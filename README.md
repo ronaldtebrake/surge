@@ -2,6 +2,8 @@
 
 An automated system that scrapes Drupal developer documentation, tracks changes, and generates an `Agents.md` file using AI assistance, with GitHub Pages integration for a custom documentation site.
 
+> Part of the [Drupal Surge](https://www.drupal.org/project/surge) ecosystem - giving AI tools a sense of Drupal.
+
 ## 🎯 Project Goals
 
 - Automatically scrape and track Drupal coding standards documentation
@@ -75,10 +77,31 @@ The system runs automatically via GitHub Actions:
 - [ ] Initial data generation
 - [ ] GitHub Pages deployment
 
+## 🤖 Drupal Surge Integration
+
+This project is part of the [Drupal Surge](https://www.drupal.org/project/surge) ecosystem, which aims to give AI tools a sense of Drupal and ensure diverse setups shape the context needed to guide AI to write for, and work with Drupal.
+
+### AGENTS.md Standard
+
+The generated `Agents.md` file follows the emerging AGENTS.md standard used by 20k+ open-source projects and works with modern AI-powered development tools including:
+
+- **Cursor** - Modern AI-powered code editor
+- **Claude** - Anthropic's AI assistant  
+- **Codex** - OpenAI's code generation model
+- **Amp, Jules, Factory, RooCode** - And 10+ other modern agents
+
+### How It Works
+
+1. **Automated Scraping**: Daily extraction of Drupal coding standards
+2. **AI Processing**: ChatGPT generates comprehensive Agents.md file
+3. **IDE Integration**: Works seamlessly with AI-powered development tools
+4. **Community Guidelines**: Automatically merges project-specific guidelines
+
 ## 🔗 Links
 
 - [Project Plan](./PROJECT_PLAN.md)
 - [Generated Documentation](./docs/Agents.md)
+- [Drupal Surge Project](https://www.drupal.org/project/surge)
 - [Drupal Official Docs](https://www.drupal.org/docs/develop/standards)
 
 ## 📝 License
