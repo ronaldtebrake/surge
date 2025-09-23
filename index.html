@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surge Coding Standards - Drupal Documentation</title>
+    <meta name="description" content="Automated Drupal coding standards documentation with AI-powered Agents.md generation">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-light.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .markdown-body {
+            background: transparent;
+        }
+        .status {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .status h3 {
+            margin: 0 0 0.5rem 0;
+            color: #2e7d32;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Surge Coding Standards</h1>
+        <p>Automated Drupal Documentation with AI-Powered Generation</p>
+    </div>
+    
+    <div class="content">
+        <div class="status">
+            <h3>🔄 System Status</h3>
+            <p>The Agents.md file is being generated automatically from the latest Drupal documentation. This page will update once the generation is complete.</p>
+        </div>
+        
+        <div class="loading">
+            <h2>Loading Documentation...</h2>
+            <p>Please wait while we generate the latest Drupal coding standards documentation.</p>
+        </div>
+        
+        <div id="content" style="display: none;">
+            <!-- Content will be loaded here -->
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Generated automatically from <a href="https://www.drupal.org/docs/develop/standards">Drupal Official Documentation</a></p>
+        <p>Powered by AI and GitHub Actions</p>
+    </div>
+
+    <script>
+        // Simple content loader - in a real implementation, this would fetch the Agents.md content
+        // For now, we'll show a placeholder
+        setTimeout(() => {
+            document.querySelector('.loading').style.display = 'none';
+            document.getElementById('content').innerHTML = `
+                <div class="markdown-body">
+                    <h1>Drupal Coding Standards - Agents Reference</h1>
+                    <p>This document is automatically generated from the official Drupal documentation.</p>
+                    <h2>Overview</h2>
+                    <p>The Agents.md file is currently being generated. Please check back later for the complete documentation.</p>
+                    <h2>Quick Links</h2>
+                    <ul>
+                        <li><a href="https://www.drupal.org/docs/develop/standards/php">PHP Coding Standards</a></li>
+                        <li><a href="https://www.drupal.org/docs/develop/standards/css">CSS Coding Standards</a></li>
+                        <li><a href="https://www.drupal.org/docs/develop/standards/javascript">JavaScript Coding Standards</a></li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('content').style.display = 'block';
+        }, 2000);
+    </script>
+</body>
+</html>
