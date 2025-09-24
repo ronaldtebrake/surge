@@ -203,12 +203,45 @@ return false; // No update needed - skip
 
 ## 🤖 Automation
 
-The system runs automatically via GitHub Actions:
+The system runs automatically via GitHub Actions with a sophisticated workflow structure:
+
+```mermaid
+graph TD
+    A[Daily: Sitemap Generator<br/>2 AM UTC] --> B{Changes?}
+    B -->|Yes| C[Trigger Content Updater]
+    B -->|No| D[End]
+    
+    C --> E[Download + Convert + Bullets]
+    E --> F{Content Changes?}
+    F -->|Yes| G[Create PR with label]
+    F -->|No| H[End]
+    
+    G --> I[PR Labeled: needs: agents.md update]
+    I --> J[Generate Quick Reference + Agents.md]
+    J --> K[Commit to PR]
+    
+    L[Weekly: Full Pipeline<br/>Sundays 3 AM UTC] --> M[Run Complete Pipeline]
+    M --> N[Commit All Changes]
+    
+    O[Manual: Full Pipeline] --> M
+    
+    style A fill:#e1f5fe
+    style C fill:#f3e5f5
+    style E fill:#e8f5e8
+    style G fill:#fff3e0
+    style J fill:#fce4ec
+    style L fill:#f1f8e9
+    style O fill:#f1f8e9
+```
+
+### Workflow Details:
 
 1. **Daily Sitemap Generation** (2 AM UTC) - Downloads main page and extracts all links with real last updated dates
 2. **Smart Content Download** - Downloads only changed content
 3. **Content Processing** - Converts HTML to markdown and generates bullet points
-4. **AI Documentation Generation** - Generates comprehensive Agents.md 
+4. **AI Documentation Generation** - Generates comprehensive Agents.md
+5. **Weekly Full Pipeline** (Sundays 3 AM UTC) - Complete system update
+6. **Manual Triggers** - All workflows can be triggered manually 
 
 ## 📊 Status
 

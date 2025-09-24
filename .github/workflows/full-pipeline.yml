@@ -1,0 +1,90 @@
+name: Full Documentation Pipeline
+
+on:
+  workflow_dispatch: # Allow manual triggering
+  schedule:
+    # Run weekly on Sundays at 3 AM UTC
+    - cron: '0 3 * * 0'
+
+jobs:
+  full-pipeline:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+    
+    - name: Run full pipeline
+      run: npm run full-pipeline
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Check for changes
+      id: changes
+      run: |
+        if git diff --quiet data/ docs/Agents.md; then
+          echo "changes=false" >> $GITHUB_OUTPUT
+        else
+          echo "changes=true" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Commit and push changes
+      if: steps.changes.outputs.changes == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/ docs/Agents.md
+        git commit -m "Update documentation pipeline - $(date +%Y-%m-%d)"
+        git push
+    
+    - name: Create summary comment
+      if: steps.changes.outputs.changes == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          let summary = '## 📊 Full Pipeline Update Summary\n\n';
+          
+          // Check if generation summary exists
+          try {
+            const summaryFile = JSON.parse(fs.readFileSync('data/pages/generation-summary.json', 'utf8'));
+            summary += `- **Total pages processed**: ${summaryFile.totalPages}\n`;
+            summary += `- **Quick References generated**: ${summaryFile.generatedPages}\n`;
+            summary += `- **Generated at**: ${new Date(summaryFile.generatedAt).toLocaleString()}\n\n`;
+          } catch (e) {
+            summary += '- Generation summary not available\n\n';
+          }
+          
+          summary += '### Files Updated:\n';
+          summary += '- `data/sitemap.json` - Updated sitemap with latest timestamps\n';
+          summary += '- `data/downloads/` - Downloaded HTML files (timestamp-based updates)\n';
+          summary += '- `data/markdown/` - Converted markdown files\n';
+          summary += '- `data/bullets/` - AI-generated bullet points\n';
+          summary += '- `data/pages/` - Quick Reference pages\n';
+          summary += '- `data/prompts/` - AI prompts\n';
+          summary += '- `docs/Agents.md` - Final comprehensive documentation\n\n';
+          summary += '✅ Documentation pipeline completed successfully!';
+          
+          // Create a comment on the latest commit
+          github.rest.repos.createCommitComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            commit_sha: context.sha,
+            body: summary
+          });

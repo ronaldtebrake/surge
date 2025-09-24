@@ -29,14 +29,14 @@ jobs:
       run: npx playwright install --with-deps
     
     - name: Update content
-      run: npm run content
+      run: npm run download && npm run convert && npm run bullets
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Check for content changes
       id: content-changes
       run: |
-        if git diff --quiet data/pages/; then
+        if git diff --quiet data/downloads/ data/markdown/ data/bullets/; then
           echo "changes=false" >> $GITHUB_OUTPUT
         else
           echo "changes=true" >> $GITHUB_OUTPUT
@@ -52,12 +52,13 @@ jobs:
           This PR contains updated Drupal documentation content based on changes detected in the sitemap.
           
           ## Changes
-          - Updated markdown files for changed documentation pages
-          - Generated from latest Drupal.org content
+          - Updated HTML downloads for changed documentation pages
+          - Converted HTML to markdown files
+          - Generated AI bullet points from markdown content
           
           ## Next Steps
           - Review the changes
-          - Merge to trigger Agents.md generation
+          - Merge to trigger Quick Reference and Agents.md generation
         labels: "needs: agents.md update"
         branch: "update-content-$(date +%Y%m%d-%H%M%S)"
         delete-branch: true

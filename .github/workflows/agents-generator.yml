@@ -27,10 +27,15 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
-    - name: Generate Agents.md
-      run: npm run agents
+    - name: Generate Quick Reference pages
+      run: npm run page-agents
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Merge into Agents.md
+      run: npm run merge-agents
+      env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Check for Agents.md changes
