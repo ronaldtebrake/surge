@@ -312,9 +312,18 @@
             document.getElementById('agents-content').style.display = 'none';
             
             try {
+                console.log('Attempting to fetch ./docs/Agents.md...');
                 const response = await fetch('./docs/Agents.md');
+                console.log('Response status:', response.status, response.statusText);
                 if (response.ok) {
                     const content = await response.text();
+                    
+                    // Check if content is not empty
+                    if (!content || content.trim().length === 0) {
+                        showError('Agents.md file is empty. Please ensure the documentation generation pipeline has run successfully.');
+                        return false;
+                    }
+                    
                     // Convert markdown to HTML using marked.js
                     const htmlContent = marked.parse(content);
                     document.getElementById('agents-content').innerHTML = `
@@ -325,39 +334,41 @@
                     document.querySelector('.loading').style.display = 'none';
                     document.getElementById('agents-content').style.display = 'block';
                     return true;
+                } else {
+                    console.error('Failed to load Agents.md:', response.status, response.statusText);
+                    showError('Failed to load Agents.md file. Please check that the file exists at ./docs/Agents.md');
+                    return false;
                 }
             } catch (error) {
-                console.log('Agents.md not available yet, showing placeholder');
+                console.error('Error loading Agents.md:', error);
+                showError('Error loading Agents.md file. Please check the console for details.');
                 return false;
             }
         }
         
-        // Try to load real content first, fallback to placeholder
-        loadAgentsContent().then(success => {
-            if (!success) {
-                // Show placeholder if Agents.md is not available
-                setTimeout(() => {
-                    document.querySelector('.loading').style.display = 'none';
-                    document.getElementById('agents-content').innerHTML = `
-                        <div class="markdown-body">
-                            <h1>Drupal Coding Standards - Agents Reference</h1>
-                            <p>This document is automatically generated from the official Drupal documentation.</p>
-                            
-                            <h2>Current Status</h2>
-                            <p>The Agents.md file is currently being generated. Please check back later for the complete documentation.</p>
-                            
-                            <h2>Quick Links</h2>
-                            <ul>
-                                <li><a href="https://www.drupal.org/docs/develop/standards/php">PHP Coding Standards</a></li>
-                                <li><a href="https://www.drupal.org/docs/develop/standards/css">CSS Coding Standards</a></li>
-                                <li><a href="https://www.drupal.org/docs/develop/standards/javascript">JavaScript Coding Standards</a></li>
-                            </ul>
-                        </div>
-                    `;
-                    document.getElementById('agents-content').style.display = 'block';
-                }, 2000);
-            }
-        });
+        // Function to show error message
+        function showError(message) {
+            document.querySelector('.loading').style.display = 'none';
+            document.getElementById('agents-content').innerHTML = `
+                <div class="markdown-body">
+                    <h1>Error Loading Documentation</h1>
+                    <p>${message}</p>
+                    <h2>Quick Links</h2>
+                    <ul>
+                        <li><a href="https://www.drupal.org/docs/develop/standards/php">PHP Coding Standards</a></li>
+                        <li><a href="https://www.drupal.org/docs/develop/standards/css">CSS Coding Standards</a></li>
+                        <li><a href="https://www.drupal.org/docs/develop/standards/javascript">JavaScript Coding Standards</a></li>
+                        <li><a href="https://www.drupal.org/docs/develop/standards/sql">SQL Coding Standards</a></li>
+                        <li><a href="https://www.drupal.org/docs/develop/standards/spelling">Spelling Standards</a></li>
+                    </ul>
+                    <p><strong>Note:</strong> The Agents.md file should be located at <code>./docs/Agents.md</code></p>
+                </div>
+            `;
+            document.getElementById('agents-content').style.display = 'block';
+        }
+        
+        // Load Agents.md content on page load
+        loadAgentsContent();
     </script>
 </body>
 </html>
