@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:fb="http://ogp.me/ns/fb#"
+  xmlns:og="http://ogp.me/ns#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="MobileOptimized" content="width" />
+  <!--[if IE]><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Detailed tutorial explaining the background while walking through the setup process of the toolset for linting &amp; fixing JS code of Drupal." />
+<meta name="generator" content="Drupal 7 (https://www.drupal.org)" />
+<link rel="image_src" href="https://www.drupal.org/sites/all/themes/bluecheese/images/drupal_meta_image.png" />
+<link rel="canonical" href="https://www.drupal.org/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool" />
+<link rel="shortlink" href="https://www.drupal.org/node/1955232" />
+<meta property="og:site_name" content="Drupal.org" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.drupal.org/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool" />
+<meta property="og:title" content="Setting up the linter-fixer tool" />
+<meta property="og:description" content="Understanding the purpose and nature of Drupal&#039;s coding standards for JavaScript from the previous pages represents the theory. Now, let&#039;s continue with their practical usage in everyday work. This page describes some basic methods of setting up developer aid tools utilizing these rulesets. Tools overview ESLint is the most popular linter utility for JavaScript and EcmaScript-based (hence the name) languages. It analyzes static code to catch syntax issues and enforce coding best practices." />
+<meta property="og:updated_time" content="2025-08-05T09:34:03+00:00" />
+<meta property="article:published_time" content="2013-03-28T10:42:54+00:00" />
+<meta property="article:modified_time" content="2025-08-05T09:34:03+00:00" />
+  <title>Setting up the linter-fixer tool | JavaScript coding standards | Drupal Wiki guide on Drupal.org</title>
+  <link type="text/css" rel="stylesheet" href="/files/advagg_css/css__IGnvPR1nQd12eUWIitgZ6GDDyWxn9W82zUE-pgSt6Y8__Gh7RLUb1X-_kkfJcUW2xrjQQJCrbwuGgKr5Ix51cJYc__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Xi-PZpvKTY78w7l1WNsqwUA52MIupHJebCMiX34Ugt0__D_EUHDAfEQdxcLiSDY7hREUWkG1Ge56_h2z3Er8V188__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__WF0PRotZAhCcl0aJjY5W2LYj8UwiYuB2dZEFluOh3Tc__FviX13FUB-Ppa2XB29BUIJQZ1Wg-F5XiDE7XD5y7mjQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Fx0_w1L9q3nwzXnALG7UfjLF34FGYgJTz636-GWbM6k__0jWLTEHP3h5U5RcXuZcFhf0DdvRdzP3_wzCVNT015Ls__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__71G6gao0TOuJxFfw9efqGV9HafmPRGSqQoYV4yqGUWc__cjdS_7q2MvneE1k5vHyBqxDqcSSGdHyUNCXu57rH2hM__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+  </head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-1955232 node-type-documentation drupalorg-site-main panels-layout og-context og-context-node og-context-node-2803009" >
+  <div id="skip-link" tabindex="-1">
+    <a class="element-invisible element-focusable" href="#content">Skip to main content</a>
+    <a class="element-invisible element-focusable skip-link-search" href="#search-block-form">Skip to search</a>
+  </div>
+    <div class="region region-page-top">
+    <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W36H8DW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div id="drupalorg-crosssite-gdpr">Can we use first and third party cookies and web beacons to <a href="https://www.drupal.org/terms">understand our audience, and to tailor promotions you see</a>?<br><button class="yes">Yes, please</button><button class="no">No, do not track me</button></div>  </div>
+      <div id="nav-header">
+          <div class="menu-nav">
+        <a class="nav-btn" id="nav-open-btn" href="#block-system-main-menu"><img src="/sites/all/themes/bluecheese/images/icon-w-menu.svg" alt="Main menu"></a>
+      </div>
+        <nav id="navigation-inner" class="container-12" role="navigation">
+        <div class="region region-navigation">
+    <div id="block-system-main-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/home" title="Drupal.org home page">Drupal.org home</a></li>
+<li class="expanded"><a href="https://www.drupal.org/about/overview/technical" title="">Discover Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/about/overview/technical" title="The open source framework behind millions of websites.">Drupal Core</a></li>
+<li class="leaf"><a href="https://new.drupal.org/drupal-cms" title="Drupal CMS puts the power of Drupal into the hands of marketers, designers and content creators.">Drupal CMS</a></li>
+<li class="leaf"><a href="https://new.drupal.org/ai" title="Open limitless possibilities with Drupal AI">Drupal AI</a></li>
+<li class="leaf"><a href="https://www.drupal.org/case-studies" title="Powerful stories that show Drupal solutions in the real world.">Case Studies</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/government" title="Drupal is the open-source CMS that enables digital transformation of government and increases citizen engagement.">Drupal for Government</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/education" title="See why 70% of the world&#039;s leading universities chose Drupal.">Drupal for Higher Education</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/nonprofit" title="See why Drupal is the open-source CMS choice for some of the world’s most influential nonprofits.">Drupal for Nonprofit</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/ecommerce" title="Natively integrate content and commerce.">Drupal for eCommerce</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/fintech" title="Secure and trustworth FinTech infrastructure.">Drupal for FinTech</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/healthcare" title="Drupal powers systems that are secure, patient-centric and engaging.">Drupal for Healthcare</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/industries/media-and-publishing" title="Create engaging multi-channel experiences to connect with your audiences - everywhere.">Drupal for Media &amp; Publishing</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Build with Drupal</a><div class="menu-block"><ul class="menu button"><li class="first collapsed"><a href="/download" title=" Download Drupal and the extensions you need">Download Drupal</a></li>
+<li class="leaf"><a href="/documentation" title="Full knowledge base including Drupal 7 resources">Documentation</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/getting-started" title="All documentation">Getting started</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Local Development Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/developers" title="">Developer Resources</a></li>
+<li class="leaf"><a href="https://new.drupal.org/docs/drupal-cms" title="Drupal CMS User Guide">Drupal CMS User Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/user_guide/en/index.html" title="Drupal User Guide">Drupal User Guide</a></li>
+<li class="leaf"><a href="https://api.drupal.org/api/drupal/11.x" title="Drupal API">API</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/modules" title="Drupal Modules">Modules</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/themes" title="Drupal themes">Themes</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/project_distribution" title="Drupal distributions">Distributions</a></li>
+<li class="leaf"><a href="/project/issues" title="Report issues and contribute improvements">Issue queues</a></li>
+<li class="last leaf"><a href="/security" title="Stay on top of the latest security alerts and updates">Security Advisories</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/drupal-services" title="">Partners &amp; Services</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/drupal-services" title="Connect with the best Drupal agencies around the world.">Find a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://new.drupal.org/association/become-a-drupal-certified-partner" title="Join an elite network of agencies committed to Drupal excellence and innovation.
+">Become a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/hosting" title="Find a hosting provider for your Drupal project.">Find a Hosting Provider</a></li>
+<li class="leaf"><a href="https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/enterprise" title="Get help with your migration to the latest version of Drupal.">Find a Migration Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/training" title="Upskill your Drupal team.">Find Training</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/steward" title="Ensure your website is protected with Drupal Steward.">Drupal Steward</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/community" title="">Community</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/community" title="Come for the code, stay for the community.">About the Community</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/contributor-guide" title="Get involved in growing and evolving Drupal.">How to Contribute</a></li>
+<li class="leaf"><a href="https://events.drupal.org/" title="DrupalCon unites experts from around the globe who create ambitious digital experiences. Network, learn, and be inspired.">DrupalCon</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/events" title="Discover local events, community meet-ups, and training.">Events</a></li>
+<li class="leaf"><a href="https://jobs.drupal.org/home" title="Find opportunities to work in Drupal.">Jobs / Careers</a></li>
+<li class="leaf"><a href="https://www.drupal.org/blog" title="News and stories about Drupal.">News &amp; Blogs</a></li>
+<li class="leaf"><a href="https://www.drupal.org/forum" title="Got a question about Drupal? Find answers on the Drupal forums.">Forum</a></li>
+<li class="leaf"><a href="/community/contributor-guide/reference-information/talk/tools/slack" title="Get support and comminicate with the global Drupal community.">Slack</a></li>
+<li class="leaf"><a href="https://www.drupal.org/subscribe" title="Sign up for Drupal news and manage your subscriptions.">Newsletters</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag" title="Get your Drupal branded merch!">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="expanded"><a href="/association" title="Support the Drupal Association - the non-profit that supports the Drupal project">Support Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/association" title="Meet the non-profit accelerating Drupal innovation ">The Drupal Association</a></li>
+<li class="leaf"><a href="/association/donate" title="Donate to the non-profit that supports Drupal">Donate</a></li>
+<li class="leaf"><a href="/association/become-a-drupal-certified-partner" title="Join the network of official Drupal Certified Partners">Become a Partner</a></li>
+<li class="leaf"><a href="/association/RippleMakers" title="Become an individual member of the Drupal Association">Become a Ripple Maker</a></li>
+<li class="leaf"><a href="/association/organization-membership" title="Join and show your organization&#039;s support for Drupal">Become an Organization Member</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag?utm_source=drupalorg&amp;utm_medium=banner&amp;utm_campaign=drupal_swag_shop_2020_09_17" title="Get your Drupal-branded bucket hats, hoodies, and more">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="last expanded"><a href="/try-hosting" title="Try Drupal">Get Started</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://new.drupal.org/drupal-cms/trial" title="">Try Drupal CMS</a></li>
+<li class="last leaf"><a href="/try-hosting" title="">Try Hosting</a></li>
+</ul></div></li>
+</ul></div><a class="close-btn" href="#top">Return to content</a>  </div>
+  </div>
+</div>
+<div id="block-search-form" class="block block-search">
+<div class="block-inner">
+    
+  <div class="content">
+    <form action="/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input placeholder="Search…" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input alt="Search" type="image" id="edit-submit" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-sclUF3VWQE9QE4ebzqOvMgW6VMfakIIO18YrCb4kNcY" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>  </div>
+  </div>
+</div>
+<div id="block-system-user-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu"><li class="button default"><a href="#block-system-user-menu"><img src="https://www.drupal.org/sites/all/themes/bluecheese/images/icon-w-user.svg" alt="Log in, view profile, and more"></a><ul><li class="first leaf"><a href="/user/login?destination=node/1955232" title="">Log in</a></li>
+<li class="last leaf"><a href="/user/register?destination=node/1955232" title="">Create account</a></li>
+</ul></li></ul></div>  </div>
+  </div>
+</div>
+  </div>
+    </nav>
+  </div>
+
+    <div id="header" class="clearfix">
+    <div id="header-inner" class="container-12 clearfix">
+      <div id="header-left">
+        <div id="site-name"><a href="/documentation">Documentation</a></div>
+              </div>
+      <div id="header-right">
+          <div class="region region-header">
+    <div id="block-drupalorg-search-documentation" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <form class="container-inline" action="/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool" method="post" id="drupalorg-documentation-search-form" accept-charset="UTF-8"><div><input type="hidden" name="form_build_id" value="form-IE7CeacwnQko2DWhgmiVGIBf2W7PVKFJofi266VCKEY" />
+<input type="hidden" name="form_id" value="drupalorg_documentation_search_form" />
+<div class="form-item form-type-textfield form-item-drupalorg-documentation-search-form">
+  <label class="element-invisible" for="edit-drupalorg-documentation-search-form--2">Search </label>
+ <input placeholder="Search documentation…" type="text" id="edit-drupalorg-documentation-search-form--2" name="drupalorg_documentation_search_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions--2"><input alt="Search" type="image" id="edit-submit--2" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div></div></form>  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    </div>
+  </div>
+  
+      <div id="banner" data-nosnippet>
+        <div class="region region-banner">
+    <div id="block-drupalorg-announcements" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="announcement"><img class="photo" src="https://www.drupal.org/files/styles/grid-2-2x-square/public/announcements/da-icon.png?itok=wwiCve4D" width="280" height="280" alt="Announcement icon" title="Announcement icon" />Last chance! The 2025 Drupal Business Survey closes tomorrow. Your response will help shape the future of the Drupal business ecosystem.</div>
+<div class="cta"><a href="https://forms.gle/kue9WCroke5VnW5e9" class="global-announce-banner dc-singapore-registration">Take the survey today</a></div>  </div>
+  </div>
+</div>
+  </div>
+    </div>
+  
+  <div id="page" class="clearfix">
+    <div class="breadbox"><nav class="breadcrumb container-12"><span><a href="/docs/develop">Develop</a></span><span><a href="/docs/develop/standards">Coding standards</a></span><span><a href="/docs/develop/standards/javascript-coding-standards">JavaScript coding standards</a></span></nav></div>
+
+    <div id="main" role="main">
+      
+      <div id="content" class="clearfix">
+                                <div id="content-inner" class="clearfix">
+
+          
+            <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+<div class="block-inner">
+    
+  <div class="content">
+    
+<div class="panelizer-view-mode node node-full node-documentation node-1955232">
+        
+<div class="panel-display hydra panel-layout clearfix " >
+
+  <div class="container preface clearfix panel-panel">
+    <div class="container-inner preface-inner panel-panel-inner">
+          </div>
+  </div>
+
+  <div class="container content clearfix">
+    <div class="container-inner content-inner panel-panel-inner">
+      <div class="column-content-region top-right-content column panel-panel">
+        <div class="column-content-region-inner top-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-block pane-drupalorg-carbon-ad-sidebar"  >
+  
+      
+  
+  <div class="pane-content">
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYIEKJI&placement=drupalorg" id="_carbonads_js"></script><div class="ad-explanation description">Advertising sustains the DA. Ads are hidden for members. <a href="/association/individual-membership">Join today</a></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-table-of-contents-toc-w-3y7froeoqmgrpcmgnphqwt4pi3"  id="on-this-page" >
+  
+        <h3 class="pane-title">
+      On this page    </h3>
+    
+  
+  <div class="pane-content">
+    <div class="item-list"><ul class="anchor-list"><li class="anchor-list__item h2-tag first"><a href="/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool#s-tools-overview" class="toc-link toc-link-invalid-id active">Tools overview</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool#s-preparing-the-environment" class="toc-link toc-link-invalid-id active">Preparing the environment</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool#s-installing-dependencies" class="toc-link toc-link-invalid-id active">Installing dependencies</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool#s-running-checks-fixes" class="toc-link toc-link-invalid-id active">Running checks &amp; fixes</a></li>
+<li class="anchor-list__item h3-tag last"><a href="/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool#s-special-cases" class="toc-link toc-link-invalid-id active">Special cases</a></li>
+</ul></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-og-menu-og-single-menu-block"  id="javascript-coding-standards" >
+  
+        <h2 class="pane-title">
+      <a href="/docs/develop/standards/javascript-coding-standards">JavaScript coding standards</a>    </h2>
+    
+  
+  <div class="pane-content">
+    <ul class="menu"><li class="first leaf"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards">JavaScript coding standards</a></li>
+<li class="leaf"><a href="/docs/develop/standards/javascript/javascript-best-practices">JavaScript best practices</a></li>
+<li class="leaf active-trail"><a href="/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool" class="active-trail active">ESLint settings</a></li>
+<li class="leaf"><a href="/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards">JavaScript API documentation and comment standards</a></li>
+<li class="last leaf"><a href="/docs/develop/standards/javascript/jquery-coding-standards">jQuery coding standards</a></li>
+</ul>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-links"  >
+  
+      
+  
+  <div class="pane-content">
+      </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region left-content column panel-panel ">
+        <div class="column-content-region-inner left-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-node-title"  >
+  
+      
+  
+  <div class="pane-content">
+    <h1>Setting up the linter-fixer tool</h1>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-updated"  id="last-updated-on" >
+  
+        <span class="pane-title">
+      Last <a href="/node/1955232/discuss">updated</a> on    </span>
+    
+  
+  <div class="pane-content">
+    5 August 2025  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-entity-field pane-node-body"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p>Understanding the purpose and nature of Drupal's coding standards for JavaScript from the <a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards" rel="nofollow">previous pages</a> represents the theory. Now, let's continue with their practical usage in everyday work. This page describes some basic methods of setting up developer aid tools utilizing these rulesets.</p>
+<h2 id="s-tools-overview"><a class="toc-anchor" title="Permalink to this headline" href="#s-tools-overview"></a>Tools overview</h2>
+<ul>
+<li><em>ESLint</em> is the most popular linter utility for JavaScript and EcmaScript-based (hence the name) languages. It analyzes static code to catch syntax issues and enforce coding best practices. (It is loosely comparable to PHPStan on the backend side, but not as type-aware.)</li>
+<li>On the other hand, <em>Prettier</em> is a separate tool: an opinionated code formatter that can be integrated into ESLint via plugins. However, unlike ESLint, it doesn’t validate logic or best practices. (It only rewrites code into a consistent format.)</li>
+</ul>
+<p>When working on JavaScript source code for Drupal, these 2 tools, ESLint and Prettier, must be installed on your project's codebase; using a package manager is the easiest way to get them. Although multiple competitor package manager utilities are available in the JavaScript/ECMAScript universe (<em>NPM</em> and <em>Yarn</em> are the two most popular), the Drupal community has <a href="https://www.drupal.org/node/2996785/revisions/13574092/view#s-install-pre-requisites:~:text=we%20use%20yarn%20for%20managing%20dependencies" rel="nofollow">chosen</a> the latter as the recommended one for many reasons. (Evidence is the <a href="https://git.drupalcode.org/project/drupal/-/blob/11.2.2/core/yarn.lock" rel="nofollow">presence</a> of the <code class="language-php">yarn.lock</code> file and the <a href="https://git.drupalcode.org/search?search=package-lock.json&amp;nav_source=navbar&amp;project_id=59858&amp;group_id=2&amp;search_code=true&amp;repository_ref=11.2.2" rel="nofollow">lack</a> of <code class="language-php">package-lock.json</code> file.) So this guide will also demonstrate Yarn commands.</p>
+<p><a href="/files/drupal-core-managaes-its-frontend-dependencies-with-yarn.png" title="Open in original size" rel="nofollow"><img alt="Screenshot" src="/files/drupal-core-managaes-its-frontend-dependencies-with-yarn.png" /></a></p>
+<p>All three development tools mentioned till now (<a href="https://github.com/yarnpkg/berry/blob/master/package.json#L76" rel="nofollow">Yarn</a>, <a href="https://github.com/eslint/eslint/blob/main/package.json#L223" rel="nofollow">ESLint</a>, and <a href="https://github.com/prettier/prettier/blob/main/package.json#L26" rel="nofollow">Prettier</a>) require a Node.js instance to be installed and run on the stack.</p>
+<h2 id="s-preparing-the-environment"><a class="toc-anchor" title="Permalink to this headline" href="#s-preparing-the-environment"></a>Preparing the environment</h2>
+<p>The underlying software stack of a Drupal-based website and its file structure can be installed in several different ways. Still, for the sake of simplicity, this guide will follow the generally suggested method: building upon the <code class="language-php">drupal/core-recommended</code> <a href="https://github.com/drupal/core-recommended" rel="nofollow">meta-package</a> and running in a containerized local development environment with <em>DDEV</em> (see the <a href="/docs/getting-started/installing-drupal/install-drupal-using-ddev-for-local-development" rel="nofollow">docs</a>). Following this platform-agnostic approach ensures the broadest reach of audience of our documentation efforts – even if you have to use a different tool as a component of the stack for any reason, you still can grasp the overall idea.</p>
+<p>One of the many benefits DDEV provides is that it already installs the latest version of Node.js on the backend stack without the need to take care of it manually. (Feel free to check by running <code class="language-php">$ ddev . node --version</code> – it should return a value starting with v22.) "Standing on the shoulders of giants" – you've probably heard the saying many times. The great people behind Node.js and Yarn have joined forces to provide a convenient way of having a package manager already available out-of-the-box without manual installation: this is the <a href="https://github.com/nodejs/corepack#readme" rel="nofollow">Corepack</a> initiative.</p>
+<p>The containerization tool DDEV offers this <em>Corepack</em> component by default, built into the web container (which runs your website). You just need to enable it:</p>
+<ol>
+<li>Find the "corepack" term in your <code class="language-php">.ddev/config.yaml</code> file</li>
+<li>Uncomment it, set its value to "true"</li>
+<li>Restart your stack: <code class="language-php">$ ddev restart</code></li>
+<li>Ensure you have its latest version installed: <code class="language-php">$ ddev yarn set version stable</code></li>
+<li>Finally, your package manager should be up and running: <code class="language-php">$ ddev yarn --version</code> responding "4.9.x" or similar version number</li>
+</ol>
+<h2 id="s-installing-dependencies"><a class="toc-anchor" title="Permalink to this headline" href="#s-installing-dependencies"></a>Installing dependencies</h2>
+<p>A package manager is only a program alone; now we need the list of required packages to feed it to install. Drupal Core is shipped with its own <code class="language-php">package.json</code> file describing all the frontend-related external dependencies. Roughly simplified, similarly to the <code class="language-php">composer.json</code> file in the root directory of your project, which lists the backend-related packages, but with the significant difference that Node.js' <code class="language-php">package.json</code> file sits two levels deeper, in the <code class="language-php">web/core/</code> directory instead.</p>
+<ol>
+<li>Stand into this lower directory: <code class="language-php">$ cd web/core</code></li>
+<li>Start installing all the dependencies listed in the <code class="language-php">package.json</code> file: <code class="language-php">$ ddev yarn install</code></li>
+<li>A new <code class="language-php">web/core/node_modules/</code> directory should appear in your file structure (it is already ignored in Git)
+<ul>
+<li>Within this, the <code class="language-php">web/core/node_modules/.bin/</code> directory should contain two executable files: <code class="language-php">eslint</code> and <code class="language-php">prettier</code> (symlinks, to be precise).</li>
+</ul>
+</li>
+<li>Now you can check if they run normally by asking their version number and comparing to these expected values:
+<ul>
+<li><code class="language-php">$ ddev yarn eslint --version</code> → "8.57.x" or similar</li>
+<li><code class="language-php">$ ddev yarn prettier --version</code> → "3.5.x" or similar</li>
+</ul>
+</li>
+</ol>
+<p>One more thing to see: currently, the only single <code class="language-php">node_modules/</code> directory containing all these external dependencies exists down there in <code class="language-php">web/core/</code>, thus it is only relevant for Drupal Core. However, we also want to lint the JavaScript code of contrib and custom modules and themes as well, living in different locations of the codebase. To make the content of <code class="language-php">node_modules/</code> available from other places as well, create a symlink from the topmost project root pointing to its content. This line chains together three commands: jumping up to the project root, creating the symlink, then returning to <code class="language-php">web/core/</code> where we started from.</p>
+<pre>
+$ cd ../../ &amp;&amp; ln -s web/core/node_modules &amp;&amp; cd web/core
+</pre><h2 id="s-running-checks-fixes"><a class="toc-anchor" title="Permalink to this headline" href="#s-running-checks-fixes"></a>Running checks &amp; fixes</h2>
+<p>Having everything prepared, now we are ready to run the linting process to check any JavaScript file existing in our project codebase. The syntax of invoking ESLint is <code class="language-php">$ ddev yarn eslint {{../relative-path/to-the/file}}</code>. If you also want ESLint to modify file content where an automatically fixable coding standard violation is detected, plus reformat the style of the entire file too, simply add the "--fix" switch to the command in extra. Some examples:</p>
+<ul>
+<li>Only check (but do not fix) a single file of Drupal Core:<br />
+	<code class="language-php">$ ddev yarn eslint modules/big_pipe/js/big_pipe.js</code><br />
+	 </li>
+<li>Check a given file outside of Core (e.g. a contrib theme's):<br />
+	<code class="language-php">$ ddev yarn eslint ../themes/contrib/gin/js/init.js</code><br />
+	 </li>
+<li>Check &amp; fix not a single file only, but all JS files within an entire directory of our custom code:<br />
+	<code class="language-php">$ ddev yarn eslint --fix ../modules/custom/my_module/js</code><br />
+	 </li>
+</ul>
+<p>Here's an example output of such a command:</p>
+<p><a href="/files/running-eslint-on-ddev-for-a-javascript-file-of-drupal-core.png" title="Open in original size" rel="nofollow"><img alt="Screenshot of CLI" src="/files/running-eslint-on-ddev-for-a-javascript-file-of-drupal-core.png" /></a></p>
+<h3 id="s-special-cases"><a class="toc-anchor" title="Permalink to this headline" href="#s-special-cases"></a>Special cases</h3>
+<p>Some rules need to be changed for specific modules (if they use a third party library and they need to use a new global variable), in that case the module can create it's own <code class="language-php">.eslintrc.json</code> turning some rules on or off and adding global variables they require. When ESLint runs, all the configuration files present in the directory tree are merged together: see <a href="https://eslint.org/docs/latest/use/configure/configuration-files#cascading-and-hierarchy" rel="nofollow">Configuration Cascading and Hierarchy</a> for more details. For example, the <em>Google Analytics</em> module uses third-party code that defines the global ”ga”, which can be allowed by adding the following code to <code class="language-php">.eslintrc.json</code> in the module directory:</p>
+<pre>
+<code class="language-javascript language-php">{
+    "extends": [
+        "drupal"
+    ],
+    "globals": {
+        "ga": true
+    }
+}</code></pre><div class="note-warning">
+<p><strong>Note:</strong> Changes to Drupal coding standards are proposed and discussed in issues in the <em>Coding Standards</em> <a href="/project/coding_standards" rel="nofollow">project</a> (also, see the <a href="https://project.pages.drupalcode.org/coding_standards/" rel="nofollow">docs</a>).</p>
+</div></div></div></div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region bottom-right-content column panel-panel">
+        <div class="column-content-region-inner bottom-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-entity-field pane-node-field-tags"  id="tags" >
+  
+        <h2 class="pane-title">
+      Tags    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="field field-name-field-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="/taxonomy/term/204552">Node.js</a></div><div class="field-item odd"><a href="/taxonomy/term/204553">Yarn</a></div><div class="field-item even"><a href="/taxonomy/term/190105">eslint</a></div><div class="field-item odd"><a href="/taxonomy/term/193599">DDEV</a></div><div class="field-item even"><a href="/taxonomy/term/204554">Prettier</a></div><div class="field-item odd"><a href="/taxonomy/term/204555">Airbnb</a></div></div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-views-panes pane-documentation-help-improve-pane"  id="help-improve-this-page" >
+  
+        <h2 class="pane-title">
+      Help improve this page    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="view view-documentation-help view-id-documentation_help view-display-id-improve_pane view-dom-id-6ee00235bf47e72ad2808e93aba72d79">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+      
+  <span class="views-field views-field-field-documentation-status">    <strong class="views-label views-label-field-documentation-status">Page status: </strong>    <span class="field-content">No known problems</span>  </span>  
+  <div class="views-field views-field-nothing">        <span class="field-content"><br /><strong>You can:</strong><br />
+<ul>
+<li>Log in, click <a href="/node/1955232/edit">Edit</a>, and edit this page</li>
+<li>Log in, click <a href="/node/1955232/discuss">Discuss</a>, update the Page status value, and suggest an improvement</li>
+<li>Log in and <a href="/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%281955232%29%20Setting%20up%20the%20linter-fixer%20tool">create a Documentation issue</a> with your suggestion</li>
+</ul></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer clearfix panel-panel">
+    <div class="container-inner footer-inner panel-panel-inner">
+          </div>
+  </div>
+
+</div><!-- /.sutro -->
+</div>
+  </div>
+  </div>
+</div>
+  </div>
+        </div>
+              </div> <!-- /#content -->
+
+    </div> <!-- /#column-left -->
+
+      </div> <!-- /#page -->
+
+  <div id="footer" role="contentinfo">
+            <div class="region region-footer">
+    <div id="block-drupalorg-documentation-license" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    Drupal’s online documentation is © 2000-2025 by the individual contributors and can be used in accordance with the <a href="/terms">Creative Commons License, Attribution-ShareAlike 2.0</a>. PHP code is distributed under the <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License</a>.  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-infra-partner" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <a href="https://bit.ly/4fYoEf8" >Infrastructure management for Drupal.org provided by <img src="/files/cta/graphic/tag1_wht.svg" alt="Tag1 logo" ></a> 
+<br />
+<span style="font-size: .65em;"><a href="https://bit.ly/41bS4lA">Need a Drupal 7 extended support partner? Consider Tag1.</a></span>  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-drupalorg-footer" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <h4 class="element-invisible">News items</h4><ul class="drupal-news"><li class="0 first"><a href="https://www.drupal.org/news">News</a></li>
+<li class="1"><a href="https://www.drupal.org/planet" title="News from Drupal community members">Planet Drupal</a></li>
+<li class="2"><a href="https://www.drupal.org/about/media-kit/social-media" title="Drupal on social media">Social media</a></li>
+<li class="3"><a href="https://www.drupal.org/subscribe">Sign up for Drupal news</a></li>
+<li class="4"><a href="https://www.drupal.org/security" title="Announcements from the Drupal Security Team">Security advisories</a></li>
+<li class="5 last"><a href="https://jobs.drupal.org/" title="Drupal Jobs">Jobs</a></li>
+</ul><h4 class="element-invisible">Our community</h4><ul class="community"><li class="0 first"><a href="https://www.drupal.org/community">Community</a></li>
+<li class="1"><span><a href="https://www.drupal.org/drupal-services" title="People and organizations offering Drupal services">Services</a>, <a href="https://www.drupal.org/training" title="People and organizations offering Drupal training">Training</a> & <a href="https://www.drupal.org/hosting" title="Organizations offering Drupal hosting">Hosting</a></span></li>
+<li class="2"><a href="https://www.drupal.org/community/contributor-guide">Contributor guide</a></li>
+<li class="3"><a href="https://groups.drupal.org/groups" title="groups.drupal.org">Groups &amp; meetups</a></li>
+<li class="4"><a href="https://events.drupal.org" title="Upcoming and past DrupalCons">DrupalCon</a></li>
+<li class="5 last"><a href="https://www.drupal.org/dcoc" title="Drupal code of conduct">Code of conduct</a></li>
+</ul><h4 class="element-invisible">Documentation</h4><ul class="get-started"><li class="0 first"><a href="https://www.drupal.org/documentation" title="Documentation for working with Drupal">Documentation</a></li>
+<li class="1"><a href="https://www.drupal.org/docs">Drupal Guide</a></li>
+<li class="2"><a href="https://www.drupal.org/docs/user_guide/en/index.html">Drupal User Guide</a></li>
+<li class="3"><a href="https://www.drupal.org/documentation/develop">Developer docs</a></li>
+<li class="4 last"><a href="https://api.drupal.org/" title="Drupal API reference">API.Drupal.org</a></li>
+</ul><h4 class="element-invisible">Drupal code base</h4><ul class="download-extend"><li class="0 first"><a href="https://www.drupal.org/download">Download &amp; Extend</a></li>
+<li class="1"><a href="https://www.drupal.org/project/drupal" title="Download the latest version of the Drupal software">Drupal core</a></li>
+<li class="2"><a href="https://www.drupal.org/project/project_module" title="Download add-on features and functionality">Modules</a></li>
+<li class="3"><a href="https://www.drupal.org/project/project_theme" title="Download pre-designed styles for Drupal">Themes</a></li>
+<li class="4 last"><a href="https://www.drupal.org/project/project_distribution" title="Download a pre-packaged Drupal site">Distributions</a></li>
+</ul><h4 class="element-invisible">Governance of community</h4><ul class="about"><li class="0 first"><a href="https://www.drupal.org/about">About</a></li>
+<li class="1"><a href="https://www.drupal.org/about/features/accessibility" title="Our committment to accessibility">Web accessibility</a></li>
+<li class="2"><a href="https://www.drupal.org/association" title="About the Drupal Association">Drupal Association</a></li>
+<li class="3"><a href="https://www.drupal.org/drupalorg" title="About Drupal.org">About Drupal.org</a></li>
+<li class="4"><a href="https://www.drupal.org/terms" title="Drupal.org terms of service">Terms of service</a></li>
+<li class="5 last"><a href="https://www.drupal.org/privacy" title="Drupal.org privacy policy">Privacy policy</a></li>
+</ul>  </div>
+  </div>
+</div>
+<div id="block-block-77" class="block block-block">
+<div class="block-inner">
+    
+  <div class="content">
+    <p>Drupal is a <a href="/about/trademark">registered trademark</a> of <a href="https://dri.es">Dries Buytaert</a>.</p>
+  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    <div class="region region-page-bottom">
+    <script type="text/javascript">
+      (function(){
+          window._pxAppId = 'PXVnPBBfwe';
+          window._pxParam2 = '';
+          window._pxParam3 = '0';
+          var p = document.getElementsByTagName('script')[0],
+              s = document.createElement('script');
+          s.async = 1;
+          s.src = '/VnPBBfwe/init.js';
+          p.parentNode.insertBefore(s,p);
+      }());
+  </script>
+  <noscript>
+      <div style="position:fixed; top:0; left:0; display:none" width="1" height="1">
+          <img src="/VnPBBfwe/xhr/api/v1/collector/noScript.gif?appId=PXVnPBBfwe">
+      </div>
+  </noscript>  </div>
+<script type="text/javascript" src="/files/advagg_js/js__B0FBwiP97ZnD38IFraZus4upS4KVkMXI3ou0fJ2ZXGA__pPDESRJz9GHsxqQIwQ_V8xnFYEH5jipG2eicsfrdWCs__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+
+<!--[if lte IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie9-" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if gt IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie10+" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if !IE]><!-->
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="/files/advagg_js/js__pqoYaVR8NVhof-vNXe50j2TKhFv__IihVag_h4G6kus__B4mbn4wICLQjWm1m3-z1kw8F1FtP0cDAHKp00Xy_-88__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__H5AFmq1RrXKsrazzPq_xPQPy4K0wUKqecPjczzRiTgQ__wor4r9P8YTtQ7p6fbywTetZ47Z_orumIfrrhgxrpLus__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="
+function advagg_mod_1() {
+  // Count how many times this function is called.
+  advagg_mod_1.count = ++advagg_mod_1.count || 1;
+  try {
+    if (advagg_mod_1.count <= 40) {
+      init_drupal_core_settings();
+
+      // Set this to 100 so that this function only runs once.
+      advagg_mod_1.count = 100;
+    }
+  }
+  catch(e) {
+    if (advagg_mod_1.count >= 40) {
+      // Throw the exception if this still fails after running 40 times.
+      throw e;
+    }
+    else {
+      // Try again in 1 ms.
+      window.setTimeout(advagg_mod_1, 1);
+    }
+  }
+}
+function advagg_mod_1_check() {
+  if (window.init_drupal_core_settings && window.jQuery && window.Drupal) {
+    advagg_mod_1();
+  }
+  else {
+    window.setTimeout(advagg_mod_1_check, 1);
+  }
+}
+advagg_mod_1_check();"></script>
+<script type="text/javascript" src="/files/advagg_js/js__Oc0wwB7MVRfxtYw6EQM7d9sXj9PAQePoWSzQJ0uTk6c__iXqOGoaPhZHCPEspUr5BC8BwOx5P8B11xv7VOhoUii8__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__FabcJ6qluktliDejymsuV-FqaN_HyMKGe93c2rO9Ky0__el1ZLGkKneOoCS6OWa01WHuIEsTsXZ46MRLCF390Fbw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__YT6D1B_BKxvm6JCH_t9sZNI5L6yITa_DlU5QcSlOkAU__OXobH7d1IP1o3WABlniIrU_-pcJacVSIPUv9bpD-6pQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__06Uejkt2sN1AJAk3QcRQG9yrq-jCjZth0s-OymGOkVE__yFxl4u_7_1AhyVnMLZRtp5wEvh9C2VdA6gnewdM1hB0__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__pLKQd4r7OrHglE7Qkqw53K2UXCqQdhqQ9v0cz7hMCQY__OErfYuQdGbFHcCoLoUW_ESSvaumApNojzjJit8-2xcw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__hHUWFbMAa11eJtx5V0ym9o0YBsB1udk34qUT5wr1ihI__vSxsxbzmzuz4XPh--CL1BBciQpEQ_m8FfdQINCOAg14__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function init_drupal_core_settings() {jQuery.extend(Drupal.settings,{"basePath":"\/","pathPrefix":"","setHasJsCookie":0,"ajaxPageState":{"theme":"bluecheese","theme_token":"6KME3G3zG-JyHT8NAVmq9gYtmY6hxftp_LNZ1RfSZKI"},"drupalorgGitlab":{"gitlab_base_url":"https:\/\/git.drupalcode.org","base_url":"https:\/\/www.drupal.org"},"better_exposed_filters":{"views":{"documentation_help":{"displays":{"improve_pane":{"filters":[]}}},"documentation_related_content":{"displays":{"related_content_pane":{"filters":[]}}}}},"urlIsAjaxTrusted":{"\/docs\/develop\/standards\/javascript-coding-standards\/setting-up-the-linter-fixer-tool":true},"drupalorgCrosssiteConsentNeeded":true,"ogContext":{"groupType":"node","gid":"2803009"}}); 
+if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(false);}} if(window.jQuery && window.Drupal){init_drupal_core_settings();}
+//--><!]]>
+</script>
+<script type="text/javascript" src="/files/advagg_js/js__2k0CJ3KAQNFTFab3y6ZvNtxs3HLons0Brq7VwvPSkKo__sQv8imhcZRev08LnyQ7OzwuHrZ3Jdwo5NmznAARX0ig__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__vj0LjvNwl-3K1P9LGT4BGuXCZcAovYsVlVmoJN3TMRg__KW8SiGceRY3sjIKVrffDjf2MK4A5Vp3EDDxVO-4pegI__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+</body>
+</html>

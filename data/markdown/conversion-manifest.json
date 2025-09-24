@@ -1,0 +1,173 @@
+{
+  "convertedAt": "2025-09-24T07:27:37.981Z",
+  "totalFiles": 33,
+  "successful": 33,
+  "failed": 0,
+  "results": [
+    {
+      "htmlFile": "accessibility-coding-standards.html",
+      "markdownFile": "accessibility-coding-standards.md",
+      "title": "Accessibility Coding Standards"
+    },
+    {
+      "htmlFile": "api-documentation-and-comment-standards.html",
+      "markdownFile": "api-documentation-and-comment-standards.md",
+      "title": "API documentation and comment standards"
+    },
+    {
+      "htmlFile": "api-documentation-examples.html",
+      "markdownFile": "api-documentation-examples.md",
+      "title": "API Documentation Examples"
+    },
+    {
+      "htmlFile": "avoid-select-from.html",
+      "markdownFile": "avoid-select-from.md",
+      "title": "Avoid \"SELECT * FROM ...\""
+    },
+    {
+      "htmlFile": "composer-package-naming-conventions.html",
+      "markdownFile": "composer-package-naming-conventions.md",
+      "title": "Composer package naming conventions"
+    },
+    {
+      "htmlFile": "configuration-file-coding-standards.html",
+      "markdownFile": "configuration-file-coding-standards.md",
+      "title": "YAML Configuration files"
+    },
+    {
+      "htmlFile": "css-architecture-for-drupal-9.html",
+      "markdownFile": "css-architecture-for-drupal-9.md",
+      "title": "CSS architecture (for Drupal 9)"
+    },
+    {
+      "htmlFile": "css-coding-standards.html",
+      "markdownFile": "css-coding-standards.md",
+      "title": "CSS coding standards"
+    },
+    {
+      "htmlFile": "css-file-organization.html",
+      "markdownFile": "css-file-organization.md",
+      "title": "CSS file organization"
+    },
+    {
+      "htmlFile": "css-formatting-guidelines.html",
+      "markdownFile": "css-formatting-guidelines.md",
+      "title": "CSS formatting guidelines"
+    },
+    {
+      "htmlFile": "css.html",
+      "markdownFile": "css.md",
+      "title": "CSS"
+    },
+    {
+      "htmlFile": "csscomb-settings-for-drupal-css-formatting-and-sort-tool.html",
+      "markdownFile": "csscomb-settings-for-drupal-css-formatting-and-sort-tool.md",
+      "title": "CSScomb settings for Drupal (CSS formatting and sort tool)"
+    },
+    {
+      "htmlFile": "drupal-markup-style-guide.html",
+      "markdownFile": "drupal-markup-style-guide.md",
+      "title": "Drupal Markup Style Guide"
+    },
+    {
+      "htmlFile": "javascript-api-documentation-and-comment-standards.html",
+      "markdownFile": "javascript-api-documentation-and-comment-standards.md",
+      "title": "JavaScript API documentation and comment standards"
+    },
+    {
+      "htmlFile": "javascript-best-practices.html",
+      "markdownFile": "javascript-best-practices.md",
+      "title": "JavaScript best practices"
+    },
+    {
+      "htmlFile": "javascript-coding-standards.html",
+      "markdownFile": "javascript-coding-standards.md",
+      "title": "JavaScript coding standards"
+    },
+    {
+      "htmlFile": "jquery-coding-standards.html",
+      "markdownFile": "jquery-coding-standards.md",
+      "title": "jQuery coding standards"
+    },
+    {
+      "htmlFile": "list-of-sql-reserved-words.html",
+      "markdownFile": "list-of-sql-reserved-words.md",
+      "title": "List of SQL reserved words"
+    },
+    {
+      "htmlFile": "markdown-coding-standards.html",
+      "markdownFile": "markdown-coding-standards.md",
+      "title": "Markdown"
+    },
+    {
+      "htmlFile": "namespaces.html",
+      "markdownFile": "namespaces.md",
+      "title": "Namespaces"
+    },
+    {
+      "htmlFile": "naming-standards-for-services-and-extending-symfony.html",
+      "markdownFile": "naming-standards-for-services-and-extending-symfony.md",
+      "title": "Naming standards for services and extending Symfony"
+    },
+    {
+      "htmlFile": "php-coding-standards.html",
+      "markdownFile": "php-coding-standards.md",
+      "title": "PHP coding standards"
+    },
+    {
+      "htmlFile": "php-exceptions.html",
+      "markdownFile": "php-exceptions.md",
+      "title": "PHP Exceptions"
+    },
+    {
+      "htmlFile": "php.html",
+      "markdownFile": "php.md",
+      "title": "PHP"
+    },
+    {
+      "htmlFile": "psr-4-namespaces-and-autoloading-in-drupal-8.html",
+      "markdownFile": "psr-4-namespaces-and-autoloading-in-drupal-8.md",
+      "title": "PSR-4 namespaces and autoloading in Drupal 8"
+    },
+    {
+      "htmlFile": "setting-up-the-linter-fixer-tool.html",
+      "markdownFile": "setting-up-the-linter-fixer-tool.md",
+      "title": "Setting up the linter-fixer tool"
+    },
+    {
+      "htmlFile": "spelling.html",
+      "markdownFile": "spelling.md",
+      "title": "Spelling"
+    },
+    {
+      "htmlFile": "sql-coding-conventions.html",
+      "markdownFile": "sql-coding-conventions.md",
+      "title": "SQL coding conventions"
+    },
+    {
+      "htmlFile": "sql.html",
+      "markdownFile": "sql.md",
+      "title": "SQL"
+    },
+    {
+      "htmlFile": "temporary-placeholders-and-delimiters.html",
+      "markdownFile": "temporary-placeholders-and-delimiters.md",
+      "title": "Temporary placeholders and delimiters"
+    },
+    {
+      "htmlFile": "twig-coding-standards.html",
+      "markdownFile": "twig-coding-standards.md",
+      "title": "Twig coding standards"
+    },
+    {
+      "htmlFile": "what-to-look-for-when-reviewing-css.html",
+      "markdownFile": "what-to-look-for-when-reviewing-css.md",
+      "title": "What to look for when reviewing CSS"
+    },
+    {
+      "htmlFile": "write-e-all-compliant-code.html",
+      "markdownFile": "write-e-all-compliant-code.md",
+      "title": "Write E_ALL compliant code"
+    }
+  ]
+}

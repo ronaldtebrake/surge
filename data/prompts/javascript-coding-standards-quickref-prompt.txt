@@ -1,0 +1,97 @@
+I have a documentation page (the Drupal "Javascript Coding Standards" standards page) that describes rules or conventions. I want to convert that page into a clear section in AGENTS.md so that an AI coding agent can read and enforce those conventions.
+
+Please do the following:
+
+Read the source content I will provide.
+
+Extract the key conventions / rules / guidelines (in bullet or list form).
+
+Write a section suitable for AGENTS.md, with a heading like ## Javascript Coding Standards, followed by the rules in a concise, machine-friendly form.
+
+Ensure the section is self-contained (i.e. an agent reading only AGENTS.md should understand the rules).
+
+Use consistent formatting across sections (e.g. heading levels, bullet style).
+
+## Source Content:
+# Bullet Points for javascript-coding-standards.md
+
+
+## JavaScript coding standards
+
+## [Coding standards](/docs/develop/standards)
+- [PHP](/docs/develop/standards/php)
+- [Accessibility Coding Standards](/docs/develop/standards/accessibility-coding-standards)
+- [CSS](/docs/develop/standards/css)
+- [JavaScript](/docs/develop/standards/javascript-coding-standards)
+- [Markdown coding standards](/docs/develop/coding-standards/markdown-coding-standards)
+- [SQL](/docs/develop/standards/sql)
+- [Twig coding standards](/docs/develop/coding-standards/twig-coding-standards)
+- [Drupal Markup Style Guide](/docs/develop/coding-standards/drupal-markup-style-guide)
+- [Spelling](/docs/develop/standards/spelling)
+- [Configuration file coding standards](/docs/develop/coding-standards/configuration-file-coding-standards)
+- [Composer package naming conventions](/docs/develop/coding-standards/composer-package-naming-conventions)
+
+## JavaScript coding standards
+- Note: Changes to Drupal coding standards are proposed and discussed in issues in the [Coding Standards project](/project/coding_standards).
+- JavaScript coding standards and best practices for Drupal.
+
+## [JavaScript coding standards](/docs/develop/standards/javascript-coding-standards/javascript-coding-standards)
+- eslint settings to impose Drupal JavaScript coding standards
+
+## [JavaScript best practices](/docs/develop/standards/javascript/javascript-best-practices)
+- This page covers DOM and Drupal specific code styles.
+
+## [Setting up the linter-fixer tool](/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool)
+- Detailed tutorial explaining the background while walking through the setup process of the toolset for linting & fixing JS code of Drupal.
+
+## [JavaScript API documentation and comment standards](/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards)
+- Documentation standards for JavaScript
+
+## [jQuery coding standards](/docs/develop/standards/javascript/jquery-coding-standards)
+- Prefix variables that point to jQuery objects with a dollar sign($)
+
+## Related Content
+
+## [Frontend Developer tools for Drupal core](/about/core/policies/core-change-policies/frontend-developer-tools-for-drupal-core)
+- How to set up frontend developer tools used by Drupal core.
+
+## Tags
+- [coding standards](/taxonomy/term/190104)
+
+## Guide maintainers
+- [![pfrenssen's picture](https://www.drupal.org/files/styles/drupalorg_user_picture/public/user-pictures/picture-382067-1401376332.jpg?itok=--NaH254)](/user/382067 "View pfrenssen's profile")
+- [![effulgentsia's picture](https://www.drupal.org/files/styles/drupalorg_user_picture/public/default-avatar.png?itok=ZYxnS__Q)](/user/78040 "View effulgentsia's profile")
+- [![tizzo's picture](https://www.drupal.org/files/styles/drupalorg_user_picture/public/user-pictures/picture-168251-1400198420.jpg?itok=94ansEqu)](/user/168251 "View tizzo's profile")
+- [![jthorson's picture](https://www.drupal.org/files/styles/drupalorg_user_picture/public/user-pictures/picture-148199-1409772253.jpg?itok=hv76IG-b)](/user/148199 "View jthorson's profile")
+
+## Requirements:
+
+### Format & Structure:
+1. **Use AGENTS.md format** - Create a section suitable for AGENTS.md
+2. **Use bullet points** - Keep it scannable and concise
+3. **Structure logically** - Group related guidelines together
+4. **Use clear headers** - Make it easy to navigate
+
+### Content Focus:
+5. **Extract key conventions/rules** - Focus on the most important coding standards and conventions
+6. **Be concise** - Avoid lengthy explanations, focus on actionable guidelines
+7. **Prioritize AI-relevant content** - Rules that AI coding agents should follow and enforce
+8. **Minimize token usage** - Use bullet points only, no examples or lengthy explanations
+
+### AI Optimization:
+9. **Make it actionable** - Each point should be something an AI can implement or enforce
+10. **Use consistent formatting** - Standardize the format for easy parsing
+11. **Focus on conventions** - Coding standards, naming conventions, best practices, rules
+12. **Self-contained** - An agent reading only this section should understand the rules
+
+### Output Format:
+Generate an AGENTS.md section in this exact format:
+
+## Javascript Coding Standards
+
+### Rules
+- [Essential rule/convention 1]
+- [Essential rule/convention 2]
+- [Essential rule/convention 3]
+
+Keep the output concise and focused on the most important rules and conventions that AI coding agents need to know and enforce. Use only bullet points to minimize token usage and costs.

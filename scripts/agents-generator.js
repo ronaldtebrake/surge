@@ -5,6 +5,7 @@ const path = require('path');
 const OpenAI = require('openai');
 
 const SITEMAP_FILE = path.join(__dirname, '..', 'data', 'sitemap.json');
+const BULLETS_DIR = path.join(__dirname, '..', 'data', 'bullets');
 const AGENTS_FILE = path.join(__dirname, '..', 'docs', 'Agents.md');
 
 class AgentsGenerator {
@@ -17,12 +18,16 @@ class AgentsGenerator {
   async generateAgents() {
     console.log('Starting Agents.md generation...');
 
-    // Load sitemap
+    // Load sitemap for structure
     const sitemap = await fs.readJson(SITEMAP_FILE);
     console.log(`Loaded sitemap with ${Object.keys(sitemap).length} sections`);
 
-    // Generate Agents.md content using sitemap data only
-    const agentsContent = await this.generateContent(sitemap);
+    // Load bullet points from all files
+    const bulletPoints = await this.loadBulletPoints();
+    console.log(`Loaded bullet points from ${bulletPoints.length} files`);
+
+    // Generate Agents.md content using bullet points
+    const agentsContent = await this.generateContent(sitemap, bulletPoints);
 
     // Ensure docs directory exists
     await fs.ensureDir(path.dirname(AGENTS_FILE));
@@ -34,9 +39,31 @@ class AgentsGenerator {
     return agentsContent;
   }
 
+  async loadBulletPoints() {
+    try {
+      const files = await fs.readdir(BULLETS_DIR);
+      const bulletFiles = files.filter(file => file.endsWith('.bullets.md'));
+      
+      const bulletPoints = [];
+      
+      for (const file of bulletFiles) {
+        const filePath = path.join(BULLETS_DIR, file);
+        const content = await fs.readFile(filePath, 'utf8');
+        bulletPoints.push({
+          filename: file,
+          content: content
+        });
+      }
+      
+      return bulletPoints;
+    } catch (error) {
+      console.error('Error loading bullet points:', error);
+      return [];
+    }
+  }
 
-  async generateContent(sitemap) {
-    const prompt = this.buildSmartPrompt(sitemap);
+  async generateContent(sitemap, bulletPoints) {
+    const prompt = this.buildSmartPrompt(sitemap, bulletPoints);
     
     // Write prompt to file for review
     const promptFile = path.join(__dirname, '..', 'data', 'prompt.txt');
@@ -70,7 +97,7 @@ class AgentsGenerator {
     }
   }
 
-              buildSmartPrompt(sitemap) {
+              buildSmartPrompt(sitemap, bulletPoints) {
                 // Create a detailed breakdown of the sitemap structure with full URLs
                 const sectionsBreakdown = Object.entries(sitemap).map(([sectionName, links]) => {
                   const linkCount = Object.keys(links).length;
@@ -90,20 +117,25 @@ class AgentsGenerator {
                   };
                 });
 
-    let prompt = `Generate a complete AGENTS.md file for Drupal development, following the AGENTS.md standard. This file is specifically for AI coding agents and development tools. Use the provided sitemap for structure and documentation links. Each section must include:
+    let prompt = `Generate a complete AGENTS.md file for Drupal development, following the AGENTS.md standard. This file is specifically for AI coding agents and development tools. Use the provided bullet points from Drupal documentation to create comprehensive rules and guidelines. Each section must include:
 
 - Comprehensive rules and guidelines (clear, concise, actionable)
 - Detailed bullet points to provide a complete picture
 
 For reference on the AGENTS.md standard format, see: https://agents.md/
 
-## Available Documentation Sections with Full Links:
+## Available Documentation Sections:
 
             ${sectionsBreakdown.map(section => `
             ### ${section.name}
             - **Number of Pages**: ${section.linkCount}
-            - **Documentation Links**:
-            ${section.links}
+            `).join('')}
+
+## Bullet Points from Drupal Documentation:
+
+            ${bulletPoints.map(bp => `
+            ### ${bp.filename.replace('.bullets.md', '')}
+            ${bp.content}
             `).join('')}
 
 ## Requirements:

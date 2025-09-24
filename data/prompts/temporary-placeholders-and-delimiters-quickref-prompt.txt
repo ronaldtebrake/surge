@@ -1,0 +1,89 @@
+I have a documentation page (the Drupal "Temporary Placeholders And Delimiters" standards page) that describes rules or conventions. I want to convert that page into a clear section in AGENTS.md so that an AI coding agent can read and enforce those conventions.
+
+Please do the following:
+
+Read the source content I will provide.
+
+Extract the key conventions / rules / guidelines (in bullet or list form).
+
+Write a section suitable for AGENTS.md, with a heading like ## Temporary Placeholders And Delimiters, followed by the rules in a concise, machine-friendly form.
+
+Ensure the section is self-contained (i.e. an agent reading only AGENTS.md should understand the rules).
+
+Use consistent formatting across sections (e.g. heading levels, bullet style).
+
+## Source Content:
+# Bullet Points for temporary-placeholders-and-delimiters.md
+
+
+## Temporary placeholders and delimiters
+
+## On this page
+- [Temporary place-holders and delimiters](/docs/develop/coding-standards/temporary-placeholders-and-delimiters#s-temporary-place-holders-and-delimiters)
+- [Finding your placeholders](/docs/develop/coding-standards/temporary-placeholders-and-delimiters#s-finding-your-placeholders)
+
+## [PHP](/docs/develop/standards/php)
+- [PHP coding standards](/docs/develop/standards/php/php-coding-standards)
+- [API documentation and comment standards](/docs/develop/standards/php/api-documentation-and-comment-standards)
+- [API Documentation Samples](/docs/develop/standards/php/api-documentation-examples)
+- [Namespaces](/docs/develop/coding-standards/namespaces)
+- [Naming standards for services and extending Symfony](/docs/develop/coding-standards/naming-standards-for-services-and-extending-symfony)
+- [PHP Exceptions](/docs/develop/coding-standards/php-exceptions)
+- [PSR-4 namespaces and autoloading in Drupal 8](/docs/develop/standards/php/psr-4-namespaces-and-autoloading-in-drupal-8)
+- [Temporary placeholders and delimiters](/docs/develop/coding-standards/temporary-placeholders-and-delimiters)
+- [Write E\_ALL compliant code](/docs/develop/coding-standards/write-e_all-compliant-code)
+
+## Temporary placeholders and delimiters
+- Last [updated](/node/209715/discuss) on
+- 25 April 2024
+- Note: Changes to Drupal coding standards are proposed and discussed in issues in the [Coding Standards project](/project/coding_standards).
+
+## [](#s-temporary-place-holders-and-delimiters "Permalink to this headline")Temporary place-holders and delimiters
+- When writing a content filter module, or any code that processes or modifies content, it is tempting to use an obscure character as a place-holder, especially if only your code will see it: But this cannot be guaranteed. Non-printing, invalid or undocumented characters might not be handled correctly in the unlikely event that they are seen by a browser or feed-reader. And the more unlikely they are to be seen – the less likely they are to be tested. This will mean that some code will be written to find and eradicate these insidious characters, possibly including the ones your code is using to do its work.
+- To avoid this happening, and extending the lifetime of your code, please use an appropriate alpha-numeric string – prefixed by the name of the module (as a name-space) and a hyphen `-` or underscore `_` – and surrounded by `[`…`]`.
+- If you need delimiting place-holders, the closing delimiter can incorporate a `/` after the initial `[` and may suffix the modulename.
+
+## [](#s-finding-your-placeholders "Permalink to this headline")Finding your placeholders
+- A PCRE such as
+- `'@\[modulename-tag\](.+?)\[/modulename-tag\]@'`
+- `'@\[modulename-tag\](.+?)\[/tag-modulename\]@'` if you suffixed the modulename as mentioned above
+- can be used to match the string you have previously delimited.
+
+## Help improve this page
+- *Page status:** No known problems
+- *You can:**
+- Log in, click [Edit](/node/209715/edit), and edit this page
+- Log in, click [Discuss](/node/209715/discuss), update the Page status value, and suggest an improvement
+- Log in and [create a Documentation issue](/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%28209715%29%20Temporary%20placeholders%20and%20delimiters) with your suggestion
+
+## Requirements:
+
+### Format & Structure:
+1. **Use AGENTS.md format** - Create a section suitable for AGENTS.md
+2. **Use bullet points** - Keep it scannable and concise
+3. **Structure logically** - Group related guidelines together
+4. **Use clear headers** - Make it easy to navigate
+
+### Content Focus:
+5. **Extract key conventions/rules** - Focus on the most important coding standards and conventions
+6. **Be concise** - Avoid lengthy explanations, focus on actionable guidelines
+7. **Prioritize AI-relevant content** - Rules that AI coding agents should follow and enforce
+8. **Minimize token usage** - Use bullet points only, no examples or lengthy explanations
+
+### AI Optimization:
+9. **Make it actionable** - Each point should be something an AI can implement or enforce
+10. **Use consistent formatting** - Standardize the format for easy parsing
+11. **Focus on conventions** - Coding standards, naming conventions, best practices, rules
+12. **Self-contained** - An agent reading only this section should understand the rules
+
+### Output Format:
+Generate an AGENTS.md section in this exact format:
+
+## Temporary Placeholders And Delimiters
+
+### Rules
+- [Essential rule/convention 1]
+- [Essential rule/convention 2]
+- [Essential rule/convention 3]
+
+Keep the output concise and focused on the most important rules and conventions that AI coding agents need to know and enforce. Use only bullet points to minimize token usage and costs.

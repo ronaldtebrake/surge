@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:fb="http://ogp.me/ns/fb#"
+  xmlns:og="http://ogp.me/ns#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="MobileOptimized" content="width" />
+  <!--[if IE]><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Best practices for writing accessible code in Drupal Core and Contrib." />
+<meta name="generator" content="Drupal 7 (https://www.drupal.org)" />
+<link rel="image_src" href="https://www.drupal.org/sites/all/themes/bluecheese/images/drupal_meta_image.png" />
+<link rel="canonical" href="https://www.drupal.org/docs/develop/standards/accessibility-coding-standards" />
+<link rel="shortlink" href="https://www.drupal.org/node/3328441" />
+<meta property="og:site_name" content="Drupal.org" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.drupal.org/docs/develop/standards/accessibility-coding-standards" />
+<meta property="og:title" content="Accessibility Coding Standards" />
+<meta property="og:description" content="Changes to Drupal coding standards are proposed and discussed in issues in the Coding Standards project. The Drupal community strives to be inclusive to everyone, including people with disabilities. To that end, the Drupal community has developed the following accessibility coding standards to help make websites and other digital assets accessible to the widest possible audience. Key Goals Effective user experiences serve our entire community, including website visitors with disabilities." />
+<meta property="og:updated_time" content="2025-08-27T05:40:15+00:00" />
+<meta property="article:published_time" content="2022-12-20T23:16:58+00:00" />
+<meta property="article:modified_time" content="2025-08-27T05:40:15+00:00" />
+  <title>Accessibility Coding Standards | Coding standards | Drupal Wiki guide on Drupal.org</title>
+  <link type="text/css" rel="stylesheet" href="/files/advagg_css/css__IGnvPR1nQd12eUWIitgZ6GDDyWxn9W82zUE-pgSt6Y8__Gh7RLUb1X-_kkfJcUW2xrjQQJCrbwuGgKr5Ix51cJYc__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Xi-PZpvKTY78w7l1WNsqwUA52MIupHJebCMiX34Ugt0__D_EUHDAfEQdxcLiSDY7hREUWkG1Ge56_h2z3Er8V188__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__WF0PRotZAhCcl0aJjY5W2LYj8UwiYuB2dZEFluOh3Tc__FviX13FUB-Ppa2XB29BUIJQZ1Wg-F5XiDE7XD5y7mjQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Fx0_w1L9q3nwzXnALG7UfjLF34FGYgJTz636-GWbM6k__0jWLTEHP3h5U5RcXuZcFhf0DdvRdzP3_wzCVNT015Ls__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__71G6gao0TOuJxFfw9efqGV9HafmPRGSqQoYV4yqGUWc__cjdS_7q2MvneE1k5vHyBqxDqcSSGdHyUNCXu57rH2hM__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+  </head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-3328441 node-type-documentation drupalorg-site-main panels-layout og-context og-context-node og-context-node-2802991" >
+  <div id="skip-link" tabindex="-1">
+    <a class="element-invisible element-focusable" href="#content">Skip to main content</a>
+    <a class="element-invisible element-focusable skip-link-search" href="#search-block-form">Skip to search</a>
+  </div>
+    <div class="region region-page-top">
+    <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W36H8DW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div id="drupalorg-crosssite-gdpr">Can we use first and third party cookies and web beacons to <a href="https://www.drupal.org/terms">understand our audience, and to tailor promotions you see</a>?<br><button class="yes">Yes, please</button><button class="no">No, do not track me</button></div>  </div>
+      <div id="nav-header">
+          <div class="menu-nav">
+        <a class="nav-btn" id="nav-open-btn" href="#block-system-main-menu"><img src="/sites/all/themes/bluecheese/images/icon-w-menu.svg" alt="Main menu"></a>
+      </div>
+        <nav id="navigation-inner" class="container-12" role="navigation">
+        <div class="region region-navigation">
+    <div id="block-system-main-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/home" title="Drupal.org home page">Drupal.org home</a></li>
+<li class="expanded"><a href="https://www.drupal.org/about/overview/technical" title="">Discover Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/about/overview/technical" title="The open source framework behind millions of websites.">Drupal Core</a></li>
+<li class="leaf"><a href="https://new.drupal.org/drupal-cms" title="Drupal CMS puts the power of Drupal into the hands of marketers, designers and content creators.">Drupal CMS</a></li>
+<li class="leaf"><a href="https://new.drupal.org/ai" title="Open limitless possibilities with Drupal AI">Drupal AI</a></li>
+<li class="leaf"><a href="https://www.drupal.org/case-studies" title="Powerful stories that show Drupal solutions in the real world.">Case Studies</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/government" title="Drupal is the open-source CMS that enables digital transformation of government and increases citizen engagement.">Drupal for Government</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/education" title="See why 70% of the world&#039;s leading universities chose Drupal.">Drupal for Higher Education</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/nonprofit" title="See why Drupal is the open-source CMS choice for some of the world’s most influential nonprofits.">Drupal for Nonprofit</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/ecommerce" title="Natively integrate content and commerce.">Drupal for eCommerce</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/fintech" title="Secure and trustworth FinTech infrastructure.">Drupal for FinTech</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/healthcare" title="Drupal powers systems that are secure, patient-centric and engaging.">Drupal for Healthcare</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/industries/media-and-publishing" title="Create engaging multi-channel experiences to connect with your audiences - everywhere.">Drupal for Media &amp; Publishing</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Build with Drupal</a><div class="menu-block"><ul class="menu button"><li class="first collapsed"><a href="/download" title=" Download Drupal and the extensions you need">Download Drupal</a></li>
+<li class="leaf"><a href="/documentation" title="Full knowledge base including Drupal 7 resources">Documentation</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/getting-started" title="All documentation">Getting started</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Local Development Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/developers" title="">Developer Resources</a></li>
+<li class="leaf"><a href="https://new.drupal.org/docs/drupal-cms" title="Drupal CMS User Guide">Drupal CMS User Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/user_guide/en/index.html" title="Drupal User Guide">Drupal User Guide</a></li>
+<li class="leaf"><a href="https://api.drupal.org/api/drupal/11.x" title="Drupal API">API</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/modules" title="Drupal Modules">Modules</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/themes" title="Drupal themes">Themes</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/project_distribution" title="Drupal distributions">Distributions</a></li>
+<li class="leaf"><a href="/project/issues" title="Report issues and contribute improvements">Issue queues</a></li>
+<li class="last leaf"><a href="/security" title="Stay on top of the latest security alerts and updates">Security Advisories</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/drupal-services" title="">Partners &amp; Services</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/drupal-services" title="Connect with the best Drupal agencies around the world.">Find a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://new.drupal.org/association/become-a-drupal-certified-partner" title="Join an elite network of agencies committed to Drupal excellence and innovation.
+">Become a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/hosting" title="Find a hosting provider for your Drupal project.">Find a Hosting Provider</a></li>
+<li class="leaf"><a href="https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/enterprise" title="Get help with your migration to the latest version of Drupal.">Find a Migration Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/training" title="Upskill your Drupal team.">Find Training</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/steward" title="Ensure your website is protected with Drupal Steward.">Drupal Steward</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/community" title="">Community</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/community" title="Come for the code, stay for the community.">About the Community</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/contributor-guide" title="Get involved in growing and evolving Drupal.">How to Contribute</a></li>
+<li class="leaf"><a href="https://events.drupal.org/" title="DrupalCon unites experts from around the globe who create ambitious digital experiences. Network, learn, and be inspired.">DrupalCon</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/events" title="Discover local events, community meet-ups, and training.">Events</a></li>
+<li class="leaf"><a href="https://jobs.drupal.org/home" title="Find opportunities to work in Drupal.">Jobs / Careers</a></li>
+<li class="leaf"><a href="https://www.drupal.org/blog" title="News and stories about Drupal.">News &amp; Blogs</a></li>
+<li class="leaf"><a href="https://www.drupal.org/forum" title="Got a question about Drupal? Find answers on the Drupal forums.">Forum</a></li>
+<li class="leaf"><a href="/community/contributor-guide/reference-information/talk/tools/slack" title="Get support and comminicate with the global Drupal community.">Slack</a></li>
+<li class="leaf"><a href="https://www.drupal.org/subscribe" title="Sign up for Drupal news and manage your subscriptions.">Newsletters</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag" title="Get your Drupal branded merch!">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="expanded"><a href="/association" title="Support the Drupal Association - the non-profit that supports the Drupal project">Support Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/association" title="Meet the non-profit accelerating Drupal innovation ">The Drupal Association</a></li>
+<li class="leaf"><a href="/association/donate" title="Donate to the non-profit that supports Drupal">Donate</a></li>
+<li class="leaf"><a href="/association/become-a-drupal-certified-partner" title="Join the network of official Drupal Certified Partners">Become a Partner</a></li>
+<li class="leaf"><a href="/association/RippleMakers" title="Become an individual member of the Drupal Association">Become a Ripple Maker</a></li>
+<li class="leaf"><a href="/association/organization-membership" title="Join and show your organization&#039;s support for Drupal">Become an Organization Member</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag?utm_source=drupalorg&amp;utm_medium=banner&amp;utm_campaign=drupal_swag_shop_2020_09_17" title="Get your Drupal-branded bucket hats, hoodies, and more">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="last expanded"><a href="/try-hosting" title="Try Drupal">Get Started</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://new.drupal.org/drupal-cms/trial" title="">Try Drupal CMS</a></li>
+<li class="last leaf"><a href="/try-hosting" title="">Try Hosting</a></li>
+</ul></div></li>
+</ul></div><a class="close-btn" href="#top">Return to content</a>  </div>
+  </div>
+</div>
+<div id="block-search-form" class="block block-search">
+<div class="block-inner">
+    
+  <div class="content">
+    <form action="/docs/develop/standards/accessibility-coding-standards" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input placeholder="Search…" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input alt="Search" type="image" id="edit-submit" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-NnvBWDRjcJfEvPUrSABDNV0HzJ042swvrgaYp2iZyo0" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>  </div>
+  </div>
+</div>
+<div id="block-system-user-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu"><li class="button default"><a href="#block-system-user-menu"><img src="https://www.drupal.org/sites/all/themes/bluecheese/images/icon-w-user.svg" alt="Log in, view profile, and more"></a><ul><li class="first leaf"><a href="/user/login?destination=node/3328441" title="">Log in</a></li>
+<li class="last leaf"><a href="/user/register?destination=node/3328441" title="">Create account</a></li>
+</ul></li></ul></div>  </div>
+  </div>
+</div>
+  </div>
+    </nav>
+  </div>
+
+    <div id="header" class="clearfix">
+    <div id="header-inner" class="container-12 clearfix">
+      <div id="header-left">
+        <div id="site-name"><a href="/documentation">Documentation</a></div>
+              </div>
+      <div id="header-right">
+          <div class="region region-header">
+    <div id="block-drupalorg-search-documentation" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <form class="container-inline" action="/docs/develop/standards/accessibility-coding-standards" method="post" id="drupalorg-documentation-search-form" accept-charset="UTF-8"><div><input type="hidden" name="form_build_id" value="form-A-JgOgXLXrGYJq9-IRCrHA2qpVv7rh14bGb8yYTuVRg" />
+<input type="hidden" name="form_id" value="drupalorg_documentation_search_form" />
+<div class="form-item form-type-textfield form-item-drupalorg-documentation-search-form">
+  <label class="element-invisible" for="edit-drupalorg-documentation-search-form--2">Search </label>
+ <input placeholder="Search documentation…" type="text" id="edit-drupalorg-documentation-search-form--2" name="drupalorg_documentation_search_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions--2"><input alt="Search" type="image" id="edit-submit--2" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div></div></form>  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    </div>
+  </div>
+  
+      <div id="banner" data-nosnippet>
+        <div class="region region-banner">
+    <div id="block-drupalorg-announcements" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="announcement"><img class="photo" src="https://www.drupal.org/files/styles/grid-2-2x-square/public/announcements/drupal-evergreen-logo-280X280px%20%281%29_0.jpg?itok=PHpn6rCb" width="280" height="280" alt="Announcement icon" title="Announcement icon" />Still on Drupal 7? Security support for Drupal 7 ended on 5 January 2025. Please visit our Drupal 7 End of Life resources page to review all of your options.</div>
+<div class="cta"><a href="https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/enterprise" class="global-announce-banner dc-singapore-registration">Migration Resource Center</a></div>  </div>
+  </div>
+</div>
+  </div>
+    </div>
+  
+  <div id="page" class="clearfix">
+    <div class="breadbox"><nav class="breadcrumb container-12"><span><a href="/docs/develop">Develop</a></span><span><a href="/docs/develop/standards">Coding standards</a></span></nav></div>
+
+    <div id="main" role="main">
+      
+      <div id="content" class="clearfix">
+                                <div id="content-inner" class="clearfix">
+
+          
+            <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+<div class="block-inner">
+    
+  <div class="content">
+    
+<div class="panelizer-view-mode node node-full node-documentation node-3328441">
+        
+<div class="panel-display hydra panel-layout clearfix " >
+
+  <div class="container preface clearfix panel-panel">
+    <div class="container-inner preface-inner panel-panel-inner">
+          </div>
+  </div>
+
+  <div class="container content clearfix">
+    <div class="container-inner content-inner panel-panel-inner">
+      <div class="column-content-region top-right-content column panel-panel">
+        <div class="column-content-region-inner top-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-block pane-drupalorg-carbon-ad-sidebar"  >
+  
+      
+  
+  <div class="pane-content">
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYIEKJI&placement=drupalorg" id="_carbonads_js"></script><div class="ad-explanation description">Advertising sustains the DA. Ads are hidden for members. <a href="/association/individual-membership">Join today</a></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-table-of-contents-toc-w-3y7froeoqmgrpcmgnphqwt4pi3"  id="on-this-page" >
+  
+        <h3 class="pane-title">
+      On this page    </h3>
+    
+  
+  <div class="pane-content">
+    <div class="item-list"><ul class="anchor-list"><li class="anchor-list__item h2-tag first"><a href="/docs/develop/standards/accessibility-coding-standards#s-key-goals" class="toc-link toc-link-invalid-id active">Key Goals</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-general-best-practices" class="toc-link toc-link-invalid-id active">General Best Practices</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-technical-standards" class="toc-link toc-link-invalid-id active">Technical Standards</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-implementation" class="toc-link toc-link-invalid-id active">Implementation</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-screen-reader-hinting-with-wai-aria-or-aria" class="toc-link toc-link-invalid-id active">Screen reader hinting with WAI-ARIA (or ARIA)</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-dynamic-content" class="toc-link toc-link-invalid-id active">Dynamic content</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-keyboard-navigation" class="toc-link toc-link-invalid-id active">Keyboard Navigation</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-accessible-methods-for-hiding-content" class="toc-link toc-link-invalid-id active">Accessible Methods for Hiding Content</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-making-content-invisible-for-sighted-users-only" class="toc-link toc-link-invalid-id active">Making content invisible for sighted users only</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-making-content-invisible-until-someone-tabs-to-it" class="toc-link toc-link-invalid-id active">Making content invisible, until someone tabs to it</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-completely-hide-content-for-all-users" class="toc-link toc-link-invalid-id active">Completely hide content for all users</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-inline-form-errors" class="toc-link toc-link-invalid-id active">Inline Form Errors</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-related-form-elements" class="toc-link toc-link-invalid-id active">Related Form Elements</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-using-animation-responsibly" class="toc-link toc-link-invalid-id active">Using animation responsibly</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-testing-your-work" class="toc-link toc-link-invalid-id active">Testing Your Work</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-automated-tools" class="toc-link toc-link-invalid-id active">Automated Tools</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-nightwatch-and-drupal-core" class="toc-link toc-link-invalid-id active">Nightwatch and Drupal Core</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-keyboard-access" class="toc-link toc-link-invalid-id active">Keyboard Access</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/accessibility-coding-standards#s-testing-with-assistive-technology" class="toc-link toc-link-invalid-id active">Testing With Assistive Technology</a></li>
+<li class="anchor-list__item h3-tag last"><a href="/docs/develop/standards/accessibility-coding-standards#s-form-accessibility" class="toc-link toc-link-invalid-id active">Form Accessibility</a></li>
+</ul></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-og-menu-og-single-menu-block"  id="coding-standards" >
+  
+        <h2 class="pane-title">
+      <a href="/docs/develop/standards">Coding standards</a>    </h2>
+    
+  
+  <div class="pane-content">
+    <ul class="menu"><li class="first leaf"><a href="/docs/develop/standards/php" title="">PHP</a></li>
+<li class="leaf active-trail"><a href="/docs/develop/standards/accessibility-coding-standards" class="active-trail active">Accessibility Coding Standards</a></li>
+<li class="leaf"><a href="/docs/develop/standards/css">CSS</a></li>
+<li class="leaf"><a href="/docs/develop/standards/javascript-coding-standards">JavaScript</a></li>
+<li class="leaf"><a href="/docs/develop/coding-standards/markdown-coding-standards">Markdown coding standards</a></li>
+<li class="leaf"><a href="/docs/develop/standards/sql" title="">SQL</a></li>
+<li class="leaf"><a href="/docs/develop/coding-standards/twig-coding-standards">Twig coding standards</a></li>
+<li class="leaf"><a href="/docs/develop/coding-standards/drupal-markup-style-guide">Drupal Markup Style Guide</a></li>
+<li class="leaf"><a href="/docs/develop/standards/spelling">Spelling</a></li>
+<li class="leaf"><a href="/docs/develop/coding-standards/configuration-file-coding-standards">Configuration file coding standards</a></li>
+<li class="last leaf"><a href="/docs/develop/coding-standards/composer-package-naming-conventions">Composer package naming conventions</a></li>
+</ul>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-links"  >
+  
+      
+  
+  <div class="pane-content">
+      </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region left-content column panel-panel ">
+        <div class="column-content-region-inner left-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-node-title"  >
+  
+      
+  
+  <div class="pane-content">
+    <h1>Accessibility Coding Standards</h1>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-updated"  id="last-updated-on" >
+  
+        <span class="pane-title">
+      Last <a href="/node/3328441/discuss">updated</a> on    </span>
+    
+  
+  <div class="pane-content">
+    27 August 2025  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-entity-field pane-node-body"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><div class="note-warning">
+<p>Changes to Drupal coding standards are proposed and discussed in issues in the <a href="/project/coding_standards" rel="nofollow">Coding Standards project</a>.</p>
+</div>
+<p>The Drupal community strives to be inclusive to everyone, including people with disabilities. To that end, the Drupal community has developed the following accessibility coding standards to help make websites and other digital assets accessible to the widest possible audience.</p>
+<h2 id="s-key-goals"><a class="toc-anchor" title="Permalink to this headline" href="#s-key-goals"></a>Key Goals</h2>
+<p>Effective user experiences serve our entire community, including website visitors with disabilities. A positive experience can be achieved by focusing on three goals:</p>
+<ol>
+<li>Creating an inclusive strategy: Consider accessibility needs when architecting the site</li>
+<li>Incorporating Accessible Coding: Use best practices (as outlined below) to ensure that content can be navigated and read by all</li>
+<li>Following Normalized Testing: Building accessibility reviews into existing processes (and not as an add-on) will help to ensure code pushed out is accessible.</li>
+</ol>
+<h2 id="s-general-best-practices"><a class="toc-anchor" title="Permalink to this headline" href="#s-general-best-practices"></a>General Best Practices</h2>
+<p>Drupal has made every effort to seamlessly build accessibility in Drupal Core.  This process empowers developers and authors to build highly legible content that can be parsed by assistive devices, by:</p>
+<ul>
+<li>Providing <strong>text alternatives (alt text)</strong> for non-text content, such as images, charts and graphs.</li>
+<li>Providing accurate transcripts, captions, and descriptions for video.</li>
+<li>Ensuring color choices have sufficient <strong>contrast</strong> to make it easier to read for users with visual impairments.</li>
+<li>Testing to ensure the website is <strong>keyboard-navigable</strong>, so that users who cannot use a mouse can still access all the content and functionality.</li>
+<li><a href="https://www.youtube.com/watch?v=jywE0UljggE&amp;ab_channel=JacksonBates" rel="nofollow">Using semantic HTML tags</a>, such as <code class="language-html language-php">&lt;h1&gt;</code>, <code class="language-html language-php">&lt;ul&gt;</code>, and <code class="language-html language-php">&lt;button&gt;</code> rather than <code class="language-html language-php">&lt;div&gt;</code>, <code class="language-html language-php">&lt;div&gt;</code> and <code class="language-html language-php">&lt;div&gt;</code>, to properly structure content and make it understandable to assistive technologies.</li>
+<li><strong>Defaulting to using HTML whenever possible</strong> and <strong>using WAI-ARIA modestly</strong>. </li>
+</ul>
+<ul>
+<li>ARIA shims labels for screen readers into non-semantic HTML; </li>
+<li>ARIA versions of elements are generally not as robust, and improper use can either reduce the usability for screen reader users or introduce accessibility errors.</li>
+</ul>
+<ul>
+<li><strong>Checking your work.</strong> Never assume something is fine; everybody makes mistakes. Run automated checkers (outlined below), and manually test new interactive components. When possible, invite users with disabilities to test your work.</li>
+</ul>
+<h2 id="s-technical-standards"><a class="toc-anchor" title="Permalink to this headline" href="#s-technical-standards"></a>Technical Standards</h2>
+<p>Public-facing code integrated into the Drupal CMS, the Drupal.org website or related community sites should strive to meet <a href="https://www.w3.org/TR/WCAG22" rel="nofollow">Web Content Accessibility Guidelines (WCAG) 2.2 AA</a>. Our community strives to keep up with the <a href="https://www.w3.org/WAI/standards-guidelines/#wcag2" rel="nofollow">latest W3C recommendations</a>. </p>
+<p>Author-facing interfaces should strive to meet the <a href="https://www.w3.org/TR/ATAG20/" rel="nofollow">Authoring Tool Accessibility Guidelines (ATAG) 2.0</a>. ATAG 2.0 is broken into two parts:</p>
+<ul>
+<li><strong>Part A</strong> involves accessibility of the authoring tool itself. Authors with disabilities should not face barriers when creating content.</li>
+<li><strong>Part B</strong> addresses how that tool supports authors in creating accessible content. Content creation tools should build accessible pages by default through templated widgets, easy-to-use authoring interfaces, and input validation.</li>
+</ul>
+<p>The accessibility of the admin side, including the editing tools, should meet the same level of accessibility as the public facing site. Author defaults should also be built to support better accessibility.</p>
+<h2 id="s-implementation"><a class="toc-anchor" title="Permalink to this headline" href="#s-implementation"></a>Implementation</h2>
+<h3 id="s-screen-reader-hinting-with-wai-aria-or-aria"><a class="toc-anchor" title="Permalink to this headline" href="#s-screen-reader-hinting-with-wai-aria-or-aria"></a>Screen reader hinting with WAI-ARIA (or ARIA)</h3>
+<p>WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet Applications) attributes add semantic meaning to both markup and markup patterns. This semantic meaning cannot be conveyed with HTML alone, e.g.:</p>
+<ul>
+<li>Indicating an accordion toggle is available but currently closed using <code class="language-php">aria-expanded="false"</code></li>
+<li>Using <code class="language-php">aria-describedby="EXAMPLE-ID"</code> to associate a form field with its help text.</li>
+<li>Using <code class="language-php">aria-current="page"</code> to indicate which navigation item is active.</li>
+</ul>
+<p>When the semantic meaning <strong>can</strong> be conveyed through HTML, we recommend avoiding using any ARIA attributes. </p>
+<p>To add ARIA attributes to elements in Drupal render arrays, use the #attributes property of the #type element in your form definitions. For example, if you have a form field that requires user input, you can add the aria-required attribute to the #attributes property like this:</p>
+<pre>
+<code class="language-php">$form['field_name'] = [  
+'#type' =&gt; 'textfield',  
+'#title' =&gt; t('Field Label'), 
+ '#attributes' =&gt; [    'aria-required' =&gt; 'true',  ],
+];</code></pre><h3 id="s-dynamic-content"><a class="toc-anchor" title="Permalink to this headline" href="#s-dynamic-content"></a>Dynamic content</h3>
+<p>When content on a page changes following user input, it is important to announce that change to screen reader users with aria-live. Key moments include:</p>
+<ul>
+<li>Alerts and error messages</li>
+<li>When an auto-complete field has provided a possible match</li>
+<li>When an AJAX filter changed the number of search results on the page</li>
+</ul>
+<p>To simplify the process, the Community has added the Drupal.announce() function to provide a consistent notification process. The <code class="language-php">Drupal.announce()</code> function allows JavaScript functions to send a message to a live region on the page, which will be read by screen readers. </p>
+<p>To use the <code class="language-php">Drupal.announce()</code> function, call it with the message that you want to announce as the argument. For example:</p>
+<pre>
+<code class="language-php">Drupal.announce( Drupal.t('Your form has been submitted successfully.') );</code></pre><p>You can also pass translated strings &amp; change the priority of messages using code like:</p>
+<pre>
+<code class="language-php">Drupal.announce( Drupal.t('This is important!'), 'assertive' );</code></pre><p>When assertive is indicated, the screen reader will interrupt other aural text with the  message.</p>
+<h3 id="s-keyboard-navigation"><a class="toc-anchor" title="Permalink to this headline" href="#s-keyboard-navigation"></a>Keyboard Navigation</h3>
+<p>Any feature that can be operated using a mouse must also work using a keyboard. Default HTML elements provide this functionality when used as intended. When implementing custom elements, be sure to test that a user can tab into and out of the element, click using keyboard or space bar, and use additional expected keys as outlined in the <a href="https://www.w3.org/WAI/ARIA/apg/" rel="nofollow">ARIA Patterns guide</a>.</p>
+<p>Certain widgets, such as popover dialogs, should capture and trap keyboard focus in the same manner that they overlay content for the mouse. Focus must then be released when the user clicks a “close” button or presses the Esc key. To assist with this process, Drupal Core includes a "tabbingManager" JavaScript class, which include methods to constrain and release focus as appropriate. You can invoke constrained tabbing with the <code class="language-php">Drupal.tabbingManager</code> JavaScript feature:</p>
+<pre>
+<code class="language-javascript language-php">var tabbingContext = Drupal.tabbingManager.constrain( $('.contextual-toolbar-tab, .contextual') );</code></pre><p>A set of encoded elements is passed to using the  constrain method. Pressing the tabbing key will now only move between the tab-enabled elements.</p>
+<p>To remove the tabbing constraint, the release method must be called on the tabbing context object.</p>
+<pre>
+<code class="language-javascript language-php">tabbingContext.release();</code></pre><p>More information can be found with the <a href="https://www.drupal.org/node/1973218#tabbing" rel="nofollow">Drupal 8 release of the tabbing constraint feature</a>.</p>
+<h3 id="s-accessible-methods-for-hiding-content"><a class="toc-anchor" title="Permalink to this headline" href="#s-accessible-methods-for-hiding-content"></a>Accessible Methods for Hiding Content</h3>
+<h4 id="s-making-content-invisible-for-sighted-users-only"><a class="toc-anchor" title="Permalink to this headline" href="#s-making-content-invisible-for-sighted-users-only"></a>Making content invisible for sighted users only</h4>
+<p>Drupal provides a CSS class, "visually-hidden," which can be used to hide content visually, but leave it available to screen readers. Common uses include providing alternative text for an icon provided as a background image, or to provide visually hidden headings to label navigation regions.</p>
+<p>Please be mindful that not all screen reader users are unable to see the content; some use it for “read along” functionality to assist with low vision or cognitive disabilities. If the visual and non-visual experiences are drastically different, visually hiding content may reduce the quality of the user experience by creating confusion.</p>
+<h4 id="s-making-content-invisible-until-someone-tabs-to-it"><a class="toc-anchor" title="Permalink to this headline" href="#s-making-content-invisible-until-someone-tabs-to-it"></a>Making content invisible, until someone tabs to it</h4>
+<p>Use Drupal's "visually-hidden" CSS class together with the CSS class "focusable" on an element to ensure that when a keyboard user focuses it, it becomes visible. Sighted keyboard users typically use the skip links feature.</p>
+<h4 id="s-completely-hide-content-for-all-users"><a class="toc-anchor" title="Permalink to this headline" href="#s-completely-hide-content-for-all-users"></a>Completely hide content for all users</h4>
+<p>Drupal’s CSS class “hidden” was created based on best practices to hide content from both sighted users and from screen readers. This class could be used instead of the general CSS instruction “display: none;” on an element.</p>
+<p>More <a href="https://www.drupal.org/docs/accessibility/hide-content-properly" rel="nofollow">specific instructions on hiding content</a> can be found in the documentation.</p>
+<h3 id="s-inline-form-errors"><a class="toc-anchor" title="Permalink to this headline" href="#s-inline-form-errors"></a>Inline Form Errors</h3>
+<p>Drupal's inline form errors module highlights errors next to the input field, rather than at the top of the page. Highlighting errors near the field makes  it easier for users to locate and correct their errors. This feature is available in Core, but it is not enabled by default. Developers should manually enable this module and test that their code works as planned. </p>
+<p>Testing form errors, while often overlooked, is nonetheless a crucial step in the development process, especially when coding for audiences with disabilities.  Make sure the error explains how to correct the input, e.g.:</p>
+<ul>
+<li>"Quantity must be greater than 0" rather than "Invalid quantity," or</li>
+<li>"Password must contain at least 8 letters" rather than "Password is too short"</li>
+</ul>
+<p>Also make sure the error is announced by screen readers if it is inserted as a link to the dynamic content above.</p>
+<p>See more information below about testing form accessibility. </p>
+<h3 id="s-related-form-elements"><a class="toc-anchor" title="Permalink to this headline" href="#s-related-form-elements"></a>Related Form Elements</h3>
+<p>When form inputs are visually grouped,  use a &lt;fieldset&gt; with a &lt;legend&gt; element to make that grouping machine-readable. Grouping checkboxes with appropriate legend elements allows screen reader users the ability to know which box they are checking.</p>
+<p>Radios, checkboxes, Form API, and the advanced search all utilize fieldsets by default.</p>
+<h3 id="s-using-animation-responsibly"><a class="toc-anchor" title="Permalink to this headline" href="#s-using-animation-responsibly"></a>Using animation responsibly</h3>
+<p>Animation is cool. It can help people know where to focus. It can also make people physically ill. Before adding animation, please consider how it will improve the users experience before doing so. If animation is enabled, make sure that user preferences are respected. The following is a best practice for adding animations responsibly.</p>
+<p>For Drupal, we are recommending that people put any animation into a prefers-reduced-motion media query that is explicitly set for no-preference. Clearly isolating the animations builds on our accessibility defaults:</p>
+<p><code class="language-php">@media (prefers-reduced-motion: no-preference) {<br />
+/* styles to apply if a user's device is not set to reduce motion */<br />
+}</code></p>
+<p>If you are building an module or theme that is heavy with animation, it may be more practical to call out which animations you can disable, but at the moment, code on Drupal.org generally has minimal animation.</p>
+<p><code class="language-php">@media (prefers-reduced-motion: reduce) {<br />
+/* styles to apply if a user's device settings are set to reduced motion */<br />
+}</code></p>
+<p>For more complex instances, you may want to draw on related articles from <a href="https://www.smashingmagazine.com/2021/10/respecting-users-motion-preferences/" rel="nofollow">Smashing Magazine</a>, <a href="https://css-tricks.com/revisiting-prefers-reduced-motion/" rel="nofollow">CSS Tricks</a>, or <a href="https://web.dev/articles/prefers-reduced-motion" rel="nofollow">Web.dev</a>.</p>
+<p>Either way, a page with animation would default to a more static view if the user/browser has prefers-reduced-motion, there would be no animation. Otherwise there may be some animation if the user/browser hasn’t set their motion preferences. It is a best practice to be able to manually override the browser settings with toggle, but at the moment there is no existing module to do this in Drupal.</p>
+<h2 id="s-testing-your-work"><a class="toc-anchor" title="Permalink to this headline" href="#s-testing-your-work"></a>Testing Your Work</h2>
+<h3 id="s-automated-tools"><a class="toc-anchor" title="Permalink to this headline" href="#s-automated-tools"></a>Automated Tools</h3>
+<p>Automated accessibility checkers are the best place to start an accessibility test.  These tools can only identify objectively invalid code, which catches 35-40% of issues in a typical site. For example, they can flag that an "alt" attribute is missing, but they can't judge whether an existing "alt" text actually describes its image. </p>
+<p>Some tools focus exclusively on actual barriers as per WCAG, while others also incorporate various best practices. Drupal's accessibility team leverages the latest stable version of <a href="https://github.com/dequelabs/axe-core" rel="nofollow">Deque's axe-core</a>, and aims to have "zero axe errors," or to be "axe clean." Axe-core is a widely-used, open source library for testing the accessibility of web content. It is embedded in free tools like <a href="https://developer.chrome.com/docs/lighthouse/" rel="nofollow">Google Lighthouse</a> and Microsoft’s <a href="https://accessibilityinsights.io/" rel="nofollow">Accessibility Insights</a>. Axe is also available from the command line or as a standalone browser plugin. Tools like <a href="https://www.npmjs.com/package/cypress-axe" rel="nofollow">cypress-axe</a>, <a href="https://pa11y.org/" rel="nofollow">pa11y</a> and <a href="https://github.com/snugbear/nightwatch-axe" rel="nofollow">nightwatch-axe</a> make it easier to integrate with CI/CD pipelines. </p>
+<p>When reporting findings to Drupal’s issue queue, we recommend using Microsoft’s Accessibility Insights to generate bug descriptions, because the "export" function provides details that allow developers to more easily replicate the problem. We encourage including testers with disabilities in all steps of the development process.</p>
+<h3 id="s-nightwatch-and-drupal-core"><a class="toc-anchor" title="Permalink to this headline" href="#s-nightwatch-and-drupal-core"></a>Nightwatch and Drupal Core</h3>
+<p>Axe testing is now included in the default Drupal Core test infrastructure. There is more information about this in the <a href="https://www.drupal.org/docs/develop/automated-testing/javascript-testing-using-nightwatch#s-writing-accessibility-tests-in-nightwatch" rel="nofollow">JavaScript testing using Nightwatch</a> page. The list of pages tested should be reviewed as the interface evolves. </p>
+<h3 id="s-keyboard-access"><a class="toc-anchor" title="Permalink to this headline" href="#s-keyboard-access"></a>Keyboard Access</h3>
+<p>Test that your module/theme is keyboard accessible:</p>
+<ul>
+<li>Is the focused element always visually highlighted?</li>
+<li>Can you tab to each link, button and control?</li>
+<li>Is the tab order logical, roughly matching the visual reading order?</li>
+<li>If an action triggers a modal dialog, is focus transferred into the dialog, and then returned to the triggering button when it closes?</li>
+<li>Does anything trigger an unexpected change of context for the cursor location? E.g., it is not unexpected to move the user's cursor when they have clicked a button to trigger an action; but it is unexpected when they have merely focused a field or input while browsing the page.</li>
+<li>Do complex controls (dropdowns, widgets) allow for the use of arrow and Esc key actions as expected for semantic elements or their ARIA patterns?</li>
+</ul>
+<p>Include testing with 200% magnification to ensure that the entire page can be accessed without using a mouse or other pointer device. Horizontally scrolling regions, such as overflowing tables, may need to be given a <code class="language-php">tabindex="0"</code> attribute to <a href="https://www.a11yproject.com/posts/how-to-use-the-tabindex-attribute/#scrollable-overflow-containers" rel="nofollow">allow for keyboard scrolling</a>.</p>
+<h3 id="s-testing-with-assistive-technology"><a class="toc-anchor" title="Permalink to this headline" href="#s-testing-with-assistive-technology"></a>Testing With Assistive Technology</h3>
+<p>For new patterns, it is useful to test with assistive technology like the NVDA Screen Reader (Windows / Firefox or Chrome)  or Apple’s VoiceOver (Mac / Safari). Make sure the element's role (what type of thing it is), name (its visible text label) and state (e.g., expanded/collapsed) are announced. Make sure the functionality is intuitive or explained.</p>
+<p>With simple and established patterns, it is best to emulate <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" rel="nofollow">HTML semantic elements</a> with simple, tab-able toggles as controls, and HTML landmark regions and headings for structure. For more complex patterns, the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/" rel="nofollow">W3C’s APG pattern library</a> should be used as a guide.</p>
+<p>For new, complex widgets, it is preferred to have the pattern tested by users with disabilities. Sighted testers with screen readers often use them differently from people who rely on them from day to day, and may miss expected keyboard shortcuts, or think something is intuitive (because they have seen it) that is not.</p>
+<h3 id="s-form-accessibility"><a class="toc-anchor" title="Permalink to this headline" href="#s-form-accessibility"></a>Form Accessibility</h3>
+<p>When testing the accessibility of your forms, ensure that a non-visual user will be alerted (keyboard focused moved etc.) to the error. Do not rely on the user to navigate backwards / go searching for the error message. Also test for visual users by way of contrast and readability of the error. <br />
+ </p></div></div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-views-panes pane-documentation-related-content-related-content-pane"  id="related-content" >
+  
+        <h2 class="pane-title">
+      Related Content    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="view view-documentation-related-content view-id-documentation_related_content view-display-id-related_content_pane view-dom-id-8cd00c0bf262dd7321ff8733d3db6285">
+        
+  
+  
+      <div class="view-content">
+        <div>
+    <div id="node-3281281" class="node node-post node-content-3281281 clearfix">
+
+  
+        <h2><a href="/association/blog/gaad-pledge-2022-extending-drupals-accessibility">GAAD Pledge 2022 - Extending Drupal&#039;s Accessibility</a></h2>
+    
+  
+  <div class="content">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><p>The Drupal community is again celebrating <a href="https://globalaccessibilityawarenessday.org/" rel="nofollow">Global Accessibility Awareness Day</a> (GAAD) but this time we are excited to also announce that the Drupal CMS has taken the GAAD pledge to formalize accessibility as a core value of our framework. Our commitment to accessibility isn’t new, but we are excited to join React Native and Ember JS, previous GAAD Pledgees, to be a public open source leader in pushing forward accessibility to the community.</p></div></div></div>  </div>
+
+  
+
+</div>
+
+  </div>
+  <div>
+    <div id="node-3064837" class="node node-documentation node-content-3064837 clearfix">
+
+  
+        <h2><a href="/docs/getting-started/accessibility/how-to-do-an-accessibility-review">How to do an accessibility review?</a></h2>
+    
+  
+  <div class="content">
+    <div class="field field-name-field-summary field-type-text field-label-hidden"><div class="field-items"><div class="field-item even">This documentation provides a step by step process for reviewing the accessibility of your module theme or site.</div></div></div><div class="field field-name-field-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="/taxonomy/term/185733">accessibility</a></div><div class="field-item odd"><a href="/taxonomy/term/187515">best practices</a></div></div></div>  </div>
+
+  
+
+</div>
+
+  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region bottom-right-content column panel-panel">
+        <div class="column-content-region-inner bottom-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-entity-field pane-node-field-tags"  id="tags" >
+  
+        <h2 class="pane-title">
+      Tags    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="field field-name-field-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="/taxonomy/term/185733">accessibility</a></div><div class="field-item odd"><a href="/taxonomy/term/187515">best practices</a></div><div class="field-item even"><a href="/taxonomy/term/190104">coding standards</a></div></div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-views-panes pane-documentation-help-improve-pane"  id="help-improve-this-page" >
+  
+        <h2 class="pane-title">
+      Help improve this page    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="view view-documentation-help view-id-documentation_help view-display-id-improve_pane view-dom-id-84f6d9e07af6e8b032ca8fd70260f05e">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+      
+  <span class="views-field views-field-field-documentation-status">    <strong class="views-label views-label-field-documentation-status">Page status: </strong>    <span class="field-content">No known problems</span>  </span>  
+  <div class="views-field views-field-nothing">        <span class="field-content"><br /><strong>You can:</strong><br />
+<ul>
+<li>Log in, click <a href="/node/3328441/edit">Edit</a>, and edit this page</li>
+<li>Log in, click <a href="/node/3328441/discuss">Discuss</a>, update the Page status value, and suggest an improvement</li>
+<li>Log in and <a href="/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%283328441%29%20Accessibility%20Coding%20Standards">create a Documentation issue</a> with your suggestion</li>
+</ul></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer clearfix panel-panel">
+    <div class="container-inner footer-inner panel-panel-inner">
+          </div>
+  </div>
+
+</div><!-- /.sutro -->
+</div>
+  </div>
+  </div>
+</div>
+  </div>
+        </div>
+              </div> <!-- /#content -->
+
+    </div> <!-- /#column-left -->
+
+      </div> <!-- /#page -->
+
+  <div id="footer" role="contentinfo">
+            <div class="region region-footer">
+    <div id="block-drupalorg-documentation-license" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    Drupal’s online documentation is © 2000-2025 by the individual contributors and can be used in accordance with the <a href="/terms">Creative Commons License, Attribution-ShareAlike 2.0</a>. PHP code is distributed under the <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License</a>.  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-infra-partner" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <a href="https://bit.ly/4fYoEf8" >Infrastructure management for Drupal.org provided by <img src="/files/cta/graphic/tag1_wht.svg" alt="Tag1 logo" ></a> 
+<br />
+<span style="font-size: .65em;"><a href="https://bit.ly/41bS4lA">Need a Drupal 7 extended support partner? Consider Tag1.</a></span>  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-drupalorg-footer" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <h4 class="element-invisible">News items</h4><ul class="drupal-news"><li class="0 first"><a href="https://www.drupal.org/news">News</a></li>
+<li class="1"><a href="https://www.drupal.org/planet" title="News from Drupal community members">Planet Drupal</a></li>
+<li class="2"><a href="https://www.drupal.org/about/media-kit/social-media" title="Drupal on social media">Social media</a></li>
+<li class="3"><a href="https://www.drupal.org/subscribe">Sign up for Drupal news</a></li>
+<li class="4"><a href="https://www.drupal.org/security" title="Announcements from the Drupal Security Team">Security advisories</a></li>
+<li class="5 last"><a href="https://jobs.drupal.org/" title="Drupal Jobs">Jobs</a></li>
+</ul><h4 class="element-invisible">Our community</h4><ul class="community"><li class="0 first"><a href="https://www.drupal.org/community">Community</a></li>
+<li class="1"><span><a href="https://www.drupal.org/drupal-services" title="People and organizations offering Drupal services">Services</a>, <a href="https://www.drupal.org/training" title="People and organizations offering Drupal training">Training</a> & <a href="https://www.drupal.org/hosting" title="Organizations offering Drupal hosting">Hosting</a></span></li>
+<li class="2"><a href="https://www.drupal.org/community/contributor-guide">Contributor guide</a></li>
+<li class="3"><a href="https://groups.drupal.org/groups" title="groups.drupal.org">Groups &amp; meetups</a></li>
+<li class="4"><a href="https://events.drupal.org" title="Upcoming and past DrupalCons">DrupalCon</a></li>
+<li class="5 last"><a href="https://www.drupal.org/dcoc" title="Drupal code of conduct">Code of conduct</a></li>
+</ul><h4 class="element-invisible">Documentation</h4><ul class="get-started"><li class="0 first"><a href="https://www.drupal.org/documentation" title="Documentation for working with Drupal">Documentation</a></li>
+<li class="1"><a href="https://www.drupal.org/docs">Drupal Guide</a></li>
+<li class="2"><a href="https://www.drupal.org/docs/user_guide/en/index.html">Drupal User Guide</a></li>
+<li class="3"><a href="https://www.drupal.org/documentation/develop">Developer docs</a></li>
+<li class="4 last"><a href="https://api.drupal.org/" title="Drupal API reference">API.Drupal.org</a></li>
+</ul><h4 class="element-invisible">Drupal code base</h4><ul class="download-extend"><li class="0 first"><a href="https://www.drupal.org/download">Download &amp; Extend</a></li>
+<li class="1"><a href="https://www.drupal.org/project/drupal" title="Download the latest version of the Drupal software">Drupal core</a></li>
+<li class="2"><a href="https://www.drupal.org/project/project_module" title="Download add-on features and functionality">Modules</a></li>
+<li class="3"><a href="https://www.drupal.org/project/project_theme" title="Download pre-designed styles for Drupal">Themes</a></li>
+<li class="4 last"><a href="https://www.drupal.org/project/project_distribution" title="Download a pre-packaged Drupal site">Distributions</a></li>
+</ul><h4 class="element-invisible">Governance of community</h4><ul class="about"><li class="0 first"><a href="https://www.drupal.org/about">About</a></li>
+<li class="1"><a href="https://www.drupal.org/about/features/accessibility" title="Our committment to accessibility">Web accessibility</a></li>
+<li class="2"><a href="https://www.drupal.org/association" title="About the Drupal Association">Drupal Association</a></li>
+<li class="3"><a href="https://www.drupal.org/drupalorg" title="About Drupal.org">About Drupal.org</a></li>
+<li class="4"><a href="https://www.drupal.org/terms" title="Drupal.org terms of service">Terms of service</a></li>
+<li class="5 last"><a href="https://www.drupal.org/privacy" title="Drupal.org privacy policy">Privacy policy</a></li>
+</ul>  </div>
+  </div>
+</div>
+<div id="block-block-77" class="block block-block">
+<div class="block-inner">
+    
+  <div class="content">
+    <p>Drupal is a <a href="/about/trademark">registered trademark</a> of <a href="https://dri.es">Dries Buytaert</a>.</p>
+  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    <div class="region region-page-bottom">
+    <script type="text/javascript">
+      (function(){
+          window._pxAppId = 'PXVnPBBfwe';
+          window._pxParam2 = '';
+          window._pxParam3 = '0';
+          var p = document.getElementsByTagName('script')[0],
+              s = document.createElement('script');
+          s.async = 1;
+          s.src = '/VnPBBfwe/init.js';
+          p.parentNode.insertBefore(s,p);
+      }());
+  </script>
+  <noscript>
+      <div style="position:fixed; top:0; left:0; display:none" width="1" height="1">
+          <img src="/VnPBBfwe/xhr/api/v1/collector/noScript.gif?appId=PXVnPBBfwe">
+      </div>
+  </noscript>  </div>
+<script type="text/javascript" src="/files/advagg_js/js__B0FBwiP97ZnD38IFraZus4upS4KVkMXI3ou0fJ2ZXGA__pPDESRJz9GHsxqQIwQ_V8xnFYEH5jipG2eicsfrdWCs__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+
+<!--[if lte IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie9-" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if gt IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie10+" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if !IE]><!-->
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="/files/advagg_js/js__pqoYaVR8NVhof-vNXe50j2TKhFv__IihVag_h4G6kus__B4mbn4wICLQjWm1m3-z1kw8F1FtP0cDAHKp00Xy_-88__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__H5AFmq1RrXKsrazzPq_xPQPy4K0wUKqecPjczzRiTgQ__wor4r9P8YTtQ7p6fbywTetZ47Z_orumIfrrhgxrpLus__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="
+function advagg_mod_1() {
+  // Count how many times this function is called.
+  advagg_mod_1.count = ++advagg_mod_1.count || 1;
+  try {
+    if (advagg_mod_1.count <= 40) {
+      init_drupal_core_settings();
+
+      // Set this to 100 so that this function only runs once.
+      advagg_mod_1.count = 100;
+    }
+  }
+  catch(e) {
+    if (advagg_mod_1.count >= 40) {
+      // Throw the exception if this still fails after running 40 times.
+      throw e;
+    }
+    else {
+      // Try again in 1 ms.
+      window.setTimeout(advagg_mod_1, 1);
+    }
+  }
+}
+function advagg_mod_1_check() {
+  if (window.init_drupal_core_settings && window.jQuery && window.Drupal) {
+    advagg_mod_1();
+  }
+  else {
+    window.setTimeout(advagg_mod_1_check, 1);
+  }
+}
+advagg_mod_1_check();"></script>
+<script type="text/javascript" src="/files/advagg_js/js__Oc0wwB7MVRfxtYw6EQM7d9sXj9PAQePoWSzQJ0uTk6c__iXqOGoaPhZHCPEspUr5BC8BwOx5P8B11xv7VOhoUii8__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__FabcJ6qluktliDejymsuV-FqaN_HyMKGe93c2rO9Ky0__el1ZLGkKneOoCS6OWa01WHuIEsTsXZ46MRLCF390Fbw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__YT6D1B_BKxvm6JCH_t9sZNI5L6yITa_DlU5QcSlOkAU__OXobH7d1IP1o3WABlniIrU_-pcJacVSIPUv9bpD-6pQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__06Uejkt2sN1AJAk3QcRQG9yrq-jCjZth0s-OymGOkVE__yFxl4u_7_1AhyVnMLZRtp5wEvh9C2VdA6gnewdM1hB0__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__pLKQd4r7OrHglE7Qkqw53K2UXCqQdhqQ9v0cz7hMCQY__OErfYuQdGbFHcCoLoUW_ESSvaumApNojzjJit8-2xcw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__hHUWFbMAa11eJtx5V0ym9o0YBsB1udk34qUT5wr1ihI__vSxsxbzmzuz4XPh--CL1BBciQpEQ_m8FfdQINCOAg14__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function init_drupal_core_settings() {jQuery.extend(Drupal.settings,{"basePath":"\/","pathPrefix":"","setHasJsCookie":0,"ajaxPageState":{"theme":"bluecheese","theme_token":"8kR1Ykk-DveOZ4Fb5qrpUFFInNtTQXy5-z__7LITHy8"},"drupalorgGitlab":{"gitlab_base_url":"https:\/\/git.drupalcode.org","base_url":"https:\/\/www.drupal.org"},"better_exposed_filters":{"views":{"documentation_help":{"displays":{"improve_pane":{"filters":[]}}},"documentation_related_content":{"displays":{"related_content_pane":{"filters":[]}}}}},"urlIsAjaxTrusted":{"\/docs\/develop\/standards\/accessibility-coding-standards":true},"drupalorgCrosssiteConsentNeeded":true,"ogContext":{"groupType":"node","gid":"2802991"}}); 
+if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(false);}} if(window.jQuery && window.Drupal){init_drupal_core_settings();}
+//--><!]]>
+</script>
+<script type="text/javascript" src="/files/advagg_js/js__2k0CJ3KAQNFTFab3y6ZvNtxs3HLons0Brq7VwvPSkKo__sQv8imhcZRev08LnyQ7OzwuHrZ3Jdwo5NmznAARX0ig__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__vj0LjvNwl-3K1P9LGT4BGuXCZcAovYsVlVmoJN3TMRg__KW8SiGceRY3sjIKVrffDjf2MK4A5Vp3EDDxVO-4pegI__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+</body>
+</html>

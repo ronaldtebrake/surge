@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:fb="http://ogp.me/ns/fb#"
+  xmlns:og="http://ogp.me/ns#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="MobileOptimized" content="width" />
+  <!--[if IE]><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Goals and best practices for CSS architecture" />
+<meta name="generator" content="Drupal 7 (https://www.drupal.org)" />
+<link rel="image_src" href="https://www.drupal.org/sites/all/themes/bluecheese/images/drupal_meta_image.png" />
+<link rel="canonical" href="https://www.drupal.org/docs/develop/standards/css/css-architecture-for-drupal-9" />
+<link rel="shortlink" href="https://www.drupal.org/node/1887918" />
+<meta property="og:site_name" content="Drupal.org" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.drupal.org/docs/develop/standards/css/css-architecture-for-drupal-9" />
+<meta property="og:title" content="CSS architecture (for Drupal 9)" />
+<meta property="og:description" content="Note: Changes to Drupal coding standards are proposed and discussed in issues in the Coding Standards project. Note: This document aims to apply emerging best-practices for CSS to Drupal 8/9. As we implement these ideas in Drupal 8, this document may need to be updated. Skip to best practices Goals The goals of good CSS should not be so different from those of good software engineering. Well-architected CSS, like PHP or JavaScript, should be: 1. Predictable CSS throughout Drupal core and contributed modules should be consistent and understandable." />
+<meta property="og:updated_time" content="2022-09-13T07:33:18+00:00" />
+<meta property="article:published_time" content="2013-01-14T03:38:17+00:00" />
+<meta property="article:modified_time" content="2022-09-13T07:33:18+00:00" />
+  <title>CSS architecture (for Drupal 9) | CSS | Drupal Wiki guide on Drupal.org</title>
+  <link type="text/css" rel="stylesheet" href="/files/advagg_css/css__IGnvPR1nQd12eUWIitgZ6GDDyWxn9W82zUE-pgSt6Y8__Gh7RLUb1X-_kkfJcUW2xrjQQJCrbwuGgKr5Ix51cJYc__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Xi-PZpvKTY78w7l1WNsqwUA52MIupHJebCMiX34Ugt0__D_EUHDAfEQdxcLiSDY7hREUWkG1Ge56_h2z3Er8V188__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__WF0PRotZAhCcl0aJjY5W2LYj8UwiYuB2dZEFluOh3Tc__FviX13FUB-Ppa2XB29BUIJQZ1Wg-F5XiDE7XD5y7mjQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Fx0_w1L9q3nwzXnALG7UfjLF34FGYgJTz636-GWbM6k__0jWLTEHP3h5U5RcXuZcFhf0DdvRdzP3_wzCVNT015Ls__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__71G6gao0TOuJxFfw9efqGV9HafmPRGSqQoYV4yqGUWc__cjdS_7q2MvneE1k5vHyBqxDqcSSGdHyUNCXu57rH2hM__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+  </head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-1887918 node-type-documentation drupalorg-site-main panels-layout og-context og-context-node og-context-node-2803003" >
+  <div id="skip-link" tabindex="-1">
+    <a class="element-invisible element-focusable" href="#content">Skip to main content</a>
+    <a class="element-invisible element-focusable skip-link-search" href="#search-block-form">Skip to search</a>
+  </div>
+    <div class="region region-page-top">
+    <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W36H8DW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div id="drupalorg-crosssite-gdpr">Can we use first and third party cookies and web beacons to <a href="https://www.drupal.org/terms">understand our audience, and to tailor promotions you see</a>?<br><button class="yes">Yes, please</button><button class="no">No, do not track me</button></div>  </div>
+      <div id="nav-header">
+          <div class="menu-nav">
+        <a class="nav-btn" id="nav-open-btn" href="#block-system-main-menu"><img src="/sites/all/themes/bluecheese/images/icon-w-menu.svg" alt="Main menu"></a>
+      </div>
+        <nav id="navigation-inner" class="container-12" role="navigation">
+        <div class="region region-navigation">
+    <div id="block-system-main-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/home" title="Drupal.org home page">Drupal.org home</a></li>
+<li class="expanded"><a href="https://www.drupal.org/about/overview/technical" title="">Discover Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/about/overview/technical" title="The open source framework behind millions of websites.">Drupal Core</a></li>
+<li class="leaf"><a href="https://new.drupal.org/drupal-cms" title="Drupal CMS puts the power of Drupal into the hands of marketers, designers and content creators.">Drupal CMS</a></li>
+<li class="leaf"><a href="https://new.drupal.org/ai" title="Open limitless possibilities with Drupal AI">Drupal AI</a></li>
+<li class="leaf"><a href="https://www.drupal.org/case-studies" title="Powerful stories that show Drupal solutions in the real world.">Case Studies</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/government" title="Drupal is the open-source CMS that enables digital transformation of government and increases citizen engagement.">Drupal for Government</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/education" title="See why 70% of the world&#039;s leading universities chose Drupal.">Drupal for Higher Education</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/nonprofit" title="See why Drupal is the open-source CMS choice for some of the world’s most influential nonprofits.">Drupal for Nonprofit</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/ecommerce" title="Natively integrate content and commerce.">Drupal for eCommerce</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/fintech" title="Secure and trustworth FinTech infrastructure.">Drupal for FinTech</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/healthcare" title="Drupal powers systems that are secure, patient-centric and engaging.">Drupal for Healthcare</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/industries/media-and-publishing" title="Create engaging multi-channel experiences to connect with your audiences - everywhere.">Drupal for Media &amp; Publishing</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Build with Drupal</a><div class="menu-block"><ul class="menu button"><li class="first collapsed"><a href="/download" title=" Download Drupal and the extensions you need">Download Drupal</a></li>
+<li class="leaf"><a href="/documentation" title="Full knowledge base including Drupal 7 resources">Documentation</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/getting-started" title="All documentation">Getting started</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Local Development Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/developers" title="">Developer Resources</a></li>
+<li class="leaf"><a href="https://new.drupal.org/docs/drupal-cms" title="Drupal CMS User Guide">Drupal CMS User Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/user_guide/en/index.html" title="Drupal User Guide">Drupal User Guide</a></li>
+<li class="leaf"><a href="https://api.drupal.org/api/drupal/11.x" title="Drupal API">API</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/modules" title="Drupal Modules">Modules</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/themes" title="Drupal themes">Themes</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/project_distribution" title="Drupal distributions">Distributions</a></li>
+<li class="leaf"><a href="/project/issues" title="Report issues and contribute improvements">Issue queues</a></li>
+<li class="last leaf"><a href="/security" title="Stay on top of the latest security alerts and updates">Security Advisories</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/drupal-services" title="">Partners &amp; Services</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/drupal-services" title="Connect with the best Drupal agencies around the world.">Find a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://new.drupal.org/association/become-a-drupal-certified-partner" title="Join an elite network of agencies committed to Drupal excellence and innovation.
+">Become a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/hosting" title="Find a hosting provider for your Drupal project.">Find a Hosting Provider</a></li>
+<li class="leaf"><a href="https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/enterprise" title="Get help with your migration to the latest version of Drupal.">Find a Migration Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/training" title="Upskill your Drupal team.">Find Training</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/steward" title="Ensure your website is protected with Drupal Steward.">Drupal Steward</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/community" title="">Community</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/community" title="Come for the code, stay for the community.">About the Community</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/contributor-guide" title="Get involved in growing and evolving Drupal.">How to Contribute</a></li>
+<li class="leaf"><a href="https://events.drupal.org/" title="DrupalCon unites experts from around the globe who create ambitious digital experiences. Network, learn, and be inspired.">DrupalCon</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/events" title="Discover local events, community meet-ups, and training.">Events</a></li>
+<li class="leaf"><a href="https://jobs.drupal.org/home" title="Find opportunities to work in Drupal.">Jobs / Careers</a></li>
+<li class="leaf"><a href="https://www.drupal.org/blog" title="News and stories about Drupal.">News &amp; Blogs</a></li>
+<li class="leaf"><a href="https://www.drupal.org/forum" title="Got a question about Drupal? Find answers on the Drupal forums.">Forum</a></li>
+<li class="leaf"><a href="/community/contributor-guide/reference-information/talk/tools/slack" title="Get support and comminicate with the global Drupal community.">Slack</a></li>
+<li class="leaf"><a href="https://www.drupal.org/subscribe" title="Sign up for Drupal news and manage your subscriptions.">Newsletters</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag" title="Get your Drupal branded merch!">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="expanded"><a href="/association" title="Support the Drupal Association - the non-profit that supports the Drupal project">Support Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/association" title="Meet the non-profit accelerating Drupal innovation ">The Drupal Association</a></li>
+<li class="leaf"><a href="/association/donate" title="Donate to the non-profit that supports Drupal">Donate</a></li>
+<li class="leaf"><a href="/association/become-a-drupal-certified-partner" title="Join the network of official Drupal Certified Partners">Become a Partner</a></li>
+<li class="leaf"><a href="/association/RippleMakers" title="Become an individual member of the Drupal Association">Become a Ripple Maker</a></li>
+<li class="leaf"><a href="/association/organization-membership" title="Join and show your organization&#039;s support for Drupal">Become an Organization Member</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag?utm_source=drupalorg&amp;utm_medium=banner&amp;utm_campaign=drupal_swag_shop_2020_09_17" title="Get your Drupal-branded bucket hats, hoodies, and more">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="last expanded"><a href="/try-hosting" title="Try Drupal">Get Started</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://new.drupal.org/drupal-cms/trial" title="">Try Drupal CMS</a></li>
+<li class="last leaf"><a href="/try-hosting" title="">Try Hosting</a></li>
+</ul></div></li>
+</ul></div><a class="close-btn" href="#top">Return to content</a>  </div>
+  </div>
+</div>
+<div id="block-search-form" class="block block-search">
+<div class="block-inner">
+    
+  <div class="content">
+    <form action="/docs/develop/standards/css/css-architecture-for-drupal-9" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input placeholder="Search…" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input alt="Search" type="image" id="edit-submit" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-t7UmX0HDBH8if2wKmKzhklYIu5v1oDdYQKtN-jjObPk" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>  </div>
+  </div>
+</div>
+<div id="block-system-user-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu"><li class="button default"><a href="#block-system-user-menu"><img src="https://www.drupal.org/sites/all/themes/bluecheese/images/icon-w-user.svg" alt="Log in, view profile, and more"></a><ul><li class="first leaf"><a href="/user/login?destination=node/1887918" title="">Log in</a></li>
+<li class="last leaf"><a href="/user/register?destination=node/1887918" title="">Create account</a></li>
+</ul></li></ul></div>  </div>
+  </div>
+</div>
+  </div>
+    </nav>
+  </div>
+
+    <div id="header" class="clearfix">
+    <div id="header-inner" class="container-12 clearfix">
+      <div id="header-left">
+        <div id="site-name"><a href="/documentation">Documentation</a></div>
+              </div>
+      <div id="header-right">
+          <div class="region region-header">
+    <div id="block-drupalorg-search-documentation" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <form class="container-inline" action="/docs/develop/standards/css/css-architecture-for-drupal-9" method="post" id="drupalorg-documentation-search-form" accept-charset="UTF-8"><div><input type="hidden" name="form_build_id" value="form-ohksZe0B6xjJSSQh5-UyhoOA9Zbcvp54w-ISdvGjnc4" />
+<input type="hidden" name="form_id" value="drupalorg_documentation_search_form" />
+<div class="form-item form-type-textfield form-item-drupalorg-documentation-search-form">
+  <label class="element-invisible" for="edit-drupalorg-documentation-search-form--2">Search </label>
+ <input placeholder="Search documentation…" type="text" id="edit-drupalorg-documentation-search-form--2" name="drupalorg_documentation_search_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions--2"><input alt="Search" type="image" id="edit-submit--2" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div></div></form>  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    </div>
+  </div>
+  
+      <div id="banner" data-nosnippet>
+        <div class="region region-banner">
+    <div id="block-drupalorg-announcements" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="announcement"><img class="photo" src="https://www.drupal.org/files/styles/grid-2-2x-square/public/announcements/drupal-evergreen-logo-280X280px%20%281%29_0.jpg?itok=PHpn6rCb" width="280" height="280" alt="Announcement icon" title="Announcement icon" />Still on Drupal 7? Security support for Drupal 7 ended on 5 January 2025. Please visit our Drupal 7 End of Life resources page to review all of your options.</div>
+<div class="cta"><a href="https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/enterprise" class="global-announce-banner dc-singapore-registration">Migration Resource Center</a></div>  </div>
+  </div>
+</div>
+  </div>
+    </div>
+  
+  <div id="page" class="clearfix">
+    <div class="breadbox"><nav class="breadcrumb container-12"><span><a href="/docs/develop">Develop</a></span><span><a href="/docs/develop/standards">Coding standards</a></span><span><a href="/docs/develop/standards/css">CSS</a></span></nav></div>
+
+    <div id="main" role="main">
+      
+      <div id="content" class="clearfix">
+                                <div id="content-inner" class="clearfix">
+
+          
+            <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+<div class="block-inner">
+    
+  <div class="content">
+    
+<div class="panelizer-view-mode node node-full node-documentation node-1887918">
+        
+<div class="panel-display hydra panel-layout clearfix " >
+
+  <div class="container preface clearfix panel-panel">
+    <div class="container-inner preface-inner panel-panel-inner">
+          </div>
+  </div>
+
+  <div class="container content clearfix">
+    <div class="container-inner content-inner panel-panel-inner">
+      <div class="column-content-region top-right-content column panel-panel">
+        <div class="column-content-region-inner top-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-block pane-drupalorg-carbon-ad-sidebar"  >
+  
+      
+  
+  <div class="pane-content">
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYIEKJI&placement=drupalorg" id="_carbonads_js"></script><div class="ad-explanation description">Advertising sustains the DA. Ads are hidden for members. <a href="/association/individual-membership">Join today</a></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-table-of-contents-toc-w-3y7froeoqmgrpcmgnphqwt4pi3"  id="on-this-page" >
+  
+        <h3 class="pane-title">
+      On this page    </h3>
+    
+  
+  <div class="pane-content">
+    <div class="item-list"><ul class="anchor-list"><li class="anchor-list__item h2-tag first"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#goals" class="toc-link active">Goals</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-1-predictable" class="toc-link toc-link-invalid-id active">1. Predictable</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-2-reusable" class="toc-link toc-link-invalid-id active">2. Reusable</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-3-maintainable" class="toc-link toc-link-invalid-id active">3. Maintainable</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-4-scalable" class="toc-link toc-link-invalid-id active">4. Scalable</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#component" class="toc-link active">The Component</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#pitfalls" class="toc-link active">Common CSS Pitfalls</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#pitfall-context" class="toc-link active">Pitfall: Modifying components based on context</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#pitfall-structure" class="toc-link active">Pitfall: Relying on HTML structure</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#pitfall-generic" class="toc-link active">Pitfall: Overly generic class names</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#pitfall-overloading" class="toc-link active">Pitfall: Making a rule do too much</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#pitfall-undo" class="toc-link active">Pitfall: Needing to undo styles</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#best-practices" class="toc-link active">Best Practices</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#avoid-structure" class="toc-link active">1. Avoid reliance on HTML structure</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#sub-components" class="toc-link active">2. Define component elements (sub-objects) using their own classes</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#extend" class="toc-link active">3. Extend components using modifier classes</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#separate-concerns" class="toc-link active">4. Separate Concerns</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-base" class="toc-link toc-link-invalid-id active">Base</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-layout" class="toc-link toc-link-invalid-id active">Layout</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-component-smacss-module" class="toc-link toc-link-invalid-id active">Component (SMACSS “module”)</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-state" class="toc-link toc-link-invalid-id active">State</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-theme" class="toc-link toc-link-invalid-id active">Theme</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#design-semantics" class="toc-link active">5. Name Components Using Design Semantics</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-note-for-core-developers" class="toc-link toc-link-invalid-id active">Note for core developers</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#s-note-for-module-developers" class="toc-link toc-link-invalid-id active">Note for module developers</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#formatting" class="toc-link active">6. Formatting Class Names</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#closing" class="toc-link active">Closing Note: Specificity, ids and !important </a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#case-study" class="toc-link active">Case Study</a></li>
+<li class="anchor-list__item h2-tag last"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9#acknowledgments" class="toc-link active">Acknowledgments</a></li>
+</ul></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-og-menu-og-single-menu-block"  id="css" >
+  
+        <h2 class="pane-title">
+      <a href="/docs/develop/standards/css">CSS</a>    </h2>
+    
+  
+  <div class="pane-content">
+    <ul class="menu"><li class="first leaf"><a href="/docs/develop/standards/css/css-coding-standards">CSS coding standards</a></li>
+<li class="leaf"><a href="/docs/develop/standards/css/css-formatting-guidelines">CSS formatting guidelines</a></li>
+<li class="leaf"><a href="/docs/develop/standards/css/csscomb-settings-for-drupal-css-formatting-and-sort-tool">CSScomb settings for Drupal (CSS formatting and sort tool)</a></li>
+<li class="leaf active-trail"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9" class="active-trail active">CSS architecture (for Drupal 9)</a></li>
+<li class="leaf"><a href="/docs/develop/standards/css/css-file-organization">CSS file organization (for Drupal 9)</a></li>
+<li class="last leaf"><a href="/docs/develop/standards/css/what-to-look-for-when-reviewing-css">What to look for when reviewing CSS</a></li>
+</ul>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-links"  >
+  
+      
+  
+  <div class="pane-content">
+      </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region left-content column panel-panel ">
+        <div class="column-content-region-inner left-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-node-title"  >
+  
+      
+  
+  <div class="pane-content">
+    <h1>CSS architecture (for Drupal 9)</h1>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-updated"  id="last-updated-on" >
+  
+        <span class="pane-title">
+      Last <a href="/node/1887918/discuss">updated</a> on    </span>
+    
+  
+  <div class="pane-content">
+    13 September 2022  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-entity-field pane-node-body"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><div class="note-warning">
+<p>Note: Changes to Drupal coding standards are proposed and discussed in issues in the <a href="/project/coding_standards" rel="nofollow">Coding Standards project</a>.</p>
+</div>
+<p>Note: This document aims to apply emerging best-practices for CSS to Drupal 8/9. As we implement these ideas in Drupal 8, this document may need to be updated.</p>
+<p><a href="#best-practices" rel="nofollow">Skip to best practices</a></p>
+<h2 id="goals"><a class="toc-anchor" title="Permalink to this headline" href="#goals"></a>Goals</h2>
+<p>The goals of good CSS should not be so different from those of good software engineering. Well-architected CSS, like PHP or JavaScript, should be:</p>
+<h3 id="s-1-predictable"><a class="toc-anchor" title="Permalink to this headline" href="#s-1-predictable"></a>1. Predictable</h3>
+<p>CSS throughout Drupal core and contributed modules should be consistent and understandable. Changes should do what you would expect without side-effects.</p>
+<h3 id="s-2-reusable"><a class="toc-anchor" title="Permalink to this headline" href="#s-2-reusable"></a>2. Reusable</h3>
+<blockquote><p>CSS rules should be abstract and decoupled enough that you can build new components quickly from existing parts without having to recode patterns and problems you’ve already solved. – <em>Philip Walton, <a href="http://engineering.appfolio.com/2012/11/16/css-architecture/" rel="nofollow">CSS Architecture</a></em></p>
+</blockquote>
+<h3 id="s-3-maintainable"><a class="toc-anchor" title="Permalink to this headline" href="#s-3-maintainable"></a>3. Maintainable</h3>
+<p>As new components and features are needed, it should be easy to add, modify and extend CSS without breaking (or refactoring) existing styles.</p>
+<h3 id="s-4-scalable"><a class="toc-anchor" title="Permalink to this headline" href="#s-4-scalable"></a>4. Scalable</h3>
+<p>CSS should be easy to manage for a single developer or for large, distributed teams (like Drupal’s).</p>
+<h2 id="component"><a class="toc-anchor" title="Permalink to this headline" href="#component"></a>The Component</h2>
+<p>Components are the discrete, purpose-built visual elements that make up the UI of a site or app. Components consist of HTML, CSS, and often – but not always – JavaScript. They are our navbars, dialogs, buttons and carousels. Components can be simple (such as icon containers and buttons) or complex enough to be themselves composed of other components.</p>
+<h2 id="pitfalls"><a class="toc-anchor" title="Permalink to this headline" href="#pitfalls"></a>Common CSS Pitfalls</h2>
+<p>To better understand the best practices provided below, it can be helpful to review some common approaches that impede our goals of predictability, maintainability, reusability and scalability.</p>
+<h3 id="pitfall-context"><a class="toc-anchor" title="Permalink to this headline" href="#pitfall-context"></a>Pitfall: Modifying components based on context</h3>
+<pre>
+<code class="language-php">/* Modifying a component when it’s in a sidebar. */
+.sidebar .component {}
+</code></pre><p>This may seem natural, but actually makes CSS less predictable and maintainable. Sooner or later you’re going to need that component style somewhere other than a sidebar! Or, the reverse may happen: a new developer places a component in the sidebar and gets an unexpectedly different appearance.</p>
+<h3 id="pitfall-structure"><a class="toc-anchor" title="Permalink to this headline" href="#pitfall-structure"></a>Pitfall: Relying on HTML structure</h3>
+<p>Mirroring a markup structure in our CSS selectors makes the resulting styles easy to break (with markup changes) and hard to reuse (because it’s tied to very specific HTML). This pitfall comes in several forms:</p>
+<ul>
+<li>Overly complex selectors: <code class="language-php">nav &gt; ul &gt; li &gt; a</code>, <code class="language-php">article p:first-child</code></li>
+<li>Qualified selectors: <code class="language-php">a.button</code>, <code class="language-php">ul.nav</code></li>
+</ul>
+<h3 id="pitfall-generic"><a class="toc-anchor" title="Permalink to this headline" href="#pitfall-generic"></a>Pitfall: Overly generic class names</h3>
+<p>Similar to the pitfall of styling a component based on context, it’s common to ‘scope’ a component’s parts under the parent component using a descendant selector:</p>
+<pre>
+<code class="language-php">.widget {}
+.widget .title {}
+.widget .content {}
+</code></pre><p>This CSS might seem economical, but tends to be counterproductive: <code class="language-php">.title</code> and <code class="language-php">.content</code> are too generic. A stand-alone <code class="language-php">.title</code> component created later will affect widget titles, likely without intending to.</p>
+<h3 id="pitfall-overloading"><a class="toc-anchor" title="Permalink to this headline" href="#pitfall-overloading"></a>Pitfall: Making a rule do too much</h3>
+<p>Applying positioning, margins, padding, colors, borders and text styles all in a single rule overloads the rule, making it difficult or impossible to reuse if some parts (say, background, borders and padding) need to be applied to a similar component later on.</p>
+<h3 id="pitfall-undo"><a class="toc-anchor" title="Permalink to this headline" href="#pitfall-undo"></a>Pitfall: Needing to undo styles</h3>
+<p>Creating style rules that undo other rules, like <code class="language-php">.component-no-padding</code> makes CSS over-complex, hard to understand and maintain, and bloats the stylesheet. Needing such styles usually indicates that some existing rules are doing too much.</p>
+<h2 id="best-practices"><a class="toc-anchor" title="Permalink to this headline" href="#best-practices"></a>Best Practices</h2>
+<h3 id="avoid-structure"><a class="toc-anchor" title="Permalink to this headline" href="#avoid-structure"></a>1. Avoid reliance on HTML structure</h3>
+<ul>
+<li>
+<p>CSS should define the appearance of an element anywhere and everywhere it appears.</p>
+</li>
+<li>
+<p>Use classes to assign appearance to markup. Never use id selectors in CSS.</p>
+</li>
+<li>
+<p>Keep selectors short. The best selector is a single class or element!</p>
+</li>
+<li>
+<p>Sometimes multi-part selectors are pragmatic. For example:</p>
+<pre>
+<code class="language-php">/**
+  * Add a horizontal rule between adjacent list rows
+  *
+  * Could be part of an implementation of the Pears “slats” component:
+  * http://pea.rs/content/slats-html5 
+  */
+.slat + .slat {
+  border-top: 1px solid #cccccc;
+}
+</code></pre><p>However, extra care should be taken when using multi-part selectors:</p>
+<ol>
+<li>Avoid elements with no native semantics (div, span) in multi-part selectors.</li>
+<li>Avoid the descendent selector (e.g. <code class="language-php">.my-list li</code>) where possible, especially for components that may wrap other components. The descendant selector has a habit of unintentionally affecting nested elements. Prefer the child selector: <code class="language-php">.my-list &gt; li</code>.</li>
+<li>Avoid more than 2 <a href="http://reference.sitepoint.com/css/combinators" rel="nofollow">combinators</a> in a selector. The following rule is maxed out: <code class="language-php">.my-list &gt; li &gt; a</code>.</li>
+<li>If in doubt, add a class and style the element directly.</li>
+</ol>
+</li>
+</ul>
+<h3 id="sub-components"><a class="toc-anchor" title="Permalink to this headline" href="#sub-components"></a>2. Define component elements (sub-objects) using their own classes</h3>
+<p>To avoid relying on markup structure and overly-generic class names, define a component’s element explicitly, prefixing them with the component’s name followed by two underscores:</p>
+<pre>
+
+</pre><pre>
+<code class="language-php">.component {}
+
+/* Component elements */
+.component__header {}
+.component__body {} </code></pre><p><strong>Note</strong> that there is no need to reflect DOM structure in the class name; for example, do not replace <code class="language-php">.menu li a</code> with <code class="language-php">.menu__item__link</code>. The class <code class="language-php">.menu__link</code> should be sufficiently specific.</p>
+<h3 id="extend"><a class="toc-anchor" title="Permalink to this headline" href="#extend"></a>3. Extend components using modifier classes</h3>
+<p>Create component variants explicitly, adding a suffix with the variant name preceded by two dashes. In order to keep the stylesheet DRY, this modifier class should only contain the styles needed to extend the original. This means that <strong>both</strong> base and modifier classes <strong>must</strong> appear together in the markup:</p>
+<p>CSS</p>
+<pre>
+<code class="language-php">/* Button component */
+.button {
+  /* styles */
+}
+
+/* Button modifier class */
+.button--primary {
+  /* modifications and additions */
+}
+</code></pre><p>HTML</p>
+<pre>
+<code class="language-php">&lt;!-- Button variant is created by applying both component and modifier classes --&gt;
+&lt;button class="button button--primary"&gt;Save&lt;/button&gt;
+</code></pre><h3 id="separate-concerns"><a class="toc-anchor" title="Permalink to this headline" href="#separate-concerns"></a>4. Separate Concerns</h3>
+<p>Components should not be responsible for their positioning or layout within the site. Never apply widths or heights except to elements that natively have these properties (e.g. images have these properties, so it's okay to use CSS to modify their width and height). Within components, separate structural rules from stylistic rules.</p>
+<p>Separate style from behavior by using dedicated classes for JavaScript manipulation rather than relying on classes already in use for CSS. This way, we can modify classes for style purposes without fear of breaking JS, and vice versa. To make the distinction clear, classes used for JavaScript manipulation should be prefixed with 'js-'. These JavaScript hooks must never be used for styling purposes. See the section ‘<a href="#formatting" target="_self" rel="nofollow">Formatting Class Names</a>’ for more information on naming conventions.</p>
+<p>Avoid applying inline styles using JavaScript. If the behaviour is describing a state change, apply a class name describing the state (e.g. 'is-active'), and allow CSS to provide the appearance. Only use inline styles applied via JavaScript when the value of the style attributes must be computed at runtime.</p>
+<p>Drupal <strong>8/9</strong> uses the <a href="http://smacss.com/book/" rel="nofollow">SMACSS</a> system to conceptually categorize CSS rules. Note that some SMACSS nomenclature has been changed to avoid confusion with existing Drupal terminology.</p>
+<ol>
+<li>
+<h4 id="s-base"><a class="toc-anchor" title="Permalink to this headline" href="#s-base"></a>Base</h4>
+<p>Base rules consist of styling for HTML elements only, such as used in a CSS reset or <a href="https://github.com/necolas/normalize.css/" rel="nofollow">Normalize.css</a>. Base rules should never include class selectors.</p>
+<p>To avoid ‘undoing’ styles in components, base styles should reflect the simplest possible appearance of each element. For example, the simplest usage of the <code class="language-php">ul</code> element may be completely unstyled, removing list markers and indents and relying on a component class for other applications.</p>
+</li>
+<li>
+<h4 id="s-layout"><a class="toc-anchor" title="Permalink to this headline" href="#s-layout"></a>Layout</h4>
+<p>Arrangement of elements on the page, including grid systems.</p>
+<blockquote><p>Grid systems should be thought of as shelves. They contain content but are not content in themselves. You put up your shelves then fill them with your stuff [i.e. components]. – <em>Harry Roberts, <a href="https://cssguidelin.es/" rel="nofollow">CSS Guidelines</a></em></p>
+</blockquote>
+</li>
+<li>
+<h4 id="s-component-smacss-module"><a class="toc-anchor" title="Permalink to this headline" href="#s-component-smacss-module"></a>Component (SMACSS “module”)</h4>
+<p>Reusable, discrete UI elements; components should form the bulk of Drupal’s CSS.</p>
+</li>
+<li>
+<h4 id="s-state"><a class="toc-anchor" title="Permalink to this headline" href="#s-state"></a>State</h4>
+<p>Styles that deal with transient changes to a component’s appearance. Often, these are client-side changes that occur as the user interacts with the page, such as hovering links or opening a modal dialog. In some cases, states are static for the life of the page and are set from the server, such as the active element in main navigation. The main ways to style state are:</p>
+<ul>
+<li>Custom classes, often but not always applied via JavaScript. These should be prefixed with <code class="language-php">.is-</code>, e.g. <code class="language-php">.is-transitioning</code>, <code class="language-php">.is-open</code>;</li>
+<li>pseudo-classes, such as <code class="language-php">:hover</code> and <code class="language-php">:checked</code>;</li>
+<li>HTML attributes with state semantics, such as <code class="language-php">details[open]</code>;</li>
+<li>media queries: styles that alter appearance based on the immediate browser environment.</li>
+</ul>
+</li>
+<li>
+<h4 id="s-theme"><a class="toc-anchor" title="Permalink to this headline" href="#s-theme"></a>Theme</h4>
+<p>Purely visual styling, such as border, box-shadow, colors and backgrounds, font properties, etc. Ideally, these should be separated enough from a component’s structure to be “swappable”, and omitting these entirely should not break the component’s functionality or basic usability.</p>
+</li>
+</ol>
+<h3 id="design-semantics"><a class="toc-anchor" title="Permalink to this headline" href="#design-semantics"></a>5. Name Components Using Design Semantics</h3>
+<p>While the HTML5 specification mentions that class names should “describe the nature of the content,” there’s no reason for this. HTML elements already impart semantics on the content and machines cannot derive content-level semantics from class names (with the narrow exception of <a href="http://microformats.org/" rel="nofollow">microformats</a>.)</p>
+<blockquote><p>Class names should communicate useful information to developers. – <em>Nicolas Gallagher, <a href="http://nicolasgallagher.com/about-html-semantics-front-end-architecture/" rel="nofollow">About HTML Semantics and Front-End Architecture</a></em></p>
+</blockquote>
+<p>Class names used as CSS hooks should reflect <em>design</em> semantics over content semantics. In general, they should reflect the intent and purpose of the design element they represent.</p>
+<p>Note that this does not preclude presentational class names. Grid system classes such as <code class="language-php">.grid-3</code>, utility classes such as <code class="language-php">.leader</code> and <code class="language-php">.trailer</code> (for adding whitespace based on a <a href="http://alistapart.com/article/settingtypeontheweb" rel="nofollow">baseline grid</a>) and <code class="language-php">.text-center</code> are all examples of presentational classes that represent visual semantics. They are meaningful to developers, and highly reusable.</p>
+<p>This does not mean going back to classes like <code class="language-php">.blue-box</code>. This is obviously a bad class name since it does not reflect the visual meaning, only one very surface attribute. It’s useful to ask “why is this a box, and why blue?”. Thinking about this, we might realize that this box is actually a version of the style used throughout our site for notifications, and this particular shade of blue is used for non-urgent notifications:</p>
+<pre>
+
+</pre><pre>
+<code class="language-php">.notification { /* general styles for all notifications */ } .notification--info { /* blue color adjustments */ } </code></pre><h4 id="s-note-for-core-developers"><a class="toc-anchor" title="Permalink to this headline" href="#s-note-for-core-developers"></a>Note for core developers</h4>
+<p>Since classes should represent design semantics and Drupal core must be design-agnostic, core default markup should be exceedingly cautious about what classes are included. This applies especially to the use of presentational class names.</p>
+<h4 id="s-note-for-module-developers"><a class="toc-anchor" title="Permalink to this headline" href="#s-note-for-module-developers"></a>Note for module developers</h4>
+<p>Since modules are responsible for providing the default HTML implementation, module developers should make their best effort to find an existing theme hook to use and to insert a design-derived class name, possibly one had already found in core. If the module’s content has no default design, the class name should be based on how the content is built; often this can just be the name of the module (e.g. <code class="language-php">class="views"</code>.)</p>
+<p>Module developers should ensure that themers can replace/augment any module-provided class.</p>
+<h3 id="formatting"><a class="toc-anchor" title="Permalink to this headline" href="#formatting"></a>6. Formatting Class Names</h3>
+<p>Class names should use full words rather than abbreviations. Styles for a button component should use e.g. <code class="language-php">class="button"</code> rather than <code class="language-php">class="btn"</code></p>
+<p>Class names for components should always use a dash between words. Use <code class="language-php">class="button-group"</code> rather than <code class="language-php">class="buttongroup"</code></p>
+<p>The HTML class attribute has been made to do a lot. Drupal uses a naming convention to make clear what a particular class is for and what other parts of the system it affects:</p>
+<pre>
+<code class="language-php">/* Component Rules */
+.component-name
+.component-name--variant
+.component-name__sub-object
+.component-name__sub-object--variant  /* this configuration should be uncommon */
+
+/* Layout Rules */
+.layout-layout-method  /* e.g. '.layout-container' */
+.grid-*
+
+/**
+ * State Classes
+ *
+ * These are always applied via JavaScript, and describe a non-default state.
+ */
+.is-state  /* e.g. '.is-active' */
+
+/**
+ * Functional JavaScript Hooks
+ *
+ * When querying or manipulating the DOM from JavaScript, prefer dedicated 
+ * classes not used for styling (or the id attribute). 
+ * If using classes, prefix them with 'js-' to mark them for JS use. 
+ * These 'js-' classes should not appear in stylesheets.
+ */
+.js-behaviour-hook  /* e.g. .js-slider, .js-dropdown */
+</code></pre><h3 id="closing"><a class="toc-anchor" title="Permalink to this headline" href="#closing"></a>Closing Note: Specificity, ids and <code class="language-php">!important</code> </h3>
+<p>Avoid using the id selector in CSS. There is no general benefit to using the 'id' attribute as a CSS hook, and it has serious downsides in the form of increased selector specificity.</p>
+<p>Although it should be avoided in CSS, there are many excellent uses for the 'id' attribute:</p>
+<ul>
+<li>A performant JavaScript hook;</li>
+<li>An anchor within the document for links (<a href="http://yoururl.com#anchor" rel="nofollow">http://yoururl.com#anchor</a>);</li>
+<li>An anchor for associating labels with form elements or for associating DOM elements using ARIA attributes.</li>
+</ul>
+<p>The <code class="language-php">!important</code> flag should be used sparingly and appropriately, and in general should be restricted to themes. Since it overrides all external stylesheet rules, it is useful for states that must supersede all others, no matter the component variant. For example, error or disabled states are appropriate places to use <code class="language-php">!important</code>, since they must be consistent and always apply when present. Never use <code class="language-php">!important</code> to resolve specificity problems for general CSS rules. Additionally, Drupal core and contrib modules should avoid the <code class="language-php">!important</code> flag, since all module CSS should be easy to override.</p>
+<h2 id="case-study"><a class="toc-anchor" title="Permalink to this headline" href="#case-study"></a>Case Study</h2>
+<p>As an example and guide to developers, take the progress bar from the <a href="http://groups.drupal.org/node/283223#Progress" rel="nofollow">proposed Seven style guide</a>:</p>
+<p><img alt="Progress bar component and small variant" src="/files/10.progress.png" /></p>
+<p>This might be marked up and styled as follows, using the standards described above:</p>
+<p>HTML</p>
+<pre>
+<code class="language-php">&lt;div class="progress"&gt;
+  &lt;!-- 
+    .label is a separate component, used for form labels, but can be applied
+    to non-label tags, and can be extended with a modifier class.
+    --&gt;
+  &lt;label class="label"&gt;Installing Node Module&lt;/label&gt;
+  
+  &lt;!-- progress element (sub-object) --&gt;
+  &lt;div class="progress__track"&gt;
+    &lt;!-- 
+      Component sub-objects don’t need more than the component name
+      as a prefix; progress__track__bar is verbose and unnecessary.
+       
+      Inline styles shown here would be applied by JavaScript using 
+      the independent 'js-' class.
+      --&gt;
+    &lt;div class="progress__bar js-progress-percent" style="width: 63%"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="progress__description"&gt;
+    &lt;!--
+      .layout-pull and .layout-push are LTR/RTL-agnostic utility classes for floating; 
+      these should not appear in core default markup since they are not
+      design-independent.
+      --&gt;
+    &lt;div class="layout-pull"&gt;Installed 15 of 24 modules&lt;/div&gt;
+    &lt;strong class="layout-push"&gt;63%&lt;/strong&gt;
+  &lt;/div&gt;
+  
+  &lt;!-- 
+    Note that appearance is not tied to the tag; the appearance of the 
+    &lt;button&gt; element would be reset in the base layer and styled as 
+    needed by applying classes.
+      
+    Since this element uses an icon, it could be refactored to use a generic 
+    icon container component. 
+    --&gt;
+  &lt;button class="progress__cancel" href="#" title="cancel"&gt;cancel&lt;/button&gt;
+&lt;/div&gt;
+
+
+&lt;!-- 
+  Modifier classes create component variants; modifier classes must 
+  be used with the original class in the markup
+  --&gt;
+&lt;div class="progress progress--small"&gt;
+  &lt;label class="label label--small"&gt;Uploading syndey-opera-house-sunset.jpg&lt;/label&gt;
+  &lt;div class="progress__track"&gt;
+    &lt;div class="progress__bar js-progress-percent" style="width: 29%"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="progress__description"&gt;
+    &lt;div class="layout-pull"&gt;Uploaded 221 of 762KB&lt;/div&gt;
+    &lt;strong class="layout-push"&gt;29%&lt;/strong&gt;
+  &lt;/div&gt;
+  &lt;a class="progress__cancel" href="#" title="cancel"&gt;&lt;span class="visually-hidden"&gt;cancel&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;
+</code></pre><p>CSS (styles omitted)</p>
+<pre>
+<code class="language-php">/**
+ * Progress Bar component
+ */
+.progress {}
+.progress__track {}
+.progress__bar {}
+.progress__description {}
+.progress__cancel {}
+.progress__cancel:focus,
+.progress__cancel:hover {}
+
+
+/**
+ * Progress Bar small variant
+ */
+.progress--small .progress__track {}
+.progress--small .progress__bar {}
+.progress--small .progress__cancel {}
+</code></pre><p>Note that the CSS relies almost exclusively on single class selectors; the exception is the small variant. This uses descendant selector, but is the recommended approach for styling sub-objects within variant components. Here’s why: firstly, it avoids extreme class names such as .progress--small__bar which begin to harm the understandability of the code. Second, since we have avoided overly-generic class names and since both parts of the selector are highly targeted classes, there is little risk of accidentally styling a further child element. Third, scoping in this case is unlikely to break reusability, since we should not expect a Progress track outside of the Progress element.</p>
+<p>We are still serving of our goals well, and we greatly simplify the required markup: we only need to add the variant class to the component itself: <code class="language-php">&lt;div class="progress progress--small"&gt;&lt;!-- all internals remain the same --&gt;&lt;/div&gt;</code>.</p>
+<h2 id="acknowledgments"><a class="toc-anchor" title="Permalink to this headline" href="#acknowledgments"></a>Acknowledgments</h2>
+<p>Portions of this guide are based heavily on:</p>
+<ul>
+<li>Philip Walton, <a href="http://engineering.appfolio.com/2012/11/16/css-architecture/" rel="nofollow">CSS Architecture</a></li>
+<li>Johnathan Snook, <a href="http://smacss.com/book/" rel="nofollow">SMACSS</a></li>
+<li>Nicolas Gallagher, <a href="http://nicolasgallagher.com/about-html-semantics-front-end-architecture/" rel="nofollow">About HTML semantics and front-end architecture</a></li>
+</ul>
+<p>Additional Influence and Resources:</p>
+<ul>
+<li>Nicole Sullivan, <a href="http://coding.smashingmagazine.com/2011/12/12/an-introduction-to-object-oriented-css-oocss/" rel="nofollow">OOCSS</a></li>
+<li>Harry Roberts, <a href="http://csswizardry.com/2012/11/code-smells-in-css/" rel="nofollow">Code Smells in CSS</a></li>
+<li>Harry Roberts, <a href="http://cssguidelin.es" rel="nofollow">CSS-Guidelines</a></li>
+</ul></div></div></div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region bottom-right-content column panel-panel">
+        <div class="column-content-region-inner bottom-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-views-panes pane-documentation-help-improve-pane"  id="help-improve-this-page" >
+  
+        <h2 class="pane-title">
+      Help improve this page    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="view view-documentation-help view-id-documentation_help view-display-id-improve_pane view-dom-id-b1e4e27f6f2f413523be29bf12c21032">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+      
+  <span class="views-field views-field-field-documentation-status">    <strong class="views-label views-label-field-documentation-status">Page status: </strong>    <span class="field-content">No known problems</span>  </span>  
+  <div class="views-field views-field-nothing">        <span class="field-content"><br /><strong>You can:</strong><br />
+<ul>
+<li>Log in, click <a href="/node/1887918/edit">Edit</a>, and edit this page</li>
+<li>Log in, click <a href="/node/1887918/discuss">Discuss</a>, update the Page status value, and suggest an improvement</li>
+<li>Log in and <a href="/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%281887918%29%20CSS%20architecture%20%28for%20Drupal%209%29">create a Documentation issue</a> with your suggestion</li>
+</ul></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer clearfix panel-panel">
+    <div class="container-inner footer-inner panel-panel-inner">
+          </div>
+  </div>
+
+</div><!-- /.sutro -->
+</div>
+  </div>
+  </div>
+</div>
+  </div>
+        </div>
+              </div> <!-- /#content -->
+
+    </div> <!-- /#column-left -->
+
+      </div> <!-- /#page -->
+
+  <div id="footer" role="contentinfo">
+            <div class="region region-footer">
+    <div id="block-drupalorg-documentation-license" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    Drupal’s online documentation is © 2000-2025 by the individual contributors and can be used in accordance with the <a href="/terms">Creative Commons License, Attribution-ShareAlike 2.0</a>. PHP code is distributed under the <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License</a>.  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-infra-partner" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <a href="https://bit.ly/4fYoEf8" >Infrastructure management for Drupal.org provided by <img src="/files/cta/graphic/tag1_wht.svg" alt="Tag1 logo" ></a> 
+<br />
+<span style="font-size: .65em;"><a href="https://bit.ly/41bS4lA">Need a Drupal 7 extended support partner? Consider Tag1.</a></span>  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-drupalorg-footer" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <h4 class="element-invisible">News items</h4><ul class="drupal-news"><li class="0 first"><a href="https://www.drupal.org/news">News</a></li>
+<li class="1"><a href="https://www.drupal.org/planet" title="News from Drupal community members">Planet Drupal</a></li>
+<li class="2"><a href="https://www.drupal.org/about/media-kit/social-media" title="Drupal on social media">Social media</a></li>
+<li class="3"><a href="https://www.drupal.org/subscribe">Sign up for Drupal news</a></li>
+<li class="4"><a href="https://www.drupal.org/security" title="Announcements from the Drupal Security Team">Security advisories</a></li>
+<li class="5 last"><a href="https://jobs.drupal.org/" title="Drupal Jobs">Jobs</a></li>
+</ul><h4 class="element-invisible">Our community</h4><ul class="community"><li class="0 first"><a href="https://www.drupal.org/community">Community</a></li>
+<li class="1"><span><a href="https://www.drupal.org/drupal-services" title="People and organizations offering Drupal services">Services</a>, <a href="https://www.drupal.org/training" title="People and organizations offering Drupal training">Training</a> & <a href="https://www.drupal.org/hosting" title="Organizations offering Drupal hosting">Hosting</a></span></li>
+<li class="2"><a href="https://www.drupal.org/community/contributor-guide">Contributor guide</a></li>
+<li class="3"><a href="https://groups.drupal.org/groups" title="groups.drupal.org">Groups &amp; meetups</a></li>
+<li class="4"><a href="https://events.drupal.org" title="Upcoming and past DrupalCons">DrupalCon</a></li>
+<li class="5 last"><a href="https://www.drupal.org/dcoc" title="Drupal code of conduct">Code of conduct</a></li>
+</ul><h4 class="element-invisible">Documentation</h4><ul class="get-started"><li class="0 first"><a href="https://www.drupal.org/documentation" title="Documentation for working with Drupal">Documentation</a></li>
+<li class="1"><a href="https://www.drupal.org/docs">Drupal Guide</a></li>
+<li class="2"><a href="https://www.drupal.org/docs/user_guide/en/index.html">Drupal User Guide</a></li>
+<li class="3"><a href="https://www.drupal.org/documentation/develop">Developer docs</a></li>
+<li class="4 last"><a href="https://api.drupal.org/" title="Drupal API reference">API.Drupal.org</a></li>
+</ul><h4 class="element-invisible">Drupal code base</h4><ul class="download-extend"><li class="0 first"><a href="https://www.drupal.org/download">Download &amp; Extend</a></li>
+<li class="1"><a href="https://www.drupal.org/project/drupal" title="Download the latest version of the Drupal software">Drupal core</a></li>
+<li class="2"><a href="https://www.drupal.org/project/project_module" title="Download add-on features and functionality">Modules</a></li>
+<li class="3"><a href="https://www.drupal.org/project/project_theme" title="Download pre-designed styles for Drupal">Themes</a></li>
+<li class="4 last"><a href="https://www.drupal.org/project/project_distribution" title="Download a pre-packaged Drupal site">Distributions</a></li>
+</ul><h4 class="element-invisible">Governance of community</h4><ul class="about"><li class="0 first"><a href="https://www.drupal.org/about">About</a></li>
+<li class="1"><a href="https://www.drupal.org/about/features/accessibility" title="Our committment to accessibility">Web accessibility</a></li>
+<li class="2"><a href="https://www.drupal.org/association" title="About the Drupal Association">Drupal Association</a></li>
+<li class="3"><a href="https://www.drupal.org/drupalorg" title="About Drupal.org">About Drupal.org</a></li>
+<li class="4"><a href="https://www.drupal.org/terms" title="Drupal.org terms of service">Terms of service</a></li>
+<li class="5 last"><a href="https://www.drupal.org/privacy" title="Drupal.org privacy policy">Privacy policy</a></li>
+</ul>  </div>
+  </div>
+</div>
+<div id="block-block-77" class="block block-block">
+<div class="block-inner">
+    
+  <div class="content">
+    <p>Drupal is a <a href="/about/trademark">registered trademark</a> of <a href="https://dri.es">Dries Buytaert</a>.</p>
+  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    <div class="region region-page-bottom">
+    <script type="text/javascript">
+      (function(){
+          window._pxAppId = 'PXVnPBBfwe';
+          window._pxParam2 = '';
+          window._pxParam3 = '0';
+          var p = document.getElementsByTagName('script')[0],
+              s = document.createElement('script');
+          s.async = 1;
+          s.src = '/VnPBBfwe/init.js';
+          p.parentNode.insertBefore(s,p);
+      }());
+  </script>
+  <noscript>
+      <div style="position:fixed; top:0; left:0; display:none" width="1" height="1">
+          <img src="/VnPBBfwe/xhr/api/v1/collector/noScript.gif?appId=PXVnPBBfwe">
+      </div>
+  </noscript>  </div>
+<script type="text/javascript" src="/files/advagg_js/js__B0FBwiP97ZnD38IFraZus4upS4KVkMXI3ou0fJ2ZXGA__pPDESRJz9GHsxqQIwQ_V8xnFYEH5jipG2eicsfrdWCs__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+
+<!--[if lte IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie9-" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if gt IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie10+" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if !IE]><!-->
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="/files/advagg_js/js__pqoYaVR8NVhof-vNXe50j2TKhFv__IihVag_h4G6kus__B4mbn4wICLQjWm1m3-z1kw8F1FtP0cDAHKp00Xy_-88__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__H5AFmq1RrXKsrazzPq_xPQPy4K0wUKqecPjczzRiTgQ__wor4r9P8YTtQ7p6fbywTetZ47Z_orumIfrrhgxrpLus__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="
+function advagg_mod_1() {
+  // Count how many times this function is called.
+  advagg_mod_1.count = ++advagg_mod_1.count || 1;
+  try {
+    if (advagg_mod_1.count <= 40) {
+      init_drupal_core_settings();
+
+      // Set this to 100 so that this function only runs once.
+      advagg_mod_1.count = 100;
+    }
+  }
+  catch(e) {
+    if (advagg_mod_1.count >= 40) {
+      // Throw the exception if this still fails after running 40 times.
+      throw e;
+    }
+    else {
+      // Try again in 1 ms.
+      window.setTimeout(advagg_mod_1, 1);
+    }
+  }
+}
+function advagg_mod_1_check() {
+  if (window.init_drupal_core_settings && window.jQuery && window.Drupal) {
+    advagg_mod_1();
+  }
+  else {
+    window.setTimeout(advagg_mod_1_check, 1);
+  }
+}
+advagg_mod_1_check();"></script>
+<script type="text/javascript" src="/files/advagg_js/js__Oc0wwB7MVRfxtYw6EQM7d9sXj9PAQePoWSzQJ0uTk6c__iXqOGoaPhZHCPEspUr5BC8BwOx5P8B11xv7VOhoUii8__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__FabcJ6qluktliDejymsuV-FqaN_HyMKGe93c2rO9Ky0__el1ZLGkKneOoCS6OWa01WHuIEsTsXZ46MRLCF390Fbw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__YT6D1B_BKxvm6JCH_t9sZNI5L6yITa_DlU5QcSlOkAU__OXobH7d1IP1o3WABlniIrU_-pcJacVSIPUv9bpD-6pQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__06Uejkt2sN1AJAk3QcRQG9yrq-jCjZth0s-OymGOkVE__yFxl4u_7_1AhyVnMLZRtp5wEvh9C2VdA6gnewdM1hB0__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__pLKQd4r7OrHglE7Qkqw53K2UXCqQdhqQ9v0cz7hMCQY__OErfYuQdGbFHcCoLoUW_ESSvaumApNojzjJit8-2xcw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__hHUWFbMAa11eJtx5V0ym9o0YBsB1udk34qUT5wr1ihI__vSxsxbzmzuz4XPh--CL1BBciQpEQ_m8FfdQINCOAg14__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function init_drupal_core_settings() {jQuery.extend(Drupal.settings,{"basePath":"\/","pathPrefix":"","setHasJsCookie":0,"ajaxPageState":{"theme":"bluecheese","theme_token":"F6JlY_ETvSB4Bg1_C_pxGCbSkt1ys3DQvgkj3yqkDgc"},"drupalorgGitlab":{"gitlab_base_url":"https:\/\/git.drupalcode.org","base_url":"https:\/\/www.drupal.org"},"better_exposed_filters":{"views":{"documentation_help":{"displays":{"improve_pane":{"filters":[]}}},"documentation_related_content":{"displays":{"related_content_pane":{"filters":[]}}}}},"urlIsAjaxTrusted":{"\/docs\/develop\/standards\/css\/css-architecture-for-drupal-9":true},"drupalorgCrosssiteConsentNeeded":true,"ogContext":{"groupType":"node","gid":"2803003"}}); 
+if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(false);}} if(window.jQuery && window.Drupal){init_drupal_core_settings();}
+//--><!]]>
+</script>
+<script type="text/javascript" src="/files/advagg_js/js__2k0CJ3KAQNFTFab3y6ZvNtxs3HLons0Brq7VwvPSkKo__sQv8imhcZRev08LnyQ7OzwuHrZ3Jdwo5NmznAARX0ig__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__vj0LjvNwl-3K1P9LGT4BGuXCZcAovYsVlVmoJN3TMRg__KW8SiGceRY3sjIKVrffDjf2MK4A5Vp3EDDxVO-4pegI__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+</body>
+</html>

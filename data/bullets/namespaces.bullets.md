@@ -1,0 +1,106 @@
+# Bullet Points for namespaces.md
+
+
+## Namespaces
+
+## On this page
+- ["use"-ing classes](/docs/develop/coding-standards/namespaces#s-use-ing-classes)
+- [Class aliasing](/docs/develop/coding-standards/namespaces#s-class-aliasing)
+- [Order of import](/docs/develop/coding-standards/namespaces#order)
+- [Modules](/docs/develop/coding-standards/namespaces#modules)
+- [Examples](/docs/develop/coding-standards/namespaces#s-examples)
+
+## [PHP](/docs/develop/standards/php)
+- [PHP coding standards](/docs/develop/standards/php/php-coding-standards)
+- [API documentation and comment standards](/docs/develop/standards/php/api-documentation-and-comment-standards)
+- [API Documentation Samples](/docs/develop/standards/php/api-documentation-examples)
+- [Namespaces](/docs/develop/coding-standards/namespaces)
+- [Naming standards for services and extending Symfony](/docs/develop/coding-standards/naming-standards-for-services-and-extending-symfony)
+- [PHP Exceptions](/docs/develop/coding-standards/php-exceptions)
+- [PSR-4 namespaces and autoloading in Drupal 8](/docs/develop/standards/php/psr-4-namespaces-and-autoloading-in-drupal-8)
+- [Temporary placeholders and delimiters](/docs/develop/coding-standards/temporary-placeholders-and-delimiters)
+- [Write E\_ALL compliant code](/docs/develop/coding-standards/write-e_all-compliant-code)
+
+## Namespaces
+- Last [updated](/node/1353118/discuss) on
+- 26 October 2023
+- Note: Changes to Drupal coding standards are proposed and discussed in issues in the [Coding Standards project](/project/coding_standards).
+- PHP 5.3 introduces [namespaces](http://www.php.net/namespaces) to the language. This page document shows how namespaces should be referenced within Drupal and it assumes that you are familiar with the concept of namespaces. (If not, you can have a look at this [article introducing namespaces](http://www.sitepoint.com/php-53-namespaces-basics/).)
+- Not all files in Drupal declare a namespace. As of Drupal 8 an increasing number of files do, but not all. Prior to Drupal 8 virtually no code used namespaces, in order to remain compatible with PHP 5.2. Therefore there are two slightly different standards.
+
+## [](#s-use-ing-classes "Permalink to this headline")"use"-ing classes
+- Classes and interfaces with a backslash `\` inside their fully-qualified name (for example: `Drupal\simpletest\WebTestBase`) must not use their fully-qualified name inside the code. If the namespace differs from the namespace of the current file, put a `use` statement on the top of the file. For example:
+- `namespace Drupal\mymodule\Tests\Foo;
+- use Drupal\simpletest\WebTestBase;
+- Tests that the foo bars.
+- class BarTest extends WebTestBase {`
+- Classes and interfaces without a backslash `\` inside their fully-qualified name (for example, the built-in PHP Exception class) must be fully qualified when used in a namespaced file. For example: `new \Exception();`. Do not `use` global classes.
+- In a file that does not declare a namespace (and is therefore in the global namespace), classes in any namespace other than global must be specified with a "use" statement at the top of the file.
+- When importing a class with "use", do not include a leading `\`. (The [PHP documentation](http://www.php.net/manual/en/language.namespaces.importing.php) makes the same recommendation.)
+- When specifying a class name in a string, use its full name including namespace, without leading `\`.
+- Escape the namespace separator in double-quoted strings: `"Drupal\\Context\\ContextInterface"`
+- Do not escape it in single-quoted strings: `'Drupal\Context\ContextInterface'`
+- As stated elsewhere, single-quoted strings are generally preferred.
+- Specify a single class per use statement. Do not specify multiple classes in a single use statement.
+- If there are multiple use declarations in a file, we do not currently have a standard about what order they should be in. However, consider code readability and do something sensible, especially if there are many use declarations.
+- API documentation (in .api.php files) should use full class names. Note that if a class is used more than once in multiple hook signatures, it must still be "use"ed, and then only the short names of the class should be used in the function.
+- `namespace Drupal\Subsystem;
+- // This imports just the Cat class from the Drupal\Othersystem namespace.
+- use Drupal\Othersystem\Cat;
+- // Bar is a class in the Drupal\Subsystem namespace in another file.
+- // It is already available without any importing.
+- Defines a Foo.
+- class Foo {
+- Constructs a new Foo object.
+- public function __construct(Bar $b, Cat $c) {
+- // Global classes must be prefixed with a \ character.
+- $d = new \DateTime();
+- The Example module.
+- This file is not part of any namespace, so all global namespaced classes
+- are automatically available.
+- use Drupal\Subsystem\Foo;
+- Does stuff with Foo stuff.
+- @param \Drupal\Subsystem\Foo $f
+- A Foo object used to bar the baz.
+- function do_stuff(Foo $f) {
+- // The DateTime class does not need to be imported as it is already global
+- $d = new \DateTime();
+
+## [](#s-class-aliasing "Permalink to this headline")Class aliasing
+- PHP allows classes to be aliased when they are imported into a namespace. In general that should only be done to avoid a name collision. If a collision happens, alias both colliding classes by prefixing the next higher portion of the namespace.
+- `use Foo\Bar\Baz as BarBaz;
+- use Stuff\Thing\Baz as ThingBaz;
+- Tests stuff for the whichever.
+- function test() {
+- $a = new BarBaz(); // This will be Foo\Bar\Baz
+- $b = new ThingBaz(); // This will be Stuff\Thing\Baz
+- That helps keep clear which one is which, and where it comes from. Aliasing should only be done to avoid name collisions.
+
+## [](#order "Permalink to this headline")Order of import
+- If there are more than one classes to 'use', there is no specific rule to order them.
+- `namespace Drupal\block;
+- use Drupal\Core\Entity\EntityForm;
+- use Drupal\Core\Entity\EntityManagerInterface;
+- use Drupal\Core\Form\FormState;
+- use Drupal\Core\Form\FormStateInterface;
+- use Symfony\Component\DependencyInjection\ContainerInterface;`
+
+## [](#modules "Permalink to this headline")Modules
+- Modules creating classes should place their code inside a custom namespace. The convention for those namespaces begins:
+- Drupal\\*<module name>*\\...
+- [Drupal 8 supports PSR-4](https://www.drupal.org/docs/develop/coding-standards/psr-4-namespaces-and-autoloading-in-drupal-8), so to permit class autodiscovery, a class in the folder:
+- <module folder>*/src/SubFolder1/SubFolder2
+- should declare the namespace:
+- Drupal\\*<module name>*\\SubFolder1\\SubFolder2
+- Note that the /src/ subfolder is omitted from the namespace.
+
+## [](#s-examples "Permalink to this headline")Examples
+- Class *Drupal\\example\_module\\Foo* in namespace *Drupal\\example\_module* should be in a file named *example\_module/src/Foo.php*
+- Class *Drupal\\example\_module\\Foo\\Bar* in namespace *Drupal\\example\_module\\Foo* should be in a file named *example\_module/src/Foo/Bar.php*
+
+## Help improve this page
+- *Page status:** No known problems
+- *You can:**
+- Log in, click [Edit](/node/1353118/edit), and edit this page
+- Log in, click [Discuss](/node/1353118/discuss), update the Page status value, and suggest an improvement
+- Log in and [create a Documentation issue](/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%281353118%29%20Namespaces) with your suggestion

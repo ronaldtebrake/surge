@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:fb="http://ogp.me/ns/fb#"
+  xmlns:og="http://ogp.me/ns#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="MobileOptimized" content="width" />
+  <!--[if IE]><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Preliminary strategy for file organization" />
+<meta name="generator" content="Drupal 7 (https://www.drupal.org)" />
+<link rel="image_src" href="https://www.drupal.org/sites/all/themes/bluecheese/images/drupal_meta_image.png" />
+<link rel="canonical" href="https://www.drupal.org/docs/develop/standards/css/css-file-organization" />
+<link rel="shortlink" href="https://www.drupal.org/node/1887922" />
+<meta property="og:site_name" content="Drupal.org" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.drupal.org/docs/develop/standards/css/css-file-organization" />
+<meta property="og:title" content="CSS file organization" />
+<meta property="og:description" content="Note: Changes to Drupal coding standards are proposed and discussed in issues in the Coding Standards project. Note: This document describes a file organization and aggregation strategy that has not yet been implemented. See this core issue for that on-going work: [#1921610] File Structure Rulesets should be grouped into logical files that enforce the separation of concerns within the CSS, that can be aggregated efficiently and that can be easily overridden by themers." />
+<meta property="og:updated_time" content="2024-05-17T18:09:59+00:00" />
+<meta property="article:published_time" content="2013-01-14T03:41:08+00:00" />
+<meta property="article:modified_time" content="2024-05-17T18:09:59+00:00" />
+  <title>CSS file organization | CSS | Drupal Wiki guide on Drupal.org</title>
+  <link type="text/css" rel="stylesheet" href="/files/advagg_css/css__IGnvPR1nQd12eUWIitgZ6GDDyWxn9W82zUE-pgSt6Y8__Gh7RLUb1X-_kkfJcUW2xrjQQJCrbwuGgKr5Ix51cJYc__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Xi-PZpvKTY78w7l1WNsqwUA52MIupHJebCMiX34Ugt0__D_EUHDAfEQdxcLiSDY7hREUWkG1Ge56_h2z3Er8V188__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__WF0PRotZAhCcl0aJjY5W2LYj8UwiYuB2dZEFluOh3Tc__FviX13FUB-Ppa2XB29BUIJQZ1Wg-F5XiDE7XD5y7mjQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Fx0_w1L9q3nwzXnALG7UfjLF34FGYgJTz636-GWbM6k__0jWLTEHP3h5U5RcXuZcFhf0DdvRdzP3_wzCVNT015Ls__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__71G6gao0TOuJxFfw9efqGV9HafmPRGSqQoYV4yqGUWc__cjdS_7q2MvneE1k5vHyBqxDqcSSGdHyUNCXu57rH2hM__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+  </head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-1887922 node-type-documentation drupalorg-site-main panels-layout og-context og-context-node og-context-node-2803003" >
+  <div id="skip-link" tabindex="-1">
+    <a class="element-invisible element-focusable" href="#content">Skip to main content</a>
+    <a class="element-invisible element-focusable skip-link-search" href="#search-block-form">Skip to search</a>
+  </div>
+    <div class="region region-page-top">
+    <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W36H8DW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div id="drupalorg-crosssite-gdpr">Can we use first and third party cookies and web beacons to <a href="https://www.drupal.org/terms">understand our audience, and to tailor promotions you see</a>?<br><button class="yes">Yes, please</button><button class="no">No, do not track me</button></div>  </div>
+      <div id="nav-header">
+          <div class="menu-nav">
+        <a class="nav-btn" id="nav-open-btn" href="#block-system-main-menu"><img src="/sites/all/themes/bluecheese/images/icon-w-menu.svg" alt="Main menu"></a>
+      </div>
+        <nav id="navigation-inner" class="container-12" role="navigation">
+        <div class="region region-navigation">
+    <div id="block-system-main-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/home" title="Drupal.org home page">Drupal.org home</a></li>
+<li class="expanded"><a href="https://www.drupal.org/about/overview/technical" title="">Discover Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/about/overview/technical" title="The open source framework behind millions of websites.">Drupal Core</a></li>
+<li class="leaf"><a href="https://new.drupal.org/drupal-cms" title="Drupal CMS puts the power of Drupal into the hands of marketers, designers and content creators.">Drupal CMS</a></li>
+<li class="leaf"><a href="https://new.drupal.org/ai" title="Open limitless possibilities with Drupal AI">Drupal AI</a></li>
+<li class="leaf"><a href="https://www.drupal.org/case-studies" title="Powerful stories that show Drupal solutions in the real world.">Case Studies</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/government" title="Drupal is the open-source CMS that enables digital transformation of government and increases citizen engagement.">Drupal for Government</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/education" title="See why 70% of the world&#039;s leading universities chose Drupal.">Drupal for Higher Education</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/nonprofit" title="See why Drupal is the open-source CMS choice for some of the world’s most influential nonprofits.">Drupal for Nonprofit</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/ecommerce" title="Natively integrate content and commerce.">Drupal for eCommerce</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/fintech" title="Secure and trustworth FinTech infrastructure.">Drupal for FinTech</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/healthcare" title="Drupal powers systems that are secure, patient-centric and engaging.">Drupal for Healthcare</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/industries/media-and-publishing" title="Create engaging multi-channel experiences to connect with your audiences - everywhere.">Drupal for Media &amp; Publishing</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Build with Drupal</a><div class="menu-block"><ul class="menu button"><li class="first collapsed"><a href="/download" title=" Download Drupal and the extensions you need">Download Drupal</a></li>
+<li class="leaf"><a href="/documentation" title="Full knowledge base including Drupal 7 resources">Documentation</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/getting-started" title="All documentation">Getting started</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Local Development Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/developers" title="">Developer Resources</a></li>
+<li class="leaf"><a href="https://new.drupal.org/docs/drupal-cms" title="Drupal CMS User Guide">Drupal CMS User Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/user_guide/en/index.html" title="Drupal User Guide">Drupal User Guide</a></li>
+<li class="leaf"><a href="https://api.drupal.org/api/drupal/11.x" title="Drupal API">API</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/modules" title="Drupal Modules">Modules</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/themes" title="Drupal themes">Themes</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/project_distribution" title="Drupal distributions">Distributions</a></li>
+<li class="leaf"><a href="/project/issues" title="Report issues and contribute improvements">Issue queues</a></li>
+<li class="last leaf"><a href="/security" title="Stay on top of the latest security alerts and updates">Security Advisories</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/drupal-services" title="">Partners &amp; Services</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/drupal-services" title="Connect with the best Drupal agencies around the world.">Find a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://new.drupal.org/association/become-a-drupal-certified-partner" title="Join an elite network of agencies committed to Drupal excellence and innovation.
+">Become a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/hosting" title="Find a hosting provider for your Drupal project.">Find a Hosting Provider</a></li>
+<li class="leaf"><a href="https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/enterprise" title="Get help with your migration to the latest version of Drupal.">Find a Migration Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/training" title="Upskill your Drupal team.">Find Training</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/steward" title="Ensure your website is protected with Drupal Steward.">Drupal Steward</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/community" title="">Community</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/community" title="Come for the code, stay for the community.">About the Community</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/contributor-guide" title="Get involved in growing and evolving Drupal.">How to Contribute</a></li>
+<li class="leaf"><a href="https://events.drupal.org/" title="DrupalCon unites experts from around the globe who create ambitious digital experiences. Network, learn, and be inspired.">DrupalCon</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/events" title="Discover local events, community meet-ups, and training.">Events</a></li>
+<li class="leaf"><a href="https://jobs.drupal.org/home" title="Find opportunities to work in Drupal.">Jobs / Careers</a></li>
+<li class="leaf"><a href="https://www.drupal.org/blog" title="News and stories about Drupal.">News &amp; Blogs</a></li>
+<li class="leaf"><a href="https://www.drupal.org/forum" title="Got a question about Drupal? Find answers on the Drupal forums.">Forum</a></li>
+<li class="leaf"><a href="/community/contributor-guide/reference-information/talk/tools/slack" title="Get support and comminicate with the global Drupal community.">Slack</a></li>
+<li class="leaf"><a href="https://www.drupal.org/subscribe" title="Sign up for Drupal news and manage your subscriptions.">Newsletters</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag" title="Get your Drupal branded merch!">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="expanded"><a href="/association" title="Support the Drupal Association - the non-profit that supports the Drupal project">Support Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/association" title="Meet the non-profit accelerating Drupal innovation ">The Drupal Association</a></li>
+<li class="leaf"><a href="/association/donate" title="Donate to the non-profit that supports Drupal">Donate</a></li>
+<li class="leaf"><a href="/association/become-a-drupal-certified-partner" title="Join the network of official Drupal Certified Partners">Become a Partner</a></li>
+<li class="leaf"><a href="/association/RippleMakers" title="Become an individual member of the Drupal Association">Become a Ripple Maker</a></li>
+<li class="leaf"><a href="/association/organization-membership" title="Join and show your organization&#039;s support for Drupal">Become an Organization Member</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag?utm_source=drupalorg&amp;utm_medium=banner&amp;utm_campaign=drupal_swag_shop_2020_09_17" title="Get your Drupal-branded bucket hats, hoodies, and more">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="last expanded"><a href="/try-hosting" title="Try Drupal">Get Started</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://new.drupal.org/drupal-cms/trial" title="">Try Drupal CMS</a></li>
+<li class="last leaf"><a href="/try-hosting" title="">Try Hosting</a></li>
+</ul></div></li>
+</ul></div><a class="close-btn" href="#top">Return to content</a>  </div>
+  </div>
+</div>
+<div id="block-search-form" class="block block-search">
+<div class="block-inner">
+    
+  <div class="content">
+    <form action="/docs/develop/standards/css/css-file-organization" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input placeholder="Search…" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input alt="Search" type="image" id="edit-submit" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-k2rvSvbEKLUVz4_m2bW85sBbaUJla7nVbF7uGtHm0c0" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>  </div>
+  </div>
+</div>
+<div id="block-system-user-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu"><li class="button default"><a href="#block-system-user-menu"><img src="https://www.drupal.org/sites/all/themes/bluecheese/images/icon-w-user.svg" alt="Log in, view profile, and more"></a><ul><li class="first leaf"><a href="/user/login?destination=node/1887922" title="">Log in</a></li>
+<li class="last leaf"><a href="/user/register?destination=node/1887922" title="">Create account</a></li>
+</ul></li></ul></div>  </div>
+  </div>
+</div>
+  </div>
+    </nav>
+  </div>
+
+    <div id="header" class="clearfix">
+    <div id="header-inner" class="container-12 clearfix">
+      <div id="header-left">
+        <div id="site-name"><a href="/documentation">Documentation</a></div>
+              </div>
+      <div id="header-right">
+          <div class="region region-header">
+    <div id="block-drupalorg-search-documentation" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <form class="container-inline" action="/docs/develop/standards/css/css-file-organization" method="post" id="drupalorg-documentation-search-form" accept-charset="UTF-8"><div><input type="hidden" name="form_build_id" value="form-nqB-j2YA6LjQL_k3KQdBaQyNnbM1qHCJa2Ye-Qdg0Wk" />
+<input type="hidden" name="form_id" value="drupalorg_documentation_search_form" />
+<div class="form-item form-type-textfield form-item-drupalorg-documentation-search-form">
+  <label class="element-invisible" for="edit-drupalorg-documentation-search-form--2">Search </label>
+ <input placeholder="Search documentation…" type="text" id="edit-drupalorg-documentation-search-form--2" name="drupalorg_documentation_search_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions--2"><input alt="Search" type="image" id="edit-submit--2" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div></div></form>  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    </div>
+  </div>
+  
+      <div id="banner" data-nosnippet>
+        <div class="region region-banner">
+    <div id="block-drupalorg-announcements" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="announcement"><img class="photo" src="https://www.drupal.org/files/styles/grid-2-2x-square/public/announcements/da-icon.png?itok=wwiCve4D" width="280" height="280" alt="Announcement icon" title="Announcement icon" />Last chance! The 2025 Drupal Business Survey closes tomorrow. Your response will help shape the future of the Drupal business ecosystem.</div>
+<div class="cta"><a href="https://forms.gle/kue9WCroke5VnW5e9" class="global-announce-banner dc-singapore-registration">Take the survey today</a></div>  </div>
+  </div>
+</div>
+  </div>
+    </div>
+  
+  <div id="page" class="clearfix">
+    <div class="breadbox"><nav class="breadcrumb container-12"><span><a href="/docs/develop">Develop</a></span><span><a href="/docs/develop/standards">Coding standards</a></span><span><a href="/docs/develop/standards/css">CSS</a></span></nav></div>
+
+    <div id="main" role="main">
+      
+      <div id="content" class="clearfix">
+                                <div id="content-inner" class="clearfix">
+
+          
+            <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+<div class="block-inner">
+    
+  <div class="content">
+    
+<div class="panelizer-view-mode node node-full node-documentation node-1887922">
+        
+<div class="panel-display hydra panel-layout clearfix " >
+
+  <div class="container preface clearfix panel-panel">
+    <div class="container-inner preface-inner panel-panel-inner">
+          </div>
+  </div>
+
+  <div class="container content clearfix">
+    <div class="container-inner content-inner panel-panel-inner">
+      <div class="column-content-region top-right-content column panel-panel">
+        <div class="column-content-region-inner top-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-block pane-drupalorg-carbon-ad-sidebar"  >
+  
+      
+  
+  <div class="pane-content">
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYIEKJI&placement=drupalorg" id="_carbonads_js"></script><div class="ad-explanation description">Advertising sustains the DA. Ads are hidden for members. <a href="/association/individual-membership">Join today</a></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-table-of-contents-toc-w-3y7froeoqmgrpcmgnphqwt4pi3"  id="on-this-page" >
+  
+        <h3 class="pane-title">
+      On this page    </h3>
+    
+  
+  <div class="pane-content">
+    <div class="item-list"><ul class="anchor-list"><li class="anchor-list__item h2-tag first"><a href="/docs/develop/standards/css/css-file-organization#file-structure" class="toc-link active">File Structure</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-file-organization#modules" class="toc-link active">SMACSS and Sass/Compass</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/css/css-file-organization#themes" class="toc-link active">CSS files for Drupal themes</a></li>
+<li class="anchor-list__item h2-tag last"><a href="/docs/develop/standards/css/css-file-organization#aggregate" class="toc-link active">Aggregating CSS</a></li>
+</ul></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-og-menu-og-single-menu-block"  id="css" >
+  
+        <h2 class="pane-title">
+      <a href="/docs/develop/standards/css">CSS</a>    </h2>
+    
+  
+  <div class="pane-content">
+    <ul class="menu"><li class="first leaf"><a href="/docs/develop/standards/css/css-coding-standards">CSS coding standards</a></li>
+<li class="leaf"><a href="/docs/develop/standards/css/css-formatting-guidelines">CSS formatting guidelines</a></li>
+<li class="leaf"><a href="/docs/develop/standards/css/csscomb-settings-for-drupal-css-formatting-and-sort-tool">CSScomb settings for Drupal (CSS formatting and sort tool)</a></li>
+<li class="leaf"><a href="/docs/develop/standards/css/css-architecture-for-drupal-9">CSS architecture (for Drupal 9)</a></li>
+<li class="leaf active-trail"><a href="/docs/develop/standards/css/css-file-organization" class="active-trail active">CSS file organization (for Drupal 9)</a></li>
+<li class="last leaf"><a href="/docs/develop/standards/css/what-to-look-for-when-reviewing-css">What to look for when reviewing CSS</a></li>
+</ul>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-links"  >
+  
+      
+  
+  <div class="pane-content">
+      </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region left-content column panel-panel ">
+        <div class="column-content-region-inner left-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-node-title"  >
+  
+      
+  
+  <div class="pane-content">
+    <h1>CSS file organization</h1>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-updated"  id="last-updated-on" >
+  
+        <span class="pane-title">
+      Last <a href="/node/1887922/discuss">updated</a> on    </span>
+    
+  
+  <div class="pane-content">
+    17 May 2024  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-entity-field pane-node-field-documentation-status"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-field-documentation-status field-type-list-text field-label-hidden"><div class="field-items"><div class="field-item even"><p class="deprecated">This documentation <strong>needs work</strong>. See "Help improve this page" in the sidebar.</p></div></div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-entity-field pane-node-body"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><div class="note-warning">
+<p>Note: Changes to Drupal coding standards are proposed and discussed in issues in the <a href="/project/coding_standards" rel="nofollow">Coding Standards project</a>.</p>
+</div>
+<p>Note: This document describes a file organization and aggregation strategy that has not yet been implemented. See this core issue for that on-going work: <span class="project-issue-issue-link project-issue-status-info project-issue-status-1"><a href="/project/drupal/issues/1921610" title="Status: Active">#1921610: [Meta] Architect our CSS</a></span></p>
+<h2 id="file-structure"><a class="toc-anchor" title="Permalink to this headline" href="#file-structure"></a>File Structure</h2>
+<p>Rulesets should be grouped into logical files that enforce the separation of concerns within the CSS, that can be aggregated efficiently and that can be easily overridden by themers.</p>
+<p>Drupal follows a SMACSS-style categorization of its CSS rules: The State and Theme categories are not frequently used with modern CSS.</p>
+<ol>
+<li>Base —Should include HTML element styling (e.g. a, ul, etc), typography, root scooped CSS custom properties, resets and utility classes.</li>
+<li>Layout —Overall layout of the page including page template layout, region layout, etc.</li>
+<li>Component (SMACSS “module”) — The majority of a theme’s styles will be within components. Components should be scoped to their own CSS files. Example components include pager, navigation, footer, etc.</li>
+<li>State (not used often) — This was originally created for styles that modified the states of components, however it is now best practice to include component states within their respective stylesheet.</li>
+<li>Theme (not used often) — This was originally created to apply styles that would affect the overall look and feel of the theme (such as colors), however this can now be done more effectively by modifying CSS custom properties.</li>
+</ol>
+<p>For more information about Drupal’s use of SMACSS, see the <a href="http://drupal.org/node/1887918#separate-concerns" rel="nofollow">“Separate Concerns” section of the CSS Architecture page</a>.</p>
+<p>These categories help us keep CSS styles with different purposes from getting intertwined with one another. However, they don’t directly dictate file structure. Drupal recommends the following guidelines for structuring CSS across files:</p>
+<h3 id="modules"><a class="toc-anchor" title="Permalink to this headline" href="#modules"></a>CSS files for Drupal modules</h3>
+<p>All of a module's styles should be placed in a <code class="language-php">css/</code> sub-directory and broken into one or more of the following files:</p>
+<p><code class="language-php">module_name.module.css</code>: This file should hold the minimal styles needed to get the module's functionality working. This includes layout, component and state styles.</p>
+<p><code class="language-php">module_name.theme.css</code>: This file should hold extra styles to make the module's functionality aesthetically pleasing. This usually just consists of theme styles.</p>
+<p><code class="language-php">module_name.admin.css</code>: This file should hold the minimal styles needed to get the module's admin screens working. This includes layout, component and state styles. On admin screens, the module may choose to load the *.module.css in addition to the *.admin.css file.</p>
+<p><code class="language-php">module_name.admin.theme.css</code>: This file should hold extra styles to make the module's admin screens aesthetically pleasing. This usually just consists of theme styles.</p>
+<p>Note: Modules should never have any base styles. Drupal core's modules do not have any base styles. Instead Drupal core uses the Normalize.css library augmented with a drupal.base.css library.</p>
+<p>If a module attaches a CSS file to a template file, the CSS file should be named the same as the template file, e.g. the system-plugin-ui-form.html.twig CSS file should be named system-plugin-ui-form.css</p>
+<h3 id="themes"><a class="toc-anchor" title="Permalink to this headline" href="#themes"></a>CSS files for Drupal themes</h3>
+<ol>
+<li>Always separate Base, Layout, and Component styles into their own files. (Drupal will aggregate these separate files into one file, so there is no performance problem with this practice.)</li>
+<li>For complex themes, consider placing each component or component family in its own file.</li>
+<li>State rules, including media queries, should be included with the component to which they apply.</li>
+<li>Theme rules may or may not have their own file(s). <a href="http://drupal.org/node/323993" rel="nofollow">Starter themes</a> are encouraged to separate their theme CSS into separate files. Otherwise, include theme rules with their corresponding component.</li>
+</ol>
+<p>Most themes will have at least the following:</p>
+<pre>
+
+</pre><pre>
+<code class="language-php language-yaml">css:
+ base: base.css
+ layout: layout.css
+ component: components.css </code></pre><p>Optionally, these can be further broken out. Below the base/layout/component level, naming is up to the module or theme. A more complex file structure using normalize.css and a mobile-first approach might look like this:</p>
+<pre>
+
+</pre><pre>
+<code class="language-php language-yaml">css:
+ base: css/base/normalize.css css/base/elements.css
+ layout: css/layout/layout.css css/layout/layout--medium.css css/layout/layout--wide.css
+ component: css/components/button.css css/components/dropdown.css css/components/pagination.css css/components/tabs.css …
+ theme: css/theme/theme--light.css css/theme/theme--dark.css </code></pre><div class="note-warning">
+<p>Note: Module styles are always loaded before theme styles and the SMACSS groups cannot be interlaced between modules and themes. For example, loading a normalize.css in a theme's "base" SMACSS group will appear in the CSS cascade order only <em>after</em> all other stylesheets defined in core and contrib modules even when they're defined in a higher SMACSS group like "component" and "theme". Follow <span class="project-issue-issue-link project-issue-status-info project-issue-status-13"><a href="/project/drupal/issues/3046636" title="Status: Needs work">#3046636: LibraryDiscoveryParser overwrites theme CSS group ordering</a></span> for more information.</p>
+</div>
+<h2 id="aggregate"><a class="toc-anchor" title="Permalink to this headline" href="#aggregate"></a>Aggregating CSS</h2>
+<p>In Drupal 7 and earlier, the “group” option and the “every page” option of <code class="language-php">drupal_add_css()</code> controlled which files would be aggregated together. The groups were <code class="language-php">CSS_SYSTEM</code>, <code class="language-php">CSS_DEFAULT</code> (for Drupal modules), and <code class="language-php">CSS_THEME</code> (for Drupal themes) and the <code class="language-php">every_page</code> option was a simple boolean flag. This meant there were up to 6 aggregated files.</p>
+<p>In Drupal 8 and later, themes now have the ability to override stylesheets without affecting the “every page” option of the original stylesheet. See <a href="http://drupal.org/node/1876600" rel="nofollow">http://drupal.org/node/1876600</a>. This means conditionally-loaded CSS remains conditionally loaded.</p>
+<p>This also means it’s now simple for themes to affect conditionally-loaded styles, so all the theme-added CSS no longer needs to load after all conditionally-loaded styles. This greatly simplifies the default grouping strategy that Drupal can employ. Instead of 6 aggregated files, we can just have 2:</p>
+<ol>
+<li>
+<p>The “Every page” aggregate. Includes:</p>
+<ol>
+<li>Base styles from libraries (like Normalize.css and drupal.base.css) and then Drupal themes.</li>
+<li>Layout styles from Drupal modules and then Drupal themes.</li>
+<li>Component styles (and their associated states and themes) from Drupal modules and then Drupal themes.</li>
+<li>State styles that are not included with components, from Drupal modules and then Drupal themes.</li>
+<li>Theme styles that are not included with components, from Drupal modules and then Drupal themes.</li>
+</ol>
+</li>
+<li>
+<p>The conditionally-loaded aggregate. Includes:</p>
+<ol>
+<li>Layout styles from Drupal modules and then Drupal themes.</li>
+<li>Component styles (and their associated states and theme) from Drupal modules and then Drupal themes.</li>
+<li>State styles that are not included with components, from Drupal modules and then Drupal themes.</li>
+<li>Theme styles that are not included with components, from Drupal modules and then Drupal themes.</li>
+</ol>
+</li>
+</ol>
+<p><em>Note: there should never be conditionally-loaded base styles.</em></p>
+<p>The order of styles within an aggregate are determined by the “weight” option of <code class="language-php">drupal_add_css()</code> which will be:</p>
+<pre>
+<code class="language-php">/**
+ * The default weight for CSS rules that style HTML elements ("base" styles).
+ */
+const CSS_BASE = -200;
+
+/**
+ * The default weight for CSS rules that layout a page.
+ */
+const CSS_LAYOUT = -100;
+
+/**
+ * The default weight for CSS rules that style design components (and their associated states and themes.)
+ */
+const CSS_COMPONENT = 0;
+
+/**
+ * The default weight for CSS rules that style states and are not included with components.
+ */
+const CSS_STATE = 100;
+
+/**
+ * The default weight for CSS rules that style theme and are not included with components.
+ */
+const CSS_THEME = 200;
+</code></pre><p>The aggregated file itself is determined by the "group" option and the "every page" flag of drupal_add_css(). The group option defaults to the <code class="language-php">CSS_AGGREGATE_DEFAULT</code> constant. Drupal core does not provide any other aggregate constants, but contrib can define their own aggregate groups.</p>
+<h3 id="modules"><a class="toc-anchor" title="Permalink to this headline" href="#modules"></a>SMACSS and Sass/Compass</h3>
+<p>SMACSS when combined with Sass/Compass concept can provide much control over output css. We can use Sass Globbing concept to have multiple .scss files and only one css file with the use of partials.</p></div></div></div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region bottom-right-content column panel-panel">
+        <div class="column-content-region-inner bottom-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-views-panes pane-documentation-help-improve-pane"  id="help-improve-this-page" >
+  
+        <h2 class="pane-title">
+      Help improve this page    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="view view-documentation-help view-id-documentation_help view-display-id-improve_pane view-dom-id-55c04e6e5b7680c4b348a01c097284f0">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+      
+  <span class="views-field views-field-field-documentation-status">    <strong class="views-label views-label-field-documentation-status">Page status: </strong>    <span class="field-content">Needs work</span>  </span>  
+  <div class="views-field views-field-nothing">        <span class="field-content"><br /><strong>You can:</strong><br />
+<ul>
+<li>Log in, click <a href="/node/1887922/edit">Edit</a>, and edit this page</li>
+<li>Log in, click <a href="/node/1887922/discuss">Discuss</a>, update the Page status value, and suggest an improvement</li>
+<li>Log in and <a href="/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%281887922%29%20CSS%20file%20organization">create a Documentation issue</a> with your suggestion</li>
+</ul></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer clearfix panel-panel">
+    <div class="container-inner footer-inner panel-panel-inner">
+          </div>
+  </div>
+
+</div><!-- /.sutro -->
+</div>
+  </div>
+  </div>
+</div>
+  </div>
+        </div>
+              </div> <!-- /#content -->
+
+    </div> <!-- /#column-left -->
+
+      </div> <!-- /#page -->
+
+  <div id="footer" role="contentinfo">
+            <div class="region region-footer">
+    <div id="block-drupalorg-documentation-license" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    Drupal’s online documentation is © 2000-2025 by the individual contributors and can be used in accordance with the <a href="/terms">Creative Commons License, Attribution-ShareAlike 2.0</a>. PHP code is distributed under the <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License</a>.  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-infra-partner" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <a href="https://bit.ly/4fYoEf8" >Infrastructure management for Drupal.org provided by <img src="/files/cta/graphic/tag1_wht.svg" alt="Tag1 logo" ></a> 
+<br />
+<span style="font-size: .65em;"><a href="https://bit.ly/41bS4lA">Need a Drupal 7 extended support partner? Consider Tag1.</a></span>  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-drupalorg-footer" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <h4 class="element-invisible">News items</h4><ul class="drupal-news"><li class="0 first"><a href="https://www.drupal.org/news">News</a></li>
+<li class="1"><a href="https://www.drupal.org/planet" title="News from Drupal community members">Planet Drupal</a></li>
+<li class="2"><a href="https://www.drupal.org/about/media-kit/social-media" title="Drupal on social media">Social media</a></li>
+<li class="3"><a href="https://www.drupal.org/subscribe">Sign up for Drupal news</a></li>
+<li class="4"><a href="https://www.drupal.org/security" title="Announcements from the Drupal Security Team">Security advisories</a></li>
+<li class="5 last"><a href="https://jobs.drupal.org/" title="Drupal Jobs">Jobs</a></li>
+</ul><h4 class="element-invisible">Our community</h4><ul class="community"><li class="0 first"><a href="https://www.drupal.org/community">Community</a></li>
+<li class="1"><span><a href="https://www.drupal.org/drupal-services" title="People and organizations offering Drupal services">Services</a>, <a href="https://www.drupal.org/training" title="People and organizations offering Drupal training">Training</a> & <a href="https://www.drupal.org/hosting" title="Organizations offering Drupal hosting">Hosting</a></span></li>
+<li class="2"><a href="https://www.drupal.org/community/contributor-guide">Contributor guide</a></li>
+<li class="3"><a href="https://groups.drupal.org/groups" title="groups.drupal.org">Groups &amp; meetups</a></li>
+<li class="4"><a href="https://events.drupal.org" title="Upcoming and past DrupalCons">DrupalCon</a></li>
+<li class="5 last"><a href="https://www.drupal.org/dcoc" title="Drupal code of conduct">Code of conduct</a></li>
+</ul><h4 class="element-invisible">Documentation</h4><ul class="get-started"><li class="0 first"><a href="https://www.drupal.org/documentation" title="Documentation for working with Drupal">Documentation</a></li>
+<li class="1"><a href="https://www.drupal.org/docs">Drupal Guide</a></li>
+<li class="2"><a href="https://www.drupal.org/docs/user_guide/en/index.html">Drupal User Guide</a></li>
+<li class="3"><a href="https://www.drupal.org/documentation/develop">Developer docs</a></li>
+<li class="4 last"><a href="https://api.drupal.org/" title="Drupal API reference">API.Drupal.org</a></li>
+</ul><h4 class="element-invisible">Drupal code base</h4><ul class="download-extend"><li class="0 first"><a href="https://www.drupal.org/download">Download &amp; Extend</a></li>
+<li class="1"><a href="https://www.drupal.org/project/drupal" title="Download the latest version of the Drupal software">Drupal core</a></li>
+<li class="2"><a href="https://www.drupal.org/project/project_module" title="Download add-on features and functionality">Modules</a></li>
+<li class="3"><a href="https://www.drupal.org/project/project_theme" title="Download pre-designed styles for Drupal">Themes</a></li>
+<li class="4 last"><a href="https://www.drupal.org/project/project_distribution" title="Download a pre-packaged Drupal site">Distributions</a></li>
+</ul><h4 class="element-invisible">Governance of community</h4><ul class="about"><li class="0 first"><a href="https://www.drupal.org/about">About</a></li>
+<li class="1"><a href="https://www.drupal.org/about/features/accessibility" title="Our committment to accessibility">Web accessibility</a></li>
+<li class="2"><a href="https://www.drupal.org/association" title="About the Drupal Association">Drupal Association</a></li>
+<li class="3"><a href="https://www.drupal.org/drupalorg" title="About Drupal.org">About Drupal.org</a></li>
+<li class="4"><a href="https://www.drupal.org/terms" title="Drupal.org terms of service">Terms of service</a></li>
+<li class="5 last"><a href="https://www.drupal.org/privacy" title="Drupal.org privacy policy">Privacy policy</a></li>
+</ul>  </div>
+  </div>
+</div>
+<div id="block-block-77" class="block block-block">
+<div class="block-inner">
+    
+  <div class="content">
+    <p>Drupal is a <a href="/about/trademark">registered trademark</a> of <a href="https://dri.es">Dries Buytaert</a>.</p>
+  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    <div class="region region-page-bottom">
+    <script type="text/javascript">
+      (function(){
+          window._pxAppId = 'PXVnPBBfwe';
+          window._pxParam2 = '';
+          window._pxParam3 = '0';
+          var p = document.getElementsByTagName('script')[0],
+              s = document.createElement('script');
+          s.async = 1;
+          s.src = '/VnPBBfwe/init.js';
+          p.parentNode.insertBefore(s,p);
+      }());
+  </script>
+  <noscript>
+      <div style="position:fixed; top:0; left:0; display:none" width="1" height="1">
+          <img src="/VnPBBfwe/xhr/api/v1/collector/noScript.gif?appId=PXVnPBBfwe">
+      </div>
+  </noscript>  </div>
+<script type="text/javascript" src="/files/advagg_js/js__B0FBwiP97ZnD38IFraZus4upS4KVkMXI3ou0fJ2ZXGA__pPDESRJz9GHsxqQIwQ_V8xnFYEH5jipG2eicsfrdWCs__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+
+<!--[if lte IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie9-" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if gt IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie10+" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if !IE]><!-->
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="/files/advagg_js/js__pqoYaVR8NVhof-vNXe50j2TKhFv__IihVag_h4G6kus__B4mbn4wICLQjWm1m3-z1kw8F1FtP0cDAHKp00Xy_-88__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__H5AFmq1RrXKsrazzPq_xPQPy4K0wUKqecPjczzRiTgQ__wor4r9P8YTtQ7p6fbywTetZ47Z_orumIfrrhgxrpLus__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="
+function advagg_mod_1() {
+  // Count how many times this function is called.
+  advagg_mod_1.count = ++advagg_mod_1.count || 1;
+  try {
+    if (advagg_mod_1.count <= 40) {
+      init_drupal_core_settings();
+
+      // Set this to 100 so that this function only runs once.
+      advagg_mod_1.count = 100;
+    }
+  }
+  catch(e) {
+    if (advagg_mod_1.count >= 40) {
+      // Throw the exception if this still fails after running 40 times.
+      throw e;
+    }
+    else {
+      // Try again in 1 ms.
+      window.setTimeout(advagg_mod_1, 1);
+    }
+  }
+}
+function advagg_mod_1_check() {
+  if (window.init_drupal_core_settings && window.jQuery && window.Drupal) {
+    advagg_mod_1();
+  }
+  else {
+    window.setTimeout(advagg_mod_1_check, 1);
+  }
+}
+advagg_mod_1_check();"></script>
+<script type="text/javascript" src="/files/advagg_js/js__Oc0wwB7MVRfxtYw6EQM7d9sXj9PAQePoWSzQJ0uTk6c__iXqOGoaPhZHCPEspUr5BC8BwOx5P8B11xv7VOhoUii8__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__FabcJ6qluktliDejymsuV-FqaN_HyMKGe93c2rO9Ky0__el1ZLGkKneOoCS6OWa01WHuIEsTsXZ46MRLCF390Fbw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__YT6D1B_BKxvm6JCH_t9sZNI5L6yITa_DlU5QcSlOkAU__OXobH7d1IP1o3WABlniIrU_-pcJacVSIPUv9bpD-6pQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__06Uejkt2sN1AJAk3QcRQG9yrq-jCjZth0s-OymGOkVE__yFxl4u_7_1AhyVnMLZRtp5wEvh9C2VdA6gnewdM1hB0__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__pLKQd4r7OrHglE7Qkqw53K2UXCqQdhqQ9v0cz7hMCQY__OErfYuQdGbFHcCoLoUW_ESSvaumApNojzjJit8-2xcw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__hHUWFbMAa11eJtx5V0ym9o0YBsB1udk34qUT5wr1ihI__vSxsxbzmzuz4XPh--CL1BBciQpEQ_m8FfdQINCOAg14__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function init_drupal_core_settings() {jQuery.extend(Drupal.settings,{"basePath":"\/","pathPrefix":"","setHasJsCookie":0,"ajaxPageState":{"theme":"bluecheese","theme_token":"Knvc2YGbBXDleNtvkDSICddccjkLpUyj9Zdpg-IRSho"},"drupalorgGitlab":{"gitlab_base_url":"https:\/\/git.drupalcode.org","base_url":"https:\/\/www.drupal.org"},"better_exposed_filters":{"views":{"documentation_help":{"displays":{"improve_pane":{"filters":[]}}},"documentation_related_content":{"displays":{"related_content_pane":{"filters":[]}}}}},"urlIsAjaxTrusted":{"\/docs\/develop\/standards\/css\/css-file-organization":true},"drupalorgCrosssiteConsentNeeded":true,"ogContext":{"groupType":"node","gid":"2803003"}}); 
+if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(false);}} if(window.jQuery && window.Drupal){init_drupal_core_settings();}
+//--><!]]>
+</script>
+<script type="text/javascript" src="/files/advagg_js/js__2k0CJ3KAQNFTFab3y6ZvNtxs3HLons0Brq7VwvPSkKo__sQv8imhcZRev08LnyQ7OzwuHrZ3Jdwo5NmznAARX0ig__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__vj0LjvNwl-3K1P9LGT4BGuXCZcAovYsVlVmoJN3TMRg__KW8SiGceRY3sjIKVrffDjf2MK4A5Vp3EDDxVO-4pegI__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+</body>
+</html>

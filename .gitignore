@@ -120,8 +120,13 @@ playwright/.cache/
 .DS_Store
 Thumbs.db
 
-# Data files
-data/sitemap.json
-data/pages/
+# Data files - Temporary files only
 data/main-page.html
 data/prompt.txt
+
+# Keep all generated content in git for:
+# - Version control of AI-generated content
+# - Ability to see changes over time
+# - Backup of processed content
+# - Easier debugging and review
+# - Efficient incremental updates (only changed files need re-download)

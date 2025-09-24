@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:fb="http://ogp.me/ns/fb#"
+  xmlns:og="http://ogp.me/ns#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="MobileOptimized" content="width" />
+  <!--[if IE]><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Reserved Words, capitalisation and user-supplied data, naming, configuring DB server for standards compliance" />
+<meta name="generator" content="Drupal 7 (https://www.drupal.org)" />
+<link rel="image_src" href="https://www.drupal.org/sites/all/themes/bluecheese/images/drupal_meta_image.png" />
+<link rel="canonical" href="https://www.drupal.org/docs/develop/standards/sql/sql-coding-conventions" />
+<link rel="shortlink" href="https://www.drupal.org/node/2497" />
+<meta property="og:site_name" content="Drupal.org" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.drupal.org/docs/develop/standards/sql/sql-coding-conventions" />
+<meta property="og:title" content="SQL coding conventions" />
+<meta property="og:description" content="Note: Changes to Drupal coding standards are proposed and discussed in issues in the Coding Standards project. Reserved Words Drupal 8 and 9 All identifiers in SQL query should be quoted. Table names are quoted using curly brackets, for example, {table_name}. All other identifiers are quoted using square brackets, for example, [column_name]. Drupal 7 Don&#039;t use (ANSI) SQL / MySQL / PostgreSQL / MS SQL Server / ... Reserved Words for column and/or table names. Even if this may work with your (MySQL) installation, it may not with others or with other databases." />
+<meta property="og:updated_time" content="2022-09-24T09:04:36+00:00" />
+<meta property="article:published_time" content="2003-08-10T23:28:11+00:00" />
+<meta property="article:modified_time" content="2022-09-24T09:04:36+00:00" />
+  <title>SQL coding conventions | SQL | Drupal Wiki guide on Drupal.org</title>
+  <link type="text/css" rel="stylesheet" href="/files/advagg_css/css__IGnvPR1nQd12eUWIitgZ6GDDyWxn9W82zUE-pgSt6Y8__Gh7RLUb1X-_kkfJcUW2xrjQQJCrbwuGgKr5Ix51cJYc__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Xi-PZpvKTY78w7l1WNsqwUA52MIupHJebCMiX34Ugt0__D_EUHDAfEQdxcLiSDY7hREUWkG1Ge56_h2z3Er8V188__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__WF0PRotZAhCcl0aJjY5W2LYj8UwiYuB2dZEFluOh3Tc__FviX13FUB-Ppa2XB29BUIJQZ1Wg-F5XiDE7XD5y7mjQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Fx0_w1L9q3nwzXnALG7UfjLF34FGYgJTz636-GWbM6k__0jWLTEHP3h5U5RcXuZcFhf0DdvRdzP3_wzCVNT015Ls__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__71G6gao0TOuJxFfw9efqGV9HafmPRGSqQoYV4yqGUWc__cjdS_7q2MvneE1k5vHyBqxDqcSSGdHyUNCXu57rH2hM__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+  </head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-2497 node-type-documentation drupalorg-site-main panels-layout og-context og-context-node og-context-node-3311604" >
+  <div id="skip-link" tabindex="-1">
+    <a class="element-invisible element-focusable" href="#content">Skip to main content</a>
+    <a class="element-invisible element-focusable skip-link-search" href="#search-block-form">Skip to search</a>
+  </div>
+    <div class="region region-page-top">
+    <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W36H8DW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div id="drupalorg-crosssite-gdpr">Can we use first and third party cookies and web beacons to <a href="https://www.drupal.org/terms">understand our audience, and to tailor promotions you see</a>?<br><button class="yes">Yes, please</button><button class="no">No, do not track me</button></div>  </div>
+      <div id="nav-header">
+          <div class="menu-nav">
+        <a class="nav-btn" id="nav-open-btn" href="#block-system-main-menu"><img src="/sites/all/themes/bluecheese/images/icon-w-menu.svg" alt="Main menu"></a>
+      </div>
+        <nav id="navigation-inner" class="container-12" role="navigation">
+        <div class="region region-navigation">
+    <div id="block-system-main-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/home" title="Drupal.org home page">Drupal.org home</a></li>
+<li class="expanded"><a href="https://www.drupal.org/about/overview/technical" title="">Discover Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/about/overview/technical" title="The open source framework behind millions of websites.">Drupal Core</a></li>
+<li class="leaf"><a href="https://new.drupal.org/drupal-cms" title="Drupal CMS puts the power of Drupal into the hands of marketers, designers and content creators.">Drupal CMS</a></li>
+<li class="leaf"><a href="https://new.drupal.org/ai" title="Open limitless possibilities with Drupal AI">Drupal AI</a></li>
+<li class="leaf"><a href="https://www.drupal.org/case-studies" title="Powerful stories that show Drupal solutions in the real world.">Case Studies</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/government" title="Drupal is the open-source CMS that enables digital transformation of government and increases citizen engagement.">Drupal for Government</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/education" title="See why 70% of the world&#039;s leading universities chose Drupal.">Drupal for Higher Education</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/nonprofit" title="See why Drupal is the open-source CMS choice for some of the world’s most influential nonprofits.">Drupal for Nonprofit</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/ecommerce" title="Natively integrate content and commerce.">Drupal for eCommerce</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/fintech" title="Secure and trustworth FinTech infrastructure.">Drupal for FinTech</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/healthcare" title="Drupal powers systems that are secure, patient-centric and engaging.">Drupal for Healthcare</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/industries/media-and-publishing" title="Create engaging multi-channel experiences to connect with your audiences - everywhere.">Drupal for Media &amp; Publishing</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Build with Drupal</a><div class="menu-block"><ul class="menu button"><li class="first collapsed"><a href="/download" title=" Download Drupal and the extensions you need">Download Drupal</a></li>
+<li class="leaf"><a href="/documentation" title="Full knowledge base including Drupal 7 resources">Documentation</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/getting-started" title="All documentation">Getting started</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Local Development Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/developers" title="">Developer Resources</a></li>
+<li class="leaf"><a href="https://new.drupal.org/docs/drupal-cms" title="Drupal CMS User Guide">Drupal CMS User Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/user_guide/en/index.html" title="Drupal User Guide">Drupal User Guide</a></li>
+<li class="leaf"><a href="https://api.drupal.org/api/drupal/11.x" title="Drupal API">API</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/modules" title="Drupal Modules">Modules</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/themes" title="Drupal themes">Themes</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/project_distribution" title="Drupal distributions">Distributions</a></li>
+<li class="leaf"><a href="/project/issues" title="Report issues and contribute improvements">Issue queues</a></li>
+<li class="last leaf"><a href="/security" title="Stay on top of the latest security alerts and updates">Security Advisories</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/drupal-services" title="">Partners &amp; Services</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/drupal-services" title="Connect with the best Drupal agencies around the world.">Find a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://new.drupal.org/association/become-a-drupal-certified-partner" title="Join an elite network of agencies committed to Drupal excellence and innovation.
+">Become a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/hosting" title="Find a hosting provider for your Drupal project.">Find a Hosting Provider</a></li>
+<li class="leaf"><a href="https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/enterprise" title="Get help with your migration to the latest version of Drupal.">Find a Migration Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/training" title="Upskill your Drupal team.">Find Training</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/steward" title="Ensure your website is protected with Drupal Steward.">Drupal Steward</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/community" title="">Community</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/community" title="Come for the code, stay for the community.">About the Community</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/contributor-guide" title="Get involved in growing and evolving Drupal.">How to Contribute</a></li>
+<li class="leaf"><a href="https://events.drupal.org/" title="DrupalCon unites experts from around the globe who create ambitious digital experiences. Network, learn, and be inspired.">DrupalCon</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/events" title="Discover local events, community meet-ups, and training.">Events</a></li>
+<li class="leaf"><a href="https://jobs.drupal.org/home" title="Find opportunities to work in Drupal.">Jobs / Careers</a></li>
+<li class="leaf"><a href="https://www.drupal.org/blog" title="News and stories about Drupal.">News &amp; Blogs</a></li>
+<li class="leaf"><a href="https://www.drupal.org/forum" title="Got a question about Drupal? Find answers on the Drupal forums.">Forum</a></li>
+<li class="leaf"><a href="/community/contributor-guide/reference-information/talk/tools/slack" title="Get support and comminicate with the global Drupal community.">Slack</a></li>
+<li class="leaf"><a href="https://www.drupal.org/subscribe" title="Sign up for Drupal news and manage your subscriptions.">Newsletters</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag" title="Get your Drupal branded merch!">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="expanded"><a href="/association" title="Support the Drupal Association - the non-profit that supports the Drupal project">Support Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/association" title="Meet the non-profit accelerating Drupal innovation ">The Drupal Association</a></li>
+<li class="leaf"><a href="/association/donate" title="Donate to the non-profit that supports Drupal">Donate</a></li>
+<li class="leaf"><a href="/association/become-a-drupal-certified-partner" title="Join the network of official Drupal Certified Partners">Become a Partner</a></li>
+<li class="leaf"><a href="/association/RippleMakers" title="Become an individual member of the Drupal Association">Become a Ripple Maker</a></li>
+<li class="leaf"><a href="/association/organization-membership" title="Join and show your organization&#039;s support for Drupal">Become an Organization Member</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag?utm_source=drupalorg&amp;utm_medium=banner&amp;utm_campaign=drupal_swag_shop_2020_09_17" title="Get your Drupal-branded bucket hats, hoodies, and more">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="last expanded"><a href="/try-hosting" title="Try Drupal">Get Started</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://new.drupal.org/drupal-cms/trial" title="">Try Drupal CMS</a></li>
+<li class="last leaf"><a href="/try-hosting" title="">Try Hosting</a></li>
+</ul></div></li>
+</ul></div><a class="close-btn" href="#top">Return to content</a>  </div>
+  </div>
+</div>
+<div id="block-search-form" class="block block-search">
+<div class="block-inner">
+    
+  <div class="content">
+    <form action="/docs/develop/standards/sql/sql-coding-conventions" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input placeholder="Search…" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input alt="Search" type="image" id="edit-submit" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-ek1Yd2lObfiYcH1mbeRfJGxH80-NlcLqR9MOfq0XrW0" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>  </div>
+  </div>
+</div>
+<div id="block-system-user-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu"><li class="button default"><a href="#block-system-user-menu"><img src="https://www.drupal.org/sites/all/themes/bluecheese/images/icon-w-user.svg" alt="Log in, view profile, and more"></a><ul><li class="first leaf"><a href="/user/login?destination=node/2497" title="">Log in</a></li>
+<li class="last leaf"><a href="/user/register?destination=node/2497" title="">Create account</a></li>
+</ul></li></ul></div>  </div>
+  </div>
+</div>
+  </div>
+    </nav>
+  </div>
+
+    <div id="header" class="clearfix">
+    <div id="header-inner" class="container-12 clearfix">
+      <div id="header-left">
+        <div id="site-name"><a href="/documentation">Documentation</a></div>
+              </div>
+      <div id="header-right">
+          <div class="region region-header">
+    <div id="block-drupalorg-search-documentation" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <form class="container-inline" action="/docs/develop/standards/sql/sql-coding-conventions" method="post" id="drupalorg-documentation-search-form" accept-charset="UTF-8"><div><input type="hidden" name="form_build_id" value="form-m4lgxppyxw432TTJEU0ShBI3sf1IGBRdp3zYV2yohJU" />
+<input type="hidden" name="form_id" value="drupalorg_documentation_search_form" />
+<div class="form-item form-type-textfield form-item-drupalorg-documentation-search-form">
+  <label class="element-invisible" for="edit-drupalorg-documentation-search-form--2">Search </label>
+ <input placeholder="Search documentation…" type="text" id="edit-drupalorg-documentation-search-form--2" name="drupalorg_documentation_search_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions--2"><input alt="Search" type="image" id="edit-submit--2" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div></div></form>  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    </div>
+  </div>
+  
+      <div id="banner" data-nosnippet>
+        <div class="region region-banner">
+    <div id="block-drupalorg-announcements" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="announcement"><img class="photo" src="https://www.drupal.org/files/styles/grid-2-2x-square/public/announcements/da-icon.png?itok=wwiCve4D" width="280" height="280" alt="Announcement icon" title="Announcement icon" />Last chance! The 2025 Drupal Business Survey closes tomorrow. Your response will help shape the future of the Drupal business ecosystem.</div>
+<div class="cta"><a href="https://forms.gle/kue9WCroke5VnW5e9" class="global-announce-banner dc-singapore-registration">Take the survey today</a></div>  </div>
+  </div>
+</div>
+  </div>
+    </div>
+  
+  <div id="page" class="clearfix">
+    <div class="breadbox"><nav class="breadcrumb container-12"><span><a href="/docs/develop">Develop</a></span><span><a href="/docs/develop/standards">Coding standards</a></span><span><a href="/docs/develop/standards/sql">SQL</a></span></nav></div>
+
+    <div id="main" role="main">
+      
+      <div id="content" class="clearfix">
+                                <div id="content-inner" class="clearfix">
+
+          
+            <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+<div class="block-inner">
+    
+  <div class="content">
+    
+<div class="panelizer-view-mode node node-full node-documentation node-2497">
+        
+<div class="panel-display hydra panel-layout clearfix " >
+
+  <div class="container preface clearfix panel-panel">
+    <div class="container-inner preface-inner panel-panel-inner">
+          </div>
+  </div>
+
+  <div class="container content clearfix">
+    <div class="container-inner content-inner panel-panel-inner">
+      <div class="column-content-region top-right-content column panel-panel">
+        <div class="column-content-region-inner top-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-block pane-drupalorg-carbon-ad-sidebar"  >
+  
+      
+  
+  <div class="pane-content">
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYIEKJI&placement=drupalorg" id="_carbonads_js"></script><div class="ad-explanation description">Advertising sustains the DA. Ads are hidden for members. <a href="/association/individual-membership">Join today</a></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-table-of-contents-toc-w-3y7froeoqmgrpcmgnphqwt4pi3"  id="on-this-page" >
+  
+        <h3 class="pane-title">
+      On this page    </h3>
+    
+  
+  <div class="pane-content">
+    <div class="item-list"><ul class="anchor-list"><li class="anchor-list__item h2-tag first"><a href="/docs/develop/standards/sql/sql-coding-conventions#reserved-words" class="toc-link active">Reserved Words</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/sql/sql-coding-conventions#reserved-words-drupal-8" class="toc-link active">Drupal 8 and 9</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/sql/sql-coding-conventions#reserved-words-drupal-7" class="toc-link active">Drupal 7</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/sql/sql-coding-conventions#formatting" class="toc-link active">Capitalization and user-supplied data</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/sql/sql-coding-conventions#naming" class="toc-link active">Naming</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/sql/sql-coding-conventions#server" class="toc-link active">Configure your Database server for standard compliance</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/sql/sql-coding-conventions#references" class="toc-link active">References</a></li>
+<li class="anchor-list__item h2-tag last"><a href="/docs/develop/standards/sql/sql-coding-conventions#indentation" class="toc-link active">Indentation</a></li>
+</ul></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-og-menu-og-single-menu-block"  id="sql" >
+  
+        <h2 class="pane-title">
+      <a href="/docs/develop/standards/sql">SQL</a>    </h2>
+    
+  
+  <div class="pane-content">
+    <ul class="menu"><li class="first leaf active-trail"><a href="/docs/develop/standards/sql/sql-coding-conventions" class="active-trail active">SQL coding conventions</a></li>
+<li class="leaf"><a href="/docs/develop/coding-standards/list-of-sql-reserved-words">List of SQL reserved words</a></li>
+<li class="last leaf"><a href="/docs/develop/coding-standards/avoid-select-from">Avoid &quot;SELECT * FROM ...&quot;</a></li>
+</ul>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-links"  >
+  
+      
+  
+  <div class="pane-content">
+      </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region left-content column panel-panel ">
+        <div class="column-content-region-inner left-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-node-title"  >
+  
+      
+  
+  <div class="pane-content">
+    <h1>SQL coding conventions</h1>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-updated"  id="last-updated-on" >
+  
+        <span class="pane-title">
+      Last <a href="/node/2497/discuss">updated</a> on    </span>
+    
+  
+  <div class="pane-content">
+    24 September 2022  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-entity-field pane-node-body"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><div class="note-warning">
+<p>Note: Changes to Drupal coding standards are proposed and discussed in issues in the <a href="/project/coding_standards" rel="nofollow">Coding Standards project</a>.</p>
+</div>
+<h2 id="reserved-words"><a class="toc-anchor" title="Permalink to this headline" href="#reserved-words"></a>Reserved Words</h2>
+<h3 id="reserved-words-drupal-8"><a class="toc-anchor" title="Permalink to this headline" href="#reserved-words-drupal-8"></a>Drupal 8 and 9</h3>
+<p>All identifiers in SQL query should be quoted. Table names are quoted using curly brackets, for example, <code class="language-php">{table_name}</code>. All other identifiers are quoted using square brackets, for example, <code class="language-php">[column_name]</code>.</p>
+<h3 id="reserved-words-drupal-7"><a class="toc-anchor" title="Permalink to this headline" href="#reserved-words-drupal-7"></a>Drupal 7</h3>
+<p>Don't use (ANSI) SQL / MySQL / PostgreSQL / MS SQL Server / ... Reserved Words for column and/or table names. Even if this may work with your (MySQL) installation, it may not with others or with other databases. Some references:</p>
+<ul>
+<li><a href="/node/141051" rel="nofollow">(ANSI) SQL Reserved Words</a></li>
+<li>MySQL Reserved Words: <a href="http://dev.mysql.com/doc/refman/5.1/en/reserved-words.html" rel="nofollow">5.1</a>, <a href="http://dev.mysql.com/doc/refman/5.0/en/reserved-words.html" rel="nofollow">5.0</a>, <a href="http://dev.mysql.com/doc/refman/4.1/en/reserved-words.html" rel="nofollow">3.23.x, 4.0, 4.1</a></li>
+<li><a href="http://www.postgresql.org/docs/8.1/static/sql-keywords-appendix.html" rel="nofollow">PostgreSQL Reserved Words</a></li>
+<li><a href="http://download.oracle.com/docs/cd/B19306_01/server.102/b14200/ap_keywd.htm#i690190" rel="nofollow">Oracle Reserved Words</a> (in particular UID is a problem in our context)</li>
+<li><a href="http://msdn2.microsoft.com/en-us/library/ms189822.aspx" rel="nofollow">MS SQL Server Reserved Words</a></li>
+<li><a href="http://publib.boulder.ibm.com/infocenter/db2luw/v9/index.jsp?topic=/com.ibm.db2.udb.admin.doc/doc/r0001095.htm" rel="nofollow">DB2 Reserved Words</a></li>
+</ul>
+<p>Some commonly misused keywords: <code class="language-php">TIMESTAMP, TYPE, TYPES, MODULE, DATA, DATE, TIME, ...</code><br />
+See also <a href="http://drupal.org/node/371" rel="nofollow">[bug] SQL Reserved Words</a>.</p>
+<h2 id="formatting"><a class="toc-anchor" title="Permalink to this headline" href="#formatting"></a>Capitalization and user-supplied data</h2>
+<ul>
+<li>Make SQL reserved words UPPERCASE. This is not a suggestion. Drupal db abstraction commands will fail if this convention is not followed.</li>
+<li>Make column and constraint names lowercase.</li>
+<li>Enclose each table name with <code class="language-php">{}</code> (this allows Drupal to prefix table names).</li>
+<li>Variable arguments (which are often user-supplied) should be moved out of the query body and passed in as separate parameters to <a href="http://api.drupal.org/apis/db_query" rel="nofollow"><code class="language-php">db_query()</code></a>, <a href="http://api.drupal.org/apis/db_query_range" rel="nofollow"><code class="language-php">db_query_range()</code></a>, and <a href="http://api.drupal.org/apis/db_query_temporary" rel="nofollow"><code class="language-php">db_query_temporary()</code></a>, etc. The query body should instead contain placeholders specifying the type of each argument (<code class="language-php">%d|%s|%|%f|%b</code>). This ensures that the data will be properly escaped and prevents SQL injection attacks.</li>
+<li>Preventing SQL injection is easy; db_query provides a way to use parametrized queries. Drupal's database functions replace the sprintf-like placeholders with the properly escaped arguments in order of appearance:</li>
+<li>%d - integers</li>
+<li>%f - floats</li>
+<li>%s - strings, enclose in single quotes</li>
+<li>%b - binary data, do not enclose in single quotes</li>
+<li>% - replaced with %</li>
+<li>Read more about <a href="/node/101496" rel="nofollow">Database Access</a></li>
+<li>Literal (constant) arguments can either be included in the query body or handled in the same way as variable arguments.</li>
+<li>Any string literal or %s placeholder must be enclosed by single quotes: <code class="language-php">'</code> . Never use double quotes.</li>
+</ul>
+<p>Example:</p>
+<pre>
+<code class="language-php">&lt;?php
+db_query("INSERT INTO {filters} (format, module, delta, weight) VALUES (%d, 'php', 0, 0)", $format);
+?&gt;
+</code></pre><p><strong>NOTE: as of Drupal 6.x, table definitions and constraints (e.g. primary keys, unique keys, indexes) should be always handled by the <a href="/node/146843" rel="nofollow">Schema API</a>, which solves cross-database compatibility concerns automatically.</strong></p>
+<h2 id="naming"><a class="toc-anchor" title="Permalink to this headline" href="#naming"></a>Naming</h2>
+<ul>
+<li>Use singular nouns for table names since they describe the entity the table represents. Drupal 6.x mixed singular/plural usage and this convention changed for Drupal 7.x.</li>
+<li>It is a good practice to prefix table names with the module name to prevent possible namespace conflicts.</li>
+<li>Name every constraint (primary, foreign, unique keys) yourself. Otherwise, you'll see funny-looking system-generated names in error messages. This happened with the <code class="language-php">moderation_roles</code> table which initially defined a key without explicit name as <code class="language-php">KEY (mid)</code>. This got mysqldump'ed as <code class="language-php">KEY mid (mid)</code> which resulted in a syntax error as <code class="language-php">mid()</code> is a mysql function (see <a href="/node/893" rel="nofollow">[bug] mysql --ansi cannot import install database</a>).</li>
+<li>Index names should begin with the name of the table they depend on, eg. <code class="language-php">INDEX users_sid_idx</code>.</li>
+</ul>
+<p><strong>NOTE: as of Drupal 6.x, table definitions and constraints should be always handled by the Schema API.</strong></p>
+<h2 id="server"><a class="toc-anchor" title="Permalink to this headline" href="#server"></a>Configure your Database server for standard compliance</h2>
+<p>Most Database Servers use extension to standard SQL. However, many of them can be configured to run in a (more) standard compliant mode. Every developer is encouraged to use the mode most standard compliant to avoid sloppy coding and compatibility problems.</p>
+<dl>
+<dt>MySQL</dt>
+<dd>Enable <a href="http://dev.mysql.com/doc/refman/5.0/en/server-sql-mode.html#id2702339" rel="nofollow">ANSI</a> and <a href="http://dev.mysql.com/doc/refman/5.0/en/server-sql-mode.html#id2702074" rel="nofollow">Strict</a> Mode</dd>
+</dl>
+<p><em>Please help growing this list for other database servers!</em></p>
+<h2 id="references"><a class="toc-anchor" title="Permalink to this headline" href="#references"></a>References</h2>
+<ul>
+<li><a href="http://www.amazon.com/exec/obidos/tg/detail/-/1558605762/ref=lib_rd_ss_TT04/102-7068143-3629730?v=glance&amp;s=books&amp;vi=reader&amp;img=17#reader-link" rel="nofollow">Joe Celko - SQL for Smarties: Advanced SQL Programming</a></li>
+<li><a href="http://www.ss64.com/orasyntax/naming.html" rel="nofollow">RDBMS Naming conventions</a></li>
+</ul>
+<h2 id="indentation"><a class="toc-anchor" title="Permalink to this headline" href="#indentation"></a>Indentation</h2>
+<p>Drupal does not have a standard method for indentation or formating of longer SQL queries on multiple lines. Some competing strategies include:</p>
+<pre>
+<code class="language-php">if (!(db_query(
+  "
+    INSERT INTO {mlsp_media_file_type}
+    SET extension   = '%s',
+    attributes      = '%s'
+  ",
+  $file_type_entry['extension'],
+  $selected_attributes
+))) {
+  $errors = TRUE;
+}
+</code></pre><p>or</p>
+<pre>
+<code class="language-php">$sql = "SELECT t.*, j1.col1, j2.col2"
+. " FROM {table} AS t"
+. " LEFT JOIN {join1} AS j1 ON j1.id = t.jid"
+. " LEFT JOIN {join2} AS j2 ON j2.id = t.jjid"
+. " WHERE t.col LIKE '%s'"
+. " ORDER BY %s"
+;
+$result = db_query($sql, 'findme', 't.weight');
+</code></pre><p>or, using the concept of "rivers" and HEREDOC syntax</p>
+<pre>
+<code class="language-php">$sql = &lt;&lt;</code></pre></div></div></div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region bottom-right-content column panel-panel">
+        <div class="column-content-region-inner bottom-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-views-panes pane-documentation-help-improve-pane"  id="help-improve-this-page" >
+  
+        <h2 class="pane-title">
+      Help improve this page    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="view view-documentation-help view-id-documentation_help view-display-id-improve_pane view-dom-id-5cb849d21cb11df5235980ee1c2523db">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+      
+  <span class="views-field views-field-field-documentation-status">    <strong class="views-label views-label-field-documentation-status">Page status: </strong>    <span class="field-content">No known problems</span>  </span>  
+  <div class="views-field views-field-nothing">        <span class="field-content"><br /><strong>You can:</strong><br />
+<ul>
+<li>Log in, click <a href="/node/2497/edit">Edit</a>, and edit this page</li>
+<li>Log in, click <a href="/node/2497/discuss">Discuss</a>, update the Page status value, and suggest an improvement</li>
+<li>Log in and <a href="/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%282497%29%20SQL%20coding%20conventions">create a Documentation issue</a> with your suggestion</li>
+</ul></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer clearfix panel-panel">
+    <div class="container-inner footer-inner panel-panel-inner">
+          </div>
+  </div>
+
+</div><!-- /.sutro -->
+</div>
+  </div>
+  </div>
+</div>
+  </div>
+        </div>
+              </div> <!-- /#content -->
+
+    </div> <!-- /#column-left -->
+
+      </div> <!-- /#page -->
+
+  <div id="footer" role="contentinfo">
+            <div class="region region-footer">
+    <div id="block-drupalorg-documentation-license" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    Drupal’s online documentation is © 2000-2025 by the individual contributors and can be used in accordance with the <a href="/terms">Creative Commons License, Attribution-ShareAlike 2.0</a>. PHP code is distributed under the <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License</a>.  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-infra-partner" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <a href="https://bit.ly/4fYoEf8" >Infrastructure management for Drupal.org provided by <img src="/files/cta/graphic/tag1_wht.svg" alt="Tag1 logo" ></a> 
+<br />
+<span style="font-size: .65em;"><a href="https://bit.ly/41bS4lA">Need a Drupal 7 extended support partner? Consider Tag1.</a></span>  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-drupalorg-footer" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <h4 class="element-invisible">News items</h4><ul class="drupal-news"><li class="0 first"><a href="https://www.drupal.org/news">News</a></li>
+<li class="1"><a href="https://www.drupal.org/planet" title="News from Drupal community members">Planet Drupal</a></li>
+<li class="2"><a href="https://www.drupal.org/about/media-kit/social-media" title="Drupal on social media">Social media</a></li>
+<li class="3"><a href="https://www.drupal.org/subscribe">Sign up for Drupal news</a></li>
+<li class="4"><a href="https://www.drupal.org/security" title="Announcements from the Drupal Security Team">Security advisories</a></li>
+<li class="5 last"><a href="https://jobs.drupal.org/" title="Drupal Jobs">Jobs</a></li>
+</ul><h4 class="element-invisible">Our community</h4><ul class="community"><li class="0 first"><a href="https://www.drupal.org/community">Community</a></li>
+<li class="1"><span><a href="https://www.drupal.org/drupal-services" title="People and organizations offering Drupal services">Services</a>, <a href="https://www.drupal.org/training" title="People and organizations offering Drupal training">Training</a> & <a href="https://www.drupal.org/hosting" title="Organizations offering Drupal hosting">Hosting</a></span></li>
+<li class="2"><a href="https://www.drupal.org/community/contributor-guide">Contributor guide</a></li>
+<li class="3"><a href="https://groups.drupal.org/groups" title="groups.drupal.org">Groups &amp; meetups</a></li>
+<li class="4"><a href="https://events.drupal.org" title="Upcoming and past DrupalCons">DrupalCon</a></li>
+<li class="5 last"><a href="https://www.drupal.org/dcoc" title="Drupal code of conduct">Code of conduct</a></li>
+</ul><h4 class="element-invisible">Documentation</h4><ul class="get-started"><li class="0 first"><a href="https://www.drupal.org/documentation" title="Documentation for working with Drupal">Documentation</a></li>
+<li class="1"><a href="https://www.drupal.org/docs">Drupal Guide</a></li>
+<li class="2"><a href="https://www.drupal.org/docs/user_guide/en/index.html">Drupal User Guide</a></li>
+<li class="3"><a href="https://www.drupal.org/documentation/develop">Developer docs</a></li>
+<li class="4 last"><a href="https://api.drupal.org/" title="Drupal API reference">API.Drupal.org</a></li>
+</ul><h4 class="element-invisible">Drupal code base</h4><ul class="download-extend"><li class="0 first"><a href="https://www.drupal.org/download">Download &amp; Extend</a></li>
+<li class="1"><a href="https://www.drupal.org/project/drupal" title="Download the latest version of the Drupal software">Drupal core</a></li>
+<li class="2"><a href="https://www.drupal.org/project/project_module" title="Download add-on features and functionality">Modules</a></li>
+<li class="3"><a href="https://www.drupal.org/project/project_theme" title="Download pre-designed styles for Drupal">Themes</a></li>
+<li class="4 last"><a href="https://www.drupal.org/project/project_distribution" title="Download a pre-packaged Drupal site">Distributions</a></li>
+</ul><h4 class="element-invisible">Governance of community</h4><ul class="about"><li class="0 first"><a href="https://www.drupal.org/about">About</a></li>
+<li class="1"><a href="https://www.drupal.org/about/features/accessibility" title="Our committment to accessibility">Web accessibility</a></li>
+<li class="2"><a href="https://www.drupal.org/association" title="About the Drupal Association">Drupal Association</a></li>
+<li class="3"><a href="https://www.drupal.org/drupalorg" title="About Drupal.org">About Drupal.org</a></li>
+<li class="4"><a href="https://www.drupal.org/terms" title="Drupal.org terms of service">Terms of service</a></li>
+<li class="5 last"><a href="https://www.drupal.org/privacy" title="Drupal.org privacy policy">Privacy policy</a></li>
+</ul>  </div>
+  </div>
+</div>
+<div id="block-block-77" class="block block-block">
+<div class="block-inner">
+    
+  <div class="content">
+    <p>Drupal is a <a href="/about/trademark">registered trademark</a> of <a href="https://dri.es">Dries Buytaert</a>.</p>
+  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    <div class="region region-page-bottom">
+    <script type="text/javascript">
+      (function(){
+          window._pxAppId = 'PXVnPBBfwe';
+          window._pxParam2 = '';
+          window._pxParam3 = '0';
+          var p = document.getElementsByTagName('script')[0],
+              s = document.createElement('script');
+          s.async = 1;
+          s.src = '/VnPBBfwe/init.js';
+          p.parentNode.insertBefore(s,p);
+      }());
+  </script>
+  <noscript>
+      <div style="position:fixed; top:0; left:0; display:none" width="1" height="1">
+          <img src="/VnPBBfwe/xhr/api/v1/collector/noScript.gif?appId=PXVnPBBfwe">
+      </div>
+  </noscript>  </div>
+<script type="text/javascript" src="/files/advagg_js/js__B0FBwiP97ZnD38IFraZus4upS4KVkMXI3ou0fJ2ZXGA__pPDESRJz9GHsxqQIwQ_V8xnFYEH5jipG2eicsfrdWCs__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+
+<!--[if lte IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie9-" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if gt IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie10+" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if !IE]><!-->
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="/files/advagg_js/js__pqoYaVR8NVhof-vNXe50j2TKhFv__IihVag_h4G6kus__B4mbn4wICLQjWm1m3-z1kw8F1FtP0cDAHKp00Xy_-88__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__H5AFmq1RrXKsrazzPq_xPQPy4K0wUKqecPjczzRiTgQ__wor4r9P8YTtQ7p6fbywTetZ47Z_orumIfrrhgxrpLus__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="
+function advagg_mod_1() {
+  // Count how many times this function is called.
+  advagg_mod_1.count = ++advagg_mod_1.count || 1;
+  try {
+    if (advagg_mod_1.count <= 40) {
+      init_drupal_core_settings();
+
+      // Set this to 100 so that this function only runs once.
+      advagg_mod_1.count = 100;
+    }
+  }
+  catch(e) {
+    if (advagg_mod_1.count >= 40) {
+      // Throw the exception if this still fails after running 40 times.
+      throw e;
+    }
+    else {
+      // Try again in 1 ms.
+      window.setTimeout(advagg_mod_1, 1);
+    }
+  }
+}
+function advagg_mod_1_check() {
+  if (window.init_drupal_core_settings && window.jQuery && window.Drupal) {
+    advagg_mod_1();
+  }
+  else {
+    window.setTimeout(advagg_mod_1_check, 1);
+  }
+}
+advagg_mod_1_check();"></script>
+<script type="text/javascript" src="/files/advagg_js/js__Oc0wwB7MVRfxtYw6EQM7d9sXj9PAQePoWSzQJ0uTk6c__iXqOGoaPhZHCPEspUr5BC8BwOx5P8B11xv7VOhoUii8__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__FabcJ6qluktliDejymsuV-FqaN_HyMKGe93c2rO9Ky0__el1ZLGkKneOoCS6OWa01WHuIEsTsXZ46MRLCF390Fbw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__YT6D1B_BKxvm6JCH_t9sZNI5L6yITa_DlU5QcSlOkAU__OXobH7d1IP1o3WABlniIrU_-pcJacVSIPUv9bpD-6pQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__06Uejkt2sN1AJAk3QcRQG9yrq-jCjZth0s-OymGOkVE__yFxl4u_7_1AhyVnMLZRtp5wEvh9C2VdA6gnewdM1hB0__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__pLKQd4r7OrHglE7Qkqw53K2UXCqQdhqQ9v0cz7hMCQY__OErfYuQdGbFHcCoLoUW_ESSvaumApNojzjJit8-2xcw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__hHUWFbMAa11eJtx5V0ym9o0YBsB1udk34qUT5wr1ihI__vSxsxbzmzuz4XPh--CL1BBciQpEQ_m8FfdQINCOAg14__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function init_drupal_core_settings() {jQuery.extend(Drupal.settings,{"basePath":"\/","pathPrefix":"","setHasJsCookie":0,"ajaxPageState":{"theme":"bluecheese","theme_token":"1jCc2YLHpQ_LulgJG3bgGEHQCbG2u-z6PuXlxzzakWY"},"drupalorgGitlab":{"gitlab_base_url":"https:\/\/git.drupalcode.org","base_url":"https:\/\/www.drupal.org"},"better_exposed_filters":{"views":{"documentation_help":{"displays":{"improve_pane":{"filters":[]}}},"documentation_related_content":{"displays":{"related_content_pane":{"filters":[]}}}}},"urlIsAjaxTrusted":{"\/docs\/develop\/standards\/sql\/sql-coding-conventions":true},"drupalorgCrosssiteConsentNeeded":true,"ogContext":{"groupType":"node","gid":"3311604"}}); 
+if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(false);}} if(window.jQuery && window.Drupal){init_drupal_core_settings();}
+//--><!]]>
+</script>
+<script type="text/javascript" src="/files/advagg_js/js__2k0CJ3KAQNFTFab3y6ZvNtxs3HLons0Brq7VwvPSkKo__sQv8imhcZRev08LnyQ7OzwuHrZ3Jdwo5NmznAARX0ig__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__vj0LjvNwl-3K1P9LGT4BGuXCZcAovYsVlVmoJN3TMRg__KW8SiGceRY3sjIKVrffDjf2MK4A5Vp3EDDxVO-4pegI__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+</body>
+</html>

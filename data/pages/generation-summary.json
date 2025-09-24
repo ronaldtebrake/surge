@@ -1,0 +1,205 @@
+{
+  "generatedAt": "2025-09-24T09:00:00.792Z",
+  "totalPages": 34,
+  "generatedPages": 33,
+  "pages": [
+    {
+      "topic": "Php",
+      "filename": "php-quickref.md",
+      "section": "PHP",
+      "url": "https://www.drupal.org/docs/develop/standards/php"
+    },
+    {
+      "topic": "Php Coding Standards",
+      "filename": "php-coding-standards-quickref.md",
+      "section": "PHP",
+      "url": "https://www.drupal.org/docs/develop/standards/php/php-coding-standards"
+    },
+    {
+      "topic": "Api Documentation And Comment Standards",
+      "filename": "api-documentation-and-comment-standards-quickref.md",
+      "section": "PHP",
+      "url": "https://www.drupal.org/docs/develop/standards/php/api-documentation-and-comment-standards"
+    },
+    {
+      "topic": "Api Documentation Examples",
+      "filename": "api-documentation-examples-quickref.md",
+      "section": "PHP",
+      "url": "https://www.drupal.org/docs/develop/standards/php/api-documentation-examples"
+    },
+    {
+      "topic": "Namespaces",
+      "filename": "namespaces-quickref.md",
+      "section": "PHP",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/namespaces"
+    },
+    {
+      "topic": "Naming Standards For Services And Extending Symfony",
+      "filename": "naming-standards-for-services-and-extending-symfony-quickref.md",
+      "section": "PHP",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/naming-standards-for-services-and-extending-symfony"
+    },
+    {
+      "topic": "Php Exceptions",
+      "filename": "php-exceptions-quickref.md",
+      "section": "PHP",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/php-exceptions"
+    },
+    {
+      "topic": "Psr 4 Namespaces And Autoloading In Drupal 8",
+      "filename": "psr-4-namespaces-and-autoloading-in-drupal-8-quickref.md",
+      "section": "PHP",
+      "url": "https://www.drupal.org/docs/develop/standards/php/psr-4-namespaces-and-autoloading-in-drupal-8"
+    },
+    {
+      "topic": "Temporary Placeholders And Delimiters",
+      "filename": "temporary-placeholders-and-delimiters-quickref.md",
+      "section": "PHP",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/temporary-placeholders-and-delimiters"
+    },
+    {
+      "topic": "Accessibility Coding Standards",
+      "filename": "accessibility-coding-standards-quickref.md",
+      "section": "Accessibility Coding Standards",
+      "url": "https://www.drupal.org/docs/develop/standards/accessibility-coding-standards"
+    },
+    {
+      "topic": "Css",
+      "filename": "css-quickref.md",
+      "section": "CSS",
+      "url": "https://www.drupal.org/docs/develop/standards/css"
+    },
+    {
+      "topic": "Css Coding Standards",
+      "filename": "css-coding-standards-quickref.md",
+      "section": "CSS",
+      "url": "https://www.drupal.org/docs/develop/standards/css/css-coding-standards"
+    },
+    {
+      "topic": "Css Formatting Guidelines",
+      "filename": "css-formatting-guidelines-quickref.md",
+      "section": "CSS",
+      "url": "https://www.drupal.org/docs/develop/standards/css/css-formatting-guidelines"
+    },
+    {
+      "topic": "Csscomb Settings For Drupal Css Formatting And Sort Tool",
+      "filename": "csscomb-settings-for-drupal-css-formatting-and-sort-tool-quickref.md",
+      "section": "CSS",
+      "url": "https://www.drupal.org/docs/develop/standards/css/csscomb-settings-for-drupal-css-formatting-and-sort-tool"
+    },
+    {
+      "topic": "Css Architecture For Drupal 9",
+      "filename": "css-architecture-for-drupal-9-quickref.md",
+      "section": "CSS",
+      "url": "https://www.drupal.org/docs/develop/standards/css/css-architecture-for-drupal-9"
+    },
+    {
+      "topic": "Css File Organization",
+      "filename": "css-file-organization-quickref.md",
+      "section": "CSS",
+      "url": "https://www.drupal.org/docs/develop/standards/css/css-file-organization"
+    },
+    {
+      "topic": "What To Look For When Reviewing Css",
+      "filename": "what-to-look-for-when-reviewing-css-quickref.md",
+      "section": "CSS",
+      "url": "https://www.drupal.org/docs/develop/standards/css/what-to-look-for-when-reviewing-css"
+    },
+    {
+      "topic": "Javascript Coding Standards",
+      "filename": "javascript-coding-standards-quickref.md",
+      "section": "JavaScript coding standards",
+      "url": "https://www.drupal.org/docs/develop/standards/javascript-coding-standards"
+    },
+    {
+      "topic": "Javascript Coding Standards",
+      "filename": "javascript-coding-standards-quickref.md",
+      "section": "JavaScript coding standards",
+      "url": "https://www.drupal.org/docs/develop/standards/javascript-coding-standards/javascript-coding-standards"
+    },
+    {
+      "topic": "Javascript Best Practices",
+      "filename": "javascript-best-practices-quickref.md",
+      "section": "JavaScript coding standards",
+      "url": "https://www.drupal.org/docs/develop/standards/javascript/javascript-best-practices"
+    },
+    {
+      "topic": "Setting Up The Linter Fixer Tool",
+      "filename": "setting-up-the-linter-fixer-tool-quickref.md",
+      "section": "JavaScript coding standards",
+      "url": "https://www.drupal.org/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool"
+    },
+    {
+      "topic": "Javascript Api Documentation And Comment Standards",
+      "filename": "javascript-api-documentation-and-comment-standards-quickref.md",
+      "section": "JavaScript coding standards",
+      "url": "https://www.drupal.org/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards"
+    },
+    {
+      "topic": "Jquery Coding Standards",
+      "filename": "jquery-coding-standards-quickref.md",
+      "section": "JavaScript coding standards",
+      "url": "https://www.drupal.org/docs/develop/standards/javascript/jquery-coding-standards"
+    },
+    {
+      "topic": "Markdown Coding Standards",
+      "filename": "markdown-coding-standards-quickref.md",
+      "section": "Markdown",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/markdown-coding-standards"
+    },
+    {
+      "topic": "Sql",
+      "filename": "sql-quickref.md",
+      "section": "SQL",
+      "url": "https://www.drupal.org/docs/develop/standards/sql"
+    },
+    {
+      "topic": "Sql Coding Conventions",
+      "filename": "sql-coding-conventions-quickref.md",
+      "section": "SQL",
+      "url": "https://www.drupal.org/docs/develop/standards/sql/sql-coding-conventions"
+    },
+    {
+      "topic": "List Of Sql Reserved Words",
+      "filename": "list-of-sql-reserved-words-quickref.md",
+      "section": "SQL",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/list-of-sql-reserved-words"
+    },
+    {
+      "topic": "Avoid Select From",
+      "filename": "avoid-select-from-quickref.md",
+      "section": "SQL",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/avoid-select-from"
+    },
+    {
+      "topic": "Twig Coding Standards",
+      "filename": "twig-coding-standards-quickref.md",
+      "section": "Twig coding standards",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/twig-coding-standards"
+    },
+    {
+      "topic": "Drupal Markup Style Guide",
+      "filename": "drupal-markup-style-guide-quickref.md",
+      "section": "Drupal Markup Style Guide",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/drupal-markup-style-guide"
+    },
+    {
+      "topic": "Spelling",
+      "filename": "spelling-quickref.md",
+      "section": "Spelling",
+      "url": "https://www.drupal.org/docs/develop/standards/spelling"
+    },
+    {
+      "topic": "Configuration File Coding Standards",
+      "filename": "configuration-file-coding-standards-quickref.md",
+      "section": "YAML Configuration files",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/configuration-file-coding-standards"
+    },
+    {
+      "topic": "Composer Package Naming Conventions",
+      "filename": "composer-package-naming-conventions-quickref.md",
+      "section": "Composer package naming conventions",
+      "url": "https://www.drupal.org/docs/develop/coding-standards/composer-package-naming-conventions"
+    }
+  ]
+}

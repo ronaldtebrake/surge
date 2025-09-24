@@ -6,6 +6,7 @@
     <title>Surge Coding Standards - Drupal Documentation</title>
     <meta name="description" content="Automated Drupal coding standards documentation with AI-powered Agents.md generation">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-light.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -131,6 +132,30 @@
             color: #2c3e50;
         }
         
+        .markdown-body h2:first-of-type {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+            margin-top: 0;
+        }
+        
+        .markdown-body h2:first-of-type + ul {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+        
+        .markdown-body h2:first-of-type + ul li {
+            margin-bottom: 8px;
+        }
+        
+        .markdown-body h2:first-of-type + ul li a {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
         .surge-info {
             padding: 40px;
             border-bottom: 1px solid #e1e8ed;
@@ -226,6 +251,19 @@
         <div class="header">
             <h1>Surge Coding Standards</h1>
             <p>Drupal Documentation • AI-Powered Generation</p>
+            <button id="refresh-btn" onclick="loadAgentsContent()" style="
+                background: #3498db;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+                margin-top: 15px;
+                transition: background 0.2s ease;
+            " onmouseover="this.style.background='#2980b9'" onmouseout="this.style.background='#3498db'">
+                🔄 Refresh Documentation
+            </button>
         </div>
         
         <div class="content">
@@ -266,51 +304,60 @@
 
     <script>
         // Load Agents.md content dynamically
-        // In a real implementation, this would fetch the actual Agents.md content
-        setTimeout(() => {
-            document.querySelector('.loading').style.display = 'none';
-            document.getElementById('agents-content').innerHTML = `
-                <div class="markdown-body">
-                    <h1>Drupal Coding Standards - Agents Reference</h1>
-                    <p>This document is automatically generated from the official Drupal documentation.</p>
-                    
-                    <h2>Current Status</h2>
-                    <p>The Agents.md file is currently being generated. Please check back later for the complete documentation.</p>
-                    
-                    <h2>Quick Links</h2>
-                    <ul>
-                        <li><a href="https://www.drupal.org/docs/develop/standards/php">PHP Coding Standards</a></li>
-                        <li><a href="https://www.drupal.org/docs/develop/standards/css">CSS Coding Standards</a></li>
-                        <li><a href="https://www.drupal.org/docs/develop/standards/javascript">JavaScript Coding Standards</a></li>
-                    </ul>
-                </div>
-            `;
-            document.getElementById('agents-content').style.display = 'block';
-        }, 2000);
         
         // Function to load actual Agents.md content
         async function loadAgentsContent() {
+            // Show loading state
+            document.querySelector('.loading').style.display = 'block';
+            document.getElementById('agents-content').style.display = 'none';
+            
             try {
-                // In a real implementation, this would fetch from the docs/Agents.md file
                 const response = await fetch('./docs/Agents.md');
                 if (response.ok) {
                     const content = await response.text();
-                    // Convert markdown to HTML (you'd use a markdown parser in production)
+                    // Convert markdown to HTML using marked.js
+                    const htmlContent = marked.parse(content);
                     document.getElementById('agents-content').innerHTML = `
                         <div class="markdown-body">
-                            ${content.replace(/\n/g, '<br>')}
+                            ${htmlContent}
                         </div>
                     `;
                     document.querySelector('.loading').style.display = 'none';
                     document.getElementById('agents-content').style.display = 'block';
+                    return true;
                 }
             } catch (error) {
                 console.log('Agents.md not available yet, showing placeholder');
+                return false;
             }
         }
         
         // Try to load real content first, fallback to placeholder
-        loadAgentsContent();
+        loadAgentsContent().then(success => {
+            if (!success) {
+                // Show placeholder if Agents.md is not available
+                setTimeout(() => {
+                    document.querySelector('.loading').style.display = 'none';
+                    document.getElementById('agents-content').innerHTML = `
+                        <div class="markdown-body">
+                            <h1>Drupal Coding Standards - Agents Reference</h1>
+                            <p>This document is automatically generated from the official Drupal documentation.</p>
+                            
+                            <h2>Current Status</h2>
+                            <p>The Agents.md file is currently being generated. Please check back later for the complete documentation.</p>
+                            
+                            <h2>Quick Links</h2>
+                            <ul>
+                                <li><a href="https://www.drupal.org/docs/develop/standards/php">PHP Coding Standards</a></li>
+                                <li><a href="https://www.drupal.org/docs/develop/standards/css">CSS Coding Standards</a></li>
+                                <li><a href="https://www.drupal.org/docs/develop/standards/javascript">JavaScript Coding Standards</a></li>
+                            </ul>
+                        </div>
+                    `;
+                    document.getElementById('agents-content').style.display = 'block';
+                }, 2000);
+            }
+        });
     </script>
 </body>
 </html>

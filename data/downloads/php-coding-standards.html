@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:fb="http://ogp.me/ns/fb#"
+  xmlns:og="http://ogp.me/ns#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="MobileOptimized" content="width" />
+  <!--[if IE]><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="The Drupal Coding Standards apply to code within Drupal and its contributed modules." />
+<meta name="generator" content="Drupal 7 (https://www.drupal.org)" />
+<link rel="image_src" href="https://www.drupal.org/sites/all/themes/bluecheese/images/drupal_meta_image.png" />
+<link rel="canonical" href="https://www.drupal.org/docs/develop/standards/php/php-coding-standards" />
+<link rel="shortlink" href="https://www.drupal.org/node/318" />
+<meta property="og:site_name" content="Drupal.org" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.drupal.org/docs/develop/standards/php/php-coding-standards" />
+<meta property="og:title" content="PHP coding standards" />
+<meta property="og:description" content="Changes to Drupal coding standards are proposed and discussed in issues in the Coding Standards project. This document is loosely based on the PEAR Coding standards." />
+<meta property="og:updated_time" content="2025-08-16T21:46:49+00:00" />
+<meta property="article:published_time" content="2002-07-28T20:40:36+00:00" />
+<meta property="article:modified_time" content="2025-08-16T21:46:49+00:00" />
+  <title>PHP coding standards | PHP | Drupal Wiki guide on Drupal.org</title>
+  <link type="text/css" rel="stylesheet" href="/files/advagg_css/css__IGnvPR1nQd12eUWIitgZ6GDDyWxn9W82zUE-pgSt6Y8__Gh7RLUb1X-_kkfJcUW2xrjQQJCrbwuGgKr5Ix51cJYc__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Xi-PZpvKTY78w7l1WNsqwUA52MIupHJebCMiX34Ugt0__D_EUHDAfEQdxcLiSDY7hREUWkG1Ge56_h2z3Er8V188__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__WF0PRotZAhCcl0aJjY5W2LYj8UwiYuB2dZEFluOh3Tc__FviX13FUB-Ppa2XB29BUIJQZ1Wg-F5XiDE7XD5y7mjQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Fx0_w1L9q3nwzXnALG7UfjLF34FGYgJTz636-GWbM6k__0jWLTEHP3h5U5RcXuZcFhf0DdvRdzP3_wzCVNT015Ls__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__71G6gao0TOuJxFfw9efqGV9HafmPRGSqQoYV4yqGUWc__cjdS_7q2MvneE1k5vHyBqxDqcSSGdHyUNCXu57rH2hM__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+  </head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-318 node-type-documentation drupalorg-site-main panels-layout og-context og-context-node og-context-node-3326697" >
+  <div id="skip-link" tabindex="-1">
+    <a class="element-invisible element-focusable" href="#content">Skip to main content</a>
+    <a class="element-invisible element-focusable skip-link-search" href="#search-block-form">Skip to search</a>
+  </div>
+    <div class="region region-page-top">
+    <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W36H8DW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div id="drupalorg-crosssite-gdpr">Can we use first and third party cookies and web beacons to <a href="https://www.drupal.org/terms">understand our audience, and to tailor promotions you see</a>?<br><button class="yes">Yes, please</button><button class="no">No, do not track me</button></div>  </div>
+      <div id="nav-header">
+          <div class="menu-nav">
+        <a class="nav-btn" id="nav-open-btn" href="#block-system-main-menu"><img src="/sites/all/themes/bluecheese/images/icon-w-menu.svg" alt="Main menu"></a>
+      </div>
+        <nav id="navigation-inner" class="container-12" role="navigation">
+        <div class="region region-navigation">
+    <div id="block-system-main-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/home" title="Drupal.org home page">Drupal.org home</a></li>
+<li class="expanded"><a href="https://www.drupal.org/about/overview/technical" title="">Discover Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/about/overview/technical" title="The open source framework behind millions of websites.">Drupal Core</a></li>
+<li class="leaf"><a href="https://new.drupal.org/drupal-cms" title="Drupal CMS puts the power of Drupal into the hands of marketers, designers and content creators.">Drupal CMS</a></li>
+<li class="leaf"><a href="https://new.drupal.org/ai" title="Open limitless possibilities with Drupal AI">Drupal AI</a></li>
+<li class="leaf"><a href="https://www.drupal.org/case-studies" title="Powerful stories that show Drupal solutions in the real world.">Case Studies</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/government" title="Drupal is the open-source CMS that enables digital transformation of government and increases citizen engagement.">Drupal for Government</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/education" title="See why 70% of the world&#039;s leading universities chose Drupal.">Drupal for Higher Education</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/nonprofit" title="See why Drupal is the open-source CMS choice for some of the world’s most influential nonprofits.">Drupal for Nonprofit</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/ecommerce" title="Natively integrate content and commerce.">Drupal for eCommerce</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/fintech" title="Secure and trustworth FinTech infrastructure.">Drupal for FinTech</a></li>
+<li class="leaf"><a href="https://www.drupal.org/industries/healthcare" title="Drupal powers systems that are secure, patient-centric and engaging.">Drupal for Healthcare</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/industries/media-and-publishing" title="Create engaging multi-channel experiences to connect with your audiences - everywhere.">Drupal for Media &amp; Publishing</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Build with Drupal</a><div class="menu-block"><ul class="menu button"><li class="first collapsed"><a href="/download" title=" Download Drupal and the extensions you need">Download Drupal</a></li>
+<li class="leaf"><a href="/documentation" title="Full knowledge base including Drupal 7 resources">Documentation</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/getting-started" title="All documentation">Getting started</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="">Local Development Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/developers" title="">Developer Resources</a></li>
+<li class="leaf"><a href="https://new.drupal.org/docs/drupal-cms" title="Drupal CMS User Guide">Drupal CMS User Guide</a></li>
+<li class="leaf"><a href="https://www.drupal.org/docs/user_guide/en/index.html" title="Drupal User Guide">Drupal User Guide</a></li>
+<li class="leaf"><a href="https://api.drupal.org/api/drupal/11.x" title="Drupal API">API</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/modules" title="Drupal Modules">Modules</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/themes" title="Drupal themes">Themes</a></li>
+<li class="leaf"><a href="https://www.drupal.org/project/project_distribution" title="Drupal distributions">Distributions</a></li>
+<li class="leaf"><a href="/project/issues" title="Report issues and contribute improvements">Issue queues</a></li>
+<li class="last leaf"><a href="/security" title="Stay on top of the latest security alerts and updates">Security Advisories</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/drupal-services" title="">Partners &amp; Services</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/drupal-services" title="Connect with the best Drupal agencies around the world.">Find a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://new.drupal.org/association/become-a-drupal-certified-partner" title="Join an elite network of agencies committed to Drupal excellence and innovation.
+">Become a Drupal Certified Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/hosting" title="Find a hosting provider for your Drupal project.">Find a Hosting Provider</a></li>
+<li class="leaf"><a href="https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/enterprise" title="Get help with your migration to the latest version of Drupal.">Find a Migration Partner</a></li>
+<li class="leaf"><a href="https://www.drupal.org/training" title="Upskill your Drupal team.">Find Training</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/steward" title="Ensure your website is protected with Drupal Steward.">Drupal Steward</a></li>
+</ul></div></li>
+<li class="expanded"><a href="https://www.drupal.org/community" title="">Community</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://www.drupal.org/community" title="Come for the code, stay for the community.">About the Community</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/contributor-guide" title="Get involved in growing and evolving Drupal.">How to Contribute</a></li>
+<li class="leaf"><a href="https://events.drupal.org/" title="DrupalCon unites experts from around the globe who create ambitious digital experiences. Network, learn, and be inspired.">DrupalCon</a></li>
+<li class="leaf"><a href="https://www.drupal.org/community/events" title="Discover local events, community meet-ups, and training.">Events</a></li>
+<li class="leaf"><a href="https://jobs.drupal.org/home" title="Find opportunities to work in Drupal.">Jobs / Careers</a></li>
+<li class="leaf"><a href="https://www.drupal.org/blog" title="News and stories about Drupal.">News &amp; Blogs</a></li>
+<li class="leaf"><a href="https://www.drupal.org/forum" title="Got a question about Drupal? Find answers on the Drupal forums.">Forum</a></li>
+<li class="leaf"><a href="/community/contributor-guide/reference-information/talk/tools/slack" title="Get support and comminicate with the global Drupal community.">Slack</a></li>
+<li class="leaf"><a href="https://www.drupal.org/subscribe" title="Sign up for Drupal news and manage your subscriptions.">Newsletters</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag" title="Get your Drupal branded merch!">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="expanded"><a href="/association" title="Support the Drupal Association - the non-profit that supports the Drupal project">Support Drupal</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="/association" title="Meet the non-profit accelerating Drupal innovation ">The Drupal Association</a></li>
+<li class="leaf"><a href="/association/donate" title="Donate to the non-profit that supports Drupal">Donate</a></li>
+<li class="leaf"><a href="/association/become-a-drupal-certified-partner" title="Join the network of official Drupal Certified Partners">Become a Partner</a></li>
+<li class="leaf"><a href="/association/RippleMakers" title="Become an individual member of the Drupal Association">Become a Ripple Maker</a></li>
+<li class="leaf"><a href="/association/organization-membership" title="Join and show your organization&#039;s support for Drupal">Become an Organization Member</a></li>
+<li class="last leaf"><a href="https://www.drupal.org/swag?utm_source=drupalorg&amp;utm_medium=banner&amp;utm_campaign=drupal_swag_shop_2020_09_17" title="Get your Drupal-branded bucket hats, hoodies, and more">Drupal Swag Shop</a></li>
+</ul></div></li>
+<li class="last expanded"><a href="/try-hosting" title="Try Drupal">Get Started</a><div class="menu-block"><ul class="menu button"><li class="first leaf"><a href="https://new.drupal.org/drupal-cms/trial" title="">Try Drupal CMS</a></li>
+<li class="last leaf"><a href="/try-hosting" title="">Try Hosting</a></li>
+</ul></div></li>
+</ul></div><a class="close-btn" href="#top">Return to content</a>  </div>
+  </div>
+</div>
+<div id="block-search-form" class="block block-search">
+<div class="block-inner">
+    
+  <div class="content">
+    <form action="/docs/develop/standards/php/php-coding-standards" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input placeholder="Search…" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input alt="Search" type="image" id="edit-submit" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-hrVPkuAxMhDzqudU0cGsFmdGoUKz3LrK8oZcp_jdYII" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>  </div>
+  </div>
+</div>
+<div id="block-system-user-menu" class="block block-system block-menu">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="menu-block"><ul class="menu"><li class="button default"><a href="#block-system-user-menu"><img src="https://www.drupal.org/sites/all/themes/bluecheese/images/icon-w-user.svg" alt="Log in, view profile, and more"></a><ul><li class="first leaf"><a href="/user/login?destination=node/318" title="">Log in</a></li>
+<li class="last leaf"><a href="/user/register?destination=node/318" title="">Create account</a></li>
+</ul></li></ul></div>  </div>
+  </div>
+</div>
+  </div>
+    </nav>
+  </div>
+
+    <div id="header" class="clearfix">
+    <div id="header-inner" class="container-12 clearfix">
+      <div id="header-left">
+        <div id="site-name"><a href="/documentation">Documentation</a></div>
+              </div>
+      <div id="header-right">
+          <div class="region region-header">
+    <div id="block-drupalorg-search-documentation" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <form class="container-inline" action="/docs/develop/standards/php/php-coding-standards" method="post" id="drupalorg-documentation-search-form" accept-charset="UTF-8"><div><input type="hidden" name="form_build_id" value="form-IHbCJdsMuiL86ZQ3FoxeEKDDK88iIx6WEZPAYb51_0A" />
+<input type="hidden" name="form_id" value="drupalorg_documentation_search_form" />
+<div class="form-item form-type-textfield form-item-drupalorg-documentation-search-form">
+  <label class="element-invisible" for="edit-drupalorg-documentation-search-form--2">Search </label>
+ <input placeholder="Search documentation…" type="text" id="edit-drupalorg-documentation-search-form--2" name="drupalorg_documentation_search_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions--2"><input alt="Search" type="image" id="edit-submit--2" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div></div></form>  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    </div>
+  </div>
+  
+      <div id="banner" data-nosnippet>
+        <div class="region region-banner">
+    <div id="block-drupalorg-announcements" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    <div class="announcement"><img class="photo" src="https://www.drupal.org/files/styles/grid-2-2x-square/public/announcements/da-icon.png?itok=wwiCve4D" width="280" height="280" alt="Announcement icon" title="Announcement icon" />Last chance! The 2025 Drupal Business Survey closes tomorrow. Your response will help shape the future of the Drupal business ecosystem.</div>
+<div class="cta"><a href="https://forms.gle/kue9WCroke5VnW5e9" class="global-announce-banner dc-singapore-registration">Take the survey today</a></div>  </div>
+  </div>
+</div>
+  </div>
+    </div>
+  
+  <div id="page" class="clearfix">
+    <div class="breadbox"><nav class="breadcrumb container-12"><span><a href="/docs/develop">Develop</a></span><span><a href="/docs/develop/standards">Coding standards</a></span><span><a href="/docs/develop/standards/php">PHP</a></span></nav></div>
+
+    <div id="main" role="main">
+      
+      <div id="content" class="clearfix">
+                                <div id="content-inner" class="clearfix">
+
+          
+            <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+<div class="block-inner">
+    
+  <div class="content">
+    
+<div class="panelizer-view-mode node node-full node-documentation node-318">
+        
+<div class="panel-display hydra panel-layout clearfix " >
+
+  <div class="container preface clearfix panel-panel">
+    <div class="container-inner preface-inner panel-panel-inner">
+          </div>
+  </div>
+
+  <div class="container content clearfix">
+    <div class="container-inner content-inner panel-panel-inner">
+      <div class="column-content-region top-right-content column panel-panel">
+        <div class="column-content-region-inner top-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-block pane-drupalorg-carbon-ad-sidebar"  >
+  
+      
+  
+  <div class="pane-content">
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYIEKJI&placement=drupalorg" id="_carbonads_js"></script><div class="ad-explanation description">Advertising sustains the DA. Ads are hidden for members. <a href="/association/individual-membership">Join today</a></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-table-of-contents-toc-w-3y7froeoqmgrpcmgnphqwt4pi3"  id="on-this-page" >
+  
+        <h3 class="pane-title">
+      On this page    </h3>
+    
+  
+  <div class="pane-content">
+    <div class="item-list"><ul class="anchor-list"><li class="anchor-list__item h2-tag first"><a href="/docs/develop/standards/php/php-coding-standards#array" class="toc-link active">Arrays</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#cast" class="toc-link active">Casting</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#chaining" class="toc-link active">Chaining</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#constructor-calls" class="toc-link active">Class Constructor Calls</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#comment" class="toc-link active">Comments</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#controlstruct" class="toc-link active">Control Structures</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-alternate-control-statement-syntax-for-templates" class="toc-link toc-link-invalid-id active">Alternate control statement syntax for templates</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#declaring" class="toc-link active">Declaring Classes</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#example-url" class="toc-link active">Example URLs</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#function-call" class="toc-link active">Function Calls</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#functdecl" class="toc-link active">Function Declarations</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#includes" class="toc-link active">Including Code</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#indent" class="toc-link active">Indenting and Whitespace</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#instantiation" class="toc-link active">Instantiation</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#line-length" class="toc-link active">Line length and wrapping</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#naming" class="toc-link active">Naming Conventions</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-functions-and-variables" class="toc-link toc-link-invalid-id active">Functions and variables</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-persistent-variables" class="toc-link toc-link-invalid-id active">Persistent Variables</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-constants" class="toc-link toc-link-invalid-id active">Constants</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-global-variables" class="toc-link toc-link-invalid-id active">Global Variables</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-classes-methods-and-properties" class="toc-link toc-link-invalid-id active">Classes, Methods and Properties</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-enums" class="toc-link toc-link-invalid-id active">Enums</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-file-names" class="toc-link toc-link-invalid-id active">File names</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#operators" class="toc-link active">Operators</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#type-hint" class="toc-link active">Parameter and return type hinting</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-new-functions-and-methods" class="toc-link toc-link-invalid-id active">New functions and methods</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-existing-functions-and-methods" class="toc-link toc-link-invalid-id active">Existing functions and methods</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-notes-about-specific-data-types" class="toc-link toc-link-invalid-id active">Notes about specific data types</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-mixed-datatypes" class="toc-link toc-link-invalid-id active">Mixed datatypes</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-nullable-types" class="toc-link toc-link-invalid-id active">Nullable types</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-objects" class="toc-link toc-link-invalid-id active">Objects</a></li>
+<li class="anchor-list__item h4-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-void" class="toc-link toc-link-invalid-id active">Void</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#php-tags" class="toc-link active">PHP Code Tags</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#quotes" class="toc-link active">Quotes</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#semicolon" class="toc-link active">Semicolons</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#strict-type" class="toc-link active">Strict type declaration</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#concat" class="toc-link active">String Concatenations</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#interfaces" class="toc-link active">Use of interfaces</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#visibility" class="toc-link active">Visibility</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-methods-and-functions" class="toc-link toc-link-invalid-id active">Methods and Functions</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-properties" class="toc-link toc-link-invalid-id active">Properties</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/php/php-coding-standards#s-abstract-final-and-static" class="toc-link toc-link-invalid-id active">abstract, final, and static</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/php/php-coding-standards#D7-autoloading" class="toc-link active">Drupal 7 class/interface autoloading</a></li>
+<li class="anchor-list__item h2-tag last"><a href="/docs/develop/standards/php/php-coding-standards#helpermod" class="toc-link active">Helper Modules</a></li>
+</ul></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-og-menu-og-single-menu-block"  id="php" >
+  
+        <h2 class="pane-title">
+      <a href="/docs/develop/standards/php">PHP</a>    </h2>
+    
+  
+  <div class="pane-content">
+    <ul class="menu"><li class="first leaf active-trail"><a href="/docs/develop/standards/php/php-coding-standards" class="active-trail active">PHP coding standards</a></li>
+<li class="leaf"><a href="/docs/develop/standards/php/api-documentation-and-comment-standards">API documentation and comment standards</a></li>
+<li class="leaf"><a href="/docs/develop/standards/php/api-documentation-examples">API Documentation Samples</a></li>
+<li class="leaf"><a href="/docs/develop/coding-standards/namespaces">Namespaces</a></li>
+<li class="leaf"><a href="/docs/develop/coding-standards/naming-standards-for-services-and-extending-symfony">Naming standards for services and extending Symfony</a></li>
+<li class="leaf"><a href="/docs/develop/coding-standards/php-exceptions">PHP Exceptions</a></li>
+<li class="leaf"><a href="/docs/develop/standards/php/psr-4-namespaces-and-autoloading-in-drupal-8">PSR-4 namespaces and autoloading in Drupal 8</a></li>
+<li class="leaf"><a href="/docs/develop/coding-standards/temporary-placeholders-and-delimiters">Temporary placeholders and delimiters</a></li>
+<li class="last leaf"><a href="/docs/develop/coding-standards/write-e_all-compliant-code">Write E_ALL compliant code</a></li>
+</ul>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-links"  >
+  
+      
+  
+  <div class="pane-content">
+      </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region left-content column panel-panel ">
+        <div class="column-content-region-inner left-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-node-title"  >
+  
+      
+  
+  <div class="pane-content">
+    <h1>PHP coding standards</h1>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-updated"  id="last-updated-on" >
+  
+        <span class="pane-title">
+      Last <a href="/node/318/discuss">updated</a> on    </span>
+    
+  
+  <div class="pane-content">
+    16 August 2025  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-entity-field pane-node-body"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><div class="note-warning">
+<p>Changes to Drupal coding standards are proposed and discussed in issues in the <a href="/project/coding_standards" rel="nofollow">Coding Standards project</a>.</p>
+</div>
+<p>This document is loosely based on the <a href="http://pear.php.net/manual/en/standards.php" rel="nofollow">PEAR Coding standards</a>.</p>
+<!--break--><h2 id="array"><a class="toc-anchor" title="Permalink to this headline" href="#array"></a>Arrays</h2>
+<p>Arrays should be formatted using short array syntax with a space separating each element (after the comma), and spaces around the =&gt; key association operator, if applicable:</p>
+<pre>
+<code class="language-php">$some_array = ['hello', 'world', 'foo' =&gt; 'bar'];
+</code></pre><p>Note that if the line declaring an array spans longer than 80 characters (often the case with form and menu declarations), each element should be broken into its own line, and indented one level:</p>
+<pre>
+<code class="language-php">$form['title'] = [
+  '#type' =&gt; 'textfield',
+  '#title' =&gt; t('Title'),
+  '#size' =&gt; 60,
+  '#maxlength' =&gt; 128,
+  '#description' =&gt; t('The title of your node.'),
+];
+</code></pre><p>Note that, as seen above, in multi-line arrays there MUST be a comma after the last array element. This helps prevent parsing errors if another element is placed at the end of the list later.</p>
+<h2 id="cast"><a class="toc-anchor" title="Permalink to this headline" href="#cast"></a>Casting</h2>
+<p>Put a space between the (type) and the $variable in a cast: <code class="language-php">(int) $mynumber</code>.</p>
+<ol>
+</ol>
+<h2 id="chaining"><a class="toc-anchor" title="Permalink to this headline" href="#chaining"></a>Chaining</h2>
+<p>PHP allows objects returned from functions and methods to be "chained", that is, a method on the returned object may be called immediately. This is known as a 'fluent interface.' Here is an example:</p>
+<pre>
+<code class="language-php">// Unchained version
+$result = db_query("SELECT title FROM {node} WHERE nid = :nid", [':nid' =&gt; 42]);
+$title = $result-&gt;fetchField();
+
+// Chained version
+$title = db_query("SELECT title FROM {node} WHERE nid = :nid", [':nid' =&gt; 42])-&gt;fetchField();
+</code></pre><p>As a general rule, a method should return $this, and thus be chainable, in any case where there is no other logical return value. Common examples are those methods that set some state or property on the object. It is better in those cases to return $this rather than TRUE/FALSE or NULL.</p>
+<p>In the case where you have a fluent interface for a class, and the code spans more than one line, the method calls should be indented with 2 spaces:</p>
+<pre>
+<code class="language-php">$query = db_select('node')
+  -&gt;condition('type', 'article')
+  -&gt;condition('status', 1)
+  -&gt;execute();</code></pre><h2 id="constructor-calls"><a class="toc-anchor" title="Permalink to this headline" href="#constructor-calls"></a>Class Constructor Calls</h2>
+<p>When calling class constructors with no arguments, always include parentheses:</p>
+<pre>
+<code class="language-php">$foo = new MyClassName();
+</code></pre><p>This is to maintain consistency with constructors that have arguments:</p>
+<pre>
+<code class="language-php">$foo = new MyClassName($arg1, $arg2);
+</code></pre><p>Note that if the class name is a variable, the variable will be evaluated first to get the class name, and then the constructor will be called. Use the same syntax:</p>
+<pre>
+<code class="language-php">$bar = 'MyClassName';
+$foo = new $bar();
+$foo = new $bar($arg1, $arg2);
+</code></pre><h2 id="comment"><a class="toc-anchor" title="Permalink to this headline" href="#comment"></a>Comments</h2>
+<p>Comment standards are discussed on the separate <a href="http://drupal.org/node/1354" rel="nofollow">Doxygen and comment formatting conventions page</a>.</p>
+<h2 id="controlstruct"><a class="toc-anchor" title="Permalink to this headline" href="#controlstruct"></a>Control Structures</h2>
+<p>Control structures include if, for, while, switch, etc. Here is a sample if statement, since it is the most complicated of them:</p>
+<pre>
+<code class="language-php">if (condition1 || condition2) {
+  action1;
+}
+elseif (condition3 &amp;&amp; condition4) {
+  action2;
+}
+else {
+  defaultaction;
+}
+</code></pre><p>(Note: Don't use "else if" -- always use elseif.)</p>
+<p>Control statements should have one space between the control keyword and opening parenthesis, to distinguish them from function calls.</p>
+<p>Always use curly braces even in situations where they are technically optional. Having them increases readability and decreases the likelihood of logic errors being introduced when new lines are added. The opening curly should be on the same line as the opening statement, preceded by one space. The closing curly should be on a line by itself and indented to the same level as the opening statement.</p>
+<p>For switch statements, always use a colon after the case condition. There must be no space between the condition and the colon. For example:</p>
+<pre>
+<code class="language-php">switch (condition) {
+  case 1:
+    action1;
+    break;
+
+  case 2:
+    action2;
+    break;
+
+  default:
+    defaultaction;
+}
+</code></pre><p>For do-while statements:</p>
+<pre>
+<code class="language-php">do {
+  actions;
+} while ($condition);
+  </code></pre><h3 id="s-alternate-control-statement-syntax-for-templates"><a class="toc-anchor" title="Permalink to this headline" href="#s-alternate-control-statement-syntax-for-templates"></a>Alternate control statement syntax for templates</h3>
+<p>In templates, the alternate control statement syntax using : instead of brackets is allowed. Note that there should not be a space between the closing parenthesis after the control keyword, and the colon, and HTML/PHP inside the control structure should be indented. For example:</p>
+<pre>
+<code class="language-php">&lt;?php if (!empty($item)): ?&gt;
+  &lt;p&gt;&lt;?php print $item; ?&gt;&lt;/p&gt;
+&lt;?php endif; ?&gt;
+
+&lt;?php foreach ($items as $item): ?&gt;
+  &lt;p&gt;&lt;?php print $item; ?&gt;&lt;/p&gt;
+&lt;?php endforeach; ?&gt;
+</code></pre><h2 id="declaring"><a class="toc-anchor" title="Permalink to this headline" href="#declaring"></a>Declaring Classes</h2>
+<p>Where to define and place your classes?</p>
+<p>Best practices include having one class or interface or trait per file. That file should be named for the class, such that the file name for <code class="language-php">FooInterface</code> would be <code class="language-php">FooInterface.php</code>.</p>
+<p>From Drupal 8, classes are autoloaded based on the <a href="http://www.php-fig.org/psr/psr-4/" rel="nofollow">PSR-4</a> namespacing convention.</p>
+<p>In core, the PSR-4 'tree' starts under <code class="language-php">core/lib/</code>.</p>
+<p>In modules, including contrib, custom and those in core, the PSR-4 'tree' starts under <code class="language-php">modulename/src</code>.</p>
+<p>Defining a class in your module's <code class="language-php">.module</code> file is only possible if the class does not have a superclass which might not be available when the <code class="language-php">.module</code> file is loaded. It's best practice to move such classes into a PSR-4 source directory.</p>
+<h2 id="example-url"><a class="toc-anchor" title="Permalink to this headline" href="#example-url"></a>Example URLs</h2>
+<p>Use "example.com" for all example URLs, per <a href="http://www.rfc-editor.org/rfc/rfc2606.txt" rel="nofollow">RFC 2606</a>.</p>
+<h2 id="function-call"><a class="toc-anchor" title="Permalink to this headline" href="#function-call"></a>Function Calls</h2>
+<p>Functions should be called with no spaces between the function name, the opening parenthesis, and the first parameter; spaces between commas and each parameter, and no space between the last parameter, the closing parenthesis, and the semicolon. Here's an example:</p>
+<pre>
+<code class="language-php">$var = foo($bar, $baz, $quux);
+</code></pre><h2 id="functdecl"><a class="toc-anchor" title="Permalink to this headline" href="#functdecl"></a>Function Declarations</h2>
+<pre>
+<code class="language-php">function funstuff_system(
+  string $foo,
+  string $bar,
+  int $baz,
+) {
+  // body
+}
+</code></pre><p>Argument lists may be split across multiple lines, where each subsequent line is indented once.</p>
+<p>When the argument list is split across multiple lines</p>
+<ul>
+<li>The first item in the list must be on the next line.</li>
+<li>There must be only one argument per line.</li>
+<li>The last argument in the list must use a trailing comma.</li>
+<li>The closing parenthesis and opening brace must be placed together on their own line with one space between them.</li>
+</ul>
+<p>Anonymous functions should have a space between "function" and its parameters, as in the following example:</p>
+<pre>
+<code class="language-php">array_map(function ($item) use ($id) {
+  return $item[$id];
+}, $items);</code></pre><h2 id="includes"><a class="toc-anchor" title="Permalink to this headline" href="#includes"></a>Including Code</h2>
+<p>Anywhere you are unconditionally including a class file, use <code class="language-php">require_once()</code>. Anywhere you are conditionally including a class file (for example, factory methods), use <code class="language-php">include_once()</code>. Either of these will ensure that class files are included only once. They share the same file list, so you don't need to worry about mixing them - a file included with <code class="language-php">require_once()</code> will not be included again by <code class="language-php">include_once()</code>.</p>
+<p><em>Note: <code class="language-php">include_once()</code> and <code class="language-php">require_once()</code> are statements, not functions. You don't need parentheses around the file name to be included.</em></p>
+<p>When including code from the same directory or a sub-directory, start the file path with ".":<br />
+<code class="language-php">include_once ./includes/mymodule_formatting.inc</code><br />
+In Drupal 7.x and later versions, use DRUPAL_ROOT:<br />
+<code class="language-php">require_once DRUPAL_ROOT . '/' . variable_get('cache_inc', 'includes/cache.inc');</code></p>
+<p>To include code in a module:</p>
+<pre>
+<code class="language-php">module_load_include('inc', 'node', 'node.admin');
+</code></pre><h2 id="indent"><a class="toc-anchor" title="Permalink to this headline" href="#indent"></a>Indenting and Whitespace</h2>
+<p>Use an indent of 2 spaces, with no tabs.</p>
+<p>Lines should have no trailing whitespace at the end.</p>
+<p>Files should be formatted with \n as the line ending (Unix line endings), not \r\n (Windows line endings).</p>
+<p>All text files should end in a single newline (\n). This avoids the verbose "\ No newline at end of file" patch warning and makes patches easier to read since it's clearer what is being changed when lines are added to the end of a file.</p>
+<p>All blocks at the beginning of a PHP file should be separated by a blank line. This includes the <code class="language-php">/** @file */</code> block, the namespace declaration and the <code class="language-php">use</code> statements (if present) as well as the subsequent code in the file. So, for example, a file header might look as follows:</p>
+<pre>
+<code class="language-php">&lt;?php
+
+namespace This\Is\The\Namespace;
+
+use Drupal\foo\Bar;
+
+/**
+ * Provides examples.
+ */
+class ExampleClassName {
+</code></pre><p>Or, for a non-class file (e.g., <code class="language-php">.module</code>):</p>
+<pre>
+<code class="language-php">&lt;?php
+
+/**
+ * @file
+ * Provides example functionality.
+ */
+
+use Drupal\foo\Bar;
+
+/**
+ * Implements hook_help().
+ */
+function example_help($route_name) {
+</code></pre><p> Leave an empty line between start of class/interface definition and property/method definition:</p>
+<pre>
+<code class="language-php">class GarfieldTheCat implements FelineInterface {
+  // Leave an empty line here.
+  public function meow() {
+...
+...
+...
+</code></pre><p>Leave an empty line between end of property definition and start method definition:</p>
+<pre>
+<code class="language-php">...
+...
+...
+  protected $lasagnaEaten = 0;
+  // Leave an empty line here.
+  public function meow() {
+    return t('Meow!');
+  }
+</code></pre><p>Leave an empty line between end of method and end of class definition:</p>
+<h2 id="instantiation"><a class="toc-anchor" title="Permalink to this headline" href="#instantiation"></a>Instantiation</h2>
+<p>Creating classes directly is discouraged. Instead, use a factory function that creates the appropriate object and returns it. This provides two benefits:</p>
+<ol>
+<li>It provides a layer of indirection, as the function may be written to return a different object (with the same interface) in different circumstances as appropriate.</li>
+<li>PHP does not allow class constructors to be chained, but does allow the return value from a function or method to be chained.</li>
+</ol>
+<h2 id="line-length"><a class="toc-anchor" title="Permalink to this headline" href="#line-length"></a>Line length and wrapping</h2>
+<p>The following rules apply to code. See <a href="http://drupal.org/node/1354" rel="nofollow">Doxygen and comment formatting conventions</a> for rules pertaining to comments.</p>
+<ul>
+<li>In general, all lines of code should not be longer than 80 characters.</li>
+<li>Lines containing longer function names, function/class definitions, variable declarations, etc are allowed to exceed 80 characters.</li>
+<li>Control structure conditions may exceed 80 characters, if they are simple to read and understand:<br />
+<pre>
+<code class="language-php">  if ($something['with']['something']['else']['in']['here'] == mymodule_check_something($whatever['else'])) {
+    ...
+  }
+  if (isset($something['what']['ever']) &amp;&amp; $something['what']['ever'] &gt; $infinite &amp;&amp; user_access('galaxy')) {
+    ...
+  }
+  // Non-obvious conditions of low complexity are also acceptable, but should
+  // always be documented, explaining WHY a particular check is done.
+  if (preg_match('@(/|\\)(\.\.|~)@', $target) &amp;&amp; strpos($target_dir, $repository) !== 0) {
+    return FALSE;
+  }
+</code></pre></li>
+<li>Conditions should not be wrapped into multiple lines.</li>
+<li>Control structure conditions should also NOT attempt to win the <em>Most Compact Condition In Least Lines Of Code Award™</em>:<br />
+<pre>
+<code class="language-php">  // DON'T DO THIS!
+  if ((isset($key) &amp;&amp; !empty($user-&gt;uid) &amp;&amp; $key == $user-&gt;uid) || (isset($user-&gt;cache) ? $user-&gt;cache : '') == ip_address() || isset($value) &amp;&amp; $value &gt;= time())) {
+    ...
+  }
+</code></pre><p>Instead, it is recommended practice to split out and prepare the conditions separately, which also permits documenting the underlying reasons for the conditions:</p>
+<pre>
+<code class="language-php">  // Key is only valid if it matches the current user's ID, as otherwise other
+  // users could access any user's things.
+  $is_valid_user = isset($key) &amp;&amp; !empty($user-&gt;uid) &amp;&amp; $key == $user-&gt;uid;
+
+  // IP must match the cache to prevent session spoofing.
+  $is_valid_cache = isset($user-&gt;cache) ? $user-&gt;cache == ip_address() : FALSE;
+
+  // Alternatively, if the request query parameter is in the future, then it
+  // is always valid, because the galaxy will implode and collapse anyway.
+  $is_valid_query = $is_valid_cache || (isset($value) &amp;&amp; $value &gt;= time());
+
+  if ($is_valid_user || $is_valid_query) {
+    ...
+  }
+</code></pre><p><em>Note: This example is still a bit dense. Always consider and decide on your own whether people unfamiliar with your code will be able to make sense of the logic.</em></p>
+</li>
+</ul>
+<h2 id="naming"><a class="toc-anchor" title="Permalink to this headline" href="#naming"></a>Naming Conventions</h2>
+<h3 id="s-functions-and-variables"><a class="toc-anchor" title="Permalink to this headline" href="#s-functions-and-variables"></a>Functions and variables</h3>
+<p>Functions should be named using lowercase, and words should be separated with an underscore. Functions should in addition have the grouping/module name as a prefix, to avoid name collisions between modules.</p>
+<p>Variables should be named using lowercase, and words should be separated either with uppercase characters (example: <code class="language-php">$lowerCamelCase</code>) or with an underscore (example: <code class="language-php">$snake_case</code>). Be consistent; do not mix camelCase and snake_case variable naming inside a file.</p>
+<h3 id="s-persistent-variables"><a class="toc-anchor" title="Permalink to this headline" href="#s-persistent-variables"></a>Persistent Variables</h3>
+<p>Persistent variables (variables/settings defined using Drupal's <a href="http://api.drupal.org/api/function/variable_get" rel="nofollow">variable_get()</a>/<a href="http://api.drupal.org/api/function/variable_set" rel="nofollow">variable_set()</a> functions) should be named using all lowercase letters, and words should be separated with an underscore. They should use the grouping/module name as a prefix, to avoid name collisions between modules.</p>
+<h3 id="s-constants"><a class="toc-anchor" title="Permalink to this headline" href="#s-constants"></a>Constants</h3>
+<ul>
+<li>Constants should always be all-uppercase, with underscores to separate words. (This includes pre-defined PHP constants like <code class="language-php">TRUE</code>, <code class="language-php">FALSE</code>, and <code class="language-php">NULL</code>.)</li>
+<li>Module-defined constant names should also be prefixed by an uppercase spelling of the module that defines them.</li>
+<li>In Drupal 8 and later, constants should be defined using the <a href="http://us3.php.net/const" rel="nofollow"><code class="language-php">const</code> PHP language keyword</a> (instead of <code class="language-php">define()</code>), because it is better for performance:<br />
+<pre>
+<code class="language-php">/**
+ * Indicates that the item should be removed at the next general cache wipe.
+ */
+ const CACHE_TEMPORARY = -1;
+</code></pre><p>Note that <code class="language-php">const</code> does not work with PHP expressions. <code class="language-php">define()</code> should be used when defining a constant conditionally or with a non-literal value:</p>
+<pre>
+<code class="language-php">if (!defined('MAINTENANCE_MODE')) {
+  define('MAINTENANCE_MODE', 'error');
+}
+</code></pre></li>
+</ul>
+<h3 id="s-global-variables"><a class="toc-anchor" title="Permalink to this headline" href="#s-global-variables"></a>Global Variables</h3>
+<p>If you need to define global variables, their name should start with a single underscore followed by the module/theme name and another underscore.</p>
+<h3 id="s-classes-methods-and-properties"><a class="toc-anchor" title="Permalink to this headline" href="#s-classes-methods-and-properties"></a>Classes, Methods and Properties</h3>
+<ol>
+<li>Classes and interfaces should use UpperCamel naming.</li>
+<li>Methods and class properties should use lowerCamel naming. In Drupal 8, properties of configuration entities are exempt of these conventions. Those properties are allowed to use underscores.</li>
+<li>If an acronym is used in a class or method name, make it CamelCase too (SampleXmlClass, not SampleXMLClass). [Note: this standard was adopted in March 2013, reversing the previous standard.]</li>
+<li>Classes should <em>not</em> use underscores in class names unless absolutely necessary to derive names inherited class names dynamically. That is quite rare, especially as Drupal does not mandate a class-file naming match.</li>
+<li>Names should not include "Drupal".</li>
+<li>Class names should not have "Class" in the name.</li>
+<li>Interfaces should always have the suffix "Interface".</li>
+<li>Test classes should always have the suffix "Test".</li>
+<li>Protected or private properties and methods should not use an underscore prefix.</li>
+<li>Classes and interfaces should have names that stand alone to tell what they do without having to refer to the namespace, read well, and are as short as possible without losing functionality information or leading to ambiguity. Notes:
+<ul>
+<li>If necessary for clarity or to prevent ambiguity, include the last component of the namespace in the name.</li>
+<li>Exception for Drupal 8.x: due to the way database classes are loaded, do not include the database engine name (MySQL, etc.) in engine-specific database class names.</li>
+<li>Exception for test classes: Test classes only need to be unambiguous within the context of the module they are testing.</li>
+</ul>
+</li>
+</ol>
+<p>Stand-alone name examples:</p>
+<table>
+<tbody>
+<tr>
+<th>Namespace</th>
+<th>Good name</th>
+<th>Bad names</th>
+</tr>
+<tr>
+<td>Drupal\Core\Database\Query\</td>
+<td>QueryCondition</td>
+<td>Condition (ambiguous)<br />
+			DatabaseQueryCondition (Database doesn't add to understanding)</td>
+</tr>
+<tr>
+<td>Drupal\Core\FileTransfer\</td>
+<td>LocalFileTransfer</td>
+<td>Local (ambiguous)</td>
+</tr>
+<tr>
+<td>Drupal\Core\Cache\</td>
+<td>CacheDatabaseDriver</td>
+<td>Database (ambiguous/misleading)<br />
+			DatabaseDriver (ambiguous/misleading)</td>
+</tr>
+<tr>
+<td>Drupal\entity\</td>
+<td>Entity<br />
+			EntityInterface</td>
+<td>DrupalEntity (unnecessary words)<br />
+			EntityClass (unnecessary words)</td>
+</tr>
+<tr>
+<td>Drupal\comment\Tests\</td>
+<td>ThreadingTest</td>
+<td>CommentThreadingTest (only needs to be unambiguous in comment context)<br />
+			Threading (not ending in Test)</td>
+</tr>
+</tbody>
+</table>
+<p>A complete example of class/interface/method names:</p>
+<pre>
+<code class="language-php">interface FelineInterface {
+  // Leave an empty line here.
+  public function meow();
+  // Leave an empty line here.
+  public function eatLasagna($amount);
+  // Leave an empty line here.
+}
+  // Leave an empty line here.
+class GarfieldTheCat implements FelineInterface {
+  // Leave an empty line here.
+  protected $lasagnaEaten = 0;
+  // Leave an empty line here.
+  public function meow() {
+    return t('Meow!');
+  }
+  // Leave an empty line here.
+  public function eatLasagna($amount) {
+    $this-&gt;lasagnaEaten += $amount;
+  }
+  // Leave an empty line here.
+}
+</code></pre><h3 id="s-enums"><a class="toc-anchor" title="Permalink to this headline" href="#s-enums"></a>Enums</h3>
+<p>Enums follow the same conventions as <a href="https://www.drupal.org/docs/develop/standards/php/php-coding-standards#s-classes" rel="nofollow">classes</a> with the addition that for their cases the enums must use UpperCamelCase.</p>
+<pre>
+<code class="language-php">enum Exists {
+
+  case ErrorIfExists;
+  case ErrorIfNotExists;
+  case ReturnEarlyIfExists;
+  case ReturnEarlyIfNotExists;
+
+  // Do stuff.
+}</code></pre><h3 id="s-file-names"><a class="toc-anchor" title="Permalink to this headline" href="#s-file-names"></a>File names</h3>
+<p>All documentation files should have the file name extension ".txt" to make viewing them on Windows systems easier. Also, the file names for such files should be all-caps (e.g. README.txt instead of readme.txt) while the extension itself is all-lowercase (i.e. txt instead of TXT).</p>
+<p>Examples: README.txt, INSTALL.txt, TODO.txt, CHANGELOG.txt etc.</p>
+<h2 id="operators"><a class="toc-anchor" title="Permalink to this headline" href="#operators"></a>Operators</h2>
+<p>All binary operators (operators that come between two values), such as <code class="language-php">+</code>, <code class="language-php">-</code>, <code class="language-php">=</code>, <code class="language-php">!=</code>, <code class="language-php">==</code>, <code class="language-php">&gt;</code>, etc. should have a space before and after the operator, for readability. For example, an assignment should be formatted as <code class="language-php">$foo = $bar;</code> rather than <code class="language-php">$foo=$bar;</code>. Unary operators (operators that operate on only one value), such as <code class="language-php">++</code>, should not have a space between the operator and the variable or number they are operating on.</p>
+<p>Checks for weak-typed inequality MUST use the <code class="language-php">!=</code> operator. The <code class="language-php">&lt;&gt;</code> operator MUST NOT be used in PHP code.</p>
+<p>The short ternary operator <code class="language-php">?:</code> must be used where the first operand of a ternary expression matches the condition. For example use:</p>
+<pre>
+<code class="language-php">$result = $condition ?: 'default';</code></pre><p>instead of:</p>
+<pre>
+<code class="language-php">$result = $condition ? $condition : 'default';</code>
+</pre><p>since <code class="language-php">$condition</code> matches both the condition and the first operand.</p>
+<p>The null coalescing operator <code class="language-php">??</code> should be used instead of a ternary operator with an isset() condition, to make code more readable. For example use: </p>
+<pre>
+<code class="language-php">$result = $values['entry'] ?? 'default'</code></pre><p>instead of:</p>
+<pre>
+<code class="language-php">$result = isset($values['entry']) ? $values['entry'] : 'default'</code></pre><h2 id="type-hint"><a class="toc-anchor" title="Permalink to this headline" href="#type-hint"></a>Parameter and return type hinting</h2>
+<p>Beginning with Drupal 9, parameter and return type hints should be used wherever possible. Example function definition using parameter and return type hints:</p>
+<pre>
+<code class="language-php">public function myMethod(MyInterface $myClass, string $id): array {
+  // Method code here.
+}</code></pre><h3 id="s-new-functions-and-methods"><a class="toc-anchor" title="Permalink to this headline" href="#s-new-functions-and-methods"></a>New functions and methods</h3>
+<p>Parameter and return type hints should be included for all new functions and methods, including new child implementations of methods for existing classes and interfaces.</p>
+<h3 id="s-existing-functions-and-methods"><a class="toc-anchor" title="Permalink to this headline" href="#s-existing-functions-and-methods"></a>Existing functions and methods</h3>
+<p>Adding type hints to existing code is a backwards compatibility break. Type hints can (and should) be added in a major version if a deprecation warning is first raised in an earlier minor version. See <span class="project-issue-issue-link project-issue-status-info project-issue-status-1"><a href="/project/drupal/issues/3050720" title="Status: Active">#3050720: [Meta] Implement strict typing in existing code</a></span> for strategies and ongoing discussion.</p>
+<h3 id="s-notes-about-specific-data-types"><a class="toc-anchor" title="Permalink to this headline" href="#s-notes-about-specific-data-types"></a>Notes about specific data types</h3>
+<h4 id="s-mixed-datatypes"><a class="toc-anchor" title="Permalink to this headline" href="#s-mixed-datatypes"></a>Mixed datatypes</h4>
+<p><code class="language-php">mixed</code> is only needed in rare cases where a more specific data type cannot be identified (for example, for the return values of callbacks, or markup strings that can be either markup objects or scalar strings). A need for <code class="language-php">mixed</code> or a <a href="https://www.php.net/manual/en/language.types.declarations.php#language.types.declarations.union" rel="nofollow">union type</a> is often a sign that the code should possibly be refactored.</p>
+<h4 id="s-nullable-types"><a class="toc-anchor" title="Permalink to this headline" href="#s-nullable-types"></a>Nullable types</h4>
+<p>Use <a href="https://www.php.net/manual/en/language.types.declarations.php" rel="nofollow">nullable types</a> where the data type may be either a specific type or null.</p>
+<h4 id="s-objects"><a class="toc-anchor" title="Permalink to this headline" href="#s-objects"></a>Objects</h4>
+<p>Use an interface type hint for parameter and return types (not a class). Type hint the most specific interface that encompasses all possible parameter or return values. Do not use <code class="language-php">stdClass</code>.</p>
+<h4 id="s-void"><a class="toc-anchor" title="Permalink to this headline" href="#s-void"></a>Void</h4>
+<p>If a function or method does not return anything, use a <code class="language-php">void</code> type hint.</p>
+<h2 id="php-tags"><a class="toc-anchor" title="Permalink to this headline" href="#php-tags"></a>PHP Code Tags</h2>
+<p>Always use <code class="language-php">&lt;?php ?&gt;</code> to delimit PHP code, not the shorthand, <code class="language-php">&lt;? ?&gt;</code>. This is required for Drupal compliance and is also the most portable way to include PHP code on differing operating systems and set-ups.</p>
+<p>Note that as of Drupal 4.7, the <code class="language-php">?&gt;</code> at the end of code files is purposely omitted. This includes for module and include files. The reasons for this can be summarized as:</p>
+<ul>
+<li>Removing it eliminates the possibility for unwanted whitespace at the end of files which can cause "header already sent" errors, XHTML/XML validation issues, and other problems.</li>
+<li>The <a href="http://www.php.net/basic-syntax.instruction-separation" rel="nofollow">closing delimiter at the end of a file is optional</a>.</li>
+<li>PHP.net itself removes the closing delimiter from the end of its files (example: <a href="https://github.com/php/web-php/blob/master/include/prepend.inc" rel="nofollow">prepend.inc</a>), so this can be seen as a "best practice."</li>
+</ul>
+<h2 id="quotes"><a class="toc-anchor" title="Permalink to this headline" href="#quotes"></a>Quotes</h2>
+<p>Drupal does not have a hard standard for the use of single quotes vs. double quotes. Where possible, keep consistency within each module, and respect the personal style of other developers.</p>
+<p>With that caveat in mind, single quote strings should be used by default. Their use is recommended except in two cases:</p>
+<ol>
+<li>Deliberate in-line variable interpolation, e.g. "&lt;h2&gt;$header&lt;/h2&gt;".</li>
+<li>Translated strings where one can avoid escaping single quotes by enclosing the string in double quotes. One such string would be "He's a good person." It would be 'He\'s a good person.' with single quotes. Such escaping may not be handled properly by .pot file generators for text translation, and it's also somewhat awkward to read.</li>
+</ol>
+<h2 id="semicolon"><a class="toc-anchor" title="Permalink to this headline" href="#semicolon"></a>Semicolons</h2>
+<p>The PHP language requires semicolons at the end of most lines, but allows them to be omitted at the end of code blocks. Drupal coding standards require them, even at the end of code blocks. In particular, for one-line PHP blocks:</p>
+<pre>
+<code class="language-php">&lt;?php print $tax; ?&gt; -- YES
+&lt;?php print $tax ?&gt; -- NO
+</code></pre><h2 id="strict-type"><a class="toc-anchor" title="Permalink to this headline" href="#strict-type"></a>Strict type declaration</h2>
+<p>If you define strict types for a PHP file, place the declare statement on a new line after the opening PHP tag surrounded by empty newlines. If the PHP file has a file level DocBlock the declare statement should be positioned after that. The declare statement is written without spaces around the equals sign.</p>
+<pre>
+<code class="language-php">&lt;?php
+
+/**
+ * @file
+ * This is a file DocBlock.
+ */
+
+declare(strict_types=1);
+</code></pre><h2 id="concat"><a class="toc-anchor" title="Permalink to this headline" href="#concat"></a>String Concatenations</h2>
+<p>Always use a space between the dot and the concatenated parts to improve readability.</p>
+<pre>
+<code class="language-php">&lt;?php 
+  $string = 'Foo' . $bar;
+  $string = $bar . 'foo';
+  $string = bar() . 'foo';
+  $string = 'foo' . 'bar';
+?&gt;
+</code></pre><p>When you concatenate simple variables, you can use double quotes and add the variable inside; otherwise, use single quotes.</p>
+<pre>
+<code class="language-php">&lt;?php
+  $string = "Foo $bar";
+?&gt;
+</code></pre><p>When using the concatenating assignment operator ('.='), use a space on each side as with the assignment operator:</p>
+<pre>
+<code class="language-php">&lt;?php
+$string .= 'Foo';
+$string .= $bar;
+$string .= baz();
+?&gt;
+</code></pre><h2 id="interfaces"><a class="toc-anchor" title="Permalink to this headline" href="#interfaces"></a>Use of interfaces</h2>
+<p>The use of a separate interface definition from an implementing class is strongly encouraged because it allows more flexibility in extending code later. A separate interface definition also neatly centralizes documentation making it easier to read. All interfaces should be fully documented according to <a href="http://drupal.org/node/1354#classes" rel="nofollow">established documentation standards</a>.</p>
+<p>If there is even a remote possibility of a class being swapped out for another implementation at some point in the future, split the method definitions off into a formal Interface. A class that is intended to be extended must always provide an Interface that other classes can implement rather than forcing them to extend the base class.</p>
+<h2 id="visibility"><a class="toc-anchor" title="Permalink to this headline" href="#visibility"></a>Visibility</h2>
+<h3 id="s-methods-and-functions"><a class="toc-anchor" title="Permalink to this headline" href="#s-methods-and-functions"></a>Methods and Functions</h3>
+<p>Visibility must be declared on all methods.</p>
+<p>Method names must not be prefixed with a single underscore to indicate protected or private visibility. That is, an underscore prefix explicitly has no meaning.</p>
+<p>Method and function names must not be declared with space after the method name. The closing brace must go on the next line following the body. There must not be a space after the opening parenthesis, and there must not be a space before the closing parenthesis.</p>
+<h3 id="s-properties"><a class="toc-anchor" title="Permalink to this headline" href="#s-properties"></a>Properties</h3>
+<p>Visibility must be declared on all properties.</p>
+<p>The use of public properties is strongly discouraged, as it allows for unwanted side effects. It also exposes implementation-specific details, which in turn makes swapping out a class for another implementation (one of the key reasons to use objects) much harder. Properties should be considered internal to a class.</p>
+<p><em>Extract from <a href="https://www.php-fig.org/psr/psr-12/#44-methods-and-functions" rel="nofollow">PSR-12 section 4.4</a></em></p>
+<h3 id="s-abstract-final-and-static"><a class="toc-anchor" title="Permalink to this headline" href="#s-abstract-final-and-static"></a>abstract, final, and static</h3>
+<p>When present, the <code class="language-php">abstract</code> and <code class="language-php">final</code> declarations must precede the visibility declaration.</p>
+<p>When present, the <code class="language-php">static</code> declaration must come after the visibility declaration.</p>
+<p><em>Extract from <a href="https://www.php-fig.org/psr/psr-12/#46-abstract-final-and-static" rel="nofollow">PSR-12 section 4.6</a></em></p>
+<h2 id="D7-autoloading"><a class="toc-anchor" title="Permalink to this headline" href="#D7-autoloading"></a>Drupal 7 class/interface autoloading</h2>
+<p><strong>Use an .inc file and use files[] in the .info file to extend a class or implement an interface.</strong></p>
+<p>If you include a file that extends a class or implements an interface, PHP generates a fatal error if the parent class or interface is not loaded. So, if a class is provided by a contributed module, or core in some cases, it is not safe to put your classes in a <em>.module</em> file. It's better to use an <em>.inc</em> file and use <code class="language-php">files[]</code> in your <em><a href="/node/542202" rel="nofollow">.info</a></em> file. For example, even if you have a dependency on a module, it's possible that both your module and the dependency are disabled when your .module file is included. Since the registry won't auto-load a class from a disabled module, this would cause an error. Also, when <a href="http://api.drupal.org/api/drupal/core!modules!system!system.api.php/function/hook_boot/7" rel="nofollow">hook_boot()</a> is run, module dependencies aren't loaded. So, if you add a class, then later implement hook_boot(), your module could be loaded without the dependency, and that will also generate a fatal error. Using an <em>.inc</em> file and using <code class="language-php">files[]</code> in your <em><a href="/node/542202" rel="nofollow">.info</a></em> file is needed to avoid those errors.</p>
+<h2 id="helpermod"><a class="toc-anchor" title="Permalink to this headline" href="#helpermod"></a>Helper Modules</h2>
+<p>There are several contributed modules/projects available to assist with review for coding standards compliance:</p>
+<ul>
+<li><a href="http://drupal.org/project/coder" rel="nofollow">Coder</a> module, which includes both Coder Review (reviews) and Coder Upgrade (updates your code). To use it:
+<ol>
+<li>Install the module (like any other module)</li>
+<li>Click on the "Code Review" link in your navigation menu.</li>
+<li>Scroll down to "Select Specific Modules".</li>
+<li>Select the module you wish to review, and click the "Submit" button.</li>
+</ol>
+<p>As an alternative to starting from the Code Review link in navigation, you can also review a particular module's code by clicking on the link on the Modules admin screen.</p>
+</li>
+<li><a href="https://addons.mozilla.org/en-GB/firefox/addon/dreditor-for-firefox/" rel="nofollow">Dreditor</a> (a firefox browser plug-in for reviewing patches and more). <a href="https://www.drupal.org/project/drupal/issues/2281761#comment-13759934" rel="nofollow">Instructions to install Dreditor on Chrome.</a></li>
+<li><a href="http://drupal.org/project/pareviewsh" rel="nofollow">PAReview</a> (a set of scripts for reviewing project applications, which runs some coding tests)</li>
+<li><a href="http://drupal.org/node/1419980" rel="nofollow">Coder Sniffer</a> (runs coding standards validation without loading drupal)</li>
+<li>The <a href="http://drupal.org/project/grammar_parser" rel="nofollow">Grammar Parser</a> module provides an automated way of rewriting code files in compliance with code standards. You'll probably also need the <a href="http://drupal.org/project/grammar_parser_ui" rel="nofollow">Grammar Parser UI</a> module. These are only available for Drupal 7.</li>
+</ul></div></div></div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="column-content-region bottom-right-content column panel-panel">
+        <div class="column-content-region-inner bottom-right-content-inner column-inner panel-panel-inner">
+          <div class="panel-pane pane-views-panes pane-documentation-help-improve-pane"  id="help-improve-this-page" >
+  
+        <h2 class="pane-title">
+      Help improve this page    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="view view-documentation-help view-id-documentation_help view-display-id-improve_pane view-dom-id-56ce35c2bdfff28224b1a7e9ff32e052">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+      
+  <span class="views-field views-field-field-documentation-status">    <strong class="views-label views-label-field-documentation-status">Page status: </strong>    <span class="field-content">No known problems</span>  </span>  
+  <div class="views-field views-field-nothing">        <span class="field-content"><br /><strong>You can:</strong><br />
+<ul>
+<li>Log in, click <a href="/node/318/edit">Edit</a>, and edit this page</li>
+<li>Log in, click <a href="/node/318/discuss">Discuss</a>, update the Page status value, and suggest an improvement</li>
+<li>Log in and <a href="/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%28318%29%20PHP%20coding%20standards">create a Documentation issue</a> with your suggestion</li>
+</ul></span>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+
+  
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer clearfix panel-panel">
+    <div class="container-inner footer-inner panel-panel-inner">
+          </div>
+  </div>
+
+</div><!-- /.sutro -->
+</div>
+  </div>
+  </div>
+</div>
+  </div>
+        </div>
+              </div> <!-- /#content -->
+
+    </div> <!-- /#column-left -->
+
+      </div> <!-- /#page -->
+
+  <div id="footer" role="contentinfo">
+            <div class="region region-footer">
+    <div id="block-drupalorg-documentation-license" class="block block-drupalorg">
+<div class="block-inner">
+    
+  <div class="content">
+    Drupal’s online documentation is © 2000-2025 by the individual contributors and can be used in accordance with the <a href="/terms">Creative Commons License, Attribution-ShareAlike 2.0</a>. PHP code is distributed under the <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License</a>.  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-infra-partner" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <a href="https://bit.ly/4fYoEf8" >Infrastructure management for Drupal.org provided by <img src="/files/cta/graphic/tag1_wht.svg" alt="Tag1 logo" ></a> 
+<br />
+<span style="font-size: .65em;"><a href="https://bit.ly/41bS4lA">Need a Drupal 7 extended support partner? Consider Tag1.</a></span>  </div>
+  </div>
+</div>
+<div id="block-drupalorg-crosssite-drupalorg-footer" class="block block-drupalorg-crosssite">
+<div class="block-inner">
+    
+  <div class="content">
+    <h4 class="element-invisible">News items</h4><ul class="drupal-news"><li class="0 first"><a href="https://www.drupal.org/news">News</a></li>
+<li class="1"><a href="https://www.drupal.org/planet" title="News from Drupal community members">Planet Drupal</a></li>
+<li class="2"><a href="https://www.drupal.org/about/media-kit/social-media" title="Drupal on social media">Social media</a></li>
+<li class="3"><a href="https://www.drupal.org/subscribe">Sign up for Drupal news</a></li>
+<li class="4"><a href="https://www.drupal.org/security" title="Announcements from the Drupal Security Team">Security advisories</a></li>
+<li class="5 last"><a href="https://jobs.drupal.org/" title="Drupal Jobs">Jobs</a></li>
+</ul><h4 class="element-invisible">Our community</h4><ul class="community"><li class="0 first"><a href="https://www.drupal.org/community">Community</a></li>
+<li class="1"><span><a href="https://www.drupal.org/drupal-services" title="People and organizations offering Drupal services">Services</a>, <a href="https://www.drupal.org/training" title="People and organizations offering Drupal training">Training</a> & <a href="https://www.drupal.org/hosting" title="Organizations offering Drupal hosting">Hosting</a></span></li>
+<li class="2"><a href="https://www.drupal.org/community/contributor-guide">Contributor guide</a></li>
+<li class="3"><a href="https://groups.drupal.org/groups" title="groups.drupal.org">Groups &amp; meetups</a></li>
+<li class="4"><a href="https://events.drupal.org" title="Upcoming and past DrupalCons">DrupalCon</a></li>
+<li class="5 last"><a href="https://www.drupal.org/dcoc" title="Drupal code of conduct">Code of conduct</a></li>
+</ul><h4 class="element-invisible">Documentation</h4><ul class="get-started"><li class="0 first"><a href="https://www.drupal.org/documentation" title="Documentation for working with Drupal">Documentation</a></li>
+<li class="1"><a href="https://www.drupal.org/docs">Drupal Guide</a></li>
+<li class="2"><a href="https://www.drupal.org/docs/user_guide/en/index.html">Drupal User Guide</a></li>
+<li class="3"><a href="https://www.drupal.org/documentation/develop">Developer docs</a></li>
+<li class="4 last"><a href="https://api.drupal.org/" title="Drupal API reference">API.Drupal.org</a></li>
+</ul><h4 class="element-invisible">Drupal code base</h4><ul class="download-extend"><li class="0 first"><a href="https://www.drupal.org/download">Download &amp; Extend</a></li>
+<li class="1"><a href="https://www.drupal.org/project/drupal" title="Download the latest version of the Drupal software">Drupal core</a></li>
+<li class="2"><a href="https://www.drupal.org/project/project_module" title="Download add-on features and functionality">Modules</a></li>
+<li class="3"><a href="https://www.drupal.org/project/project_theme" title="Download pre-designed styles for Drupal">Themes</a></li>
+<li class="4 last"><a href="https://www.drupal.org/project/project_distribution" title="Download a pre-packaged Drupal site">Distributions</a></li>
+</ul><h4 class="element-invisible">Governance of community</h4><ul class="about"><li class="0 first"><a href="https://www.drupal.org/about">About</a></li>
+<li class="1"><a href="https://www.drupal.org/about/features/accessibility" title="Our committment to accessibility">Web accessibility</a></li>
+<li class="2"><a href="https://www.drupal.org/association" title="About the Drupal Association">Drupal Association</a></li>
+<li class="3"><a href="https://www.drupal.org/drupalorg" title="About Drupal.org">About Drupal.org</a></li>
+<li class="4"><a href="https://www.drupal.org/terms" title="Drupal.org terms of service">Terms of service</a></li>
+<li class="5 last"><a href="https://www.drupal.org/privacy" title="Drupal.org privacy policy">Privacy policy</a></li>
+</ul>  </div>
+  </div>
+</div>
+<div id="block-block-77" class="block block-block">
+<div class="block-inner">
+    
+  <div class="content">
+    <p>Drupal is a <a href="/about/trademark">registered trademark</a> of <a href="https://dri.es">Dries Buytaert</a>.</p>
+  </div>
+  </div>
+</div>
+  </div>
+      </div>
+    <div class="region region-page-bottom">
+    <script type="text/javascript">
+      (function(){
+          window._pxAppId = 'PXVnPBBfwe';
+          window._pxParam2 = '';
+          window._pxParam3 = '0';
+          var p = document.getElementsByTagName('script')[0],
+              s = document.createElement('script');
+          s.async = 1;
+          s.src = '/VnPBBfwe/init.js';
+          p.parentNode.insertBefore(s,p);
+      }());
+  </script>
+  <noscript>
+      <div style="position:fixed; top:0; left:0; display:none" width="1" height="1">
+          <img src="/VnPBBfwe/xhr/api/v1/collector/noScript.gif?appId=PXVnPBBfwe">
+      </div>
+  </noscript>  </div>
+<script type="text/javascript" src="/files/advagg_js/js__B0FBwiP97ZnD38IFraZus4upS4KVkMXI3ou0fJ2ZXGA__pPDESRJz9GHsxqQIwQ_V8xnFYEH5jipG2eicsfrdWCs__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+
+<!--[if lte IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie9-" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if gt IE 9]>
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js#ie10+" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<![endif]-->
+
+<!--[if !IE]><!-->
+<script type="text/javascript" src="/files/advagg_js/js__79M6UrZjAw3oNGnUjsWip12JsvnUZmJGA3h9LI0kuzE__J0sbXAJNry2-C_ZL2xd0RdVuzwTLvwN-UisIv5RNCvU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(true);}"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="/files/advagg_js/js__pqoYaVR8NVhof-vNXe50j2TKhFv__IihVag_h4G6kus__B4mbn4wICLQjWm1m3-z1kw8F1FtP0cDAHKp00Xy_-88__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__H5AFmq1RrXKsrazzPq_xPQPy4K0wUKqecPjczzRiTgQ__wor4r9P8YTtQ7p6fbywTetZ47Z_orumIfrrhgxrpLus__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer" onload="
+function advagg_mod_1() {
+  // Count how many times this function is called.
+  advagg_mod_1.count = ++advagg_mod_1.count || 1;
+  try {
+    if (advagg_mod_1.count <= 40) {
+      init_drupal_core_settings();
+
+      // Set this to 100 so that this function only runs once.
+      advagg_mod_1.count = 100;
+    }
+  }
+  catch(e) {
+    if (advagg_mod_1.count >= 40) {
+      // Throw the exception if this still fails after running 40 times.
+      throw e;
+    }
+    else {
+      // Try again in 1 ms.
+      window.setTimeout(advagg_mod_1, 1);
+    }
+  }
+}
+function advagg_mod_1_check() {
+  if (window.init_drupal_core_settings && window.jQuery && window.Drupal) {
+    advagg_mod_1();
+  }
+  else {
+    window.setTimeout(advagg_mod_1_check, 1);
+  }
+}
+advagg_mod_1_check();"></script>
+<script type="text/javascript" src="/files/advagg_js/js__Oc0wwB7MVRfxtYw6EQM7d9sXj9PAQePoWSzQJ0uTk6c__iXqOGoaPhZHCPEspUr5BC8BwOx5P8B11xv7VOhoUii8__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__FabcJ6qluktliDejymsuV-FqaN_HyMKGe93c2rO9Ky0__el1ZLGkKneOoCS6OWa01WHuIEsTsXZ46MRLCF390Fbw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__YT6D1B_BKxvm6JCH_t9sZNI5L6yITa_DlU5QcSlOkAU__OXobH7d1IP1o3WABlniIrU_-pcJacVSIPUv9bpD-6pQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__06Uejkt2sN1AJAk3QcRQG9yrq-jCjZth0s-OymGOkVE__yFxl4u_7_1AhyVnMLZRtp5wEvh9C2VdA6gnewdM1hB0__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__pLKQd4r7OrHglE7Qkqw53K2UXCqQdhqQ9v0cz7hMCQY__OErfYuQdGbFHcCoLoUW_ESSvaumApNojzjJit8-2xcw__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__hHUWFbMAa11eJtx5V0ym9o0YBsB1udk34qUT5wr1ihI__vSxsxbzmzuz4XPh--CL1BBciQpEQ_m8FfdQINCOAg14__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function init_drupal_core_settings() {jQuery.extend(Drupal.settings,{"basePath":"\/","pathPrefix":"","setHasJsCookie":0,"ajaxPageState":{"theme":"bluecheese","theme_token":"RN7Eoknt0RLMN_cKnUgB72e0_2rPqRAYBdtUwl5d68U"},"drupalorgGitlab":{"gitlab_base_url":"https:\/\/git.drupalcode.org","base_url":"https:\/\/www.drupal.org"},"better_exposed_filters":{"views":{"documentation_help":{"displays":{"improve_pane":{"filters":[]}}},"documentation_related_content":{"displays":{"related_content_pane":{"filters":[]}}}}},"urlIsAjaxTrusted":{"\/docs\/develop\/standards\/php\/php-coding-standards":true},"drupalorgCrosssiteConsentNeeded":true,"ogContext":{"groupType":"node","gid":"3326697"}}); 
+if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(false);}} if(window.jQuery && window.Drupal){init_drupal_core_settings();}
+//--><!]]>
+</script>
+<script type="text/javascript" src="/files/advagg_js/js__2k0CJ3KAQNFTFab3y6ZvNtxs3HLons0Brq7VwvPSkKo__sQv8imhcZRev08LnyQ7OzwuHrZ3Jdwo5NmznAARX0ig__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+<script type="text/javascript" src="/files/advagg_js/js__vj0LjvNwl-3K1P9LGT4BGuXCZcAovYsVlVmoJN3TMRg__KW8SiGceRY3sjIKVrffDjf2MK4A5Vp3EDDxVO-4pegI__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
+</body>
+</html>
