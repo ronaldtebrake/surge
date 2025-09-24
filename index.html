@@ -6,7 +6,6 @@
     <title>Surge Coding Standards - Drupal Documentation</title>
     <meta name="description" content="Automated Drupal coding standards documentation with AI-powered Agents.md generation">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-light.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -251,19 +250,35 @@
         <div class="header">
             <h1>Surge Coding Standards</h1>
             <p>Drupal Documentation • AI-Powered Generation</p>
-            <button id="refresh-btn" onclick="loadAgentsContent()" style="
-                background: #3498db;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-                font-size: 14px;
-                margin-top: 15px;
-                transition: background 0.2s ease;
-            " onmouseover="this.style.background='#2980b9'" onmouseout="this.style.background='#3498db'">
-                🔄 Refresh Documentation
-            </button>
+            <div style="margin-top: 15px;">
+                <button id="copy-agents-btn" onclick="copyAgentsContent()" style="
+                    background: #27ae60;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    margin-right: 10px;
+                    transition: background 0.2s ease;
+                " onmouseover="this.style.background='#229954'" onmouseout="this.style.background='#27ae60'">
+                    📋 Copy Agents.md
+                </button>
+                <a href="https://github.com/ronaldtebrake/surge" style="
+                    background: #3498db;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    transition: background 0.2s ease;
+                    text-decoration: none;
+                    display: inline-block;
+                " onmouseover="this.style.background='#2980b9'" onmouseout="this.style.background='#3498db'">
+                    📁 View on GitHub
+                </a>
+            </div>
         </div>
         
         <div class="content">
@@ -283,15 +298,153 @@
                 <p>You can copy this to your project as you please, or use <a href="https://www.drupal.org/project/surge">Drupal Surge</a> to automatically generate and install it for you.</p>
             </div>
             
-            <!-- Dynamic Agents.md Content -->
+            <!-- Agents.md Content -->
             <div class="agents-content">
-                <div class="loading">
-                    <h2>Loading Documentation</h2>
-                    <p>Generating the latest Drupal coding standards documentation...</p>
-                </div>
-                
-                <div id="agents-content" style="display: none;">
-                    <!-- Agents.md content will be loaded here -->
+                <div class="markdown-body">
+                    <h1>Agents.md</h1>
+                    
+                    <p>This file provides comprehensive guidelines for AI-powered development tools working with Drupal projects.</p>
+                    
+                    <h2>Overview</h2>
+                    
+                    <p>This Agents.md file is automatically generated from Drupal's official coding standards documentation, covering 11 main areas with 34 individual documentation pages.</p>
+                    
+                    <h2>Drupal Coding Standards</h2>
+                    
+                    <h3>PHP Standards</h3>
+                    <ul>
+                        <li><strong>PSR-4 Autoloading</strong>: Follow PSR-4 autoloading standards for class loading</li>
+                        <li><strong>Namespaces</strong>: Use proper namespacing conventions (\Drupal\module_name)</li>
+                        <li><strong>E_STRICT Compliance</strong>: Write E_STRICT compliant code</li>
+                        <li><strong>API Documentation</strong>: Follow Drupal's API documentation standards with proper @param, @return, @throws tags</li>
+                        <li><strong>Exceptions</strong>: Use appropriate exception handling and custom exception classes</li>
+                        <li><strong>Service Naming</strong>: Follow naming standards for services and extending Symfony components</li>
+                    </ul>
+                    
+                    <h3>CSS Standards</h3>
+                    <ul>
+                        <li><strong>BEM Methodology</strong>: Use BEM (Block, Element, Modifier) methodology for CSS class naming</li>
+                        <li><strong>CSS Architecture</strong>: Follow Drupal's CSS architecture guidelines for Drupal 9+</li>
+                        <li><strong>Formatting</strong>: Use CSScomb for consistent CSS formatting and sorting</li>
+                        <li><strong>File Organization</strong>: Organize CSS files according to Drupal standards</li>
+                        <li><strong>Review Guidelines</strong>: Follow specific guidelines when reviewing CSS code</li>
+                    </ul>
+                    
+                    <h3>JavaScript Standards</h3>
+                    <ul>
+                        <li><strong>Modern JavaScript</strong>: Follow modern JavaScript best practices and ES6+ features</li>
+                        <li><strong>JSDoc Documentation</strong>: Use proper JSDoc documentation for functions and classes</li>
+                        <li><strong>Linting Tools</strong>: Set up and use appropriate linting and fixing tools</li>
+                        <li><strong>jQuery Standards</strong>: Follow Drupal's jQuery coding standards when using jQuery</li>
+                        <li><strong>API Documentation</strong>: Follow JavaScript API documentation and comment standards</li>
+                    </ul>
+                    
+                    <h3>Accessibility Standards</h3>
+                    <ul>
+                        <li><strong>WCAG Compliance</strong>: Follow WCAG 2.1 guidelines for accessibility</li>
+                        <li><strong>Semantic HTML</strong>: Use proper semantic HTML elements</li>
+                        <li><strong>ARIA Attributes</strong>: Implement ARIA attributes correctly</li>
+                        <li><strong>Keyboard Navigation</strong>: Ensure proper keyboard navigation support</li>
+                        <li><strong>Screen Reader Support</strong>: Test with screen readers and assistive technologies</li>
+                    </ul>
+                    
+                    <h3>SQL Standards</h3>
+                    <ul>
+                        <li><strong>Coding Conventions</strong>: Follow Drupal's SQL coding conventions</li>
+                        <li><strong>Reserved Words</strong>: Avoid using SQL reserved words in table/column names</li>
+                        <li><strong>Query Optimization</strong>: Avoid SELECT * queries, use proper indexing</li>
+                        <li><strong>Naming Conventions</strong>: Follow naming conventions for database objects</li>
+                    </ul>
+                    
+                    <h3>Twig Standards</h3>
+                    <ul>
+                        <li><strong>Template Organization</strong>: Organize Twig templates properly</li>
+                        <li><strong>Naming Conventions</strong>: Follow naming conventions for template files</li>
+                        <li><strong>Best Practices</strong>: Use Twig best practices for performance and maintainability</li>
+                    </ul>
+                    
+                    <h3>Markdown Standards</h3>
+                    <ul>
+                        <li><strong>Documentation Formatting</strong>: Follow proper Markdown formatting for documentation</li>
+                        <li><strong>Code Blocks</strong>: Use appropriate code block syntax and language identifiers</li>
+                        <li><strong>Structure</strong>: Organize documentation with proper headings and sections</li>
+                    </ul>
+                    
+                    <h3>YAML Configuration</h3>
+                    <ul>
+                        <li><strong>File Structure</strong>: Follow proper YAML file structure and indentation</li>
+                        <li><strong>Validation</strong>: Ensure YAML files are valid and properly formatted</li>
+                        <li><strong>Configuration Standards</strong>: Follow Drupal's configuration file coding standards</li>
+                    </ul>
+                    
+                    <h3>Composer Standards</h3>
+                    <ul>
+                        <li><strong>Package Naming</strong>: Follow Composer package naming conventions</li>
+                        <li><strong>Dependency Management</strong>: Properly manage dependencies and versions</li>
+                        <li><strong>Autoloading</strong>: Configure autoloading correctly</li>
+                    </ul>
+                    
+                    <h3>Drupal Markup</h3>
+                    <ul>
+                        <li><strong>HTML Structure</strong>: Follow Drupal's markup style guide</li>
+                        <li><strong>Semantic Elements</strong>: Use appropriate semantic HTML elements</li>
+                        <li><strong>Style Guide</strong>: Follow the Drupal markup style guide</li>
+                    </ul>
+                    
+                    <h3>Spelling Standards</h3>
+                    <ul>
+                        <li><strong>Documentation Consistency</strong>: Maintain consistent spelling and terminology</li>
+                        <li><strong>Terminology</strong>: Use proper Drupal and technical terminology</li>
+                    </ul>
+                    
+                    <h2>Available Documentation Sections</h2>
+                    
+                    <ul>
+                        <li><strong>PHP</strong></li>
+                        <li><strong>Accessibility Coding Standards</strong></li>
+                        <li><strong>CSS</strong></li>
+                        <li><strong>JavaScript coding standards</strong></li>
+                        <li><strong>Markdown</strong></li>
+                        <li><strong>SQL</strong></li>
+                        <li><strong>Twig coding standards</strong></li>
+                        <li><strong>Drupal Markup Style Guide</strong></li>
+                        <li><strong>Spelling</strong></li>
+                        <li><strong>YAML Configuration files</strong></li>
+                        <li><strong>Composer package naming conventions</strong></li>
+                    </ul>
+                    
+                    <h2>Best Practices</h2>
+                    
+                    <ol>
+                        <li><strong>Always follow Drupal coding standards</strong> - This is non-negotiable for Drupal development</li>
+                        <li><strong>Use proper documentation and comments</strong> - Document your code thoroughly</li>
+                        <li><strong>Follow security best practices</strong> - Security should be a primary concern</li>
+                        <li><strong>Write testable code</strong> - Make your code easy to test and maintain</li>
+                        <li><strong>Use appropriate design patterns</strong> - Follow established patterns and conventions</li>
+                        <li><strong>Follow accessibility guidelines</strong> - Ensure your code is accessible to all users</li>
+                        <li><strong>Keep dependencies updated</strong> - Regularly update Composer dependencies</li>
+                        <li><strong>Use version control properly</strong> - Follow Git best practices</li>
+                        <li><strong>Code review everything</strong> - Have all code reviewed before merging</li>
+                        <li><strong>Performance matters</strong> - Consider performance implications of your code</li>
+                    </ol>
+                    
+                    <h2>Resources</h2>
+                    
+                    <ul>
+                        <li><a href="https://www.drupal.org/docs/develop/standards">Drupal Coding Standards</a></li>
+                        <li><a href="https://api.drupal.org">Drupal API Documentation</a></li>
+                        <li><a href="https://www.drupal.org/docs/develop">Drupal Developer Guide</a></li>
+                        <li><a href="https://www.drupal.org/security">Drupal Security</a></li>
+                        <li><a href="https://www.drupal.org/docs/8/api/performance">Drupal Performance</a></li>
+                    </ul>
+                    
+                    <h2>Last Updated</h2>
+                    
+                    <p>This file is automatically generated and updated based on changes to Drupal's official coding standards documentation.</p>
+                    
+                    <hr>
+                    
+                    <p><em>This file is automatically generated from Drupal's official coding standards documentation.</em></p>
                 </div>
             </div>
         </div>
@@ -303,72 +456,162 @@
     </div>
 
     <script>
-        // Load Agents.md content dynamically
-        
-        // Function to load actual Agents.md content
-        async function loadAgentsContent() {
-            // Show loading state
-            document.querySelector('.loading').style.display = 'block';
-            document.getElementById('agents-content').style.display = 'none';
+        // Raw markdown content of Agents.md
+        const agentsMarkdownContent = `# Agents.md
+
+This file provides comprehensive guidelines for AI-powered development tools working with Drupal projects.
+
+## Overview
+
+This Agents.md file is automatically generated from Drupal's official coding standards documentation, covering 11 main areas with 34 individual documentation pages.
+
+## Drupal Coding Standards
+
+### PHP Standards
+- **PSR-4 Autoloading**: Follow PSR-4 autoloading standards for class loading
+- **Namespaces**: Use proper namespacing conventions (\\Drupal\\module_name)
+- **E_STRICT Compliance**: Write E_STRICT compliant code
+- **API Documentation**: Follow Drupal's API documentation standards with proper @param, @return, @throws tags
+- **Exceptions**: Use appropriate exception handling and custom exception classes
+- **Service Naming**: Follow naming standards for services and extending Symfony components
+
+### CSS Standards
+- **BEM Methodology**: Use BEM (Block, Element, Modifier) methodology for CSS class naming
+- **CSS Architecture**: Follow Drupal's CSS architecture guidelines for Drupal 9+
+- **Formatting**: Use CSScomb for consistent CSS formatting and sorting
+- **File Organization**: Organize CSS files according to Drupal standards
+- **Review Guidelines**: Follow specific guidelines when reviewing CSS code
+
+### JavaScript Standards
+- **Modern JavaScript**: Follow modern JavaScript best practices and ES6+ features
+- **JSDoc Documentation**: Use proper JSDoc documentation for functions and classes
+- **Linting Tools**: Set up and use appropriate linting and fixing tools
+- **jQuery Standards**: Follow Drupal's jQuery coding standards when using jQuery
+- **API Documentation**: Follow JavaScript API documentation and comment standards
+
+### Accessibility Standards
+- **WCAG Compliance**: Follow WCAG 2.1 guidelines for accessibility
+- **Semantic HTML**: Use proper semantic HTML elements
+- **ARIA Attributes**: Implement ARIA attributes correctly
+- **Keyboard Navigation**: Ensure proper keyboard navigation support
+- **Screen Reader Support**: Test with screen readers and assistive technologies
+
+### SQL Standards
+- **Coding Conventions**: Follow Drupal's SQL coding conventions
+- **Reserved Words**: Avoid using SQL reserved words in table/column names
+- **Query Optimization**: Avoid SELECT * queries, use proper indexing
+- **Naming Conventions**: Follow naming conventions for database objects
+
+### Twig Standards
+- **Template Organization**: Organize Twig templates properly
+- **Naming Conventions**: Follow naming conventions for template files
+- **Best Practices**: Use Twig best practices for performance and maintainability
+
+### Markdown Standards
+- **Documentation Formatting**: Follow proper Markdown formatting for documentation
+- **Code Blocks**: Use appropriate code block syntax and language identifiers
+- **Structure**: Organize documentation with proper headings and sections
+
+### YAML Configuration
+- **File Structure**: Follow proper YAML file structure and indentation
+- **Validation**: Ensure YAML files are valid and properly formatted
+- **Configuration Standards**: Follow Drupal's configuration file coding standards
+
+### Composer Standards
+- **Package Naming**: Follow Composer package naming conventions
+- **Dependency Management**: Properly manage dependencies and versions
+- **Autoloading**: Configure autoloading correctly
+
+### Drupal Markup
+- **HTML Structure**: Follow Drupal's markup style guide
+- **Semantic Elements**: Use appropriate semantic HTML elements
+- **Style Guide**: Follow the Drupal markup style guide
+
+### Spelling Standards
+- **Documentation Consistency**: Maintain consistent spelling and terminology
+- **Terminology**: Use proper Drupal and technical terminology
+
+## Available Documentation Sections
+
+- **PHP**
+- **Accessibility Coding Standards**
+- **CSS**
+- **JavaScript coding standards**
+- **Markdown**
+- **SQL**
+- **Twig coding standards**
+- **Drupal Markup Style Guide**
+- **Spelling**
+- **YAML Configuration files**
+- **Composer package naming conventions**
+
+## Best Practices
+
+1. **Always follow Drupal coding standards** - This is non-negotiable for Drupal development
+2. **Use proper documentation and comments** - Document your code thoroughly
+3. **Follow security best practices** - Security should be a primary concern
+4. **Write testable code** - Make your code easy to test and maintain
+5. **Use appropriate design patterns** - Follow established patterns and conventions
+6. **Follow accessibility guidelines** - Ensure your code is accessible to all users
+7. **Keep dependencies updated** - Regularly update Composer dependencies
+8. **Use version control properly** - Follow Git best practices
+9. **Code review everything** - Have all code reviewed before merging
+10. **Performance matters** - Consider performance implications of your code
+
+## Resources
+
+- [Drupal Coding Standards](https://www.drupal.org/docs/develop/standards)
+- [Drupal API Documentation](https://api.drupal.org)
+- [Drupal Developer Guide](https://www.drupal.org/docs/develop)
+- [Drupal Security](https://www.drupal.org/security)
+- [Drupal Performance](https://www.drupal.org/docs/8/api/performance)
+
+## Last Updated
+
+This file is automatically generated and updated based on changes to Drupal's official coding standards documentation.
+
+---
+
+*This file is automatically generated from Drupal's official coding standards documentation.*`;
+
+        function copyAgentsContent() {
+            const button = document.getElementById('copy-agents-btn');
+            const originalText = button.innerHTML;
             
-            try {
-                console.log('Attempting to fetch ./docs/Agents.md...');
-                const response = await fetch('./docs/Agents.md');
-                console.log('Response status:', response.status, response.statusText);
-                if (response.ok) {
-                    const content = await response.text();
-                    
-                    // Check if content is not empty
-                    if (!content || content.trim().length === 0) {
-                        showError('Agents.md file is empty. Please ensure the documentation generation pipeline has run successfully.');
-                        return false;
-                    }
-                    
-                    // Convert markdown to HTML using marked.js
-                    const htmlContent = marked.parse(content);
-                    document.getElementById('agents-content').innerHTML = `
-                        <div class="markdown-body">
-                            ${htmlContent}
-                        </div>
-                    `;
-                    document.querySelector('.loading').style.display = 'none';
-                    document.getElementById('agents-content').style.display = 'block';
-                    return true;
-                } else {
-                    console.error('Failed to load Agents.md:', response.status, response.statusText);
-                    showError('Failed to load Agents.md file. Please check that the file exists at ./docs/Agents.md');
-                    return false;
+            // Copy to clipboard
+            navigator.clipboard.writeText(agentsMarkdownContent).then(function() {
+                // Success feedback
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#27ae60';
+                
+                // Reset after 2 seconds
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = agentsMarkdownContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    button.innerHTML = '✅ Copied!';
+                    button.style.background = '#27ae60';
+                    setTimeout(function() {
+                        button.innerHTML = originalText;
+                    }, 2000);
+                } catch (err) {
+                    button.innerHTML = '❌ Failed';
+                    button.style.background = '#e74c3c';
+                    setTimeout(function() {
+                        button.innerHTML = originalText;
+                    }, 2000);
                 }
-            } catch (error) {
-                console.error('Error loading Agents.md:', error);
-                showError('Error loading Agents.md file. Please check the console for details.');
-                return false;
-            }
+                document.body.removeChild(textArea);
+            });
         }
-        
-        // Function to show error message
-        function showError(message) {
-            document.querySelector('.loading').style.display = 'none';
-            document.getElementById('agents-content').innerHTML = `
-                <div class="markdown-body">
-                    <h1>Error Loading Documentation</h1>
-                    <p>${message}</p>
-                    <h2>Quick Links</h2>
-                    <ul>
-                        <li><a href="https://www.drupal.org/docs/develop/standards/php">PHP Coding Standards</a></li>
-                        <li><a href="https://www.drupal.org/docs/develop/standards/css">CSS Coding Standards</a></li>
-                        <li><a href="https://www.drupal.org/docs/develop/standards/javascript">JavaScript Coding Standards</a></li>
-                        <li><a href="https://www.drupal.org/docs/develop/standards/sql">SQL Coding Standards</a></li>
-                        <li><a href="https://www.drupal.org/docs/develop/standards/spelling">Spelling Standards</a></li>
-                    </ul>
-                    <p><strong>Note:</strong> The Agents.md file should be located at <code>./docs/Agents.md</code></p>
-                </div>
-            `;
-            document.getElementById('agents-content').style.display = 'block';
-        }
-        
-        // Load Agents.md content on page load
-        loadAgentsContent();
     </script>
+
 </body>
 </html>
