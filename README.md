@@ -1,22 +1,21 @@
 # Surge Coding Standards
 
-An automated system that scrapes Drupal developer documentation, tracks changes, and generates an `Agents.md` file using AI assistance, with GitHub Pages integration for a custom documentation site.
+An automated system that tracks Drupal coding standards documentation changes and generates comprehensive `Agents.md` files using AI assistance, with GitHub Pages integration for a custom documentation site.
 
 > Part of the [Drupal Surge](https://www.drupal.org/project/surge) ecosystem - giving AI tools a sense of Drupal.
 
 ## 🎯 Project Goals
 
-- Automatically scrape and track Drupal coding standards documentation
-- Generate structured sitemap with change tracking
-- Create markdown files for documentation pages
-- Use AI to generate comprehensive `Agents.md` file
+- Automatically track Drupal coding standards documentation changes
+- Generate structured sitemap with real last updated dates
+- Use AI to generate comprehensive `Agents.md` file from sitemap data
 - Deploy results to GitHub Pages
 
 ## 🚀 Features
 
-- **Automated Scraping**: Daily sitemap generation using Playwright
-- **Change Detection**: Smart content updating based on timestamps
-- **AI Integration**: ChatGPT-powered documentation generation
+- **Smart Sitemap Generation**: Daily sitemap generation using curl (bypasses bot detection)
+- **Real Last Updated Dates**: Fetches actual modification dates from Drupal pages
+- **AI Integration**: ChatGPT-powered documentation generation with smart prompts
 - **GitHub Actions**: Fully automated CI/CD pipeline
 - **GitHub Pages**: Beautiful static site deployment
 
@@ -25,12 +24,10 @@ An automated system that scrapes Drupal developer documentation, tracks changes,
 ```
 /
 ├── .github/workflows/     # GitHub Actions workflows
-├── data/                  # Scraped data and sitemap
-│   ├── sitemap.json      # Generated sitemap
-│   └── pages/            # Individual markdown files
+├── data/                  # Generated data
+│   └── sitemap.json      # Generated sitemap with real dates
 ├── scripts/              # Automation scripts
 │   ├── sitemap-scraper.js
-│   ├── content-scraper.js
 │   └── agents-generator.js
 ├── docs/                 # Generated documentation
 │   └── Agents.md
@@ -52,10 +49,7 @@ An automated system that scrapes Drupal developer documentation, tracks changes,
    ```bash
    # Generate sitemap
    npm run sitemap
-   
-   # Update content
-   npm run content
-   
+
    # Generate Agents.md
    npm run agents
    ```
@@ -64,17 +58,16 @@ An automated system that scrapes Drupal developer documentation, tracks changes,
 
 The system runs automatically via GitHub Actions:
 
-1. **Daily Sitemap Generation** (2 AM UTC)
-2. **Content Updates** (triggered by sitemap changes)
-3. **AI Documentation Generation** (triggered by content changes)
+1. **Daily Sitemap Generation** (2 AM UTC) - Downloads main page and extracts all links with real last updated dates
+2. **AI Documentation Generation** (triggered by sitemap changes) - Generates comprehensive Agents.md using smart prompts
 
 ## 📊 Status
 
 - [x] Repository setup
 - [x] GitHub Actions workflows
-- [x] Scraping scripts
-- [x] AI integration
-- [ ] Initial data generation
+- [x] Sitemap generation (curl-based)
+- [x] AI integration with smart prompts
+- [x] Fallback content generation
 - [ ] GitHub Pages deployment
 
 ## 🤖 Drupal Surge Integration

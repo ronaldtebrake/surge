@@ -119,3 +119,9 @@ playwright/.cache/
 # OS
 .DS_Store
 Thumbs.db
+
+# Data files
+data/sitemap.json
+data/pages/
+data/main-page.html
+data/prompt.txt

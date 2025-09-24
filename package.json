@@ -1,12 +1,11 @@
 {
   "name": "surge-codingstandards",
   "version": "1.0.0",
-  "description": "Automated Drupal developer documentation system with AI-powered Agents.md generation",
+  "description": "Automated Drupal coding standards sitemap generation with AI-powered Agents.md creation",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sitemap": "node scripts/sitemap-scraper.js",
-    "content": "node scripts/content-scraper.js",
     "agents": "node scripts/agents-generator.js"
   },
   "keywords": [

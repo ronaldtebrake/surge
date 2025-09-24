@@ -5,9 +5,8 @@ Create an automated system that scrapes Drupal developer documentation, tracks c
 
 ## Project Goals
 - Automatically scrape and track Drupal coding standards documentation
-- Generate structured sitemap with change tracking
-- Create markdown files for documentation pages
-- Use AI to generate comprehensive `Agents.md` file
+- Generate structured sitemap with change tracking and real last updated dates
+- Use AI to generate comprehensive `Agents.md` file from sitemap data
 - Deploy results to GitHub Pages
 
 ---
@@ -15,7 +14,7 @@ Create an automated system that scrapes Drupal developer documentation, tracks c
 ## Phase 1: Project Setup & Infrastructure
 
 ### 1.1 Repository Structure Setup
-- [ ] Create proper directory structure:
+- [X] Create proper directory structure:
   ```
   /
   ├── .github/
@@ -24,12 +23,9 @@ Create an automated system that scrapes Drupal developer documentation, tracks c
   │       ├── content-updater.yml
   │       └── agents-generator.yml
   ├── data/
-  │   ├── sitemap.json
-  │   └── pages/
-  │       └── *.md
+  │   └── sitemap.json
   ├── scripts/
   │   ├── sitemap-scraper.js
-  │   ├── content-scraper.js
   │   └── agents-generator.js
   ├── docs/
   │   └── Agents.md
@@ -46,101 +42,71 @@ Create an automated system that scrapes Drupal developer documentation, tracks c
   - `PLAYWRIGHT_BROWSERS` (for Playwright setup)
 
 ### 1.3 Dependencies & Package Management
-- [ ] Create `package.json` with required dependencies:
-  - Playwright for web scraping
+- [X] Create `package.json` with required dependencies:
+  - curl for web scraping (via child_process)
+  - OpenAI for AI integration
+  - fs-extra for file operations
   - Node.js for automation scripts
   - GitHub Actions for CI/CD
-- [ ] Set up Playwright browser installation in GitHub Actions
 
 ---
 
 ## Phase 2: Sitemap Generation System
 
 ### 2.1 Sitemap Scraper Development
-- [ ] Create `scripts/sitemap-scraper.js`:
-  - [ ] Navigate to https://www.drupal.org/docs/develop/standards
-  - [ ] Extract all section headers (PHP, CSS, JavaScript, etc.)
-  - [ ] Extract all documentation links under each section
-  - [ ] Scrape last updated timestamps from each page
-  - [ ] Generate structured JSON output
+- [X] Create `scripts/sitemap-scraper.js`:
+  - [X] Download https://www.drupal.org/docs/develop/standards using curl
+  - [X] Extract all section headers (PHP, CSS, JavaScript, etc.)
+  - [X] Extract all documentation links under each section
+  - [X] Scrape last updated timestamps from each page using curl
+  - [X] Generate structured JSON output
 
 ### 2.2 JSON Structure Implementation
-- [ ] Implement the required JSON structure:
+- [X] Implement the required JSON structure:
   ```json
   {
-    "PHP Coding Standards": {
-      "https://www.drupal.org/docs/develop/standards/php/php-coding-standards": "2024-01-15",
-      "https://www.drupal.org/docs/develop/standards/php/php-coding-standards/php-coding-standards": "2024-01-10"
+    "PHP": {
+      "https://www.drupal.org/docs/develop/standards/php": "2024-04-11",
+      "https://www.drupal.org/docs/develop/standards/php/php-coding-standards": "2025-08-16"
     },
-    "CSS Coding Standards": {
-      "https://www.drupal.org/docs/develop/standards/css": "2024-01-12"
+    "CSS": {
+      "https://www.drupal.org/docs/develop/standards/css": "2023-01-19"
     }
   }
   ```
 
 ### 2.3 GitHub Actions Workflow for Sitemap
-- [ ] Create `.github/workflows/sitemap-generator.yml`:
-  - [ ] Run on cron schedule (daily at 2 AM UTC)
-  - [ ] Set up Playwright environment
-  - [ ] Execute sitemap scraper
-  - [ ] Compare with existing sitemap.json
-  - [ ] Commit changes if updates detected
-  - [ ] Trigger content updater workflow
+- [X] Create `.github/workflows/sitemap-generator.yml`:
+  - [X] Run on cron schedule (daily at 2 AM UTC)
+  - [X] Execute sitemap scraper (no Playwright needed)
+  - [X] Compare with existing sitemap.json
+  - [X] Create pull request if changes detected
+  - [X] Label PR with "needs: content update"
 
 ---
 
-## Phase 3: Content Management System
+## Phase 3: AI-Powered Agents.md Generation
 
-### 3.1 Content Scraper Development
-- [ ] Create `scripts/content-scraper.js`:
-  - [ ] Read sitemap.json
-  - [ ] Compare last_updated timestamps
-  - [ ] Scrape only changed pages
-  - [ ] Convert HTML content to clean markdown
-  - [ ] Save markdown files to `data/pages/`
+### 3.1 Agents Generator Development
+- [X] Create `scripts/agents-generator.js`:
+  - [X] Read sitemap.json with all documentation links and dates
+  - [X] Generate comprehensive Agents.md using AI (OpenAI GPT-4)
+  - [X] Use smart prompts with sitemap data for context
+  - [X] Include fallback content generation when API unavailable
 
-### 3.2 Change Detection Logic
-- [ ] Implement smart change detection:
-  - [ ] Compare timestamps from sitemap
-  - [ ] Check file modification dates
-  - [ ] Hash content for additional verification
-  - [ ] Only process truly changed content
+### 3.2 Smart Prompt Engineering
+- [X] Implement intelligent prompt system:
+  - [X] Analyze sitemap structure and extract topics
+  - [X] Generate detailed prompts with section breakdowns
+  - [X] Include last updated dates and page counts
+  - [X] Create comprehensive requirements for AI generation
 
-### 3.3 GitHub Actions Workflow for Content Updates
-- [ ] Create `.github/workflows/content-updater.yml`:
-  - [ ] Triggered by sitemap changes
-  - [ ] Run content scraper
-  - [ ] Create pull request with changes
-  - [ ] Add label "needs: agents.md update"
-  - [ ] Include summary of updated pages
-
----
-
-## Phase 4: AI-Powered Agents.md Generation
-
-### 4.1 AI Integration Script
-- [ ] Create `scripts/agents-generator.js`:
-  - [ ] Read all markdown files from `data/pages/`
-  - [ ] Combine content intelligently
-  - [ ] Send to OpenAI API with structured prompt
-  - [ ] Generate comprehensive `Agents.md` file
-  - [ ] Handle API rate limiting and errors
-
-### 4.2 Prompt Engineering
-- [ ] Design effective prompt for ChatGPT:
-  - [ ] Include context about Drupal coding standards
-  - [ ] Specify desired output format
-  - [ ] Include examples of good documentation structure
-  - [ ] Request specific sections (overview, standards, examples, etc.)
-
-### 4.3 GitHub Actions Workflow for AI Generation
-- [ ] Create `.github/workflows/agents-generator.yml`:
-  - [ ] Triggered by PRs with "needs: agents.md update" label
-  - [ ] Only runs for user ronaltebrake
-  - [ ] Run agents generator script
-  - [ ] Create commit with updated `Agents.md`
-  - [ ] Update PR with generated content
-  - [ ] Remove the trigger label
+### 3.3 GitHub Actions Workflow for Agents.md Updates
+- [X] Create `.github/workflows/agents-generator.yml`:
+  - [X] Triggered by sitemap changes (PRs with "needs: agents.md update" label)
+  - [X] Run agents generator with OpenAI API
+  - [X] Generate comprehensive Agents.md file
+  - [X] Commit changes to the PR branch
 
 ---
 
