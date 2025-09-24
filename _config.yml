@@ -1,0 +1,93 @@
+# Jekyll configuration for Surge Coding Standards
+# This configures Jekyll to work with our static site while excluding unnecessary folders
+
+# Site settings
+title: "Surge Coding Standards"
+description: "Automated Drupal coding standards documentation with AI-powered Agents.md generation"
+baseurl: ""
+url: "https://ronaldtebrake.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Exclude files and folders from Jekyll processing
+exclude:
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - scripts/
+  - data/
+  - PROJECT_PLAN.md
+  - prompt-structure-summary.txt
+  - quick-reference-approach-summary.md
+  - section-based-approach-summary.md
+  - README.md
+  - .git/
+  - .gitignore
+
+# Include files that should be processed
+include:
+  - .nojekyll
+
+# Collections (if you want to use them later)
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults for different file types
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "default"
+
+# Plugins (GitHub Pages compatible)
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Kramdown settings for better markdown processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+
+# Jekyll SEO Tag settings
+seo:
+  type: "WebSite"
+  name: "Surge Coding Standards"
+  description: "Automated Drupal coding standards documentation with AI-powered Agents.md generation"
+  url: "https://ronaldtebrake.github.io/surge-codingstandards"
+  image: "/assets/logo.png"
+
+# GitHub Pages specific settings
+github: [metadata]
+
+# Safe mode (for GitHub Pages)
+safe: true
+
+# Source directory (where Jekyll looks for files)
+source: "."
+
+# Destination directory (where Jekyll outputs files)
+destination: "_site"
+
+# Keep files (files to keep after build)
+keep_files:
+  - .nojekyll
+  - index.html
