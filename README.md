@@ -82,7 +82,3 @@ graph TD
 - [Generated Documentation](./docs/Agents.md)
 - [Drupal Surge Project](https://www.drupal.org/project/surge)
 - [Drupal Official Docs](https://www.drupal.org/docs/develop/standards)
-
-## 📝 License
-
-MIT License
