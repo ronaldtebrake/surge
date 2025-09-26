@@ -10,7 +10,7 @@ const BULLETS_DIR = path.join(__dirname, '..', 'data', 'bullets');
 class BulletPointGenerator {
   constructor() {
     this.openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY
+      apiKey: process.env.OPENAI_API_KEY || 'dummy'
     });
   }
 
@@ -39,6 +39,12 @@ class BulletPointGenerator {
   }
 
   async generateBulletPoints(markdownContent, filename) {
+    // Check if we have a valid API key
+    if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === 'dummy') {
+      console.log(`   ⚠️ No API key provided, using fallback for ${filename}`);
+      return this.createFallbackBulletPoints(markdownContent, filename);
+    }
+
     const prompt = `Convert the following Drupal documentation into comprehensive bullet points for AI coding agents. Focus on rules, guidelines, and standards that AI tools should follow when working with Drupal.
 
 File: ${filename}

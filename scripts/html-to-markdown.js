@@ -1,5 +1,37 @@
 #!/usr/bin/env node
 
+// Polyfill for File global that undici expects
+if (typeof globalThis.File === 'undefined') {
+  globalThis.File = class File {
+    constructor(chunks, filename, options = {}) {
+      this.name = filename;
+      this.size = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
+      this.type = options.type || '';
+      this.lastModified = options.lastModified || Date.now();
+      this._chunks = chunks;
+    }
+    
+    stream() {
+      return new ReadableStream({
+        start(controller) {
+          for (const chunk of this._chunks) {
+            controller.enqueue(chunk);
+          }
+          controller.close();
+        }
+      });
+    }
+    
+    arrayBuffer() {
+      return Promise.resolve(Buffer.concat(this._chunks).buffer);
+    }
+    
+    text() {
+      return Promise.resolve(Buffer.concat(this._chunks).toString());
+    }
+  };
+}
+
 const fs = require('fs-extra');
 const path = require('path');
 const cheerio = require('cheerio');
