@@ -8,6 +8,8 @@ const SITEMAP_FILE = path.join(__dirname, '..', 'data', 'sitemap.json');
 const BULLETS_DIR = path.join(__dirname, '..', 'data', 'bullets');
 const PAGES_DIR = path.join(__dirname, '..', 'data', 'pages');
 const PROMPTS_DIR = path.join(__dirname, '..', 'data', 'prompts');
+const BULLETS_MANIFEST_FILE = path.join(BULLETS_DIR, 'bullets-manifest.json');
+const PAGES_MANIFEST_FILE = path.join(PAGES_DIR, 'generation-summary.json');
 
 class PageAgentsGenerator {
   constructor() {
@@ -23,6 +25,56 @@ class PageAgentsGenerator {
       console.error('Error loading sitemap:', error);
       throw error;
     }
+  }
+
+  async loadBulletsManifest() {
+    try {
+      if (await fs.pathExists(BULLETS_MANIFEST_FILE)) {
+        return await fs.readJson(BULLETS_MANIFEST_FILE);
+      }
+    } catch (error) {
+      console.warn('Could not load bullets manifest:', error.message);
+    }
+    return null;
+  }
+
+  async loadPagesManifest() {
+    try {
+      if (await fs.pathExists(PAGES_MANIFEST_FILE)) {
+        return await fs.readJson(PAGES_MANIFEST_FILE);
+      }
+    } catch (error) {
+      console.warn('Could not load pages manifest:', error.message);
+    }
+    return null;
+  }
+
+  needsPageUpdate(pageUrl, bulletsManifest, pagesManifest) {
+    if (!bulletsManifest || !pagesManifest) {
+      return true; // If we can't determine, process it
+    }
+
+    // Find the bullet points file for this page
+    const urlParts = pageUrl.split('/');
+    const lastPart = urlParts[urlParts.length - 1];
+    const bulletsFilename = `${lastPart}.bullets.md`;
+    
+    const bulletResult = bulletsManifest.results?.find(r => r.bulletsFile === bulletsFilename);
+    if (!bulletResult) {
+      return true; // No bullet points available
+    }
+
+    // Find the last generated page for this URL
+    const pageResult = pagesManifest.pages?.find(p => p.url === pageUrl);
+    if (!pageResult) {
+      return true; // Never generated before
+    }
+
+    // Compare timestamps - if bullet points were updated after page generation, update the page
+    const bulletsUpdated = new Date(bulletResult.lastProcessedAt || bulletResult.convertedAt);
+    const pageGenerated = new Date(pageResult.generatedAt || pagesManifest.generatedAt);
+    
+    return bulletsUpdated > pageGenerated;
   }
 
   async loadBulletPointsForPage(pageUrl) {
@@ -279,8 +331,11 @@ ${keyRules.length > 0 ? keyRules.join('\n') : `- Follow Drupal coding standards 
     console.log('🚀 Starting page-based Quick Reference generation...');
     
     try {
-      // Load sitemap
+      // Load sitemap and manifests for incremental updates
       const sitemap = await this.loadSitemap();
+      const bulletsManifest = await this.loadBulletsManifest();
+      const pagesManifest = await this.loadPagesManifest();
+      
       console.log(`Loaded sitemap with ${Object.keys(sitemap).length} sections`);
       
       // Ensure directories exist
@@ -288,19 +343,54 @@ ${keyRules.length > 0 ? keyRules.join('\n') : `- Follow Drupal coding standards 
       await fs.ensureDir(PROMPTS_DIR);
       
       const results = [];
+      const pagesToUpdate = [];
+      const pagesToSkip = [];
       let totalPages = 0;
       
-      // Generate each page from all sections
+      // Determine which pages need updating
       for (const [sectionName, links] of Object.entries(sitemap)) {
-        console.log(`\n📂 Processing section: ${sectionName}`);
-        
         for (const [pageUrl, lastUpdated] of Object.entries(links)) {
           totalPages++;
-          const result = await this.generatePageAgents(pageUrl, sectionName);
-          
-          if (result) {
-            results.push(result);
+          if (this.needsPageUpdate(pageUrl, bulletsManifest, pagesManifest)) {
+            pagesToUpdate.push({ pageUrl, sectionName });
+          } else {
+            pagesToSkip.push({ pageUrl, sectionName });
           }
+        }
+      }
+      
+      console.log(`Found ${totalPages} pages total`);
+      console.log(`  - Need updates: ${pagesToUpdate.length}`);
+      console.log(`  - Up to date: ${pagesToSkip.length}`);
+      
+      if (pagesToSkip.length > 0) {
+        console.log(`⏭ Skipping up-to-date pages: ${pagesToSkip.slice(0, 3).map(p => p.pageUrl.split('/').pop()).join(', ')}${pagesToSkip.length > 3 ? '...' : ''}`);
+      }
+      
+      // Generate only pages that need updating
+      for (const { pageUrl, sectionName } of pagesToUpdate) {
+        console.log(`\n📂 Processing section: ${sectionName}`);
+        const result = await this.generatePageAgents(pageUrl, sectionName);
+        
+        if (result) {
+          results.push(result);
+        }
+      }
+      
+      // Merge with existing results for pages that weren't updated
+      const existingPages = pagesManifest?.pages || [];
+      const updatedPages = [...results.map(r => ({
+        topic: r.topic,
+        filename: r.filename,
+        section: r.section,
+        url: r.url,
+        generatedAt: new Date().toISOString()
+      }))];
+      
+      // Add existing pages that weren't updated
+      for (const existingPage of existingPages) {
+        if (!pagesToUpdate.some(p => p.pageUrl === existingPage.url)) {
+          updatedPages.push(existingPage);
         }
       }
       
@@ -308,20 +398,19 @@ ${keyRules.length > 0 ? keyRules.join('\n') : `- Follow Drupal coding standards 
       const summary = {
         generatedAt: new Date().toISOString(),
         totalPages: totalPages,
-        generatedPages: results.length,
-        pages: results.map(r => ({
-          topic: r.topic,
-          filename: r.filename,
-          section: r.section,
-          url: r.url
-        }))
+        pagesUpdated: pagesToUpdate.length,
+        pagesSkipped: pagesToSkip.length,
+        generatedPages: updatedPages.length,
+        pages: updatedPages
       };
       
       await fs.writeJson(path.join(PAGES_DIR, 'generation-summary.json'), summary, { spaces: 2 });
       
       console.log(`\n✅ Page generation complete:`);
       console.log(`   - Total pages: ${totalPages}`);
-      console.log(`   - Generated: ${results.length} Quick References`);
+      console.log(`   - Pages updated: ${summary.pagesUpdated}`);
+      console.log(`   - Pages skipped (up-to-date): ${summary.pagesSkipped}`);
+      console.log(`   - Generated: ${summary.generatedPages} Quick References`);
       console.log(`   - Files saved to: ${PAGES_DIR}`);
       console.log(`   - Prompts saved to: ${PROMPTS_DIR}`);
       

@@ -8,27 +8,27 @@
   <meta name="MobileOptimized" content="width" />
   <!--[if IE]><![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="description" content="JavaScript coding standards and best practices for Drupal." />
+<meta name="description" content="eslint settings to impose Drupal JavaScript coding standards" />
 <meta name="generator" content="Drupal 7 (https://www.drupal.org)" />
 <link rel="image_src" href="https://www.drupal.org/sites/all/themes/bluecheese/images/drupal_meta_image.png" />
-<link rel="canonical" href="https://www.drupal.org/docs/develop/standards/javascript-coding-standards" />
-<link rel="shortlink" href="https://www.drupal.org/node/2803009" />
+<link rel="canonical" href="https://www.drupal.org/docs/develop/standards/javascript-coding-standards/javascript-coding-standards" />
+<link rel="shortlink" href="https://www.drupal.org/node/172169" />
 <meta property="og:site_name" content="Drupal.org" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.drupal.org/docs/develop/standards/javascript-coding-standards" />
+<meta property="og:url" content="https://www.drupal.org/docs/develop/standards/javascript-coding-standards/javascript-coding-standards" />
 <meta property="og:title" content="JavaScript coding standards" />
-<meta property="og:description" content="Note: Changes to Drupal coding standards are proposed and discussed in issues in the Coding Standards project. JavaScript coding standards and best practices for Drupal." />
-<meta property="og:updated_time" content="2023-01-19T16:43:35+00:00" />
-<meta property="article:published_time" content="2016-09-20T13:09:10+00:00" />
-<meta property="article:modified_time" content="2023-01-19T16:43:35+00:00" />
-  <title>JavaScript coding standards | Coding standards | Drupal Wiki guide on Drupal.org</title>
+<meta property="og:description" content="Note: Changes to Drupal coding standards are proposed and discussed in issues in the Coding Standards project. Use eslint for Drupal JS coding standards. See the eslint settings information. Drupal uses &#039;eslint-config-airbnb&#039; as ESLint shareable config. Therefore it&#039;s reasonable to use &#039;Airbnb JavaScript Style Guide&#039; as Drupal JS coding standard. Indenting All code MUST indent using two (2) space characters, All code MUST NOT indent using tab characters, All code MUST NOT end with trailing whitespace. Semicolons JavaScript allows optional &quot;semi-colon insertion&quot;. Drupal standards do not." />
+<meta property="og:updated_time" content="2024-05-13T14:33:46+00:00" />
+<meta property="article:published_time" content="2007-08-31T18:34:31+00:00" />
+<meta property="article:modified_time" content="2024-05-13T14:33:46+00:00" />
+  <title>JavaScript coding standards | JavaScript coding standards | Drupal Wiki guide on Drupal.org</title>
   <link type="text/css" rel="stylesheet" href="/files/advagg_css/css__IGnvPR1nQd12eUWIitgZ6GDDyWxn9W82zUE-pgSt6Y8__Gh7RLUb1X-_kkfJcUW2xrjQQJCrbwuGgKr5Ix51cJYc__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
 <link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Xi-PZpvKTY78w7l1WNsqwUA52MIupHJebCMiX34Ugt0__D_EUHDAfEQdxcLiSDY7hREUWkG1Ge56_h2z3Er8V188__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
 <link type="text/css" rel="stylesheet" href="/files/advagg_css/css__WF0PRotZAhCcl0aJjY5W2LYj8UwiYuB2dZEFluOh3Tc__FviX13FUB-Ppa2XB29BUIJQZ1Wg-F5XiDE7XD5y7mjQ__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
 <link type="text/css" rel="stylesheet" href="/files/advagg_css/css__Fx0_w1L9q3nwzXnALG7UfjLF34FGYgJTz636-GWbM6k__0jWLTEHP3h5U5RcXuZcFhf0DdvRdzP3_wzCVNT015Ls__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
-<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__71G6gao0TOuJxFfw9efqGV9HafmPRGSqQoYV4yqGUWc__cjdS_7q2MvneE1k5vHyBqxDqcSSGdHyUNCXu57rH2hM__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="/files/advagg_css/css__71G6gao0TOuJxFfw9efqGV9HafmPRGSqQoYV4yqGUWc__YMvZnJfUoe4tqFtuq7v2JwgHervMHSNYiOH-0uyzOUU__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.css" media="all" />
   </head>
-<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-2803009 node-type-guide drupalorg-site-main panels-layout og-context og-context-node og-context-node-2803009" >
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-172169 node-type-documentation drupalorg-site-main panels-layout og-context og-context-node og-context-node-2803009" >
   <div id="skip-link" tabindex="-1">
     <a class="element-invisible element-focusable" href="#content">Skip to main content</a>
     <a class="element-invisible element-focusable skip-link-search" href="#search-block-form">Skip to search</a>
@@ -109,13 +109,13 @@
 <div class="block-inner">
     
   <div class="content">
-    <form action="/docs/develop/standards/javascript-coding-standards" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+    <form action="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
       <h2 class="element-invisible">Search form</h2>
     <div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search </label>
  <input placeholder="Search…" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input alt="Search" type="image" id="edit-submit" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-D-VNI1uIQOWvKLI4FEYyupJswZ70SFfybDSO0yWkb4c" />
+<div class="form-actions form-wrapper" id="edit-actions"><input alt="Search" type="image" id="edit-submit" name="submit" value="Search" src="/sites/all/themes/bluecheese/images/icon-w-search.svg" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-xpzlLGQRy8lEVI3ZFf_fng_AUjSbKBVX8raQeI8XP80" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div>
 </div></form>  </div>
@@ -125,8 +125,8 @@
 <div class="block-inner">
     
   <div class="content">
-    <div class="menu-block"><ul class="menu"><li class="button default"><a href="#block-system-user-menu"><img src="https://www.drupal.org/sites/all/themes/bluecheese/images/icon-w-user.svg" alt="Log in, view profile, and more"></a><ul><li class="first leaf"><a href="/user/login?destination=node/2803009" title="">Log in</a></li>
-<li class="last leaf"><a href="/user/register?destination=node/2803009" title="">Create account</a></li>
+    <div class="menu-block"><ul class="menu"><li class="button default"><a href="#block-system-user-menu"><img src="https://www.drupal.org/sites/all/themes/bluecheese/images/icon-w-user.svg" alt="Log in, view profile, and more"></a><ul><li class="first leaf"><a href="/user/login?destination=node/172169" title="">Log in</a></li>
+<li class="last leaf"><a href="/user/register?destination=node/172169" title="">Create account</a></li>
 </ul></li></ul></div>  </div>
   </div>
 </div>
@@ -145,7 +145,7 @@
 <div class="block-inner">
     
   <div class="content">
-    <form class="container-inline" action="/docs/develop/standards/javascript-coding-standards" method="post" id="drupalorg-documentation-search-form" accept-charset="UTF-8"><div><input type="hidden" name="form_build_id" value="form-5iqBU6Me82aRLqTs3pye7RbDRXJFZoyoSEirm4JTXb8" />
+    <form class="container-inline" action="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards" method="post" id="drupalorg-documentation-search-form" accept-charset="UTF-8"><div><input type="hidden" name="form_build_id" value="form-mA-OUc8NitkGs2ekTYCLKInZow42pa_g_84EW-5yoME" />
 <input type="hidden" name="form_id" value="drupalorg_documentation_search_form" />
 <div class="form-item form-type-textfield form-item-drupalorg-documentation-search-form">
   <label class="element-invisible" for="edit-drupalorg-documentation-search-form--2">Search </label>
@@ -165,15 +165,15 @@
 <div class="block-inner">
     
   <div class="content">
-    <div class="announcement"><img class="photo" src="https://www.drupal.org/files/styles/grid-2-2x-square/public/announcements/da-icon.png?itok=wwiCve4D" width="280" height="280" alt="Announcement icon" title="Announcement icon" />Last chance! The 2025 Drupal Business Survey closes tomorrow. Your response will help shape the future of the Drupal business ecosystem.</div>
-<div class="cta"><a href="https://forms.gle/kue9WCroke5VnW5e9" class="global-announce-banner dc-singapore-registration">Take the survey today</a></div>  </div>
+    <div class="announcement"><img class="photo" src="https://www.drupal.org/files/styles/grid-2-2x-square/public/announcements/drupal-evergreen-logo-280X280px%20%281%29_0.jpg?itok=PHpn6rCb" width="280" height="280" alt="Announcement icon" title="Announcement icon" />Still on Drupal 7? Security support for Drupal 7 ended on 5 January 2025. Please visit our Drupal 7 End of Life resources page to review all of your options.</div>
+<div class="cta"><a href="https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/enterprise" class="global-announce-banner dc-singapore-registration">Migration Resource Center</a></div>  </div>
   </div>
 </div>
   </div>
     </div>
   
   <div id="page" class="clearfix">
-    <div class="breadbox"><nav class="breadcrumb container-12"><span><a href="/docs/develop">Develop</a></span><span><a href="/docs/develop/standards">Coding standards</a></span></nav></div>
+    <div class="breadbox"><nav class="breadcrumb container-12"><span><a href="/docs/develop">Develop</a></span><span><a href="/docs/develop/standards">Coding standards</a></span><span><a href="/docs/develop/standards/javascript-coding-standards">JavaScript coding standards</a></span></nav></div>
 
     <div id="main" role="main">
       
@@ -187,7 +187,7 @@
     
   <div class="content">
     
-<div class="panelizer-view-mode node node-full node-guide node-2803009">
+<div class="panelizer-view-mode node node-full node-documentation node-172169">
         
 <div class="panel-display hydra panel-layout clearfix " >
 
@@ -209,24 +209,52 @@
 
   
   </div>
-<div class="panel-separator"></div><div class="panel-pane pane-block pane-og-menu-og-single-menu-block"  id="coding-standards" >
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-table-of-contents-toc-w-3y7froeoqmgrpcmgnphqwt4pi3"  id="on-this-page" >
   
-        <h2 class="pane-title">
-      <a href="/docs/develop/standards">Coding standards</a>    </h2>
+        <h3 class="pane-title">
+      On this page    </h3>
     
   
   <div class="pane-content">
-    <ul class="menu"><li class="first leaf"><a href="/docs/develop/standards/php" title="">PHP</a></li>
-<li class="leaf"><a href="/docs/develop/standards/accessibility-coding-standards">Accessibility Coding Standards</a></li>
-<li class="leaf"><a href="/docs/develop/standards/css">CSS</a></li>
-<li class="leaf active-trail"><a href="/docs/develop/standards/javascript-coding-standards" class="active-trail active">JavaScript</a></li>
-<li class="leaf"><a href="/docs/develop/coding-standards/markdown-coding-standards">Markdown coding standards</a></li>
-<li class="leaf"><a href="/docs/develop/standards/sql" title="">SQL</a></li>
-<li class="leaf"><a href="/docs/develop/coding-standards/twig-coding-standards">Twig coding standards</a></li>
-<li class="leaf"><a href="/docs/develop/coding-standards/drupal-markup-style-guide">Drupal Markup Style Guide</a></li>
-<li class="leaf"><a href="/docs/develop/standards/spelling">Spelling</a></li>
-<li class="leaf"><a href="/docs/develop/coding-standards/configuration-file-coding-standards">Configuration file coding standards</a></li>
-<li class="last leaf"><a href="/docs/develop/coding-standards/composer-package-naming-conventions">Composer package naming conventions</a></li>
+    <div class="item-list"><ul class="anchor-list"><li class="anchor-list__item h2-tag first"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#indenting" class="toc-link active">Indenting</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#semicolons" class="toc-link active">Semicolons</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#strict" class="toc-link active">File-closure</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#camelcasing" class="toc-link active">CamelCasing</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#variablesandarrays" class="toc-link active">Variables and Arrays</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#globvariables" class="toc-link active">Global Variables</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#constants" class="toc-link active">Constants</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#arrays" class="toc-link active">Arrays</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#s-typeof" class="toc-link toc-link-invalid-id active">Typeof</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#functions" class="toc-link active">Functions</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#s-function-and-method-names" class="toc-link toc-link-invalid-id active">Function and method names</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#declarations" class="toc-link active">Function Declarations</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#functioncalls" class="toc-link active">Function Calls</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#constructors" class="toc-link active">Constructors</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#comments" class="toc-link active">Comments</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#concatenation" class="toc-link active">String Concatenation</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#structures" class="toc-link active">Control Structures</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#switch" class="toc-link active">switch</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#try" class="toc-link active">try</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#forin" class="toc-link active">for in</a></li>
+<li class="anchor-list__item h2-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#operators" class="toc-link active">Operators</a></li>
+<li class="anchor-list__item h3-tag"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#truefalse" class="toc-link active">Comparisons</a></li>
+<li class="anchor-list__item h3-tag last"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards#comma" class="toc-link active">Comma Operator</a></li>
+</ul></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-og-menu-og-single-menu-block"  id="javascript-coding-standards" >
+  
+        <h2 class="pane-title">
+      <a href="/docs/develop/standards/javascript-coding-standards">JavaScript coding standards</a>    </h2>
+    
+  
+  <div class="pane-content">
+    <ul class="menu"><li class="first leaf active-trail"><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards" class="active-trail active">JavaScript coding standards</a></li>
+<li class="leaf"><a href="/docs/develop/standards/javascript/javascript-best-practices">JavaScript best practices</a></li>
+<li class="leaf"><a href="/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool">ESLint settings</a></li>
+<li class="leaf"><a href="/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards">JavaScript API documentation and comment standards</a></li>
+<li class="last leaf"><a href="/docs/develop/standards/javascript/jquery-coding-standards">jQuery coding standards</a></li>
 </ul>  </div>
 
   
@@ -244,13 +272,33 @@
       </div>
       <div class="column-content-region left-content column panel-panel ">
         <div class="column-content-region-inner left-content-inner column-inner panel-panel-inner">
-          <div class="panel-pane pane-page-title"  >
+          <div class="panel-pane pane-node-title"  >
   
       
   
   <div class="pane-content">
     <h1>JavaScript coding standards</h1>
   </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-node-updated"  id="last-updated-on" >
+  
+        <span class="pane-title">
+      Last <a href="/node/172169/discuss">updated</a> on    </span>
+    
+  
+  <div class="pane-content">
+    13 May 2024  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-entity-field pane-node-field-documentation-status"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-field-documentation-status field-type-list-text field-label-hidden"><div class="field-items"><div class="field-item even"><p class="deprecated">This documentation <strong>needs work</strong>. See "Help improve this page" in the sidebar.</p></div></div></div>  </div>
 
   
   </div>
@@ -262,54 +310,239 @@
     <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"><div class="note-warning">
 <p>Note: Changes to Drupal coding standards are proposed and discussed in issues in the <a href="/project/coding_standards" rel="nofollow">Coding Standards project</a>.</p>
 </div>
-<p>JavaScript coding standards and best practices for Drupal.</p></div></div></div>  </div>
+<p>Use <a href="http://eslint.org/docs/user-guide/command-line-interface" rel="nofollow">eslint</a> for Drupal JS coding standards. See the <a href="https://www.drupal.org/node/1955232" rel="nofollow">eslint settings information</a>. Drupal uses 'eslint-config-airbnb' as ESLint shareable config. Therefore it's reasonable to use <a href="https://github.com/airbnb/javascript/" rel="nofollow">'Airbnb JavaScript Style Guide'</a> as Drupal JS coding standard.</p>
+<h2 id="indenting"><a class="toc-anchor" title="Permalink to this headline" href="#indenting"></a>Indenting</h2>
+<ul>
+<li>All code MUST indent using two (2) space characters,</li>
+<li>All code MUST NOT indent using tab characters,</li>
+<li>All code MUST NOT end with trailing whitespace.</li>
+</ul>
+<h2 id="semicolons"><a class="toc-anchor" title="Permalink to this headline" href="#semicolons"></a>Semicolons</h2>
+<p>JavaScript allows optional "semi-colon insertion". Drupal standards do not.</p>
+<ul>
+<li>All statements (except <code class="language-php">for, function, if, switch, try, while</code>) MUST be followed by a semi-colon (<code class="language-php">;</code>),</li>
+<li>Return values MUST start on the same line as the <code class="language-php">return</code> keyword.</li>
+</ul>
+<p><strong>EXCEPTIONS:</strong></p>
+<ul>
+<li>Anonymous functions assigned to a variable MUST be followed by a semi-colon.<br />
+<pre>
+<code class="language-php">Drupal.behaviors.tableSelect = function (context) {
+  // Statements...
+};
+</code></pre></li>
+<li>do/while control structures MUST be followed by a semi-colon<br />
+<pre>
+<code class="language-php">do {
+  // Statements...
+} while (condition);
+</code></pre></li>
+</ul>
+<h2 id="strict"><a class="toc-anchor" title="Permalink to this headline" href="#strict"></a>File-closure</h2>
+<p>All JavaScript code MUST be declared inside a closure wrapping the whole file.</p>
+<pre>
+<code class="language-javascript language-php">/**
+ * @file
+ */
+(() =&gt; {
 
-  
-  </div>
-<div class="panel-separator"></div><div class="panel-pane pane-section-contents"  >
-  
-      
-  
-  <div class="pane-content">
-    <section><h2><a href="/docs/develop/standards/javascript-coding-standards/javascript-coding-standards">JavaScript coding standards</a></h2><p>eslint settings to impose Drupal JavaScript coding standards</p></section><section><h2><a href="/docs/develop/standards/javascript/javascript-best-practices">JavaScript best practices</a></h2><p>This page covers DOM and Drupal specific code styles.</p></section><section><h2><a href="/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool">Setting up the linter-fixer tool</a></h2><p>Detailed tutorial explaining the background while walking through the setup process of the toolset for linting &amp; fixing JS code of Drupal.</p></section><section><h2><a href="/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards">JavaScript API documentation and comment standards</a></h2><p>Documentation standards for JavaScript</p></section><section><h2><a href="/docs/develop/standards/javascript/jquery-coding-standards">jQuery coding standards</a></h2><p>Prefix variables that point to jQuery objects with a dollar sign($)</p></section>  </div>
+  // All the JavaScript for this file.
 
-  
-  </div>
-<div class="panel-separator"></div><div class="panel-pane pane-views-panes pane-documentation-related-content-related-content-pane"  id="related-content" >
-  
-        <h2 class="pane-title">
-      Related Content    </h2>
-    
-  
-  <div class="pane-content">
-    <div class="view view-documentation-related-content view-id-documentation_related_content view-display-id-related_content_pane view-dom-id-500e88d259426c9a955f976e06026419">
-        
-  
-  
-      <div class="view-content">
-        <div>
-    <div id="node-2996785" class="node node-documentation node-content-2996785 clearfix">
+})();
+</code></pre><h2 id="camelcasing"><a class="toc-anchor" title="Permalink to this headline" href="#camelcasing"></a>CamelCasing</h2>
+<p>For variables that are not <a href="#constants" rel="nofollow">constants</a> or <a href="#constructors" rel="nofollow">constructors</a>, multi-word variables and functions SHOULD be lowerCamelCased.</p>
+<p>The first letter of each variable or function SHOULD be lowercase, and the first letter of subsequent words SHOULD be capitalized. There SHOULD NOT be underscores between the words.</p>
+<p>In case a variable contains a jQuery object, the variable MUST start with a dollar sign (<code class="language-php">$</code>):</p>
+<pre>
+<code class="language-php">let $form = $('#search-block-form');
+let $inputs = $form.find('input');
+</code></pre><h2 id="variablesandarrays"><a class="toc-anchor" title="Permalink to this headline" href="#variablesandarrays"></a>Variables and Arrays</h2>
+<p>Due to enabled strict mode, an undeclared variable will halt the script, and on old browsers such variables are implicitly exported into global scope.</p>
+<p>All variables MUST be declared with let or const before they are used and SHOULD be declared only once. All variables SHOULD be declared at the beginning of a function.</p>
+<p>Each variable assignment SHOULD be declared on a separate line - including variables that are only declared but do not get a value assigned.</p>
+<pre>
+<code class="language-php">let anArray = [];
+let eventCallback = function () {};
+let curTableDragSetting;
+let curTableDragIndex;
+</code></pre><h3 id="globvariables"><a class="toc-anchor" title="Permalink to this headline" href="#globvariables"></a>Global Variables</h3>
+<p>Drupal JavaScript MUST NOT define global variables.</p>
+<h3 id="constants"><a class="toc-anchor" title="Permalink to this headline" href="#constants"></a>Constants</h3>
+<p>Pre-defined constants SHOULD be all-uppercase and words separated by underscores: <code class="language-php">UPPER_UNDERSCORED</code>.</p>
+<p>Variables added via PHP SHOULD be <a href="#camelcasing" rel="nofollow">lowerCamelCased</a>, so that they are consistent with other JavaScript variables:</p>
+<pre>
+<code class="language-php">$element['#attached']['js'][] = array(
+  'data' =&gt; array('myModule' =&gt; array('basePath' =&gt; base_path())), 
+  'type' =&gt; 'setting',
+);
+</code></pre><p>This variable would then be referenced:</p>
+<pre>
+<code class="language-php">Drupal.settings.myModule.basePath;
+</code></pre><h3 id="arrays"><a class="toc-anchor" title="Permalink to this headline" href="#arrays"></a>Arrays</h3>
+<p>Arrays SHOULD be formatted with one space separating each element and the assignment operator, if applicable:</p>
+<pre>
+<code class="language-php">let someArray = ['hello', 'world'];
+</code></pre><p>If the line is longer than 80 characters, each element SHOULD be broken into its own line, and indented one level.</p>
+<p>Use trailing comma after last element in multi line arrays. Trailing commas simplify adding and removing items to objects and arrays, since only the lines you are modifying must be touched. Also this leads to cleaner git diffs, when an item is added or removed from an object or array.</p>
+<pre>
+<code class="language-javascript language-php">// bad
+let fruits = [
+  'apples',
+  'banana',
+  'pineapple'
+];
 
-  
-        <h2><a href="/about/core/policies/core-change-policies/frontend-developer-tools-for-drupal-core">Frontend Developer tools for Drupal core</a></h2>
-    
-  
-  <div class="content">
-    <div class="field field-name-field-summary field-type-text field-label-hidden"><div class="field-items"><div class="field-item even">How to set up frontend developer tools used by Drupal core.</div></div></div>  </div>
+// good
+let fruits = [
+  'apples',
+  'banana',
+  'pineapple',
+];</code></pre><h3 id="s-typeof"><a class="toc-anchor" title="Permalink to this headline" href="#s-typeof"></a>Typeof</h3>
+<p>In type comparisons, the value tested MUST NOT be wrapped in parenthesis.</p>
+<pre>
+<code class="language-php">if (typeof myVariable === 'string') {
+  // ...
+}
+</code></pre><h2 id="functions"><a class="toc-anchor" title="Permalink to this headline" href="#functions"></a>Functions</h2>
+<h3 id="s-function-and-method-names"><a class="toc-anchor" title="Permalink to this headline" href="#s-function-and-method-names"></a>Function and method names</h3>
+<p>Function names SHOULD begin with the name of the module or theme declaring the function, so as to avoid name collisions.</p>
+<pre>
+<code class="language-php">Drupal.behaviors.tableDrag = function (context) {
+  Object.keys(Drupal.settings.tableDrag).forEach(function (base) {
+    $('#' + base).once('tabledrag', addBehavior);
+  });
+};
+</code></pre><h3 id="declarations"><a class="toc-anchor" title="Permalink to this headline" href="#declarations"></a>Function Declarations</h3>
+<ul>
+<li>The <code class="language-php">function</code> keyword MUST be followed by one space.</li>
+<li>Named functions MUST NOT have a space between the function name and the following left parenthesis.</li>
+<li>Optional arguments (using default values) SHOULD be defined at the end of the function signature.</li>
+<li>Every function SHOULD attempt to return a meaningful value.</li>
+</ul>
+<pre>
+<code class="language-javascript language-php">Drupal.behaviors.tableDrag = function (context) {
+  // ...
+  this.clickCallback = function (e) {
+    return false;
+  };
+  // ...
+};
 
-  
+function funStuff(field, settings) {
+  const settings = settings || Drupal.settings;
+  alert("This JS file does fun message popups.");
+  return field;
+}
 
-</div>
+// Anonymous:
+() =&gt; {}
 
-  </div>
-    </div>
-  
-  
-  
-  
-  
-  
-</div>  </div>
+// Named:
+function closeDialog() {}
+</code></pre><p>Note: The above examples code are lacking JSDoc and comments, only for clarity.</p>
+<h3 id="functioncalls"><a class="toc-anchor" title="Permalink to this headline" href="#functioncalls"></a>Function Calls</h3>
+<p>Functions SHOULD be called with no spaces between the function name, the opening parenthesis, and the first parameter.</p>
+<p>There SHOULD be one space between commas and each parameter, and there SHOULD NOT be a space between the last parameter, the closing parenthesis, and the semicolon.</p>
+<pre>
+<code class="language-php">let foobar = foo(bar, baz, quux);
+</code></pre><p>There SHOULD be one space on either side of an equals sign used to assign the return value of a function to a variable.</p>
+<h2 id="constructors"><a class="toc-anchor" title="Permalink to this headline" href="#constructors"></a>Constructors</h2>
+<p>Constructors are functions that are designed to be used with the <code class="language-php">new</code> prefix. The <code class="language-php">new</code> prefix creates a new object based on the function's prototype, and binds that object to the function's implied this parameter. JavaScript doesn't issue compile-time warning or run-time warnings if a required <code class="language-php">new</code> is omitted. If you do not use the <code class="language-php">new</code> prefix, no new object will be made and operations will be bound to the global object instead.</p>
+<p>Constructor functions MUST be given names with an initial uppercase character.</p>
+<p>A function with an initial uppercase name MUST NOT be called without a <code class="language-php">new</code> operator.</p>
+<pre>
+<code class="language-php">function CollapsibleDetails(node) {}
+
+let collapsibleDetail = new CollapsibleDetails(element);
+</code></pre><h2 id="comments"><a class="toc-anchor" title="Permalink to this headline" href="#comments"></a>Comments</h2>
+<p>Inline documentation for source files MUST follow the <a href="https://drupal.org/node/2183405" rel="nofollow">JavaScript API documentation and comment standards</a> (based on JSDoc).</p>
+<p>Non-JSDoc comments are strongly RECOMMENDED.</p>
+<p>A general rule of thumb is that if you look at a section of code and think "Wow, I don't want to try and describe that", you SHOULD comment it before you forget how it works. Comments MAY be removed by JS compression utilities later, so they don't negatively impact the file download size.</p>
+<p>Non-JSDoc comments SHOULD use capitalized sentences with punctuation. Comments SHOULD be on a separate line, immediately before the code line or block they reference.</p>
+<pre>
+<code class="language-php">// Unselect all other checkboxes.
+doSomething();
+</code></pre><p>If each line of a list needs a separate comment, comments MAY be placed on the same line and MAY be formatted to a uniform indent for readability.</p>
+<p>C style comments (<code class="language-php">/* */</code>) and standard C++ comments (<code class="language-php">//</code>) are both allowed.</p>
+<h2 id="concatenation"><a class="toc-anchor" title="Permalink to this headline" href="#concatenation"></a>String Concatenation</h2>
+<p>Expressions SHOULD be separated with one space before and after the <code class="language-php">+</code> operator to improve readability.</p>
+<pre>
+<code class="language-php">let string = 'Foo' + bar;
+string = bar + 'foo';
+string = bar() + 'foo';
+string = 'foo' + 'bar';
+</code></pre><p>The concatenating assignment operator (<code class="language-php">+=</code>) SHOULD be separated with one space on each side as with the assignment operator:</p>
+<pre>
+<code class="language-php">let string += 'Foo';
+string += bar;
+string += baz();
+</code></pre><h2 id="structures"><a class="toc-anchor" title="Permalink to this headline" href="#structures"></a>Control Structures</h2>
+<p>Control statements MUST have one space between the control keyword and opening parenthesis, to distinguish them from function calls.</p>
+<p>Control structures MUST always use curly braces, even in situations where they are optional. Having them increases readability and decreases the likelihood of logic errors being introduced when new lines are added.</p>
+<p>These include <code class="language-php">if, for, while, switch</code>.</p>
+<p>Example <code class="language-php">if</code> statement (the most complicated one):</p>
+<pre>
+<code class="language-php">if (condition1 || condition2) {
+  action1();
+}
+else if (condition3 &amp;&amp; condition4) {
+  action2();
+}
+else {
+  defaultAction();
+}
+</code></pre><h3 id="switch"><a class="toc-anchor" title="Permalink to this headline" href="#switch"></a>switch</h3>
+<p>For <code class="language-php">switch</code> statements:</p>
+<pre>
+<code class="language-php">switch (condition) {
+  case 1:
+    action1();
+    break;
+
+  case 2:
+    action2();
+    break;
+
+  default:
+    defaultAction();
+}
+</code></pre><h3 id="try"><a class="toc-anchor" title="Permalink to this headline" href="#try"></a>try</h3>
+<p>For <code class="language-php">try/catch</code> statements:</p>
+<pre>
+<code class="language-php">try {
+  // Statements...
+}
+catch (error) {
+  // Error handling...
+}
+finally {
+  // Statements...
+}
+</code></pre><h3 id="forin"><a class="toc-anchor" title="Permalink to this headline" href="#forin"></a>for in</h3>
+<p>The body of every <code class="language-php">for in</code> statement MUST be wrapped in an <code class="language-php">if</code> statement that performs the filtering. It MAY select for a particular type or range of values, or it can exclude functions, or it can exclude properties from the prototype.</p>
+<pre>
+<code class="language-php">for (let variable in object) {
+  if (filter) {
+    // Statements...
+  }
+}
+</code></pre><p>You MUST use the <code class="language-php">hasOwnProperty</code> method to distinguish the true members of the object, which SHOULD be placed inside the loop, not on the same line:</p>
+<pre>
+<code class="language-php">for (let variable in object) {
+  if (object.hasOwnProperty(variable)) {
+    // Statements...
+  }
+}
+</code></pre><h2 id="operators"><a class="toc-anchor" title="Permalink to this headline" href="#operators"></a>Operators</h2>
+<h3 id="truefalse"><a class="toc-anchor" title="Permalink to this headline" href="#truefalse"></a>Comparisons</h3>
+<p>The <code class="language-php">==</code> and <code class="language-php">!=</code> operators do type coercion before comparing. This can lead to unexpected errors.</p>
+<p>Strict equality MUST be used in comparisons (<code class="language-php">===</code> or <code class="language-php">!==</code>).</p>
+<h3 id="comma"><a class="toc-anchor" title="Permalink to this headline" href="#comma"></a>Comma Operator</h3>
+<p>You SHOULD NOT use the comma operator, with the exception of the control part in <code class="language-php">for</code> statements.</p>
+<p>The comma operator causes the expressions on either side of it to be executed in left-to-right order, and returns the value of the expression on the right.</p>
+<pre>
+<code class="language-php">let x = (y = 3, z = 9);
+</code></pre><p>This sets <code class="language-php">x</code> to <code class="language-php">9</code>. This can be confusing for users not familiar with the syntax and makes the code more difficult to read and understand.</p></div></div></div>  </div>
 
   
   </div>
@@ -324,34 +557,31 @@
     
   
   <div class="pane-content">
-    <div class="field field-name-field-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="/taxonomy/term/190104">coding standards</a></div></div></div>  </div>
+    <div class="field field-name-field-tags field-type-taxonomy-term-reference field-label-hidden"><div class="field-items"><div class="field-item even"><a href="/taxonomy/term/188579">javascript</a></div><div class="field-item odd"><a href="/taxonomy/term/190104">coding standards</a></div></div></div>  </div>
 
   
   </div>
-<div class="panel-separator"></div><div class="panel-pane pane-views-panes pane-group-maintainers-panel-pane-1"  id="guide-maintainers" >
+<div class="panel-separator"></div><div class="panel-pane pane-views-panes pane-documentation-help-improve-pane"  id="help-improve-this-page" >
   
         <h2 class="pane-title">
-      Guide maintainers    </h2>
+      Help improve this page    </h2>
     
   
   <div class="pane-content">
-    <div class="view view-group-maintainers view-id-group_maintainers view-display-id-panel_pane_1 view-dom-id-414f787c13e4d30764b0581fe7be1d84">
+    <div class="view view-documentation-help view-id-documentation_help view-display-id-improve_pane view-dom-id-992ae3135ee636a469ce2cb2299d6b53">
         
   
   
       <div class="view-content">
-        <div class="views-row views-row-1">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
       
-          <a href="/user/382067" title="View pfrenssen&#039;s profile"><img src="https://www.drupal.org/files/styles/drupalorg_user_picture/public/user-pictures/picture-382067-1401376332.jpg?itok=--NaH254" width="80" height="80" alt="pfrenssen&#039;s picture" /></a>    </div>
-  <div class="views-row views-row-2">
-      
-          <a href="/user/78040" title="View effulgentsia&#039;s profile"><img src="https://www.drupal.org/files/styles/drupalorg_user_picture/public/default-avatar.png?itok=ZYxnS__Q" width="80" height="80" alt="effulgentsia&#039;s picture" /></a>    </div>
-  <div class="views-row views-row-3">
-      
-          <a href="/user/168251" title="View tizzo&#039;s profile"><img src="https://www.drupal.org/files/styles/drupalorg_user_picture/public/user-pictures/picture-168251-1400198420.jpg?itok=94ansEqu" width="80" height="80" alt="tizzo&#039;s picture" /></a>    </div>
-  <div class="views-row views-row-4">
-      
-          <a href="/user/148199" title="View jthorson&#039;s profile"><img src="https://www.drupal.org/files/styles/drupalorg_user_picture/public/user-pictures/picture-148199-1409772253.jpg?itok=hv76IG-b" width="80" height="80" alt="jthorson&#039;s picture" /></a>    </div>
+  <span class="views-field views-field-field-documentation-status">    <strong class="views-label views-label-field-documentation-status">Page status: </strong>    <span class="field-content">Needs work</span>  </span>  
+  <div class="views-field views-field-nothing">        <span class="field-content"><br /><strong>You can:</strong><br />
+<ul>
+<li>Log in, click <a href="/node/172169/edit">Edit</a>, and edit this page</li>
+<li>Log in, click <a href="/node/172169/discuss">Discuss</a>, update the Page status value, and suggest an improvement</li>
+<li>Log in and <a href="/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%28172169%29%20JavaScript%20coding%20standards">create a Documentation issue</a> with your suggestion</li>
+</ul></span>  </div>  </div>
     </div>
   
   
@@ -521,7 +751,7 @@ advagg_mod_1_check();"></script>
 <script type="text/javascript" src="/files/advagg_js/js__hHUWFbMAa11eJtx5V0ym9o0YBsB1udk34qUT5wr1ihI__vSxsxbzmzuz4XPh--CL1BBciQpEQ_m8FfdQINCOAg14__YaNGWokqa69Wq8hHbkE322PVJ8I-GmpfBsT8LGsMpcI.js" defer="defer"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-function init_drupal_core_settings() {jQuery.extend(Drupal.settings,{"basePath":"\/","pathPrefix":"","setHasJsCookie":0,"ajaxPageState":{"theme":"bluecheese","theme_token":"8XxquyrLlwReQ7xD2nfHipC8vPodSIWnOyyLb3mA7pQ"},"drupalorgGitlab":{"gitlab_base_url":"https:\/\/git.drupalcode.org","base_url":"https:\/\/www.drupal.org"},"better_exposed_filters":{"views":{"group_maintainers":{"displays":{"panel_pane_1":{"filters":[]}}},"documentation_related_content":{"displays":{"related_content_pane":{"filters":[]}}}}},"urlIsAjaxTrusted":{"\/docs\/develop\/standards\/javascript-coding-standards":true},"drupalorgCrosssiteConsentNeeded":true,"ogContext":{"groupType":"node","gid":"2803009"}}); 
+function init_drupal_core_settings() {jQuery.extend(Drupal.settings,{"basePath":"\/","pathPrefix":"","setHasJsCookie":0,"ajaxPageState":{"theme":"bluecheese","theme_token":"Hp1tUYagvJY0zcDT9R_PVtNjIf-STGEkNY7XCTKgP4g"},"drupalorgGitlab":{"gitlab_base_url":"https:\/\/git.drupalcode.org","base_url":"https:\/\/www.drupal.org"},"better_exposed_filters":{"views":{"documentation_help":{"displays":{"improve_pane":{"filters":[]}}},"documentation_related_content":{"displays":{"related_content_pane":{"filters":[]}}}}},"urlIsAjaxTrusted":{"\/docs\/develop\/standards\/javascript-coding-standards\/javascript-coding-standards":true},"drupalorgCrosssiteConsentNeeded":true,"ogContext":{"groupType":"node","gid":"2803009"}}); 
 if(jQuery.isFunction(jQuery.holdReady)){jQuery.holdReady(false);}} if(window.jQuery && window.Drupal){init_drupal_core_settings();}
 //--><!]]>
 </script>

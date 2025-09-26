@@ -6,6 +6,8 @@ const OpenAI = require('openai');
 
 const MARKDOWN_DIR = path.join(__dirname, '..', 'data', 'markdown');
 const BULLETS_DIR = path.join(__dirname, '..', 'data', 'bullets');
+const SITEMAP_FILE = path.join(__dirname, '..', 'data', 'sitemap.json');
+const BULLETS_MANIFEST_FILE = path.join(BULLETS_DIR, 'bullets-manifest.json');
 
 class BulletPointGenerator {
   constructor() {
@@ -30,7 +32,12 @@ class BulletPointGenerator {
       await fs.writeFile(bulletsPath, bulletPoints, 'utf8');
       
       console.log(`✓ Converted: ${markdownFile} → ${bulletsFile}`);
-      return { markdownFile, bulletsFile, success: true };
+      return { 
+        markdownFile, 
+        bulletsFile, 
+        success: true, 
+        lastProcessedAt: new Date().toISOString() 
+      };
       
     } catch (error) {
       console.error(`Error converting ${markdownFile}:`, error);
@@ -167,27 +174,106 @@ Generate bullet points that cover all the rules and guidelines from this documen
     return bulletPoints.join('\n');
   }
 
+  async loadSitemap() {
+    try {
+      return await fs.readJson(SITEMAP_FILE);
+    } catch (error) {
+      console.warn('Could not load sitemap, processing all files:', error.message);
+      return null;
+    }
+  }
+
+  async loadBulletsManifest() {
+    try {
+      if (await fs.pathExists(BULLETS_MANIFEST_FILE)) {
+        return await fs.readJson(BULLETS_MANIFEST_FILE);
+      }
+    } catch (error) {
+      console.warn('Could not load bullets manifest:', error.message);
+    }
+    return null;
+  }
+
+  getUrlFromMarkdownFile(markdownFile, sitemap) {
+    if (!sitemap) return null;
+    
+    // Convert markdown filename to URL pattern
+    const baseName = markdownFile.replace('.md', '');
+    
+    // Search through all sections for matching URL
+    for (const [sectionName, urls] of Object.entries(sitemap)) {
+      for (const [url, lastModified] of Object.entries(urls)) {
+        const urlBaseName = url.split('/').pop();
+        if (urlBaseName === baseName) {
+          return { url, lastModified, sectionName };
+        }
+      }
+    }
+    return null;
+  }
+
+  needsUpdate(markdownFile, sitemap, bulletsManifest) {
+    if (!sitemap || !bulletsManifest) {
+      return true; // If we can't determine, process it
+    }
+
+    const urlInfo = this.getUrlFromMarkdownFile(markdownFile, sitemap);
+    if (!urlInfo) {
+      return true; // If we can't find URL info, process it
+    }
+
+    // Find the last processed timestamp for this file
+    const lastProcessed = bulletsManifest.results?.find(r => r.markdownFile === markdownFile);
+    if (!lastProcessed) {
+      return true; // Never processed before
+    }
+
+    // Compare timestamps
+    const sitemapDate = new Date(urlInfo.lastModified);
+    const processedDate = new Date(lastProcessed.lastProcessedAt || lastProcessed.convertedAt);
+    
+    return sitemapDate > processedDate;
+  }
+
   async convertAllMarkdownToBullets() {
     console.log('Starting Markdown to Bullet Points conversion...');
     
     try {
+      // Load sitemap and manifest for incremental updates
+      const sitemap = await this.loadSitemap();
+      const bulletsManifest = await this.loadBulletsManifest();
+      
       // Ensure bullets directory exists
       await fs.ensureDir(BULLETS_DIR);
-      
-      // Clear existing bullet files
-      await fs.emptyDir(BULLETS_DIR);
-      console.log('Cleared existing bullet point files');
       
       // Get all markdown files
       const files = await fs.readdir(MARKDOWN_DIR);
       const markdownFiles = files.filter(file => file.endsWith('.md') && file !== 'conversion-manifest.json');
       
-      console.log(`Found ${markdownFiles.length} markdown files to convert`);
+      // Determine which files need updating
+      const filesToUpdate = [];
+      const filesToSkip = [];
+      
+      for (const markdownFile of markdownFiles) {
+        if (this.needsUpdate(markdownFile, sitemap, bulletsManifest)) {
+          filesToUpdate.push(markdownFile);
+        } else {
+          filesToSkip.push(markdownFile);
+        }
+      }
+      
+      console.log(`Found ${markdownFiles.length} markdown files total`);
+      console.log(`  - Need updates: ${filesToUpdate.length}`);
+      console.log(`  - Up to date: ${filesToSkip.length}`);
+      
+      if (filesToSkip.length > 0) {
+        console.log(`⏭ Skipping up-to-date files: ${filesToSkip.slice(0, 5).join(', ')}${filesToSkip.length > 5 ? '...' : ''}`);
+      }
       
       const conversionResults = [];
       
-      // Convert each markdown file
-      for (const markdownFile of markdownFiles) {
+      // Convert only files that need updating
+      for (const markdownFile of filesToUpdate) {
         const result = await this.convertToBulletPoints(markdownFile);
         conversionResults.push(result);
         
@@ -195,19 +281,34 @@ Generate bullet points that cover all the rules and guidelines from this documen
         await new Promise(resolve => setTimeout(resolve, 1000));
       }
       
+      // Merge with existing results for files that weren't updated
+      const existingResults = bulletsManifest?.results || [];
+      const updatedResults = [...conversionResults];
+      
+      // Add existing results for files that weren't updated
+      for (const existingResult of existingResults) {
+        if (!filesToUpdate.includes(existingResult.markdownFile)) {
+          updatedResults.push(existingResult);
+        }
+      }
+      
       // Create conversion manifest
       const manifest = {
         convertedAt: new Date().toISOString(),
         totalFiles: markdownFiles.length,
-        successful: conversionResults.filter(r => r.success).length,
-        failed: conversionResults.filter(r => !r.success).length,
-        results: conversionResults
+        filesUpdated: filesToUpdate.length,
+        filesSkipped: filesToSkip.length,
+        successful: updatedResults.filter(r => r.success).length,
+        failed: updatedResults.filter(r => !r.success).length,
+        results: updatedResults
       };
       
       await fs.writeJson(path.join(BULLETS_DIR, 'bullets-manifest.json'), manifest, { spaces: 2 });
       
       console.log(`\n✅ Bullet points conversion complete:`);
       console.log(`   - Total files: ${manifest.totalFiles}`);
+      console.log(`   - Files updated: ${manifest.filesUpdated}`);
+      console.log(`   - Files skipped (up-to-date): ${manifest.filesSkipped}`);
       console.log(`   - Successful: ${manifest.successful}`);
       console.log(`   - Failed: ${manifest.failed}`);
       console.log(`   - Bullet point files saved to: ${BULLETS_DIR}`);
