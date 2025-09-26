@@ -9,7 +9,6 @@
     "download": "node scripts/smart-content-downloader.js",
     "convert": "node scripts/html-to-markdown.js",
     "bullets": "node scripts/markdown-to-bullets.js",
-    "agents": "node scripts/agents-generator.js",
     "page-agents": "node scripts/page-agents-generator.js",
     "merge-agents": "node scripts/quickref-merger.js",
     "full-pipeline": "npm run sitemap && npm run download && npm run convert && npm run bullets && npm run page-agents && npm run merge-agents"

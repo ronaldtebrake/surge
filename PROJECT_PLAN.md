@@ -77,7 +77,7 @@ Create an automated system that scrapes Drupal developer documentation, tracks c
 
 ### 2.3 GitHub Actions Workflow for Sitemap
 - [X] Create `.github/workflows/sitemap-generator.yml`:
-  - [X] Run on cron schedule (daily at 2 AM UTC)
+  - [X] Run on cron schedule (weekly on Sundays at 2 AM UTC)
   - [X] Execute sitemap scraper (no Playwright needed)
   - [X] Compare with existing sitemap.json
   - [X] Create pull request if changes detected

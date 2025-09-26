@@ -39,7 +39,6 @@ An automated system that downloads Drupal coding standards documentation, conver
 │   ├── smart-content-downloader.js  # Smart download with timestamp checking
 │   ├── html-to-markdown.js          # Convert HTML to markdown
 │   ├── markdown-to-bullets.js       # Generate bullet points
-│   ├── agents-generator.js          # Generate Agents.md (legacy)
 │   ├── page-agents-generator.js     # Generate Quick Reference pages
 │   └── quickref-merger.js           # Merge Quick Reference pages
 ├── docs/                 # Generated documentation
@@ -72,10 +71,7 @@ An automated system that downloads Drupal coding standards documentation, conver
    # Generate bullet points (needs API key)
    npm run bullets
 
-   # Generate Agents.md (legacy approach - needs API key)
-   npm run agents
-
-   # Generate Quick Reference pages (new approach - needs API key)
+   # Generate Quick Reference pages (needs API key)
    npm run page-agents
 
    # Merge Quick Reference pages into final Agents.md
@@ -207,7 +203,7 @@ The system runs automatically via GitHub Actions with a sophisticated workflow s
 
 ```mermaid
 graph TD
-    A[Daily: Sitemap Generator<br/>2 AM UTC] --> B{Changes?}
+    A[Weekly: Sitemap Generator<br/>Sundays 2 AM UTC] --> B{Changes?}
     B -->|Yes| C[Trigger Content Updater]
     B -->|No| D[End]
     
@@ -236,7 +232,7 @@ graph TD
 
 ### Workflow Details:
 
-1. **Daily Sitemap Generation** (2 AM UTC) - Downloads main page and extracts all links with real last updated dates
+1. **Weekly Sitemap Generation** (Sundays 2 AM UTC) - Downloads main page and extracts all links with real last updated dates
 2. **Smart Content Download** - Downloads only changed content
 3. **Content Processing** - Converts HTML to markdown and generates bullet points
 4. **AI Documentation Generation** - Generates comprehensive Agents.md
