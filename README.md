@@ -199,50 +199,45 @@ return false; // No update needed - skip
 
 ## 🤖 Automation
 
-The system runs automatically via GitHub Actions with a sophisticated PR-based workflow structure:
+The system runs automatically via GitHub Actions with a single comprehensive workflow:
 
 ```mermaid
 graph TD
-    A[Weekly: Sitemap Generator<br/>Sundays 2 AM UTC] --> B{Changes?}
-    B -->|Yes| C[Create PR: Update Sitemap]
-    B -->|No| D[End]
-    
-    C --> E[PR Merged: needs: content update]
-    E --> F[Content Updater Workflow]
-    F --> G[Download + Convert + Bullets]
-    G --> H{Content Changes?}
-    H -->|Yes| I[Create PR: Update Content]
+    A[Weekly: Full Pipeline<br/>Sundays 2 AM UTC] --> B[Generate Sitemap]
+    B --> C[Download Content]
+    C --> D[Convert HTML to Markdown]
+    D --> E[Generate Bullet Points]
+    E --> F[Generate Quick Reference Pages]
+    F --> G[Merge into Agents.md]
+    G --> H{Changes?}
+    H -->|Yes| I[Create PR: Complete Update]
     H -->|No| J[End]
     
-    I --> K[PR Merged: needs: agents.md update]
-    K --> L[Agents Generator Workflow]
-    L --> M[Generate Quick Reference + Agents.md]
-    M --> N[Create PR: Update Agents.md]
-    
-    O[Weekly: Full Pipeline<br/>Sundays 3 AM UTC] --> P[Run Complete Pipeline]
-    P --> Q[Create PR: Weekly Update]
-    
-    R[Manual: Full Pipeline] --> P
+    K[Manual: Full Pipeline] --> B
     
     style A fill:#e1f5fe
-    style C fill:#f3e5f5
-    style E fill:#e8f5e8
-    style I fill:#fff3e0
-    style M fill:#fce4ec
-    style N fill:#fce4ec
-    style O fill:#f1f8e9
-    style Q fill:#f1f8e9
-    style R fill:#f1f8e9
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+    style F fill:#f1f8e9
+    style G fill:#e3f2fd
+    style I fill:#c8e6c9
+    style K fill:#f1f8e9
 ```
 
 ### Workflow Details:
 
-1. **Weekly Sitemap Generation** (Sundays 2 AM UTC) - Downloads main page and extracts all links with real last updated dates, creates PR
-2. **Content Update Workflow** - Triggers when sitemap PR is merged, downloads changed content and creates PR
-3. **Agents Generation Workflow** - Triggers when content PR is merged, generates Agents.md and creates PR
-4. **Weekly Full Pipeline** (Sundays 3 AM UTC) - Complete system update, creates PR
-5. **Manual Triggers** - All workflows can be triggered manually
-6. **PR-Based Flow** - All changes go through PR review before merging to main 
+1. **Weekly Full Pipeline** (Sundays 2 AM UTC) - Complete end-to-end update:
+   - Generates sitemap with latest timestamps from Drupal.org
+   - Downloads only changed content (timestamp-based updates)
+   - Converts HTML to markdown
+   - Generates AI bullet points
+   - Creates Quick Reference pages
+   - Merges everything into comprehensive Agents.md
+   - Creates single PR with all changes
+2. **Manual Full Pipeline** - Same comprehensive process available for manual triggering
+3. **PR-Based Flow** - All changes go through PR review before merging to main 
 
 ## 📊 Status
 

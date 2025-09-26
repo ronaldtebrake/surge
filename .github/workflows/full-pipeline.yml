@@ -3,8 +3,8 @@ name: Full Documentation Pipeline
 on:
   workflow_dispatch: # Allow manual triggering
   schedule:
-    # Run weekly on Sundays at 3 AM UTC
-    - cron: '0 3 * * 0'
+    # Run weekly on Sundays at 2 AM UTC
+    - cron: '0 2 * * 0'
 
 jobs:
   full-pipeline:
@@ -29,10 +29,34 @@ jobs:
     - name: Install Playwright browsers
       run: npx playwright install --with-deps
     
-    - name: Run full pipeline
-      run: npm run full-pipeline
+    - name: Generate sitemap
+      run: npm run sitemap
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
+    
+    - name: Download content
+      run: npm run download
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
+    
+    - name: Convert HTML to markdown
+      run: npm run convert
+    
+    - name: Generate bullet points
+      run: npm run bullets
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
+    
+    - name: Generate Quick Reference pages
+      run: npm run page-agents
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
+    
+    - name: Merge into Agents.md
+      run: npm run merge-agents
+      env:
         GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
     
     - name: Check for changes
@@ -51,7 +75,7 @@ jobs:
         token: ${{ secrets.PAT_GITHUB_TOKEN }}
         title: "Weekly documentation pipeline update - $(date +%Y-%m-%d)"
         body: |
-          This PR contains the weekly full documentation pipeline update.
+          This PR contains a comprehensive documentation pipeline update with all changes from sitemap generation to final Agents.md creation.
           
           ## Changes
           - Updated sitemap with latest timestamps from Drupal.org
