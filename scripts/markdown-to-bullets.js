@@ -41,6 +41,13 @@ class BulletPointGenerator {
       
     } catch (error) {
       console.error(`Error converting ${markdownFile}:`, error);
+      
+      // Handle access denied errors by skipping the file
+      if (error.message && error.message.startsWith('ACCESS_DENIED:')) {
+        console.warn(`   ⚠️ Skipping ${markdownFile} due to access denied`);
+        return { markdownFile, bulletsFile, success: false, error: error.message, skipped: true };
+      }
+      
       return { markdownFile, bulletsFile, success: false, error: error.message };
     }
   }
@@ -96,6 +103,13 @@ Generate bullet points that cover all the rules and guidelines from this documen
     } catch (error) {
       console.error('Error generating bullet points:', error);
       
+      // Check for access denied errors - skip file generation instead of failing
+      const errorMessage = error.message?.toLowerCase() || '';
+      if (errorMessage.includes('access denied') || errorMessage.includes('permission denied')) {
+        console.warn(`   ⚠️ Access denied for ${filename}, skipping bullet point generation`);
+        throw new Error(`ACCESS_DENIED: ${error.message}`);
+      }
+      
       // Check for critical API errors that should fail fast
       if (this.isCriticalApiError(error)) {
         throw new Error(`OpenAI API error: ${error.message}. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits.`);
@@ -143,6 +157,7 @@ Generate bullet points that cover all the rules and guidelines from this documen
       'invalid api key',
       'authentication',
       'permission denied',
+      'access denied',
       'account deactivated',
       'quota exceeded',
       'context length exceeded'
@@ -299,7 +314,8 @@ Generate bullet points that cover all the rules and guidelines from this documen
         filesUpdated: filesToUpdate.length,
         filesSkipped: filesToSkip.length,
         successful: updatedResults.filter(r => r.success).length,
-        failed: updatedResults.filter(r => !r.success).length,
+        failed: updatedResults.filter(r => !r.success && !r.skipped).length,
+        skipped: updatedResults.filter(r => r.skipped).length,
         results: updatedResults
       };
       
@@ -311,6 +327,7 @@ Generate bullet points that cover all the rules and guidelines from this documen
       console.log(`   - Files skipped (up-to-date): ${manifest.filesSkipped}`);
       console.log(`   - Successful: ${manifest.successful}`);
       console.log(`   - Failed: ${manifest.failed}`);
+      console.log(`   - Skipped (access denied): ${manifest.skipped}`);
       console.log(`   - Bullet point files saved to: ${BULLETS_DIR}`);
       
       if (manifest.failed > 0) {

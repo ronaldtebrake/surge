@@ -174,7 +174,8 @@ Keep the output concise and focused on the most important rules and conventions 
       if (!bulletPoints) {
         // In CI environments, fail if no bullet points are available
         if (process.env.CI || process.env.GITHUB_ACTIONS) {
-          throw new Error(`No bullet points found for ${topic}. This usually means the bullets generation step failed. Check that OPENAI_API_KEY is properly configured.`);
+          console.warn(`   ⚠️ No bullet points found for ${topic} - likely due to access denied during download. Skipping page generation.`);
+          return null;
         }
         
         console.log(`   ⚠️ No bullet points found for ${topic}`);

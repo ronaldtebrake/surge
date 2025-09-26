@@ -39,6 +39,7 @@ const TurndownService = require('turndown');
 
 const DOWNLOADS_DIR = path.join(__dirname, '..', 'data', 'downloads');
 const MARKDOWN_DIR = path.join(__dirname, '..', 'data', 'markdown');
+const MANIFEST_FILE = path.join(DOWNLOADS_DIR, 'download-manifest.json');
 
 // Configure turndown service for better markdown conversion
 const turndownService = new TurndownService({
@@ -132,10 +133,30 @@ function cleanMarkdown(markdown) {
     .trim();
 }
 
+async function loadDownloadManifest() {
+  try {
+    if (await fs.pathExists(MANIFEST_FILE)) {
+      return await fs.readJson(MANIFEST_FILE);
+    }
+  } catch (error) {
+    console.warn('Could not load download manifest:', error);
+  }
+  
+  return { files: {} };
+}
+
+function isAccessDenied(htmlFile, manifest) {
+  const fileInfo = manifest.files[htmlFile];
+  return fileInfo && fileInfo.accessDenied === true;
+}
+
 async function convertAllHtmlToMarkdown() {
   console.log('Starting HTML to Markdown conversion...');
   
   try {
+    // Load download manifest to check for access denied files
+    const manifest = await loadDownloadManifest();
+    
     // Ensure markdown directory exists
     await fs.ensureDir(MARKDOWN_DIR);
     
@@ -147,12 +168,22 @@ async function convertAllHtmlToMarkdown() {
     const files = await fs.readdir(DOWNLOADS_DIR);
     const htmlFiles = files.filter(file => file.endsWith('.html'));
     
-    console.log(`Found ${htmlFiles.length} HTML files to convert`);
+    // Filter out access denied files
+    const accessibleFiles = htmlFiles.filter(file => !isAccessDenied(file, manifest));
+    const accessDeniedFiles = htmlFiles.filter(file => isAccessDenied(file, manifest));
+    
+    console.log(`Found ${htmlFiles.length} HTML files total`);
+    console.log(`  - Accessible: ${accessibleFiles.length}`);
+    console.log(`  - Access denied: ${accessDeniedFiles.length}`);
+    
+    if (accessDeniedFiles.length > 0) {
+      console.log(`⏭ Skipping access denied files: ${accessDeniedFiles.slice(0, 3).join(', ')}${accessDeniedFiles.length > 3 ? '...' : ''}`);
+    }
     
     const conversionResults = [];
     
-    // Convert each HTML file
-    for (const htmlFile of htmlFiles) {
+    // Convert each accessible HTML file
+    for (const htmlFile of accessibleFiles) {
       const result = await convertHtmlToMarkdown(htmlFile);
       conversionResults.push(result);
       
@@ -160,12 +191,25 @@ async function convertAllHtmlToMarkdown() {
       await new Promise(resolve => setTimeout(resolve, 10));
     }
     
+    // Add skipped access denied files to results
+    for (const htmlFile of accessDeniedFiles) {
+      conversionResults.push({
+        htmlFile,
+        markdownFile: null,
+        skipped: true,
+        reason: 'Access denied during download'
+      });
+    }
+    
     // Create conversion manifest
     const manifest = {
       convertedAt: new Date().toISOString(),
       totalFiles: htmlFiles.length,
+      accessibleFiles: accessibleFiles.length,
+      accessDeniedFiles: accessDeniedFiles.length,
       successful: conversionResults.filter(r => r.markdownFile).length,
       failed: conversionResults.filter(r => r.error).length,
+      skipped: conversionResults.filter(r => r.skipped).length,
       results: conversionResults
     };
     
@@ -173,8 +217,11 @@ async function convertAllHtmlToMarkdown() {
     
     console.log(`\n✅ Conversion complete:`);
     console.log(`   - Total files: ${manifest.totalFiles}`);
+    console.log(`   - Accessible: ${manifest.accessibleFiles}`);
+    console.log(`   - Access denied: ${manifest.accessDeniedFiles}`);
     console.log(`   - Successful: ${manifest.successful}`);
     console.log(`   - Failed: ${manifest.failed}`);
+    console.log(`   - Skipped: ${manifest.skipped}`);
     console.log(`   - Markdown files saved to: ${MARKDOWN_DIR}`);
     
     if (manifest.failed > 0) {

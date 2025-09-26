@@ -66,18 +66,14 @@ async function downloadPageWithRetry(url, filename, retryCount = 0) {
         console.warn(`curl stderr for ${url}: ${stderr}`);
       }
       
-      // Check if we got an access denied page
-      try {
-        const content = await fs.readFile(outputPath, 'utf8');
-        if (content.includes('Access to this page has been denied') || content.includes('Access denied')) {
-          console.warn(`Access denied detected for ${url}`);
-          if (retryCount < DOWNLOAD_CONFIG.maxRetries - 1) {
-            console.log(`Retrying with different approach in ${DOWNLOAD_CONFIG.retryDelay}ms...`);
-            await sleep(DOWNLOAD_CONFIG.retryDelay);
-            return downloadPageWithRetry(url, filename, retryCount + 1).then(resolve).catch(reject);
+        // Check if we got an access denied page
+        try {
+          const content = await fs.readFile(outputPath, 'utf8');
+          if (content.includes('Access to this page has been denied') || content.includes('Access denied')) {
+            console.warn(`Access denied detected for ${url} - skipping this page`);
+            // Don't retry for access denied, just skip the page
+            return reject(new Error('ACCESS_DENIED: Access denied - skipping page'));
           }
-          return reject(new Error('Access denied - could not download content'));
-        }
         
         // Check if content is too small (likely an error page)
         if (content.length < 1000) {
@@ -181,6 +177,7 @@ async function downloadUpdatedPages() {
     let totalPages = 0;
     let updatedPages = 0;
     let skippedPages = 0;
+    let accessDeniedPages = 0;
     
     // Process all pages from all sections
     for (const [sectionName, links] of Object.entries(sitemap)) {
@@ -209,15 +206,29 @@ async function downloadUpdatedPages() {
               await sleep(DOWNLOAD_CONFIG.delayBetweenRequests);
             })
             .catch(error => {
-              console.error(`Failed to download ${url}: ${error.message}`);
-              // Still update manifest to track failed attempts
-              manifest.files[filename] = {
-                url,
-                lastUpdated,
-                downloadedAt: new Date().toISOString(),
-                section: sectionName,
-                error: error.message
-              };
+              if (error.message && error.message.startsWith('ACCESS_DENIED:')) {
+                console.warn(`Access denied for ${url} - skipping page`);
+                accessDeniedPages++;
+                // Track access denied pages separately
+                manifest.files[filename] = {
+                  url,
+                  lastUpdated,
+                  downloadedAt: new Date().toISOString(),
+                  section: sectionName,
+                  error: error.message,
+                  accessDenied: true
+                };
+              } else {
+                console.error(`Failed to download ${url}: ${error.message}`);
+                // Still update manifest to track failed attempts
+                manifest.files[filename] = {
+                  url,
+                  lastUpdated,
+                  downloadedAt: new Date().toISOString(),
+                  section: sectionName,
+                  error: error.message
+                };
+              }
             });
           
           downloadPromises.push(downloadPromise);
@@ -232,6 +243,7 @@ async function downloadUpdatedPages() {
     console.log(`   - Total pages: ${totalPages}`);
     console.log(`   - Need updates: ${updatedPages}`);
     console.log(`   - Skipped (up to date): ${skippedPages}`);
+    console.log(`   - Access denied: ${accessDeniedPages}`);
     
     if (updatedPages > 0) {
       console.log(`\n⏳ Downloading ${updatedPages} updated pages...`);
@@ -255,12 +267,14 @@ async function downloadUpdatedPages() {
     manifest.totalPages = totalPages;
     manifest.updatedPages = updatedPages;
     manifest.skippedPages = skippedPages;
+    manifest.accessDeniedPages = accessDeniedPages;
     
     await saveDownloadManifest(manifest);
     
     console.log(`\n✅ Smart download complete:`);
     console.log(`   - Updated: ${updatedPages} pages`);
     console.log(`   - Skipped: ${skippedPages} pages`);
+    console.log(`   - Access denied: ${accessDeniedPages} pages`);
     console.log(`   - Files saved to: ${DOWNLOADS_DIR}`);
     console.log(`   - Manifest saved to: ${MANIFEST_FILE}`);
     
