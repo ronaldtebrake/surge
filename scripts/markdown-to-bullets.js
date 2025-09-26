@@ -89,9 +89,59 @@ Generate bullet points that cover all the rules and guidelines from this documen
     } catch (error) {
       console.error('Error generating bullet points:', error);
       
-      // Fallback: create basic bullet points from the content
+      // Check for critical API errors that should fail fast
+      if (this.isCriticalApiError(error)) {
+        throw new Error(`OpenAI API error: ${error.message}. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits.`);
+      }
+      
+      // For non-critical errors, use fallback in local development
+      if (process.env.CI || process.env.GITHUB_ACTIONS) {
+        throw new Error(`OpenAI API error: ${error.message}. In CI environment, all API errors are treated as critical.`);
+      }
+      
+      console.warn(`   ⚠️ API error, using fallback for ${filename}: ${error.message}`);
       return this.createFallbackBulletPoints(markdownContent, filename);
     }
+  }
+
+  isCriticalApiError(error) {
+    // Check for critical API errors that should always fail
+    const criticalErrors = [
+      'insufficient_quota',           // Billing/quota exceeded
+      'billing_hard_limit_reached',   // Billing hard limit
+      'invalid_api_key',              // Invalid API key
+      'invalid_organization',         // Invalid organization
+      'account_deactivated',          // Account deactivated
+      'rate_limit_exceeded',          // Rate limit exceeded
+      'requests_per_minute_limit_exceeded', // Rate limit
+      'tokens_per_minute_limit_exceeded',   // Token limit
+      'context_length_exceeded',      // Context too long
+      'model_not_found',              // Model not available
+      'permission_denied',            // Permission issues
+      'invalid_request_error',        // Invalid request
+      'authentication_error'          // Authentication failed
+    ];
+    
+    // Check error code/type
+    if (error.code && criticalErrors.includes(error.code)) {
+      return true;
+    }
+    
+    // Check error message for common critical patterns
+    const errorMessage = error.message?.toLowerCase() || '';
+    const criticalPatterns = [
+      'insufficient quota',
+      'billing',
+      'rate limit',
+      'invalid api key',
+      'authentication',
+      'permission denied',
+      'account deactivated',
+      'quota exceeded',
+      'context length exceeded'
+    ];
+    
+    return criticalPatterns.some(pattern => errorMessage.includes(pattern));
   }
 
   createFallbackBulletPoints(markdownContent, filename) {
