@@ -41,6 +41,11 @@ class BulletPointGenerator {
   async generateBulletPoints(markdownContent, filename) {
     // Check if we have a valid API key
     if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === 'dummy') {
+      // In CI environments, fail if no API key is provided
+      if (process.env.CI || process.env.GITHUB_ACTIONS) {
+        throw new Error(`OPENAI_API_KEY is required in CI environment but not provided. Cannot generate bullet points for ${filename}`);
+      }
+      
       console.log(`   ⚠️ No API key provided, using fallback for ${filename}`);
       return this.createFallbackBulletPoints(markdownContent, filename);
     }

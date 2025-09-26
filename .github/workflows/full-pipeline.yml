@@ -1,5 +1,9 @@
 name: Full Documentation Pipeline
 
+# This workflow requires the following secrets to be configured:
+# - OPENAI_API_KEY: OpenAI API key for AI-powered content generation
+# - PAT_GITHUB_TOKEN: GitHub Personal Access Token with repo permissions
+
 on:
   workflow_dispatch: # Allow manual triggering
   schedule:
@@ -47,12 +51,14 @@ jobs:
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
+        CI: true  # Ensure CI environment is detected
     
     - name: Generate Quick Reference pages
       run: npm run page-agents
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
+        CI: true  # Ensure CI environment is detected
     
     - name: Merge into Agents.md
       run: npm run merge-agents

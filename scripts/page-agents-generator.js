@@ -120,6 +120,11 @@ Keep the output concise and focused on the most important rules and conventions 
       const bulletPoints = await this.loadBulletPointsForPage(pageUrl);
       
       if (!bulletPoints) {
+        // In CI environments, fail if no bullet points are available
+        if (process.env.CI || process.env.GITHUB_ACTIONS) {
+          throw new Error(`No bullet points found for ${topic}. This usually means the bullets generation step failed. Check that OPENAI_API_KEY is properly configured.`);
+        }
+        
         console.log(`   ⚠️ No bullet points found for ${topic}`);
         return null;
       }
@@ -162,6 +167,11 @@ Keep the output concise and focused on the most important rules and conventions 
           content = this.generateFallbackQuickRef(topic, pageUrl, bulletPoints);
         }
       } else {
+        // In CI environments, fail if no API key is provided
+        if (process.env.CI || process.env.GITHUB_ACTIONS) {
+          throw new Error(`OPENAI_API_KEY is required in CI environment but not provided. Cannot generate Quick Reference for ${topic}`);
+        }
+        
         console.log(`   ⚠️ No API key provided, generating fallback content`);
         content = this.generateFallbackQuickRef(topic, pageUrl, bulletPoints);
       }
