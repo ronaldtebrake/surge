@@ -54,7 +54,7 @@ An automated system that downloads Drupal coding standards documentation, conver
    ```
 
 2. **Configure GitHub secrets**:
-   - `GITHUB_TOKEN`: PAT token for repository access
+   - `PAT_GITHUB_TOKEN`: PAT token for repository access
    - `OPENAI_API_KEY`: OpenAI API key for ChatGPT integration
 
 3. **Run locally**:
@@ -199,45 +199,50 @@ return false; // No update needed - skip
 
 ## 🤖 Automation
 
-The system runs automatically via GitHub Actions with a sophisticated workflow structure:
+The system runs automatically via GitHub Actions with a sophisticated PR-based workflow structure:
 
 ```mermaid
 graph TD
     A[Weekly: Sitemap Generator<br/>Sundays 2 AM UTC] --> B{Changes?}
-    B -->|Yes| C[Trigger Content Updater]
+    B -->|Yes| C[Create PR: Update Sitemap]
     B -->|No| D[End]
     
-    C --> E[Download + Convert + Bullets]
-    E --> F{Content Changes?}
-    F -->|Yes| G[Create PR with label]
-    F -->|No| H[End]
+    C --> E[PR Merged: needs: content update]
+    E --> F[Content Updater Workflow]
+    F --> G[Download + Convert + Bullets]
+    G --> H{Content Changes?}
+    H -->|Yes| I[Create PR: Update Content]
+    H -->|No| J[End]
     
-    G --> I[PR Labeled: needs: agents.md update]
-    I --> J[Generate Quick Reference + Agents.md]
-    J --> K[Commit to PR]
+    I --> K[PR Merged: needs: agents.md update]
+    K --> L[Agents Generator Workflow]
+    L --> M[Generate Quick Reference + Agents.md]
+    M --> N[Create PR: Update Agents.md]
     
-    L[Weekly: Full Pipeline<br/>Sundays 3 AM UTC] --> M[Run Complete Pipeline]
-    M --> N[Commit All Changes]
+    O[Weekly: Full Pipeline<br/>Sundays 3 AM UTC] --> P[Run Complete Pipeline]
+    P --> Q[Create PR: Weekly Update]
     
-    O[Manual: Full Pipeline] --> M
+    R[Manual: Full Pipeline] --> P
     
     style A fill:#e1f5fe
     style C fill:#f3e5f5
     style E fill:#e8f5e8
-    style G fill:#fff3e0
-    style J fill:#fce4ec
-    style L fill:#f1f8e9
+    style I fill:#fff3e0
+    style M fill:#fce4ec
+    style N fill:#fce4ec
     style O fill:#f1f8e9
+    style Q fill:#f1f8e9
+    style R fill:#f1f8e9
 ```
 
 ### Workflow Details:
 
-1. **Weekly Sitemap Generation** (Sundays 2 AM UTC) - Downloads main page and extracts all links with real last updated dates
-2. **Smart Content Download** - Downloads only changed content
-3. **Content Processing** - Converts HTML to markdown and generates bullet points
-4. **AI Documentation Generation** - Generates comprehensive Agents.md
-5. **Weekly Full Pipeline** (Sundays 3 AM UTC) - Complete system update
-6. **Manual Triggers** - All workflows can be triggered manually 
+1. **Weekly Sitemap Generation** (Sundays 2 AM UTC) - Downloads main page and extracts all links with real last updated dates, creates PR
+2. **Content Update Workflow** - Triggers when sitemap PR is merged, downloads changed content and creates PR
+3. **Agents Generation Workflow** - Triggers when content PR is merged, generates Agents.md and creates PR
+4. **Weekly Full Pipeline** (Sundays 3 AM UTC) - Complete system update, creates PR
+5. **Manual Triggers** - All workflows can be triggered manually
+6. **PR-Based Flow** - All changes go through PR review before merging to main 
 
 ## 📊 Status
 

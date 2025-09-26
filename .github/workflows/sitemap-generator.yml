@@ -14,7 +14,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PAT_GITHUB_TOKEN }}
     
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -28,7 +28,7 @@ jobs:
     - name: Generate sitemap
       run: npm run sitemap
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
     
     - name: Check for changes
       id: changes
@@ -39,18 +39,21 @@ jobs:
           echo "changes=true" >> $GITHUB_OUTPUT
         fi
     
-    - name: Commit and push changes
+    - name: Create Pull Request
       if: steps.changes.outputs.changes == 'true'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add data/sitemap.json
-        git commit -m "Update sitemap with latest Drupal documentation changes"
-        git push
-    
-    - name: Trigger content updater
-      if: steps.changes.outputs.changes == 'true'
-      uses: peter-evans/repository-dispatch@v2
+      uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        event-type: sitemap-updated
+        token: ${{ secrets.PAT_GITHUB_TOKEN }}
+        title: "Update sitemap with latest Drupal documentation changes"
+        body: |
+          This PR contains an updated sitemap with the latest Drupal documentation changes.
+          
+          ## Changes
+          - Updated `data/sitemap.json` with latest timestamps from Drupal.org
+          
+          ## Next Steps
+          - Review the sitemap changes
+          - Merge to trigger content download and processing
+        labels: "needs: content update"
+        branch: "update-sitemap-$(date +%Y%m%d-%H%M%S)"
+        delete-branch: true

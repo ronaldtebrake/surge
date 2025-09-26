@@ -2,20 +2,22 @@ name: Generate Agents.md
 
 on:
   pull_request:
-    types: [opened, synchronize, labeled]
+    types: [closed]
     branches: [main]
 
 jobs:
   generate-agents:
     runs-on: ubuntu-latest
-    # Only run for user ronaltebrake
-    if: github.actor == 'ronaltebrake' && contains(github.event.pull_request.labels.*.name, 'needs: agents.md update')
+    # Only run when PR is merged and has the agents update label
+    if: |
+      github.event.pull_request.merged == true && 
+      contains(github.event.pull_request.labels.*.name, 'needs: agents.md update')
     
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PAT_GITHUB_TOKEN }}
         fetch-depth: 0
     
     - name: Setup Node.js
@@ -31,12 +33,12 @@ jobs:
       run: npm run page-agents
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
     
     - name: Merge into Agents.md
       run: npm run merge-agents
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
     
     - name: Check for Agents.md changes
       id: agents-changes
@@ -47,23 +49,23 @@ jobs:
           echo "changes=true" >> $GITHUB_OUTPUT
         fi
     
-    - name: Commit Agents.md changes
+    - name: Create Pull Request
       if: steps.agents-changes.outputs.changes == 'true'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add docs/Agents.md
-        git commit -m "Update Agents.md with latest Drupal documentation content"
-        git push
-    
-    - name: Remove label
-      if: steps.agents-changes.outputs.changes == 'true'
-      uses: actions/github-script@v7
+      uses: peter-evans/create-pull-request@v5
       with:
-        script: |
-          github.rest.issues.removeLabel({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            issue_number: context.issue.number,
-            name: 'needs: agents.md update'
-          })
+        token: ${{ secrets.PAT_GITHUB_TOKEN }}
+        title: "Update Agents.md with latest Drupal documentation content"
+        body: |
+          This PR contains an updated Agents.md file with the latest Drupal documentation content.
+          
+          ## Changes
+          - Generated Quick Reference pages from updated content
+          - Merged Quick Reference pages into comprehensive Agents.md
+          - Updated AI-powered documentation for Drupal coding standards
+          
+          ## Next Steps
+          - Review the Agents.md changes
+          - Merge to deploy updated documentation
+        labels: "documentation-update"
+        branch: "update-agents-$(date +%Y%m%d-%H%M%S)"
+        delete-branch: true

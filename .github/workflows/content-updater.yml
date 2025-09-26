@@ -1,19 +1,24 @@
 name: Update Content
 
 on:
-  repository_dispatch:
-    types: [sitemap-updated]
+  pull_request:
+    types: [closed]
+    branches: [main]
   workflow_dispatch: # Allow manual triggering
 
 jobs:
   update-content:
     runs-on: ubuntu-latest
+    # Only run when PR is merged and has the content update label
+    if: |
+      github.event.pull_request.merged == true && 
+      contains(github.event.pull_request.labels.*.name, 'needs: content update')
     
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PAT_GITHUB_TOKEN }}
         fetch-depth: 0
     
     - name: Setup Node.js
@@ -31,7 +36,7 @@ jobs:
     - name: Update content
       run: npm run download && npm run convert && npm run bullets
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
     
     - name: Check for content changes
       id: content-changes
@@ -46,7 +51,7 @@ jobs:
       if: steps.content-changes.outputs.changes == 'true'
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PAT_GITHUB_TOKEN }}
         title: "Update Drupal documentation content"
         body: |
           This PR contains updated Drupal documentation content based on changes detected in the sitemap.
