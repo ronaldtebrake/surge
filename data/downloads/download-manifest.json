@@ -1,5 +1,5 @@
 {
-  "lastDownload": "2025-09-26T13:15:23.794Z",
+  "lastDownload": "2025-09-30T10:17:53.375Z",
   "files": {
     "composer-package-naming-conventions.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/composer-package-naming-conventions",
@@ -198,11 +198,12 @@
       "size": 35060
     },
     "javascript-coding-standards.html": {
-      "url": "https://www.drupal.org/docs/develop/standards/javascript-coding-standards/javascript-coding-standards",
-      "lastUpdated": "2024-05-13",
-      "downloadedAt": "2025-09-26T13:15:20.791Z",
+      "url": "https://www.drupal.org/docs/develop/standards/javascript-coding-standards",
+      "lastUpdated": "2023-01-19",
+      "downloadedAt": "2025-09-30T10:17:46.427Z",
       "section": "JavaScript coding standards",
-      "size": 54774
+      "size": 37314,
+      "contentHash": "892d7dd1aef013da7ad26484ab86962590238ae9158d9b7d44a62c5c05c7e195"
     },
     "accessibility-coding-standards.html": {
       "url": "https://www.drupal.org/docs/develop/standards/accessibility-coding-standards",
@@ -234,6 +235,7 @@
     }
   },
   "totalPages": 34,
-  "updatedPages": 1,
-  "skippedPages": 33
+  "updatedPages": 0,
+  "skippedPages": 34,
+  "accessDeniedPages": 0
 }

@@ -3,6 +3,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { exec } = require('child_process');
+const crypto = require('crypto');
 
 const SITEMAP_FILE = path.join(__dirname, '..', 'data', 'sitemap.json');
 const DOWNLOADS_DIR = path.join(__dirname, '..', 'data', 'downloads');
@@ -108,6 +109,10 @@ function sanitizeFilename(url) {
   return `${cleanName}.html`;
 }
 
+function calculateContentHash(content) {
+  return crypto.createHash('sha256').update(content).digest('hex');
+}
+
 async function loadDownloadManifest() {
   try {
     if (await fs.pathExists(MANIFEST_FILE)) {
@@ -136,10 +141,6 @@ async function needsUpdate(url, lastUpdated, manifest) {
     return true; // New file
   }
   
-  if (fileInfo.lastUpdated !== lastUpdated) {
-    return true; // Updated timestamp
-  }
-  
   // Check if file exists and is valid
   const filePath = path.join(DOWNLOADS_DIR, filename);
   if (!await fs.pathExists(filePath)) {
@@ -148,14 +149,40 @@ async function needsUpdate(url, lastUpdated, manifest) {
   
   try {
     const content = await fs.readFile(filePath, 'utf8');
+    
+    // Check for invalid content
     if (content.includes('Access to this page has been denied') || content.includes('Access denied') || content.length < 1000) {
       return true; // Invalid content
     }
+    
+    // Calculate current content hash
+    const currentHash = calculateContentHash(content);
+    
+    // If we have a stored hash, compare it
+    if (fileInfo.contentHash) {
+      if (fileInfo.contentHash !== currentHash) {
+        console.log(`  🔄 Content changed: ${filename} (hash mismatch)`);
+        return true; // Content has changed
+      }
+      return false; // Content is the same, no update needed
+    }
+    
+    // If no stored hash but we have lastUpdated, use timestamp fallback
+    if (lastUpdated && fileInfo.lastUpdated !== lastUpdated) {
+      console.log(`  🔄 Timestamp changed: ${filename} (no content hash available)`);
+      return true; // Updated timestamp
+    }
+    
+    // If no hash and no lastUpdated, we need to download to get the hash
+    if (!lastUpdated) {
+      console.log(`  🔄 No hash available: ${filename} (downloading to establish baseline)`);
+      return true;
+    }
+    
+    return false; // No update needed
   } catch (error) {
     return true; // File corrupted
   }
-  
-  return false; // No update needed
 }
 
 async function downloadUpdatedPages() {
@@ -193,14 +220,22 @@ async function downloadUpdatedPages() {
           
           const downloadPromise = downloadPageWithRetry(url, filename)
             .then(async (outputPath) => {
+              // Read content to calculate hash
+              const content = await fs.readFile(outputPath, 'utf8');
+              const contentHash = calculateContentHash(content);
+              const fileStats = await fs.stat(outputPath);
+              
               // Update manifest
               manifest.files[filename] = {
                 url,
                 lastUpdated,
                 downloadedAt: new Date().toISOString(),
                 section: sectionName,
-                size: (await fs.stat(outputPath)).size
+                size: fileStats.size,
+                contentHash: contentHash
               };
+              
+              console.log(`  ✅ Updated: ${filename} (hash: ${contentHash.substring(0, 8)}...)`);
               
               // Add delay between requests
               await sleep(DOWNLOAD_CONFIG.delayBetweenRequests);
@@ -216,7 +251,8 @@ async function downloadUpdatedPages() {
                   downloadedAt: new Date().toISOString(),
                   section: sectionName,
                   error: error.message,
-                  accessDenied: true
+                  accessDenied: true,
+                  contentHash: null
                 };
               } else {
                 console.error(`Failed to download ${url}: ${error.message}`);
@@ -226,7 +262,8 @@ async function downloadUpdatedPages() {
                   lastUpdated,
                   downloadedAt: new Date().toISOString(),
                   section: sectionName,
-                  error: error.message
+                  error: error.message,
+                  contentHash: null
                 };
               }
             });
@@ -244,6 +281,7 @@ async function downloadUpdatedPages() {
     console.log(`   - Need updates: ${updatedPages}`);
     console.log(`   - Skipped (up to date): ${skippedPages}`);
     console.log(`   - Access denied: ${accessDeniedPages}`);
+    console.log(`\n💡 Content hashing enabled - pages will only update when content actually changes`);
     
     if (updatedPages > 0) {
       console.log(`\n⏳ Downloading ${updatedPages} updated pages...`);
@@ -277,6 +315,7 @@ async function downloadUpdatedPages() {
     console.log(`   - Access denied: ${accessDeniedPages} pages`);
     console.log(`   - Files saved to: ${DOWNLOADS_DIR}`);
     console.log(`   - Manifest saved to: ${MANIFEST_FILE}`);
+    console.log(`\n🔍 Next run will use content hashing to detect actual changes`);
     
   } catch (error) {
     console.error('Error during smart content download:', error);

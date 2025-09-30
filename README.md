@@ -4,14 +4,14 @@ Automated Drupal coding standards documentation with AI-powered Agents.md genera
 
 > Part of the [Drupal Surge](https://www.drupal.org/project/surge) ecosystem - giving AI tools a sense of Drupal.
 
-## 🚀 Features
+## Features
 
-- **Smart Downloads**: Only downloads changed content using timestamps
+- **Smart Downloads**: Only downloads changed content using content hashing and timestamps
 - **AI Processing**: Converts documentation to structured bullet points and Agents.md
 - **Automated Pipeline**: Weekly GitHub Actions workflow with PR-based updates
 - **GitHub Pages**: Deployed documentation site
 
-## 🔧 Setup
+## Setup
 
 1. **Install dependencies**:
    ```bash
@@ -27,7 +27,7 @@ Automated Drupal coding standards documentation with AI-powered Agents.md genera
    npm run full-pipeline
    ```
 
-## 🔄 How It Works
+## How It Works
 
 ```mermaid
 graph TD
@@ -48,14 +48,14 @@ graph TD
 
 **Pipeline Steps:**
 1. **Sitemap Generation** - Downloads Drupal docs and extracts timestamps
-2. **Smart Download** - Only downloads changed content
+2. **Smart Download** - Only downloads changed content using content hashing
 3. **HTML to Markdown** - Converts to clean markdown
 4. **AI Bullet Points** - Generates structured content for AI tools
 5. **Quick Reference** - Creates page-specific AI prompts
 6. **Agents.md** - Merges everything into comprehensive documentation
 7. **PR Creation** - Single PR with all changes for review
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── .github/workflows/     # GitHub Actions
@@ -70,14 +70,18 @@ graph TD
 └── package.json
 ```
 
-## 🤖 Automation
+## Automation
 
 - **Weekly**: Runs automatically every Sunday at 2 AM UTC
 - **Manual**: Trigger via GitHub Actions UI
 - **PR-Based**: All changes go through PR review
-- **Smart Updates**: Only processes changed content
+- **Smart Updates**: Only processes changed content using content hashing
 
-## 🔗 Links
+## Content Hashing
+
+The system uses SHA-256 content hashing to detect actual content changes, eliminating unnecessary downloads. Pages are only updated when their content actually changes, not just because time has passed. This ensures efficient updates and reduces bandwidth usage.
+
+## Links
 
 - [Generated Documentation](./docs/Agents.md)
 - [Drupal Surge Project](https://www.drupal.org/project/surge)
