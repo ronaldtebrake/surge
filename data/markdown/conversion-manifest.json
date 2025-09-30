@@ -1,8 +1,11 @@
 {
-  "convertedAt": "2025-09-26T13:15:24.590Z",
+  "convertedAt": "2025-09-30T09:51:48.027Z",
   "totalFiles": 33,
-  "successful": 33,
+  "accessibleFiles": 32,
+  "accessDeniedFiles": 1,
+  "successful": 32,
   "failed": 0,
+  "skipped": 1,
   "results": [
     {
       "htmlFile": "accessibility-coding-standards.html",
@@ -78,11 +81,6 @@
       "htmlFile": "javascript-best-practices.html",
       "markdownFile": "javascript-best-practices.md",
       "title": "JavaScript best practices"
-    },
-    {
-      "htmlFile": "javascript-coding-standards.html",
-      "markdownFile": "javascript-coding-standards.md",
-      "title": "JavaScript coding standards"
     },
     {
       "htmlFile": "jquery-coding-standards.html",
@@ -168,6 +166,12 @@
       "htmlFile": "write-e-all-compliant-code.html",
       "markdownFile": "write-e-all-compliant-code.md",
       "title": "Write E_ALL compliant code"
+    },
+    {
+      "htmlFile": "javascript-coding-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
     }
   ]
 }
