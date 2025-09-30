@@ -78,11 +78,19 @@ jobs:
       id: timestamp
       run: echo "timestamp=$(date +%Y%m%d-%H%M%S)" >> $GITHUB_OUTPUT
     
+    - name: Generate App Token
+      id: generate_token
+      uses: actions/create-github-app-token@v1
+      with:
+        app-id: ${{ secrets.APP_ID }}
+        private-key: ${{ secrets.APP_PRIVATE_KEY }}
+        owner: ${{ github.repository_owner }}
+    
     - name: Create Pull Request
       if: steps.changes.outputs.changes == 'true'
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.PAT_GITHUB_TOKEN }}
+        token: ${{ steps.generate_token.outputs.token }}
         title: "Weekly documentation pipeline update - ${{ steps.timestamp.outputs.timestamp }}"
         body: |
           This PR contains a comprehensive documentation pipeline update with all changes from sitemap generation to final Agents.md creation.
@@ -108,3 +116,10 @@ jobs:
         labels: "weekly-update"
         branch: "weekly-pipeline-${{ steps.timestamp.outputs.timestamp }}"
         delete-branch: true
+        commit-message: "docs: weekly pipeline update ${{ steps.timestamp.outputs.timestamp }}"
+        committer: "GitHub Actions <noreply@github.com>"
+        author: "GitHub Actions <noreply@github.com>"
+        # Reduce API calls by using existing PR if possible
+        add-paths: |
+          data/
+          docs/Agents.md
