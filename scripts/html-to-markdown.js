@@ -202,7 +202,7 @@ async function convertAllHtmlToMarkdown() {
     }
     
     // Create conversion manifest
-    const manifest = {
+    const conversionManifest = {
       convertedAt: new Date().toISOString(),
       totalFiles: htmlFiles.length,
       accessibleFiles: accessibleFiles.length,
@@ -213,18 +213,18 @@ async function convertAllHtmlToMarkdown() {
       results: conversionResults
     };
     
-    await fs.writeJson(path.join(MARKDOWN_DIR, 'conversion-manifest.json'), manifest, { spaces: 2 });
+    await fs.writeJson(path.join(MARKDOWN_DIR, 'conversion-manifest.json'), conversionManifest, { spaces: 2 });
     
     console.log(`\n✅ Conversion complete:`);
-    console.log(`   - Total files: ${manifest.totalFiles}`);
-    console.log(`   - Accessible: ${manifest.accessibleFiles}`);
-    console.log(`   - Access denied: ${manifest.accessDeniedFiles}`);
-    console.log(`   - Successful: ${manifest.successful}`);
-    console.log(`   - Failed: ${manifest.failed}`);
-    console.log(`   - Skipped: ${manifest.skipped}`);
+    console.log(`   - Total files: ${conversionManifest.totalFiles}`);
+    console.log(`   - Accessible: ${conversionManifest.accessibleFiles}`);
+    console.log(`   - Access denied: ${conversionManifest.accessDeniedFiles}`);
+    console.log(`   - Successful: ${conversionManifest.successful}`);
+    console.log(`   - Failed: ${conversionManifest.failed}`);
+    console.log(`   - Skipped: ${conversionManifest.skipped}`);
     console.log(`   - Markdown files saved to: ${MARKDOWN_DIR}`);
     
-    if (manifest.failed > 0) {
+    if (conversionManifest.failed > 0) {
       console.log('\nFailed conversions:');
       conversionResults.filter(r => r.error).forEach(r => {
         console.log(`   - ${r.htmlFile}: ${r.error}`);
