@@ -1,44 +1,14 @@
-I have a documentation page (the Drupal "Psr 4 Namespaces And Autoloading In Drupal 8" standards page) that describes rules or conventions. I want to convert that page into a clear section in AGENTS.md so that an AI coding agent can read and enforce those conventions.
+Convert the following Drupal coding standards bullet points into a clean, focused section for an Agents.md file.
 
-Please do the following:
+The bullet points are already cleaned and contain only the essential coding standards. Your job is to organize them into a clear, concise format that AI coding agents can easily follow.
 
-Read the source content I will provide.
-
-Extract the key conventions / rules / guidelines (in bullet or list form).
-
-Write a section suitable for AGENTS.md, with a heading like ## Psr 4 Namespaces And Autoloading In Drupal 8, followed by the rules in a concise, machine-friendly form.
-
-Ensure the section is self-contained (i.e. an agent reading only AGENTS.md should understand the rules).
-
-Use consistent formatting across sections (e.g. heading levels, bullet style).
-
-## Source Content:
-# Bullet Points for psr-4-namespaces-and-autoloading-in-drupal-8.md
-
+## Source Bullet Points:
 
 ## PSR-4 namespaces and autoloading in Drupal 8
 
-## On this page
-- [Summary](/docs/develop/standards/php/psr-4-namespaces-and-autoloading-in-drupal-8#s-summary)
-- [Namespace resolution](/docs/develop/standards/php/psr-4-namespaces-and-autoloading-in-drupal-8#s-namespace-resolution)
-
-## [PHP](/docs/develop/standards/php)
-- [PHP coding standards](/docs/develop/standards/php/php-coding-standards)
-- [API documentation and comment standards](/docs/develop/standards/php/api-documentation-and-comment-standards)
-- [API Documentation Samples](/docs/develop/standards/php/api-documentation-examples)
-- [Namespaces](/docs/develop/coding-standards/namespaces)
-- [Naming standards for services and extending Symfony](/docs/develop/coding-standards/naming-standards-for-services-and-extending-symfony)
-- [PHP Exceptions](/docs/develop/coding-standards/php-exceptions)
-- [PSR-4 namespaces and autoloading in Drupal 8](/docs/develop/standards/php/psr-4-namespaces-and-autoloading-in-drupal-8)
-- [Temporary placeholders and delimiters](/docs/develop/coding-standards/temporary-placeholders-and-delimiters)
-- [Write E\_ALL compliant code](/docs/develop/coding-standards/write-e_all-compliant-code)
-
 ## PSR-4 namespaces and autoloading in Drupal 8
-- Last [updated](/node/2156625/discuss) on
-- 13 December 2022
-- Note: Changes to Drupal coding standards are proposed and discussed in issues in the [Coding Standards project](/project/coding_standards).
 
-## [](#s-summary "Permalink to this headline")Summary
+## Summary
 - Drupal 8 implements the [PSR-4 standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) for package-based PHP namespace autoloading by the PHP Framework Interoperability Group. Upgrading [Drupal 7 modules to Drupal 8](https://www.drupal.org/update/modules/7/8) will require using [PSR-4](https://www.drupal.org/taxonomy/term/51071) standards. See [more background info on Drupal 8 development here](https://www.drupal.org/getting-started-d8-bkg-prereq). Autoloading works for both modules and themes. (For themes, though, cross-path request may have an issue. See issue [#2763861](/project/bootstrap/issues/2763861).)
 - Example `vegetable.module` directory structure:
 - modules/vegetable/
@@ -68,7 +38,7 @@ Use consistent formatting across sections (e.g. heading levels, bullet style).
 - The identical logic applies to PHPUnit tests contained in `./tests/src/`.
 - The `modules/vegetable/src/Tests` folder contains the [SimpleTest](https://www.drupal.org/docs/7/testing/simpletest-testing-overview-drupal-7) test code and the `modules/vegetable/tests` folder contains the [PHPUnit](https://www.drupal.org/docs/8/phpunit) test code. SimpleTest is deprecated in Drupal 8 but is still supported and PHPUnit is the recommended testing framework
 
-## [](#s-namespace-resolution "Permalink to this headline")Namespace resolution
+## Namespace resolution
 - The namespace of all Drupal core components, as well as contributed modules, begins with `Drupal\`
 - The first parts of a namespaced class name indicate the base namespace that maps to a registered base directory, in which PHP files will be looked up:
 - Base namespace
@@ -117,41 +87,25 @@ Use consistent formatting across sections (e.g. heading levels, bullet style).
 - Each PHP class, interface, or trait lives in a separate PHP file.
 - For example, the class `Drupal\Component\Diff\Engine\DiffEngine` is defined in `core/lib/Drupal/Component/Diff/Engine/DiffEngine.php`.
 
-## Help improve this page
-- *Page status:** No known problems
-- *You can:**
-- Log in, click [Edit](/node/2156625/edit), and edit this page
-- Log in, click [Discuss](/node/2156625/discuss), update the Page status value, and suggest an improvement
-- Log in and [create a Documentation issue](/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%282156625%29%20PSR-4%20namespaces%20and%20autoloading%20in%20Drupal%208) with your suggestion
-
 ## Requirements:
+- Extract only the essential coding standards and rules
+- Use clear, actionable language that AI agents can implement
+- Group related rules under appropriate subheadings
+- Keep it concise - no examples or lengthy explanations
+- Use consistent bullet point formatting
+- Focus on what AI coding agents should do/avoid
 
-### Format & Structure:
-1. **Use AGENTS.md format** - Create a section suitable for AGENTS.md
-2. **Use bullet points** - Keep it scannable and concise
-3. **Structure logically** - Group related guidelines together
-4. **Use clear headers** - Make it easy to navigate
-
-### Content Focus:
-5. **Extract key conventions/rules** - Focus on the most important coding standards and conventions
-6. **Be concise** - Avoid lengthy explanations, focus on actionable guidelines
-7. **Prioritize AI-relevant content** - Rules that AI coding agents should follow and enforce
-8. **Minimize token usage** - Use bullet points only, no examples or lengthy explanations
-
-### AI Optimization:
-9. **Make it actionable** - Each point should be something an AI can implement or enforce
-10. **Use consistent formatting** - Standardize the format for easy parsing
-11. **Focus on conventions** - Coding standards, naming conventions, best practices, rules
-12. **Self-contained** - An agent reading only this section should understand the rules
-
-### Output Format:
-Generate an AGENTS.md section in this exact format:
+## Output Format:
+Generate a clean section in this format:
 
 ## Psr 4 Namespaces And Autoloading In Drupal 8
 
-### Rules
-- [Essential rule/convention 1]
-- [Essential rule/convention 2]
-- [Essential rule/convention 3]
+### [Subsection 1]
+- [Essential rule 1]
+- [Essential rule 2]
 
-Keep the output concise and focused on the most important rules and conventions that AI coding agents need to know and enforce. Use only bullet points to minimize token usage and costs.
+### [Subsection 2]  
+- [Essential rule 3]
+- [Essential rule 4]
+
+Keep the output focused, actionable, and optimized for AI coding agents.

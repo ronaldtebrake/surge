@@ -1,11 +1,11 @@
 ## Javascript Best Practices
 
 ### Rules
-- [JavaScript code placement](/docs/develop/standards/javascript/javascript-best-practices#jscodeplacement)
-- [Use literal expressions](/docs/develop/standards/javascript/javascript-best-practices#literal)
-- ["with" statement](/docs/develop/standards/javascript/javascript-best-practices#with)
-- [Avoiding unreachable code](/docs/develop/standards/javascript/javascript-best-practices#avoidingunreachablecode)
-- [eval() is evil](/docs/develop/standards/javascript/javascript-best-practices#eval)
-- [Preventing XSS](/docs/develop/standards/javascript/javascript-best-practices#xss)
-- [Modifying the DOM](/docs/develop/standards/javascript/javascript-best-practices#createElement)
-- [Drupal 6 (and later) Specific Stuff](/docs/develop/standards/javascript/javascript-best-practices#drupal6)
+- This page covers DOM and Drupal specific code styles.
+- JavaScript code SHOULD NOT be embedded in the HTML where possible, as it adds significantly to page weight with no opportunity for mitigation by caching and compression.
+- Code SHOULD use literal expressions instead of the `new` operator:
+- Use `[]` instead of `new Array()`
+- Use `{}` instead of `new Object()`
+- It is RECOMMENDED to use literal expressions instead of the wrapper forms `new Number`, `new String`, `new Boolean` in situations where the literal expression is the same. However, you MAY use object instances in which it matters:
+- The `with` statement MUST NOT be used, since it is not possible to use `with` with enabled strict mode.
+- Instead, you SHOULD use the explicit longer version:

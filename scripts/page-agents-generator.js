@@ -104,54 +104,67 @@ class PageAgentsGenerator {
   buildPagePrompt(pageUrl, bulletPoints) {
     const topic = this.extractTopicFromUrl(pageUrl);
     
-    return `I have a documentation page (the Drupal "${topic}" standards page) that describes rules or conventions. I want to convert that page into a clear section in AGENTS.md so that an AI coding agent can read and enforce those conventions.
+    return `Convert the following Drupal coding standards bullet points into a clean, focused section for an Agents.md file.
 
-Please do the following:
+The bullet points are already cleaned and contain only the essential coding standards. Your job is to organize them into a clear, concise format that AI coding agents can easily follow.
 
-Read the source content I will provide.
-
-Extract the key conventions / rules / guidelines (in bullet or list form).
-
-Write a section suitable for AGENTS.md, with a heading like ## ${topic}, followed by the rules in a concise, machine-friendly form.
-
-Ensure the section is self-contained (i.e. an agent reading only AGENTS.md should understand the rules).
-
-Use consistent formatting across sections (e.g. heading levels, bullet style).
-
-## Source Content:
+## Source Bullet Points:
 ${bulletPoints ? bulletPoints.content : 'No bullet points available'}
 
 ## Requirements:
+- Extract only the essential coding standards and rules
+- Use clear, actionable language that AI agents can implement
+- Group related rules under appropriate subheadings
+- Keep it concise - no examples or lengthy explanations
+- Use consistent bullet point formatting
+- Focus on what AI coding agents should do/avoid
 
-### Format & Structure:
-1. **Use AGENTS.md format** - Create a section suitable for AGENTS.md
-2. **Use bullet points** - Keep it scannable and concise
-3. **Structure logically** - Group related guidelines together
-4. **Use clear headers** - Make it easy to navigate
-
-### Content Focus:
-5. **Extract key conventions/rules** - Focus on the most important coding standards and conventions
-6. **Be concise** - Avoid lengthy explanations, focus on actionable guidelines
-7. **Prioritize AI-relevant content** - Rules that AI coding agents should follow and enforce
-8. **Minimize token usage** - Use bullet points only, no examples or lengthy explanations
-
-### AI Optimization:
-9. **Make it actionable** - Each point should be something an AI can implement or enforce
-10. **Use consistent formatting** - Standardize the format for easy parsing
-11. **Focus on conventions** - Coding standards, naming conventions, best practices, rules
-12. **Self-contained** - An agent reading only this section should understand the rules
-
-### Output Format:
-Generate an AGENTS.md section in this exact format:
+## Output Format:
+Generate a clean section in this format:
 
 ## ${topic}
 
-### Rules
-- [Essential rule/convention 1]
-- [Essential rule/convention 2]
-- [Essential rule/convention 3]
+### [Subsection 1]
+- [Essential rule 1]
+- [Essential rule 2]
 
-Keep the output concise and focused on the most important rules and conventions that AI coding agents need to know and enforce. Use only bullet points to minimize token usage and costs.`;
+### [Subsection 2]  
+- [Essential rule 3]
+- [Essential rule 4]
+
+Keep the output focused, actionable, and optimized for AI coding agents.`;
+  }
+
+  buildAgentsPrompt(bulletPoints) {
+    return `Convert the following Drupal coding standards bullet points into a clean, focused section for an Agents.md file. 
+
+The bullet points are already cleaned and contain only the essential coding standards. Your job is to organize them into a clear, concise format that AI coding agents can easily follow.
+
+## Source Bullet Points:
+${bulletPoints}
+
+## Requirements:
+- Extract only the essential coding standards and rules
+- Use clear, actionable language that AI agents can implement
+- Group related rules under appropriate subheadings
+- Keep it concise - no examples or lengthy explanations
+- Use consistent bullet point formatting
+- Focus on what AI coding agents should do/avoid
+
+## Output Format:
+Generate a clean section in this format:
+
+## [Topic Name]
+
+### [Subsection 1]
+- [Essential rule 1]
+- [Essential rule 2]
+
+### [Subsection 2]  
+- [Essential rule 3]
+- [Essential rule 4]
+
+Keep the output focused, actionable, and optimized for AI coding agents.`;
   }
 
   extractTopicFromUrl(url) {
@@ -328,6 +341,162 @@ ${keyRules.length > 0 ? keyRules.join('\n') : `- Follow Drupal coding standards 
 - Follow security best practices`}`;
   }
 
+  async generateAgentsFile() {
+    console.log('🚀 Starting Agents.md generation from bullet points...');
+    
+    try {
+      // Load all bullet point files
+      const bulletFiles = await fs.readdir(BULLETS_DIR);
+      const bulletsFiles = bulletFiles.filter(file => file.endsWith('.bullets.md'));
+      
+      console.log(`Found ${bulletsFiles.length} bullet point files`);
+      
+      // Load all bullet point content
+      const allBulletPoints = [];
+      for (const file of bulletsFiles) {
+        const filePath = path.join(BULLETS_DIR, file);
+        const content = await fs.readFile(filePath, 'utf8');
+        const topic = file.replace('.bullets.md', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        
+        allBulletPoints.push({
+          topic,
+          filename: file,
+          content: content.trim()
+        });
+      }
+      
+      // Sort by topic for consistent output
+      allBulletPoints.sort((a, b) => a.topic.localeCompare(b.topic));
+      
+      console.log(`Loaded bullet points for: ${allBulletPoints.map(b => b.topic).join(', ')}`);
+      
+      // Combine all bullet points
+      const combinedBulletPoints = allBulletPoints.map(bp => 
+        `## ${bp.topic}\n\n${bp.content}`
+      ).join('\n\n');
+      
+      // Generate Agents.md content
+      let agentsContent;
+      if (process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY !== 'dummy') {
+        try {
+          const prompt = this.buildAgentsPrompt(combinedBulletPoints);
+          
+          const response = await this.openai.chat.completions.create({
+            model: 'gpt-4',
+            messages: [
+              {
+                role: 'system',
+                content: 'You are an expert at creating clean, focused coding standards documentation for AI agents. Focus on extracting essential rules and organizing them clearly. Use only bullet points and clear headings.'
+              },
+              {
+                role: 'user',
+                content: prompt
+              }
+            ],
+            max_tokens: 4000,
+            temperature: 0.2
+          });
+          
+          agentsContent = response.choices[0].message.content;
+          console.log(`✅ Generated Agents.md with AI (${agentsContent.length} characters)`);
+        } catch (error) {
+          console.error(`❌ AI generation failed: ${error.message}`);
+          agentsContent = this.generateFallbackAgents(allBulletPoints);
+        }
+      } else {
+        console.log(`⚠️ No API key provided, generating fallback content`);
+        agentsContent = this.generateFallbackAgents(allBulletPoints);
+      }
+      
+      // Save Agents.md file
+      const agentsFilePath = path.join(__dirname, '..', 'docs', 'Agents.md');
+      await fs.ensureDir(path.dirname(agentsFilePath));
+      await fs.writeFile(agentsFilePath, agentsContent);
+      console.log(`📄 Agents.md saved to: ${agentsFilePath}`);
+      
+      return {
+        filePath: agentsFilePath,
+        content: agentsContent,
+        topicsCount: allBulletPoints.length
+      };
+      
+    } catch (error) {
+      console.error('Error generating Agents.md:', error);
+      throw error;
+    }
+  }
+
+  generateFallbackAgents(allBulletPoints) {
+    const sections = allBulletPoints.map(bp => {
+      // Extract key bullet points (skip empty lines and metadata)
+      const lines = bp.content.split('\n').filter(line => 
+        line.trim().startsWith('-') && 
+        line.trim().length > 10 &&
+        !line.includes('http') &&
+        !line.includes('Last updated') &&
+        !line.includes('Page status') &&
+        !line.includes('On this page')
+      );
+      
+      const keyRules = lines.slice(0, 10); // Take first 10 rules
+      
+      return `## ${bp.topic}
+
+${keyRules.length > 0 ? keyRules.join('\n') : `- Follow Drupal coding standards for ${bp.topic}
+- Maintain consistency with Drupal core practices
+- Ensure code is readable and maintainable`}`;
+    });
+    
+    return sections.join('\n\n');
+  }
+
+  async combineQuickRefsIntoAgents() {
+    console.log('🔄 Combining individual quick reference files into Agents.md...');
+    
+    try {
+      // Read all quick reference files
+      const quickRefFiles = await fs.readdir(PAGES_DIR);
+      const mdFiles = quickRefFiles.filter(file => file.endsWith('-quickref.md'));
+      
+      console.log(`Found ${mdFiles.length} quick reference files`);
+      
+      const sections = [];
+      
+      for (const file of mdFiles) {
+        const filePath = path.join(PAGES_DIR, file);
+        const content = await fs.readFile(filePath, 'utf8');
+        
+        // Skip files that only contain links (old format)
+        if (content.includes('[/docs/') && content.split('\n').filter(line => line.trim().startsWith('-')).length < 3) {
+          console.log(`   ⏭ Skipping ${file} (contains only links)`);
+          continue;
+        }
+        
+        sections.push(content.trim());
+        console.log(`   ✅ Added ${file}`);
+      }
+      
+      // Combine all sections
+      const agentsContent = sections.join('\n\n');
+      
+      // Save Agents.md file
+      const agentsFilePath = path.join(__dirname, '..', 'docs', 'Agents.md');
+      await fs.ensureDir(path.dirname(agentsFilePath));
+      await fs.writeFile(agentsFilePath, agentsContent);
+      console.log(`📄 Agents.md saved to: ${agentsFilePath}`);
+      
+      return {
+        filePath: agentsFilePath,
+        content: agentsContent,
+        sectionsCount: sections.length
+      };
+      
+    } catch (error) {
+      console.error('Error combining quick references:', error);
+      throw error;
+    }
+  }
+
   async generateAllPages() {
     console.log('🚀 Starting page-based Quick Reference generation...');
     
@@ -424,10 +593,28 @@ ${keyRules.length > 0 ? keyRules.join('\n') : `- Follow Drupal coding standards 
   }
 }
 
-// Run the page generator
+// Run the page generator with Agents.md combination
 if (require.main === module) {
   const generator = new PageAgentsGenerator();
-  generator.generateAllPages().catch(console.error);
+  
+  async function runGeneration() {
+    try {
+      // First, regenerate all individual quick reference files with clean bullet points
+      console.log('Step 1: Regenerating individual quick reference files...');
+      await generator.generateAllPages();
+      
+      // Then, combine them into a single Agents.md file
+      console.log('\nStep 2: Combining into Agents.md...');
+      await generator.combineQuickRefsIntoAgents();
+      
+      console.log('\n✅ Complete! Agents.md generated successfully.');
+    } catch (error) {
+      console.error('❌ Error during generation:', error);
+      process.exit(1);
+    }
+  }
+  
+  runGeneration();
 }
 
 module.exports = { PageAgentsGenerator };

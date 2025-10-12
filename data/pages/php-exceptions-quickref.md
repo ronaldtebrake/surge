@@ -1,11 +1,11 @@
 ## Php Exceptions
 
 ### Rules
-- [Basic Exception Naming Conventions](/docs/develop/coding-standards/php-exceptions#conventions)
-- [Exception Subclasses](/docs/develop/coding-standards/php-exceptions#subclass)
-- [Example:](/docs/develop/coding-standards/php-exceptions#s-example)
-- [Try-catch blocks](/docs/develop/coding-standards/php-exceptions#s-try-catch-blocks)
-- [Inheritance](/docs/develop/coding-standards/php-exceptions#s-inheritance)
-- [PHP coding standards](/docs/develop/standards/php/php-coding-standards)
-- [API documentation and comment standards](/docs/develop/standards/php/api-documentation-and-comment-standards)
-- [API Documentation Samples](/docs/develop/standards/php/api-documentation-examples)
+- 2.  All Exceptions must end with the suffix "Exception".
+- 3.  All Exceptions should include an appropriate message and should not be translated. Only messages from the install and update system are currently translated as they are user facing.
+- 4.  The Exception's message should include a hint to the values that caused the exception.
+- 1.  Formatting messages should be done by concatenating strings or using `sprintf()`.
+- 2.  Values should be surrounded by single quotes.
+- 3.  **DO NOT** translate the message.
+- 4.  **DO NOT** use `SafeMarkup::format()`.
+- 5.  Exception classes should be named for the subsystem to which they relate, and the type of error. That is, `[Subsystem][ErrorType]Exception`.

@@ -1,11 +1,10 @@
 ## Temporary Placeholders And Delimiters
 
 ### Rules
-- [Temporary place-holders and delimiters](/docs/develop/coding-standards/temporary-placeholders-and-delimiters#s-temporary-place-holders-and-delimiters)
-- [Finding your placeholders](/docs/develop/coding-standards/temporary-placeholders-and-delimiters#s-finding-your-placeholders)
-- [PHP coding standards](/docs/develop/standards/php/php-coding-standards)
-- [API documentation and comment standards](/docs/develop/standards/php/api-documentation-and-comment-standards)
-- [API Documentation Samples](/docs/develop/standards/php/api-documentation-examples)
-- [Namespaces](/docs/develop/coding-standards/namespaces)
-- [Naming standards for services and extending Symfony](/docs/develop/coding-standards/naming-standards-for-services-and-extending-symfony)
-- [PHP Exceptions](/docs/develop/coding-standards/php-exceptions)
+- When writing a content filter module, or any code that processes or modifies content, it is tempting to use an obscure character as a place-holder, especially if only your code will see it: But this cannot be guaranteed. Non-printing, invalid or undocumented characters might not be handled correctly in the unlikely event that they are seen by a browser or feed-reader. And the more unlikely they are to be seen – the less likely they are to be tested. This will mean that some code will be written to find and eradicate these insidious characters, possibly including the ones your code is using to do its work.
+- To avoid this happening, and extending the lifetime of your code, please use an appropriate alpha-numeric string – prefixed by the name of the module (as a name-space) and a hyphen `-` or underscore `_` – and surrounded by `[`…`]`.
+- If you need delimiting place-holders, the closing delimiter can incorporate a `/` after the initial `[` and may suffix the modulename.
+- A PCRE such as
+- `'@\[modulename-tag\](.+?)\[/modulename-tag\]@'`
+- `'@\[modulename-tag\](.+?)\[/tag-modulename\]@'` if you suffixed the modulename as mentioned above
+- can be used to match the string you have previously delimited.

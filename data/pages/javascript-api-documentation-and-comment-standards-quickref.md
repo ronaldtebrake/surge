@@ -1,11 +1,11 @@
 ## Javascript Api Documentation And Comment Standards
 
 ### Rules
-- [Tag order](/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards#s-tag-order)
-- [Documenting a JavaScript file](/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards#s-documenting-a-javascript-file)
-- [Documenting behaviors](/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards#behavior)
-- [Documenting usual constructs](/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards#s-documenting-usual-constructs)
-- [JavaScript coding standards](/docs/develop/standards/javascript-coding-standards/javascript-coding-standards)
-- [JavaScript best practices](/docs/develop/standards/javascript/javascript-best-practices)
-- [ESLint settings](/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool)
-- [JavaScript API documentation and comment standards](/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards)
+- All JavaScript items (methods, object constructors and properties, functions, variables, etc.) need to have documentation headers, or they will not be recognized by the parser (unlike the API module, which picks up all PHP items whether or not they have documentation headers). Only behaviors are documented specifically, see the [behavior documentation example](#behavior).
+- Not all of the @tags we use for PHP are supported. See below for the tags available and their order of declaration.
+- To indicate the data type for a `@param` or `@return` tag, put the data type in `{}` brackets: `@param {TheType} paramName` or `@return {TheType}`. For non-object data, use `number`, `string`, `bool`, `null`, `undefined`, `object`, `function`, `Array`. For particular objects, use the constructor name; this could be a built-in JavaScript class (`Date`, `RegExp`), a DOM element (`HTMLElement`, `HTMLInputElement`), a Drupal-specific class (`Drupal.Ajax`), etc.
+- Additional tag: like `@throws`, which documents exceptions being thrown by a PHP or JavaScript function, use `@fires` to document events that are triggered by a JavaScript function. In addition, if the event is a custom event (as opposed to a standard event like a key press), add a documentation block immediately before the first line of code within a function that triggers the event, with an `@event` tag, to document the event itself (see sample below for details). Only include one `@event` block for each custom event, but use `@fires` in each function that triggers the custom event.
+- Additional tag: when documenting an object that is not being used as a namespace or class, use `@prop {type} name` tags to document its properties (these work like `@param` for function parameters).
+- Some additional notation is required in many cases to help JSDoc figure out what type of item is being documented.
+- Use `@name` to tell JSDoc the name of what is being documented, if it is not the same as the name in the code (usually because it is a function name like `DropButton` rather than including the class name like `Drupal.DropButton`).
+- Use `@constructor` to indicate that a function is intended to be a class constructor.

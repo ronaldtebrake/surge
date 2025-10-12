@@ -1,112 +1,60 @@
-I have a documentation page (the Drupal "Configuration File Coding Standards" standards page) that describes rules or conventions. I want to convert that page into a clear section in AGENTS.md so that an AI coding agent can read and enforce those conventions.
+Convert the following Drupal coding standards bullet points into a clean, focused section for an Agents.md file.
 
-Please do the following:
+The bullet points are already cleaned and contain only the essential coding standards. Your job is to organize them into a clear, concise format that AI coding agents can easily follow.
 
-Read the source content I will provide.
-
-Extract the key conventions / rules / guidelines (in bullet or list form).
-
-Write a section suitable for AGENTS.md, with a heading like ## Configuration File Coding Standards, followed by the rules in a concise, machine-friendly form.
-
-Ensure the section is self-contained (i.e. an agent reading only AGENTS.md should understand the rules).
-
-Use consistent formatting across sections (e.g. heading levels, bullet style).
-
-## Source Content:
-# Bullet Points for configuration-file-coding-standards.md
-
+## Source Bullet Points:
 
 ## YAML Configuration files
 
-## On this page
-- [Format](/docs/develop/coding-standards/configuration-file-coding-standards#format)
-- [Filename](/docs/develop/coding-standards/configuration-file-coding-standards#filename)
-- [Simple configuration](/docs/develop/coding-standards/configuration-file-coding-standards#s-simple-configuration)
-- [Configuration entities](/docs/develop/coding-standards/configuration-file-coding-standards#s-configuration-entities)
-- [Comments](/docs/develop/coding-standards/configuration-file-coding-standards#comments)
-- [Whitespace](/docs/develop/coding-standards/configuration-file-coding-standards#whitespace)
-
-## [Coding standards](/docs/develop/standards)
-- [PHP](/docs/develop/standards/php)
-- [Accessibility Coding Standards](/docs/develop/standards/accessibility-coding-standards)
-- [CSS](/docs/develop/standards/css)
-- [JavaScript](/docs/develop/standards/javascript-coding-standards)
-- [Markdown coding standards](/docs/develop/coding-standards/markdown-coding-standards)
-- [SQL](/docs/develop/standards/sql)
-- [Twig coding standards](/docs/develop/coding-standards/twig-coding-standards)
-- [Drupal Markup Style Guide](/docs/develop/coding-standards/drupal-markup-style-guide)
-- [Spelling](/docs/develop/standards/spelling)
-- [Configuration file coding standards](/docs/develop/coding-standards/configuration-file-coding-standards)
-- [Composer package naming conventions](/docs/develop/coding-standards/composer-package-naming-conventions)
-
 ## YAML Configuration files
-- Last [updated](/node/2315769/discuss) on
-- 19 January 2023
-- Note: Changes to Drupal coding standards are proposed and discussed in issues in the [Coding Standards project](/project/coding_standards).
 
-## [](#format "Permalink to this headline")Format
+## Format
 - Configuration files use [YAML syntax](https://yaml.org/spec/).
 
-## [](#filename "Permalink to this headline")Filename
+## Filename
 - The configuration file name is equal to the unique configuration name with **`.yml`** extension.
 - The unique configuration name cannot exceed 250 characters.
 
-## [](#s-simple-configuration "Permalink to this headline")Simple configuration
+## Simple configuration
 - For simple configuration, the unique configuration name **must** start with the extension name (the machine name of the module, theme, or install profile that owns the configuration).
 - For example, a module with the machine name `mymodule` wants to create a simple configuration for storing the module settings, the configuration name may be `mymodule.settings`, but it may not be `my_module.settings`.
 - Extensions can also have multiple configuration files, the use of the name `settings` is common practice but is not required, `mymodule` could also create a configuration named `mymodule.features`, if separating them makes logical sense.
 
-## [](#s-configuration-entities "Permalink to this headline")Configuration entities
+## Configuration entities
 - For configuration entities, the unique configuration name has a prefix, which is equal to `(extension).(config_prefix)`. Here, `(extension)` is the machine name of the module that defines the config entity, or "core" for core entities; `(config_prefix)` is defined in the entity annotation, and defaults to the machine name (ID) of the config entity if it has not been overridden by a `config_prefix` annotation in the entity class. Extension names cannot exceed 50 characters, and config entity config prefixes cannot exceed 32 characters.
 - The rest of the unique configuration name for a config entity (which is called the *suffix* in the rest of this section) is limited to 150 characters.
 - For many configuration entities, the suffix consists solely of the individual machine name of the item. For instance, the unique configuration name for an image style is `image.style.(machine_name_of_style)`, and for a view it is `views.view.(machine_name_of_view)`. In these cases, the machine name of the item cannot exceed 150 characters.
 - For entity bundles, the unique configuration name for the bundle configuration is `(extension).(entity_id).(bundle_config_prefix).(bundle_machine_name)`, where `(extension)` is the module that defines the entity (or "core"), `(entity_id)` is the machine name of the entity this is a bundle of, `(bundle_config_prefix)` is the config prefix defined in the bundle configuration entity class annotation (defaulting to the config entity ID if not defined), and `(bundle_machine_name)` is the machine name of that particular bundle. So for example, the unique configuration name for the Book module's "book" content type for nodes is `node.type.book`, because the config prefix for the NodeType entity is "type", and the node type's machine name in this case is "book". Entity and bundle IDs and config prefixes are limited to 32 characters.
 - For configuration like field instances and view modes, it's an even more complex structure. For instance, the view mode structure is `entity.view_mode.(target_entity_type).(view_mode_machine_name)` (example: entity.view\_mode.node.teaser), and field instances are `field.instance.(target_entity_type).(target_bundle).(field_machine_name)` (example: field.instance.node.article.body). In these cases, sensible maximums need to be chosen for each component of the unique configuration name, so that the suffix portion does not exceed 150 characters.
 
-## [](#comments "Permalink to this headline")Comments
+## Comments
 - Comments are not typically in config files, but can be made using `#`.
 
-## [](#whitespace "Permalink to this headline")Whitespace
+## Whitespace
 - Use two spaces to indent in config files. In [YAML](https://yaml.org/), the white space has semantic meaning to represent nested structures.
 
 ## Tags
 - [coding standards](/taxonomy/term/190104)
 
-## Help improve this page
-- *Page status:** No known problems
-- *You can:**
-- Log in, click [Edit](/node/2315769/edit), and edit this page
-- Log in, click [Discuss](/node/2315769/discuss), update the Page status value, and suggest an improvement
-- Log in and [create a Documentation issue](/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%282315769%29%20YAML%20Configuration%20files) with your suggestion
-
 ## Requirements:
+- Extract only the essential coding standards and rules
+- Use clear, actionable language that AI agents can implement
+- Group related rules under appropriate subheadings
+- Keep it concise - no examples or lengthy explanations
+- Use consistent bullet point formatting
+- Focus on what AI coding agents should do/avoid
 
-### Format & Structure:
-1. **Use AGENTS.md format** - Create a section suitable for AGENTS.md
-2. **Use bullet points** - Keep it scannable and concise
-3. **Structure logically** - Group related guidelines together
-4. **Use clear headers** - Make it easy to navigate
-
-### Content Focus:
-5. **Extract key conventions/rules** - Focus on the most important coding standards and conventions
-6. **Be concise** - Avoid lengthy explanations, focus on actionable guidelines
-7. **Prioritize AI-relevant content** - Rules that AI coding agents should follow and enforce
-8. **Minimize token usage** - Use bullet points only, no examples or lengthy explanations
-
-### AI Optimization:
-9. **Make it actionable** - Each point should be something an AI can implement or enforce
-10. **Use consistent formatting** - Standardize the format for easy parsing
-11. **Focus on conventions** - Coding standards, naming conventions, best practices, rules
-12. **Self-contained** - An agent reading only this section should understand the rules
-
-### Output Format:
-Generate an AGENTS.md section in this exact format:
+## Output Format:
+Generate a clean section in this format:
 
 ## Configuration File Coding Standards
 
-### Rules
-- [Essential rule/convention 1]
-- [Essential rule/convention 2]
-- [Essential rule/convention 3]
+### [Subsection 1]
+- [Essential rule 1]
+- [Essential rule 2]
 
-Keep the output concise and focused on the most important rules and conventions that AI coding agents need to know and enforce. Use only bullet points to minimize token usage and costs.
+### [Subsection 2]  
+- [Essential rule 3]
+- [Essential rule 4]
+
+Keep the output focused, actionable, and optimized for AI coding agents.

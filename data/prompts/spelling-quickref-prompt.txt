@@ -1,112 +1,51 @@
-I have a documentation page (the Drupal "Spelling" standards page) that describes rules or conventions. I want to convert that page into a clear section in AGENTS.md so that an AI coding agent can read and enforce those conventions.
+Convert the following Drupal coding standards bullet points into a clean, focused section for an Agents.md file.
 
-Please do the following:
+The bullet points are already cleaned and contain only the essential coding standards. Your job is to organize them into a clear, concise format that AI coding agents can easily follow.
 
-Read the source content I will provide.
-
-Extract the key conventions / rules / guidelines (in bullet or list form).
-
-Write a section suitable for AGENTS.md, with a heading like ## Spelling, followed by the rules in a concise, machine-friendly form.
-
-Ensure the section is self-contained (i.e. an agent reading only AGENTS.md should understand the rules).
-
-Use consistent formatting across sections (e.g. heading levels, bullet style).
-
-## Source Content:
-# Bullet Points for spelling.md
-
+## Source Bullet Points:
 
 ## Spelling
 
-## On this page
-- [Spelling of CSpell](/docs/develop/standards/spelling#s-spelling-of-cspell)
-- [Ignore word(s) in a file](/docs/develop/standards/spelling#s-ignore-words-in-a-file)
-- [Disable CSpell by line](/docs/develop/standards/spelling#s-disable-cspell-by-line)
-- [Disable CSpell for multiple lines](/docs/develop/standards/spelling#s-disable-cspell-for-multiple-lines)
-
-## [Coding standards](/docs/develop/standards)
-- [PHP](/docs/develop/standards/php)
-- [Accessibility Coding Standards](/docs/develop/standards/accessibility-coding-standards)
-- [CSS](/docs/develop/standards/css)
-- [JavaScript](/docs/develop/standards/javascript-coding-standards)
-- [Markdown coding standards](/docs/develop/coding-standards/markdown-coding-standards)
-- [SQL](/docs/develop/standards/sql)
-- [Twig coding standards](/docs/develop/coding-standards/twig-coding-standards)
-- [Drupal Markup Style Guide](/docs/develop/coding-standards/drupal-markup-style-guide)
-- [Spelling](/docs/develop/standards/spelling)
-- [Configuration file coding standards](/docs/develop/coding-standards/configuration-file-coding-standards)
-- [Composer package naming conventions](/docs/develop/coding-standards/composer-package-naming-conventions)
-
 ## Spelling
-- Last [updated](/node/3352554/discuss) on
-- 3 October 2023
 - Drupal Core uses US English spelling for all source code, including comments and names.
 - Core code is automatically checked for spelling by [CSpell](https://cspell.org/).
 
-## [](#s-spelling-of-cspell "Permalink to this headline")Spelling of CSpell
+## Spelling of CSpell
 - For in line documentation settings use all lower case for cspell. For example, `// cspell:ignore.`
 
-## [](#s-ignore-words-in-a-file "Permalink to this headline")Ignore word(s) in a file
+## Ignore word(s) in a file
 - Use the `cspell:ignore` directive. The words are listed alphabetically with a single space between the words. Use multiple lines to meet the number of characters per line limit.
-- // cspell:ignore first-word second-word`
 
-## [](#s-disable-cspell-by-line "Permalink to this headline")Disable CSpell by line
+## Disable CSpell by line
 - if it's not in English or a nonsense string (for example, a random string in a test) disable CSpell for that line. Note that `cspell` is lower case.
-- // cspell:disable-next-line
-- $token = 'PxOHfS_QL-T01NjBgu7Z7I04tIwMp6La5vM-mVxezbU';
-- use Drupal\foo\Bar;`
 
-## [](#s-disable-cspell-for-multiple-lines "Permalink to this headline")Disable CSpell for multiple lines
+## Disable CSpell for multiple lines
 - For multiple lines, use disable before the lines and enable after. Note that `cspell` is lower case.
-- // cspell:disable
-- $lorem1 = 'Lorem ipsum dolor sit amet in libero.';
-- $lorem2 = 'Ut fermentum est vitae metus orci.';
-- // cspell:enable`
 - See the [cspell development tool page](/node/3352552) for more details.
 
 ## Related Content
-
-## [Style guide](/drupalorg/style-guide)
 - This section is intended to provide direction for Drupal.org content, particularly documentation and general information pages related to
-
-## [User interface standards](/docs/develop/user-interface-standards)
 - User Interface standards for Drupal.
 
-## Help improve this page
-- *Page status:** No known problems
-- *You can:**
-- Log in, click [Edit](/node/3352554/edit), and edit this page
-- Log in, click [Discuss](/node/3352554/discuss), update the Page status value, and suggest an improvement
-- Log in and [create a Documentation issue](/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%283352554%29%20Spelling) with your suggestion
-
 ## Requirements:
+- Extract only the essential coding standards and rules
+- Use clear, actionable language that AI agents can implement
+- Group related rules under appropriate subheadings
+- Keep it concise - no examples or lengthy explanations
+- Use consistent bullet point formatting
+- Focus on what AI coding agents should do/avoid
 
-### Format & Structure:
-1. **Use AGENTS.md format** - Create a section suitable for AGENTS.md
-2. **Use bullet points** - Keep it scannable and concise
-3. **Structure logically** - Group related guidelines together
-4. **Use clear headers** - Make it easy to navigate
-
-### Content Focus:
-5. **Extract key conventions/rules** - Focus on the most important coding standards and conventions
-6. **Be concise** - Avoid lengthy explanations, focus on actionable guidelines
-7. **Prioritize AI-relevant content** - Rules that AI coding agents should follow and enforce
-8. **Minimize token usage** - Use bullet points only, no examples or lengthy explanations
-
-### AI Optimization:
-9. **Make it actionable** - Each point should be something an AI can implement or enforce
-10. **Use consistent formatting** - Standardize the format for easy parsing
-11. **Focus on conventions** - Coding standards, naming conventions, best practices, rules
-12. **Self-contained** - An agent reading only this section should understand the rules
-
-### Output Format:
-Generate an AGENTS.md section in this exact format:
+## Output Format:
+Generate a clean section in this format:
 
 ## Spelling
 
-### Rules
-- [Essential rule/convention 1]
-- [Essential rule/convention 2]
-- [Essential rule/convention 3]
+### [Subsection 1]
+- [Essential rule 1]
+- [Essential rule 2]
 
-Keep the output concise and focused on the most important rules and conventions that AI coding agents need to know and enforce. Use only bullet points to minimize token usage and costs.
+### [Subsection 2]  
+- [Essential rule 3]
+- [Essential rule 4]
+
+Keep the output focused, actionable, and optimized for AI coding agents.

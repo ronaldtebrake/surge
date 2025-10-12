@@ -1,45 +1,15 @@
-I have a documentation page (the Drupal "Css File Organization" standards page) that describes rules or conventions. I want to convert that page into a clear section in AGENTS.md so that an AI coding agent can read and enforce those conventions.
+Convert the following Drupal coding standards bullet points into a clean, focused section for an Agents.md file.
 
-Please do the following:
+The bullet points are already cleaned and contain only the essential coding standards. Your job is to organize them into a clear, concise format that AI coding agents can easily follow.
 
-Read the source content I will provide.
-
-Extract the key conventions / rules / guidelines (in bullet or list form).
-
-Write a section suitable for AGENTS.md, with a heading like ## Css File Organization, followed by the rules in a concise, machine-friendly form.
-
-Ensure the section is self-contained (i.e. an agent reading only AGENTS.md should understand the rules).
-
-Use consistent formatting across sections (e.g. heading levels, bullet style).
-
-## Source Content:
-# Bullet Points for css-file-organization.md
-
+## Source Bullet Points:
 
 ## CSS file organization
 
-## On this page
-- [File Structure](/docs/develop/standards/css/css-file-organization#file-structure)
-- [SMACSS and Sass/Compass](/docs/develop/standards/css/css-file-organization#modules)
-- [CSS files for Drupal themes](/docs/develop/standards/css/css-file-organization#themes)
-- [Aggregating CSS](/docs/develop/standards/css/css-file-organization#aggregate)
-
-## [CSS](/docs/develop/standards/css)
-- [CSS coding standards](/docs/develop/standards/css/css-coding-standards)
-- [CSS formatting guidelines](/docs/develop/standards/css/css-formatting-guidelines)
-- [CSScomb settings for Drupal (CSS formatting and sort tool)](/docs/develop/standards/css/csscomb-settings-for-drupal-css-formatting-and-sort-tool)
-- [CSS architecture (for Drupal 9)](/docs/develop/standards/css/css-architecture-for-drupal-9)
-- [CSS file organization (for Drupal 9)](/docs/develop/standards/css/css-file-organization)
-- [What to look for when reviewing CSS](/docs/develop/standards/css/what-to-look-for-when-reviewing-css)
-
 ## CSS file organization
-- Last [updated](/node/1887922/discuss) on
-- 17 May 2024
-- This documentation **needs work**. See "Help improve this page" in the sidebar.
-- Note: Changes to Drupal coding standards are proposed and discussed in issues in the [Coding Standards project](/project/coding_standards).
 - Note: This document describes a file organization and aggregation strategy that has not yet been implemented. See this core issue for that on-going work: [#1921610: \[Meta\] Architect our CSS](/project/drupal/issues/1921610 "Status: Active")
 
-## [](#file-structure "Permalink to this headline")File Structure
+## File Structure
 - Rulesets should be grouped into logical files that enforce the separation of concerns within the CSS, that can be aggregated efficiently and that can be easily overridden by themers.
 - Drupal follows a SMACSS-style categorization of its CSS rules: The State and Theme categories are not frequently used with modern CSS.
 - 1.  Base —Should include HTML element styling (e.g. a, ul, etc), typography, root scooped CSS custom properties, resets and utility classes.
@@ -50,7 +20,7 @@ Use consistent formatting across sections (e.g. heading levels, bullet style).
 - For more information about Drupal’s use of SMACSS, see the [“Separate Concerns” section of the CSS Architecture page](http://drupal.org/node/1887918#separate-concerns).
 - These categories help us keep CSS styles with different purposes from getting intertwined with one another. However, they don’t directly dictate file structure. Drupal recommends the following guidelines for structuring CSS across files:
 
-## [](#modules "Permalink to this headline")CSS files for Drupal modules
+## CSS files for Drupal modules
 - All of a module's styles should be placed in a `css/` sub-directory and broken into one or more of the following files:
 - `module_name.module.css`: This file should hold the minimal styles needed to get the module's functionality working. This includes layout, component and state styles.
 - `module_name.theme.css`: This file should hold extra styles to make the module's functionality aesthetically pleasing. This usually just consists of theme styles.
@@ -59,23 +29,16 @@ Use consistent formatting across sections (e.g. heading levels, bullet style).
 - Note: Modules should never have any base styles. Drupal core's modules do not have any base styles. Instead Drupal core uses the Normalize.css library augmented with a drupal.base.css library.
 - If a module attaches a CSS file to a template file, the CSS file should be named the same as the template file, e.g. the system-plugin-ui-form.html.twig CSS file should be named system-plugin-ui-form.css
 
-## [](#themes "Permalink to this headline")CSS files for Drupal themes
+## CSS files for Drupal themes
 - 1.  Always separate Base, Layout, and Component styles into their own files. (Drupal will aggregate these separate files into one file, so there is no performance problem with this practice.)
 - 2.  For complex themes, consider placing each component or component family in its own file.
 - 3.  State rules, including media queries, should be included with the component to which they apply.
 - 4.  Theme rules may or may not have their own file(s). [Starter themes](http://drupal.org/node/323993) are encouraged to separate their theme CSS into separate files. Otherwise, include theme rules with their corresponding component.
 - Most themes will have at least the following:
-- base: base.css
-- layout: layout.css
-- component: components.css`
 - Optionally, these can be further broken out. Below the base/layout/component level, naming is up to the module or theme. A more complex file structure using normalize.css and a mobile-first approach might look like this:
-- base: css/base/normalize.css css/base/elements.css
-- layout: css/layout/layout.css css/layout/layout--medium.css css/layout/layout--wide.css
-- component: css/components/button.css css/components/dropdown.css css/components/pagination.css css/components/tabs.css …
-- theme: css/theme/theme--light.css css/theme/theme--dark.css`
 - Note: Module styles are always loaded before theme styles and the SMACSS groups cannot be interlaced between modules and themes. For example, loading a normalize.css in a theme's "base" SMACSS group will appear in the CSS cascade order only *after* all other stylesheets defined in core and contrib modules even when they're defined in a higher SMACSS group like "component" and "theme". Follow [#3046636: LibraryDiscoveryParser overwrites theme CSS group ordering](/project/drupal/issues/3046636 "Status: Needs work") for more information.
 
-## [](#aggregate "Permalink to this headline")Aggregating CSS
+## Aggregating CSS
 - In Drupal 7 and earlier, the “group” option and the “every page” option of `drupal_add_css()` controlled which files would be aggregated together. The groups were `CSS_SYSTEM`, `CSS_DEFAULT` (for Drupal modules), and `CSS_THEME` (for Drupal themes) and the `every_page` option was a simple boolean flag. This meant there were up to 6 aggregated files.
 - In Drupal 8 and later, themes now have the ability to override stylesheets without affecting the “every page” option of the original stylesheet. See [http://drupal.org/node/1876600](http://drupal.org/node/1876600). This means conditionally-loaded CSS remains conditionally loaded.
 - This also means it’s now simple for themes to affect conditionally-loaded styles, so all the theme-added CSS no longer needs to load after all conditionally-loaded styles. This greatly simplifies the default grouping strategy that Drupal can employ. Instead of 6 aggregated files, we can just have 2:
@@ -92,56 +55,30 @@ Use consistent formatting across sections (e.g. heading levels, bullet style).
 - 4.  Theme styles that are not included with components, from Drupal modules and then Drupal themes.
 - Note: there should never be conditionally-loaded base styles.*
 - The order of styles within an aggregate are determined by the “weight” option of `drupal_add_css()` which will be:
-- The default weight for CSS rules that style HTML elements ("base" styles).
-- const CSS_BASE = -200;
-- The default weight for CSS rules that layout a page.
-- const CSS_LAYOUT = -100;
-- The default weight for CSS rules that style design components (and their associated states and themes.)
-- const CSS_COMPONENT = 0;
-- The default weight for CSS rules that style states and are not included with components.
-- const CSS_STATE = 100;
-- The default weight for CSS rules that style theme and are not included with components.
-- const CSS_THEME = 200;`
 - The aggregated file itself is determined by the "group" option and the "every page" flag of drupal\_add\_css(). The group option defaults to the `CSS_AGGREGATE_DEFAULT` constant. Drupal core does not provide any other aggregate constants, but contrib can define their own aggregate groups.
 
-## [](#modules "Permalink to this headline")SMACSS and Sass/Compass
+## SMACSS and Sass/Compass
 - SMACSS when combined with Sass/Compass concept can provide much control over output css. We can use Sass Globbing concept to have multiple .scss files and only one css file with the use of partials.
 
-## Help improve this page
-- *Page status:** Needs work
-- *You can:**
-- Log in, click [Edit](/node/1887922/edit), and edit this page
-- Log in, click [Discuss](/node/1887922/discuss), update the Page status value, and suggest an improvement
-- Log in and [create a Documentation issue](/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%281887922%29%20CSS%20file%20organization) with your suggestion
-
 ## Requirements:
+- Extract only the essential coding standards and rules
+- Use clear, actionable language that AI agents can implement
+- Group related rules under appropriate subheadings
+- Keep it concise - no examples or lengthy explanations
+- Use consistent bullet point formatting
+- Focus on what AI coding agents should do/avoid
 
-### Format & Structure:
-1. **Use AGENTS.md format** - Create a section suitable for AGENTS.md
-2. **Use bullet points** - Keep it scannable and concise
-3. **Structure logically** - Group related guidelines together
-4. **Use clear headers** - Make it easy to navigate
-
-### Content Focus:
-5. **Extract key conventions/rules** - Focus on the most important coding standards and conventions
-6. **Be concise** - Avoid lengthy explanations, focus on actionable guidelines
-7. **Prioritize AI-relevant content** - Rules that AI coding agents should follow and enforce
-8. **Minimize token usage** - Use bullet points only, no examples or lengthy explanations
-
-### AI Optimization:
-9. **Make it actionable** - Each point should be something an AI can implement or enforce
-10. **Use consistent formatting** - Standardize the format for easy parsing
-11. **Focus on conventions** - Coding standards, naming conventions, best practices, rules
-12. **Self-contained** - An agent reading only this section should understand the rules
-
-### Output Format:
-Generate an AGENTS.md section in this exact format:
+## Output Format:
+Generate a clean section in this format:
 
 ## Css File Organization
 
-### Rules
-- [Essential rule/convention 1]
-- [Essential rule/convention 2]
-- [Essential rule/convention 3]
+### [Subsection 1]
+- [Essential rule 1]
+- [Essential rule 2]
 
-Keep the output concise and focused on the most important rules and conventions that AI coding agents need to know and enforce. Use only bullet points to minimize token usage and costs.
+### [Subsection 2]  
+- [Essential rule 3]
+- [Essential rule 4]
+
+Keep the output focused, actionable, and optimized for AI coding agents.

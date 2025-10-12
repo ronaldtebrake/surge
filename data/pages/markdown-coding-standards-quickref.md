@@ -1,11 +1,7 @@
 ## Markdown Coding Standards
 
 ### Rules
-- [PHP](/docs/develop/standards/php)
-- [Accessibility Coding Standards](/docs/develop/standards/accessibility-coding-standards)
-- [CSS](/docs/develop/standards/css)
-- [JavaScript](/docs/develop/standards/javascript-coding-standards)
-- [Markdown coding standards](/docs/develop/coding-standards/markdown-coding-standards)
-- [SQL](/docs/develop/standards/sql)
-- [Twig coding standards](/docs/develop/coding-standards/twig-coding-standards)
-- [Drupal Markup Style Guide](/docs/develop/coding-standards/drupal-markup-style-guide)
+- This topic is currently being discussed:
+- [#2952616: Adopt CommonMark spec for Markdown files](/project/coding_standards/issues/2952616 "Status: Needs review")
+- [#2191525: \[PP-1\]\[policy, no patch\] Extend Markdown coding standards to support API module (DOXYGEN)](/project/coding_standards/issues/2191525 "Status: Postponed")
+- [coding standards](/taxonomy/term/190104)

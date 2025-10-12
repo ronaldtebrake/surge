@@ -1,11 +1,11 @@
 ## Javascript Coding Standards
 
 ### Rules
-- [PHP](/docs/develop/standards/php)
-- [Accessibility Coding Standards](/docs/develop/standards/accessibility-coding-standards)
-- [CSS](/docs/develop/standards/css)
-- [JavaScript](/docs/develop/standards/javascript-coding-standards)
-- [Markdown coding standards](/docs/develop/coding-standards/markdown-coding-standards)
-- [SQL](/docs/develop/standards/sql)
-- [Twig coding standards](/docs/develop/coding-standards/twig-coding-standards)
-- [Drupal Markup Style Guide](/docs/develop/coding-standards/drupal-markup-style-guide)
+- All code MUST indent using two (2) space characters,
+- All code MUST NOT indent using tab characters,
+- All code MUST NOT end with trailing whitespace.
+- JavaScript allows optional "semi-colon insertion". Drupal standards do not.
+- All statements (except `for, function, if, switch, try, while`) MUST be followed by a semi-colon (`;`),
+- Return values MUST start on the same line as the `return` keyword.
+- *EXCEPTIONS:**
+- Anonymous functions assigned to a variable MUST be followed by a semi-colon.

@@ -1,11 +1,9 @@
 ## Css Coding Standards
 
 ### Rules
-- [Acknowledgements](/docs/develop/standards/css/css-coding-standards#s-acknowledgements)
-- [CSS coding standards](/docs/develop/standards/css/css-coding-standards)
-- [CSS formatting guidelines](/docs/develop/standards/css/css-formatting-guidelines)
-- [CSScomb settings for Drupal (CSS formatting and sort tool)](/docs/develop/standards/css/csscomb-settings-for-drupal-css-formatting-and-sort-tool)
-- [CSS architecture (for Drupal 9)](/docs/develop/standards/css/css-architecture-for-drupal-9)
-- [CSS file organization (for Drupal 9)](/docs/develop/standards/css/css-file-organization)
-- [What to look for when reviewing CSS](/docs/develop/standards/css/what-to-look-for-when-reviewing-css)
-- Last [updated](/node/1886770/discuss) on
+- To minimize friction when contributing to CSS, the front-end developers of the Drupal community have reached consensus about our coding standards for:
+- Formatting CSS code.
+- CSS architecture, including goals, pitfalls and best practices.
+- Grouping rulesets into files.
+- Despite our natural range of working styles and coding preferences, we value collaboration and ease of development, so we have attempted to explain our standards clearly in the following documents.
+- > "Part of being a good steward to a successful project is realizing that writing code for yourself is a Bad Idea™. If thousands of people are using your code, then **write your code for maximum clarity**." - Idan Gazit

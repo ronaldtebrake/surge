@@ -1,11 +1,11 @@
 ## Css Formatting Guidelines
 
 ### Rules
-- [Whitespace](/docs/develop/standards/css/css-formatting-guidelines#s-whitespace)
-- [Indentation](/docs/develop/standards/css/css-formatting-guidelines#s-indentation)
-- [Blank lines](/docs/develop/standards/css/css-formatting-guidelines#s-blank-lines)
-- [Line endings](/docs/develop/standards/css/css-formatting-guidelines#s-line-endings)
-- [Comments](/docs/develop/standards/css/css-formatting-guidelines#s-comments)
-- [File comments](/docs/develop/standards/css/css-formatting-guidelines#s-file-comments)
-- [Single line comments describing a ruleset](/docs/develop/standards/css/css-formatting-guidelines#s-single-line-comments-describing-a-ruleset)
-- [Multi-line comments describing a ruleset](/docs/develop/standards/css/css-formatting-guidelines#s-multi-line-comments-describing-a-ruleset)
+- Use 2 spaces for each level of indentation, the same standard as Drupal’s PHP and JavaScript code.
+- Declarations (property/value pairs) should be indented one level relative to their selector.
+- Rulesets within a media query should be indented one level relative to the media statement.
+- Comments should maintain the indentation of their declaration or ruleset.
+- In general, separate each ruleset by a blank line when using PostCSS.
+- If a ruleset has a preceding Doxygen-style or single-line-style comment that describes it, place a blank line before the comment.
+- If two rulesets have no interleaving blank line, they must be logically related. If they are not logically related to each other, add a blank line and a comment describing the second ruleset.
+- There MUST NOT be any whitespace (spaces or tabs) at the end of lines.

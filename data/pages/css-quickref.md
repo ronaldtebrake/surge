@@ -1,11 +1,11 @@
 ## Css
 
 ### Rules
-- [PHP](/docs/develop/standards/php)
-- [Accessibility Coding Standards](/docs/develop/standards/accessibility-coding-standards)
-- [CSS](/docs/develop/standards/css)
-- [JavaScript](/docs/develop/standards/javascript-coding-standards)
-- [Markdown coding standards](/docs/develop/coding-standards/markdown-coding-standards)
-- [SQL](/docs/develop/standards/sql)
-- [Twig coding standards](/docs/develop/coding-standards/twig-coding-standards)
-- [Drupal Markup Style Guide](/docs/develop/coding-standards/drupal-markup-style-guide)
+- CSS coding standards and best practices for Drupal.
+- Overview of CSS coding standards
+- Whitespace, comments, formatting and more
+- Standards for using the CSScomb formatting and sort tool for CSS
+- Goals and best practices for CSS architecture
+- Preliminary strategy for file organization
+- How to review CSS patches
+- Working with CSS in Drupal 7.

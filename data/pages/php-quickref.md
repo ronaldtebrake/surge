@@ -1,11 +1,11 @@
 ## Php
 
 ### Rules
-- [PHP](/docs/develop/standards/php)
-- [Accessibility Coding Standards](/docs/develop/standards/accessibility-coding-standards)
-- [CSS](/docs/develop/standards/css)
-- [JavaScript](/docs/develop/standards/javascript-coding-standards)
-- [Markdown coding standards](/docs/develop/coding-standards/markdown-coding-standards)
-- [SQL](/docs/develop/standards/sql)
-- [Twig coding standards](/docs/develop/coding-standards/twig-coding-standards)
-- [Drupal Markup Style Guide](/docs/develop/coding-standards/drupal-markup-style-guide)
+- The Drupal coding standards for PHP.
+- The Drupal Coding Standards apply to code within Drupal and its contributed modules.
+- Standards for API documentation blocks in PHP code
+- This page is intended to be a collection of the complete API documentation examples
+- Standards having to do with namespaces
+- Standards for services and Symfony usage
+- Basic conventions, exception subclasses, try-catch blocks, inheritance
+- Summary of how Drupal 8 uses the PSR-4 standard for namespace autoloading
