@@ -1,8 +1,11 @@
 {
-  "convertedAt": "2025-09-26T13:15:24.590Z",
+  "convertedAt": "2025-10-12T12:29:33.937Z",
   "totalFiles": 33,
+  "accessibleFiles": 33,
+  "accessDeniedFiles": 0,
   "successful": 33,
   "failed": 0,
+  "skipped": 0,
   "results": [
     {
       "htmlFile": "accessibility-coding-standards.html",
