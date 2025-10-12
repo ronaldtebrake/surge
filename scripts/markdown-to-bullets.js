@@ -64,22 +64,34 @@ class BulletPointGenerator {
       return this.createFallbackBulletPoints(markdownContent, filename);
     }
 
-    const prompt = `Convert the following Drupal documentation into comprehensive bullet points for AI coding agents. Focus on rules, guidelines, and standards that AI tools should follow when working with Drupal.
+    // Clean the markdown content to remove metadata and navigation
+    const cleanedContent = this.cleanMarkdownContent(markdownContent);
+
+    const prompt = `Convert the following Drupal coding standards documentation into clean, focused bullet points for AI coding agents. 
 
 File: ${filename}
 
+IMPORTANT: Extract ONLY the actual coding standards, rules, and guidelines. Do NOT include:
+- Navigation menus or "On this page" sections
+- Last updated timestamps or metadata
+- "Help improve this page" sections
+- Permalinks or anchor links
+- Table of contents
+- References to other pages
+- Examples (keep only the rules, not the code examples)
+
 Requirements:
-- Extract all rules, guidelines, and standards
+- Extract only the coding standards and rules
 - Convert them into clear, actionable bullet points
 - Focus on what AI coding agents should do/avoid
-- Remove examples and keep only the rules
 - Use consistent formatting with bullet points
-- Be comprehensive - include all relevant guidelines
+- Group related rules under appropriate headings
+- Be comprehensive but concise
 
 Documentation content:
-${markdownContent}
+${cleanedContent}
 
-Generate bullet points that cover all the rules and guidelines from this documentation:`;
+Generate clean bullet points that contain only the coding standards and rules:`;
 
     try {
       const completion = await this.openai.chat.completions.create({
@@ -166,27 +178,211 @@ Generate bullet points that cover all the rules and guidelines from this documen
     return criticalPatterns.some(pattern => errorMessage.includes(pattern));
   }
 
-  createFallbackBulletPoints(markdownContent, filename) {
-    // Simple fallback that extracts headings and creates basic bullet points
+  cleanMarkdownContent(markdownContent) {
     const lines = markdownContent.split('\n');
-    const bulletPoints = [`# Bullet Points for ${filename}\n`];
+    const cleanedLines = [];
+    let skipSection = false;
+    let inCodeBlock = false;
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const trimmedLine = line.trim();
+      
+      // Skip code blocks entirely
+      if (trimmedLine.startsWith('```')) {
+        inCodeBlock = !inCodeBlock;
+        continue;
+      }
+      
+      if (inCodeBlock) {
+        continue;
+      }
+      
+      // Process headings - clean them but keep them
+      if (line.startsWith('#')) {
+        // Clean the heading but preserve it
+        const cleanedHeading = line.replace(/\[.*?\]\(.*?\)/g, '').trim();
+        if (cleanedHeading && !this.isMetadataHeading(cleanedHeading.replace(/^#+\s*/, ''))) {
+          cleanedLines.push(cleanedHeading);
+        }
+        continue;
+      }
+      
+      // Skip navigation and metadata sections
+      if (this.shouldSkipLine(trimmedLine, lines, i)) {
+        continue;
+      }
+      
+      // Skip entire sections that are metadata
+      if (this.isMetadataSection(trimmedLine)) {
+        skipSection = true;
+        continue;
+      }
+      
+      // End of metadata section
+      if (skipSection && line.startsWith('#')) {
+        skipSection = false;
+      }
+      
+      if (!skipSection) {
+        cleanedLines.push(line);
+      }
+    }
+    
+    return cleanedLines.join('\n');
+  }
+
+  shouldSkipLine(line, allLines, currentIndex) {
+    // Skip navigation sections
+    if (line === '### On this page' || line === '## On this page') {
+      return true;
+    }
+    
+    // Skip "Help improve this page" sections
+    if (line === '## Help improve this page' || line === '### Help improve this page') {
+      return true;
+    }
+    
+    // Skip last updated information
+    if (line.startsWith('Last [updated]') || line.match(/^\d{1,2} \w+ \d{4}$/)) {
+      return true;
+    }
+    
+    // Skip permalink patterns
+    if (line.includes('Permalink to this headline')) {
+      return true;
+    }
+    
+    // Skip table of contents links
+    if (line.match(/^- \[.*\]\(\/docs\/.*#.*\)$/)) {
+      return true;
+    }
+    
+    // Skip "Changes to Drupal coding standards" references
+    if (line.includes('Changes to Drupal coding standards are proposed')) {
+      return true;
+    }
+    
+    // Skip "This document is loosely based on" references
+    if (line.includes('This document is loosely based on')) {
+      return true;
+    }
+    
+    // Skip page status and improvement sections
+    if (line.includes('Page status:') || line.includes('You can:')) {
+      return true;
+    }
+    
+    // Skip "This documentation needs work" messages
+    if (line.includes('This documentation **needs work**')) {
+      return true;
+    }
+    
+    // Skip "Note: Changes to Drupal coding standards" references
+    if (line.includes('Note: Changes to Drupal coding standards')) {
+      return true;
+    }
+    
+    // Skip "Log in, click" improvement suggestions
+    if (line.includes('Log in, click [Edit]') || line.includes('Log in, click [Discuss]') || line.includes('Log in and [create a Documentation issue]')) {
+      return true;
+    }
+    
+    // Skip empty lines that are just metadata
+    if (line === '' && currentIndex > 0 && currentIndex < allLines.length - 1) {
+      const prevLine = allLines[currentIndex - 1].trim();
+      const nextLine = allLines[currentIndex + 1].trim();
+      
+      // Skip empty lines between metadata
+      if (prevLine.includes('Last [updated]') || nextLine.match(/^\d{1,2} \w+ \d{4}$/)) {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+
+  isMetadataSection(line) {
+    // Check if this line starts a metadata section
+    const metadataPatterns = [
+      '### On this page',
+      '## On this page',
+      '## Help improve this page',
+      '### Help improve this page',
+      'Last [updated]',
+      'Changes to Drupal coding standards',
+      'This document is loosely based on',
+      'This documentation **needs work**',
+      'Note: Changes to Drupal coding standards',
+      'Page status:',
+      'You can:'
+    ];
+    
+    return metadataPatterns.some(pattern => line.includes(pattern));
+  }
+
+  createFallbackBulletPoints(markdownContent, filename) {
+    // Clean the content first
+    const cleanedContent = this.cleanMarkdownContent(markdownContent);
+    const lines = cleanedContent.split('\n');
+    const bulletPoints = [];
     
     let currentSection = '';
+    let inCodeBlock = false;
     
     for (const line of lines) {
+      const trimmedLine = line.trim();
+      
+      // Skip code blocks entirely
+      if (trimmedLine.startsWith('```')) {
+        inCodeBlock = !inCodeBlock;
+        continue;
+      }
+      
+      if (inCodeBlock) {
+        continue;
+      }
+      
+      // Process headings
       if (line.startsWith('#')) {
-        currentSection = line.replace(/^#+\s*/, '');
-        bulletPoints.push(`\n## ${currentSection}`);
-      } else if (line.trim() && !line.startsWith('```') && !line.startsWith('|')) {
+        // Extract heading text, removing permalinks and markdown links
+        currentSection = line.replace(/^#+\s*/, '')
+          .replace(/\[.*?\]\(.*?\)/g, '') // Remove markdown links
+          .replace(/\[.*?\]\("Permalink to this headline"\)/g, '') // Remove permalinks
+          .replace(/\s+/g, ' ') // Normalize whitespace
+          .trim();
+        
+        // Skip metadata headings and empty headings
+        if (currentSection && !this.isMetadataHeading(currentSection)) {
+          bulletPoints.push(`\n## ${currentSection}`);
+        }
+      } 
+      // Process content lines
+      else if (trimmedLine && !line.startsWith('|') && !line.startsWith('- [') && !line.startsWith('* [')) {
+        // Skip navigation links and metadata
+        if (this.shouldSkipLine(trimmedLine, lines, lines.indexOf(line))) {
+          continue;
+        }
+        
         // Convert regular text to bullet points
-        const cleanLine = line.trim().replace(/^[-*+]\s*/, '');
-        if (cleanLine.length > 10) { // Only include substantial content
+        const cleanLine = trimmedLine.replace(/^[-*+]\s*/, '');
+        if (cleanLine.length > 10 && !cleanLine.match(/^\[.*\]\(\/docs\/.*\)$/)) {
           bulletPoints.push(`- ${cleanLine}`);
         }
       }
     }
     
     return bulletPoints.join('\n');
+  }
+
+  isMetadataHeading(heading) {
+    const metadataHeadings = [
+      'On this page',
+      'Help improve this page',
+      'PHP' // Skip the navigation section
+    ];
+    
+    return metadataHeadings.some(pattern => heading.includes(pattern));
   }
 
   async loadSitemap() {

@@ -1,19 +1,7 @@
-# Bullet Points for list-of-sql-reserved-words.md
-
 
 ## List of SQL reserved words
 
-## On this page
-- [Reserved Words](/docs/develop/coding-standards/list-of-sql-reserved-words#s-reserved-words)
-
-## [SQL](/docs/develop/standards/sql)
-- [SQL coding conventions](/docs/develop/standards/sql/sql-coding-conventions)
-- [List of SQL reserved words](/docs/develop/coding-standards/list-of-sql-reserved-words)
-- [Avoid "SELECT \* FROM ..."](/docs/develop/coding-standards/avoid-select-from)
-
 ## List of SQL reserved words
-- Last [updated](/node/141051/discuss) on
-- 24 September 2022
 - The list below represents a combination of the following sources of SQL reserved words:
 - [ANSI SQL 92](http://developer.mimer.se/validator/sql-reserved-words.tml)
 - [ANSI SQL 99](http://developer.mimer.se/validator/sql-reserved-words.tml)
@@ -28,7 +16,7 @@
 - [Oracle 10.2](http://download-west.oracle.com/docs/cd/B19306_01/server.102/b14200/ap_keywd.htm)
 - There are undoubtedly more sources that we should add to this list, but this makes a very good starting point.
 
-## [](#s-reserved-words "Permalink to this headline")Reserved Words
+## Reserved Words
 - 4.  ABSOLUTE
 - 11.  AGGREGATE
 - 14.  ALLOCATE
@@ -674,10 +662,3 @@
 - 820.  WRITETEXT
 - 824.  YEAR\_MONTH
 - 825.  ZEROFILL
-
-## Help improve this page
-- *Page status:** No known problems
-- *You can:**
-- Log in, click [Edit](/node/141051/edit), and edit this page
-- Log in, click [Discuss](/node/141051/discuss), update the Page status value, and suggest an improvement
-- Log in and [create a Documentation issue](/node/add/project-issue/documentation?title=Suggestion%20for%3A%20%28141051%29%20List%20of%20SQL%20reserved%20words) with your suggestion
