@@ -1,55 +1,12 @@
-
-## Setting up the linter-fixer tool
-
-## Setting up the linter-fixer tool
-- Understanding the purpose and nature of Drupal's coding standards for JavaScript from the [previous pages](/docs/develop/standards/javascript-coding-standards/javascript-coding-standards) represents the theory. Now, let's continue with their practical usage in everyday work. This page describes some basic methods of setting up developer aid tools utilizing these rulesets.
-
-## Tools overview
-- *ESLint* is the most popular linter utility for JavaScript and EcmaScript-based (hence the name) languages. It analyzes static code to catch syntax issues and enforce coding best practices. (It is loosely comparable to PHPStan on the backend side, but not as type-aware.)
-- On the other hand, *Prettier* is a separate tool: an opinionated code formatter that can be integrated into ESLint via plugins. However, unlike ESLint, it doesn’t validate logic or best practices. (It only rewrites code into a consistent format.)
-- When working on JavaScript source code for Drupal, these 2 tools, ESLint and Prettier, must be installed on your project's codebase; using a package manager is the easiest way to get them. Although multiple competitor package manager utilities are available in the JavaScript/ECMAScript universe (*NPM* and *Yarn* are the two most popular), the Drupal community has [chosen](https://www.drupal.org/node/2996785/revisions/13574092/view#s-install-pre-requisites:~:text=we%20use%20yarn%20for%20managing%20dependencies) the latter as the recommended one for many reasons. (Evidence is the [presence](https://git.drupalcode.org/project/drupal/-/blob/11.2.2/core/yarn.lock) of the `yarn.lock` file and the [lack](https://git.drupalcode.org/search?search=package-lock.json&nav_source=navbar&project_id=59858&group_id=2&search_code=true&repository_ref=11.2.2) of `package-lock.json` file.) So this guide will also demonstrate Yarn commands.
-- [![Screenshot](/files/drupal-core-managaes-its-frontend-dependencies-with-yarn.png)](/files/drupal-core-managaes-its-frontend-dependencies-with-yarn.png "Open in original size")
-- All three development tools mentioned till now ([Yarn](https://github.com/yarnpkg/berry/blob/master/package.json#L76), [ESLint](https://github.com/eslint/eslint/blob/main/package.json#L223), and [Prettier](https://github.com/prettier/prettier/blob/main/package.json#L26)) require a Node.js instance to be installed and run on the stack.
-
-## Preparing the environment
-- The underlying software stack of a Drupal-based website and its file structure can be installed in several different ways. Still, for the sake of simplicity, this guide will follow the generally suggested method: building upon the `drupal/core-recommended` [meta-package](https://github.com/drupal/core-recommended) and running in a containerized local development environment with *DDEV* (see the [docs](/docs/getting-started/installing-drupal/install-drupal-using-ddev-for-local-development)). Following this platform-agnostic approach ensures the broadest reach of audience of our documentation efforts – even if you have to use a different tool as a component of the stack for any reason, you still can grasp the overall idea.
-- One of the many benefits DDEV provides is that it already installs the latest version of Node.js on the backend stack without the need to take care of it manually. (Feel free to check by running `$ ddev . node --version` – it should return a value starting with v22.) "Standing on the shoulders of giants" – you've probably heard the saying many times. The great people behind Node.js and Yarn have joined forces to provide a convenient way of having a package manager already available out-of-the-box without manual installation: this is the [Corepack](https://github.com/nodejs/corepack#readme) initiative.
-- The containerization tool DDEV offers this *Corepack* component by default, built into the web container (which runs your website). You just need to enable it:
-- 1.  Find the "corepack" term in your `.ddev/config.yaml` file
-- 2.  Uncomment it, set its value to "true"
-- 3.  Restart your stack: `$ ddev restart`
-- 4.  Ensure you have its latest version installed: `$ ddev yarn set version stable`
-- 5.  Finally, your package manager should be up and running: `$ ddev yarn --version` responding "4.9.x" or similar version number
-
-## Installing dependencies
-- A package manager is only a program alone; now we need the list of required packages to feed it to install. Drupal Core is shipped with its own `package.json` file describing all the frontend-related external dependencies. Roughly simplified, similarly to the `composer.json` file in the root directory of your project, which lists the backend-related packages, but with the significant difference that Node.js' `package.json` file sits two levels deeper, in the `web/core/` directory instead.
-- 1.  Stand into this lower directory: `$ cd web/core`
-- 2.  Start installing all the dependencies listed in the `package.json` file: `$ ddev yarn install`
-- 3.  A new `web/core/node_modules/` directory should appear in your file structure (it is already ignored in Git)
-- Within this, the `web/core/node_modules/.bin/` directory should contain two executable files: `eslint` and `prettier` (symlinks, to be precise).
-- 4.  Now you can check if they run normally by asking their version number and comparing to these expected values:
-- `$ ddev yarn eslint --version` → "8.57.x" or similar
-- `$ ddev yarn prettier --version` → "3.5.x" or similar
-- One more thing to see: currently, the only single `node_modules/` directory containing all these external dependencies exists down there in `web/core/`, thus it is only relevant for Drupal Core. However, we also want to lint the JavaScript code of contrib and custom modules and themes as well, living in different locations of the codebase. To make the content of `node_modules/` available from other places as well, create a symlink from the topmost project root pointing to its content. This line chains together three commands: jumping up to the project root, creating the symlink, then returning to `web/core/` where we started from.
-
-## Running checks & fixes
-- Having everything prepared, now we are ready to run the linting process to check any JavaScript file existing in our project codebase. The syntax of invoking ESLint is `$ ddev yarn eslint {{../relative-path/to-the/file}}`. If you also want ESLint to modify file content where an automatically fixable coding standard violation is detected, plus reformat the style of the entire file too, simply add the "--fix" switch to the command in extra. Some examples:
-- Only check (but do not fix) a single file of Drupal Core:
-- `$ ddev yarn eslint modules/big_pipe/js/big_pipe.js`
-- Check a given file outside of Core (e.g. a contrib theme's):
-- `$ ddev yarn eslint ../themes/contrib/gin/js/init.js`
-- Check & fix not a single file only, but all JS files within an entire directory of our custom code:
-- `$ ddev yarn eslint --fix ../modules/custom/my_module/js`
-- Here's an example output of such a command:
-- [![Screenshot of CLI](/files/running-eslint-on-ddev-for-a-javascript-file-of-drupal-core.png)](/files/running-eslint-on-ddev-for-a-javascript-file-of-drupal-core.png "Open in original size")
-
-## Special cases
-- Some rules need to be changed for specific modules (if they use a third party library and they need to use a new global variable), in that case the module can create it's own `.eslintrc.json` turning some rules on or off and adding global variables they require. When ESLint runs, all the configuration files present in the directory tree are merged together: see [Configuration Cascading and Hierarchy](https://eslint.org/docs/latest/use/configure/configuration-files#cascading-and-hierarchy) for more details. For example, the *Google Analytics* module uses third-party code that defines the global ”ga”, which can be allowed by adding the following code to `.eslintrc.json` in the module directory:
-
-## Tags
-- [Node.js](/taxonomy/term/204552)
-- [Yarn](/taxonomy/term/204553)
-- [eslint](/taxonomy/term/190105)
-- [DDEV](/taxonomy/term/193599)
-- [Prettier](/taxonomy/term/204554)
-- [Airbnb](/taxonomy/term/204555)
+- Use ESLint and Prettier for analyzing and formatting JavaScript source code in Drupal projects.
+- Install ESLint and Prettier using a package manager, preferably Yarn, as recommended by the Drupal community.
+- Ensure a Node.js instance is installed and running on the stack for Yarn, ESLint, and Prettier to function.
+- Use DDEV for a containerized local development environment, which comes with the latest version of Node.js installed.
+- Enable Corepack in DDEV by setting its value to "true" in the `.ddev/config.yaml` file.
+- Update Corepack to its latest version using the command `$ ddev yarn set version stable`.
+- Install required packages using the `package.json` file located in the `web/core/` directory of the Drupal Core.
+- Ensure the `web/core/node_modules/` directory contains executable files for `eslint` and `prettier`.
+- Make the content of `node_modules/` available from other locations by creating a symlink from the project root pointing to its content.
+- Run the linting process to check any JavaScript file in the project codebase using the command `$ ddev yarn eslint {{../relative-path/to-the/file}}`.
+- Use the "--fix" switch with the ESLint command to automatically fix coding standard violations and reformat the style of the entire file.
+- For specific modules using third-party libraries, create a custom `.eslintrc.json` file in the module directory to turn some rules on or off and add required global variables.

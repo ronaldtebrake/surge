@@ -1,58 +1,58 @@
 {
-  "PHP": {
-    "https://www.drupal.org/docs/develop/standards/php": "2024-04-11",
-    "https://www.drupal.org/docs/develop/standards/php/php-coding-standards": "2025-08-16",
-    "https://www.drupal.org/docs/develop/standards/php/api-documentation-and-comment-standards": "2025-06-04",
-    "https://www.drupal.org/docs/develop/standards/php/api-documentation-examples": "2023-01-19",
-    "https://www.drupal.org/docs/develop/coding-standards/namespaces": "2023-10-26",
-    "https://www.drupal.org/docs/develop/coding-standards/naming-standards-for-services-and-extending-symfony": "2022-12-13",
-    "https://www.drupal.org/docs/develop/coding-standards/php-exceptions": "2023-05-02",
-    "https://www.drupal.org/docs/develop/standards/php/psr-4-namespaces-and-autoloading-in-drupal-8": "2022-12-13",
-    "https://www.drupal.org/docs/develop/coding-standards/temporary-placeholders-and-delimiters": "2024-04-25",
-    "https://www.drupal.org/docs/develop/coding-standards/write-e_all-compliant-code": "2024-04-25"
+  "[Obsolete] PHP": {
+    "https://www.drupal.org/docs/develop/standards/obsolete-php": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-php/obsolete-php-coding-standards": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-php/obsolete-api-documentation-and-comment-standards": "2025-10-17",
+    "https://www.drupal.org/docs/develop/standards/obsolete-php/obsolete-api-documentation-examples": "2025-10-16",
+    "https://www.drupal.org/docs/develop/coding-standards/namespaces": "2025-10-16",
+    "https://www.drupal.org/docs/develop/coding-standards/naming-standards-for-services-and-extending-symfony": "2025-10-16",
+    "https://www.drupal.org/docs/develop/coding-standards/php-exceptions": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-php/obsolete-psr-4-namespaces-and-autoloading-in-drupal-8": "2025-10-16",
+    "https://www.drupal.org/docs/develop/coding-standards/temporary-placeholders-and-delimiters": "2025-10-16",
+    "https://www.drupal.org/docs/develop/coding-standards/write-e_all-compliant-code": "2025-10-16"
   },
-  "Accessibility Coding Standards": {
-    "https://www.drupal.org/docs/develop/standards/accessibility-coding-standards": "2025-08-27"
+  "[Obsolete] Accessibility Coding Standards": {
+    "https://www.drupal.org/docs/develop/standards/obsolete-accessibility-coding-standards": "2025-10-16"
   },
-  "CSS": {
-    "https://www.drupal.org/docs/develop/standards/css": "2023-01-19",
-    "https://www.drupal.org/docs/develop/standards/css/css-coding-standards": "2023-08-17",
-    "https://www.drupal.org/docs/develop/standards/css/css-formatting-guidelines": "2025-01-19",
-    "https://www.drupal.org/docs/develop/standards/css/csscomb-settings-for-drupal-css-formatting-and-sort-tool": "2021-01-12",
-    "https://www.drupal.org/docs/develop/standards/css/css-architecture-for-drupal-9": "2022-09-13",
-    "https://www.drupal.org/docs/develop/standards/css/css-file-organization": "2024-05-17",
-    "https://www.drupal.org/docs/develop/standards/css/what-to-look-for-when-reviewing-css": "2020-10-16"
+  "[Obsolete] CSS": {
+    "https://www.drupal.org/docs/develop/standards/obsolete-css": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-css-coding-standards": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-css-formatting-guidelines": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-csscomb-settings-for-drupal-css-formatting-and-sort-tool": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-css-architecture-for-drupal-9": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-css-file-organization": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-what-to-look-for-when-reviewing-css": "2025-10-16"
   },
-  "JavaScript coding standards": {
-    "https://www.drupal.org/docs/develop/standards/javascript-coding-standards": "2023-01-19",
-    "https://www.drupal.org/docs/develop/standards/javascript-coding-standards/javascript-coding-standards": "2024-05-13",
-    "https://www.drupal.org/docs/develop/standards/javascript/javascript-best-practices": "2020-10-16",
-    "https://www.drupal.org/docs/develop/standards/javascript-coding-standards/setting-up-the-linter-fixer-tool": "2025-08-05",
-    "https://www.drupal.org/docs/develop/standards/javascript-coding-standards/javascript-api-documentation-and-comment-standards": "2023-06-16",
-    "https://www.drupal.org/docs/develop/standards/javascript/jquery-coding-standards": "2021-03-11"
+  "[Obsolete] JavaScript coding standards": {
+    "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards/obsolete-javascript-coding-standards": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards/obsolete-javascript-best-practices": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards/obsolete-setting-up-the-linter-fixer-tool": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards/obsolete-javascript-api-documentation-and-comment-standards": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards/obsolete-jquery-coding-standards": "2025-10-16"
   },
-  "Markdown": {
-    "https://www.drupal.org/docs/develop/coding-standards/markdown-coding-standards": "2023-01-19"
+  "[Obsolete] Markdown": {
+    "https://www.drupal.org/docs/develop/coding-standards/markdown-coding-standards": "2025-10-16"
   },
-  "SQL": {
-    "https://www.drupal.org/docs/develop/standards/sql": "2023-01-31",
-    "https://www.drupal.org/docs/develop/standards/sql/sql-coding-conventions": "2022-09-24",
-    "https://www.drupal.org/docs/develop/coding-standards/list-of-sql-reserved-words": "2022-09-24",
-    "https://www.drupal.org/docs/develop/coding-standards/avoid-select-from": "2024-04-25"
+  "[Obsolete] SQL": {
+    "https://www.drupal.org/docs/develop/standards/obsolete-sql": "2025-10-16",
+    "https://www.drupal.org/docs/develop/standards/obsolete-sql/obsolete-sql-coding-conventions": "2025-10-16",
+    "https://www.drupal.org/docs/develop/coding-standards/list-of-sql-reserved-words": "2025-10-16",
+    "https://www.drupal.org/docs/develop/coding-standards/avoid-select-from": "2025-10-16"
   },
-  "Twig coding standards": {
-    "https://www.drupal.org/docs/develop/coding-standards/twig-coding-standards": "2023-01-19"
+  "[Obsolete] Twig coding standards": {
+    "https://www.drupal.org/docs/develop/coding-standards/twig-coding-standards": "2025-10-16"
   },
-  "Drupal Markup Style Guide": {
-    "https://www.drupal.org/docs/develop/coding-standards/drupal-markup-style-guide": "2023-06-07"
+  "[Obsolete] Drupal Markup Style Guide": {
+    "https://www.drupal.org/docs/develop/coding-standards/drupal-markup-style-guide": "2025-10-16"
   },
-  "Spelling": {
-    "https://www.drupal.org/docs/develop/standards/spelling": "2023-10-03"
+  "[Obsolete] Spelling": {
+    "https://www.drupal.org/docs/develop/standards/obsolete-spelling": "2025-10-16"
   },
-  "YAML Configuration files": {
-    "https://www.drupal.org/docs/develop/coding-standards/configuration-file-coding-standards": "2023-01-19"
+  "[Obsolete] YAML Configuration files": {
+    "https://www.drupal.org/docs/develop/coding-standards/configuration-file-coding-standards": "2025-10-16"
   },
-  "Composer package naming conventions": {
-    "https://www.drupal.org/docs/develop/coding-standards/composer-package-naming-conventions": "2025-06-19"
+  "[Obsolete] Composer package naming conventions": {
+    "https://www.drupal.org/docs/develop/coding-standards/composer-package-naming-conventions": "2025-10-16"
   }
 }
