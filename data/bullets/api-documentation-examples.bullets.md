@@ -1,123 +1,20 @@
-
-## API Documentation Examples
-
-## API Documentation Examples
-- This page is ia collection of the complete API documentation examples, which you can use as starting points to writing documentation that conforms to the Drupal project's [API documentation standards](/node/1354).
-
-## Files
-- [General standards for file documentation](http://drupal.org/coding-standards/docs#file)
-
-## Module file (\*.module)
-
-## Install file (\*.install)
-
-## Include file (\*.inc)
-- [Special standards for tpl.php files](http://drupal.org/coding-standards/docs#templates)
-
-## File containing a single class
-- [Object-oriented coding standards](https://www.drupal.org/docs/develop/coding-standards/object-oriented-code).
-- [Special standards for tpl.php files](http://drupal.org/coding-standards/docs#templates) Note that there is no @ingroup themeable in the override!
-
-## Functions
-- [Documentation standards for functions](http://drupal.org/coding-standards/docs#functions)
-
-## Generic functions
-
-## Callback functions
-- [Standards for documenting callback functions](http://drupal.org/coding-standards/docs#callbacks) -- these are standard-format callback functions that are passed to other functions as arguments.
-- Callback used in only one API function:
-- Callback used in a few API functions:
-- Callback used in many functions, where some explanation is needed for the otherwise standard function arguments:
-- \[NOTE: NEEDS STANDARDS UPDATE - data types on @param/@return!\]
-
-## Hook definition functions
-- [Standards for documenting hook definitions](http://drupal.org/coding-standards/docs#hooks)
-- \[NOTE: NEEDS STANDARDS UPDATE - data types on @param/@return, and function body needs to be provided, as it's part of the documentation.\]
-
-## hook implementation
-- [Standards for documenting hook implementations](http://drupal.org/coding-standards/docs#hookimpl)
-
-## hook\_update\_N implementation (update function)
-- [Drupal API documentation standards for functions](https://drupal.org/coding-standards/docs#functions)
-
-## form-generating function (including validate/submit)
-- [Form-generating functions](https://drupal.org/coding-standards/docs#forms)
-- \[needs an example\]
-
-## hook\_menu() callbacks
-- \[needs an example\]
-- [Standards for documenting hook\_menu() callbacks](http://drupal.org/coding-standards/docs#menu-callback)
-- \[NEEDS STANDARDS UPDATE - data type on parameter, and it needs @return as well!!\]
-
-## render API callback
-- [Render API callback functions](https://drupal.org/coding-standards/docs#render)
-- (needs an example)
-
-## theme\_foo() themeable function
-- [Standards for documenting themeable functions](http://drupal.org/coding-standards/docs#themeable)
-
-## Classes
-- [Standards for documenting classes and interfaces](http://drupal.org/coding-standards/docs#classes)
-
-## Class with a namespace
-
-## Class without a namespace
-- (needs example)
-
-## Interface
-- \[NEEDS STANDARDS UPDATE - first line does not conform to standards\]
-
-## Member function
-- (needs example)
-
-## Member function that overrides base class method
-- \[NEEDS STANDARDS UPDATE: first line needs class name and probably namespace\]
-
-## Member function that implements interface method
-
-## Member constant
-- (needs example)
-
-## Member variable
-- (needs example)
-
-## Plugin annotation
-- [Standards for plugin annotation](http://drupal.org/coding-standards/docs#Plugin)
-- (needs example)
-
-## Miscellaneous examples
-
-## Constant
-- (needs link to standards)
-- \[NEEDS GRAMMAR UPDATE - this example is not well written. Maybe pick a different constant? Also, where did this come from? We're looking for a define() here I think, not a class constant.\]
-
-## Global variable
-- (needs example, and you might note that these are documented in separate api.php files)
-
-## Bullet lists
-- [Standards for using lists](http://drupal.org/coding-standards/docs#lists)
-- (needs example)
-
-## Sections, sub-sections, and in-page references
-- [Standards for using sections](http://drupal.org/coding-standards/docs#section)
-- (needs example)
-
-## Code samples (@code)
-- [Standards for using @code](http://drupal.org/coding-standards/docs#code)
-
-## @link
-- [Standards for using @link](http://drupal.org/coding-standards/docs#link)
-
-## @see
-- [Standards for using @see](http://drupal.org/coding-standards/docs#see)
-
-## Defining a topic/group
-- [Standards for using @defgroup, @ingroup, and @addtogroup](http://drupal.org/coding-standards/docs#defgroup)
-- (needs example)
-
-## @ingroup and @addtogroup
-- [Standards for using @defgroup, @ingroup, and @addtogroup](http://drupal.org/coding-standards/docs#defgroup)
-- (needs example for addtogroup)
-
-## Tags
-- [coding standards](/taxonomy/term/190104)
+- Follow general standards for file documentation when creating files
+- Adhere to special standards for tpl.php files when creating include files
+- Follow object-oriented coding standards when creating a file containing a single class
+- Adhere to documentation standards for functions when creating functions
+- Follow standards for documenting callback functions when creating callback functions
+- Adhere to standards for documenting hook definitions when creating hook definition functions
+- Follow standards for documenting hook implementations when creating hook implementations
+- Adhere to Drupal API documentation standards for functions when creating hook_update_N implementation (update function)
+- Follow form-generating functions standards when creating form-generating functions
+- Adhere to standards for documenting hook_menu() callbacks when creating hook_menu() callbacks
+- Follow render API callback functions standards when creating render API callback
+- Adhere to standards for documenting themeable functions when creating theme_foo() themeable function
+- Follow standards for documenting classes and interfaces when creating classes
+- Adhere to standards for plugin annotation when creating plugin annotation
+- Follow standards for using lists when creating bullet lists
+- Adhere to standards for using sections when creating sections, sub-sections, and in-page references
+- Follow standards for using @code when creating code samples
+- Adhere to standards for using @link when creating @link
+- Follow standards for using @see when creating @see
+- Adhere to standards for using @defgroup, @ingroup, and @addtogroup when defining a topic/group or using @ingroup and @addtogroup.
