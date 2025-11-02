@@ -1,12 +1,14 @@
 {
-  "lastDownload": "2025-09-30T10:17:53.375Z",
+  "lastDownload": "2025-11-02T03:16:00.899Z",
   "files": {
     "composer-package-naming-conventions.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/composer-package-naming-conventions",
-      "lastUpdated": "2025-06-19",
-      "downloadedAt": "2025-09-24T07:24:44.141Z",
-      "section": "Composer package naming conventions",
-      "size": 48148
+      "lastUpdated": "2025-10-16",
+      "downloadedAt": "2025-11-02T03:15:25.016Z",
+      "section": "[Obsolete] Composer package naming conventions",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "sql.html": {
       "url": "https://www.drupal.org/docs/develop/standards/sql",
@@ -38,10 +40,12 @@
     },
     "markdown-coding-standards.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/markdown-coding-standards",
-      "lastUpdated": "2023-01-19",
-      "downloadedAt": "2025-09-24T07:24:46.383Z",
-      "section": "Markdown",
-      "size": 35200
+      "lastUpdated": "2025-10-16",
+      "downloadedAt": "2025-11-02T03:15:24.976Z",
+      "section": "[Obsolete] Markdown",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "what-to-look-for-when-reviewing-css.html": {
       "url": "https://www.drupal.org/docs/develop/standards/css/what-to-look-for-when-reviewing-css",
@@ -52,10 +56,12 @@
     },
     "list-of-sql-reserved-words.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/list-of-sql-reserved-words",
-      "lastUpdated": "2022-09-24",
-      "downloadedAt": "2025-09-24T07:24:46.448Z",
-      "section": "SQL",
-      "size": 50242
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:25.022Z",
+      "section": "[Obsolete] SQL",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "jquery-coding-standards.html": {
       "url": "https://www.drupal.org/docs/develop/standards/javascript/jquery-coding-standards",
@@ -94,17 +100,21 @@
     },
     "naming-standards-for-services-and-extending-symfony.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/naming-standards-for-services-and-extending-symfony",
-      "lastUpdated": "2022-12-13",
-      "downloadedAt": "2025-09-24T07:24:46.578Z",
-      "section": "PHP",
-      "size": 37375
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.795Z",
+      "section": "[Obsolete] PHP",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "configuration-file-coding-standards.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/configuration-file-coding-standards",
-      "lastUpdated": "2023-01-19",
-      "downloadedAt": "2025-09-24T07:24:46.731Z",
-      "section": "YAML Configuration files",
-      "size": 41721
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:25.023Z",
+      "section": "[Obsolete] YAML Configuration files",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "csscomb-settings-for-drupal-css-formatting-and-sort-tool.html": {
       "url": "https://www.drupal.org/docs/develop/standards/css/csscomb-settings-for-drupal-css-formatting-and-sort-tool",
@@ -122,10 +132,12 @@
     },
     "php-exceptions.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/php-exceptions",
-      "lastUpdated": "2023-05-02",
-      "downloadedAt": "2025-09-24T07:24:46.876Z",
-      "section": "PHP",
-      "size": 39874
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.772Z",
+      "section": "[Obsolete] PHP",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "css.html": {
       "url": "https://www.drupal.org/docs/develop/standards/css",
@@ -136,10 +148,12 @@
     },
     "temporary-placeholders-and-delimiters.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/temporary-placeholders-and-delimiters",
-      "lastUpdated": "2024-04-25",
-      "downloadedAt": "2025-09-24T07:24:46.960Z",
-      "section": "PHP",
-      "size": 37068
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.823Z",
+      "section": "[Obsolete] PHP",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "css-file-organization.html": {
       "url": "https://www.drupal.org/docs/develop/standards/css/css-file-organization",
@@ -157,17 +171,21 @@
     },
     "avoid-select-from.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/avoid-select-from",
-      "lastUpdated": "2024-04-25",
-      "downloadedAt": "2025-09-24T07:24:47.258Z",
-      "section": "SQL",
-      "size": 35164
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:25.022Z",
+      "section": "[Obsolete] SQL",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "twig-coding-standards.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/twig-coding-standards",
-      "lastUpdated": "2023-01-19",
-      "downloadedAt": "2025-09-24T07:24:47.311Z",
-      "section": "Twig coding standards",
-      "size": 52956
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:25.003Z",
+      "section": "[Obsolete] Twig coding standards",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "php-coding-standards.html": {
       "url": "https://www.drupal.org/docs/develop/standards/php/php-coding-standards",
@@ -185,17 +203,21 @@
     },
     "write-e-all-compliant-code.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/write-e_all-compliant-code",
-      "lastUpdated": "2024-04-25",
-      "downloadedAt": "2025-09-24T07:24:47.903Z",
-      "section": "PHP",
-      "size": 39214
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.773Z",
+      "section": "[Obsolete] PHP",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "drupal-markup-style-guide.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/drupal-markup-style-guide",
-      "lastUpdated": "2023-06-07",
-      "downloadedAt": "2025-09-24T07:24:48.051Z",
-      "section": "Drupal Markup Style Guide",
-      "size": 35060
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:25.010Z",
+      "section": "[Obsolete] Drupal Markup Style Guide",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     },
     "javascript-coding-standards.html": {
       "url": "https://www.drupal.org/docs/develop/standards/javascript-coding-standards",
@@ -228,14 +250,205 @@
     },
     "namespaces.html": {
       "url": "https://www.drupal.org/docs/develop/coding-standards/namespaces",
-      "lastUpdated": "2023-10-26",
-      "downloadedAt": "2025-09-24T07:24:49.177Z",
-      "section": "PHP",
-      "size": 42579
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.773Z",
+      "section": "[Obsolete] PHP",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-api-documentation-examples.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-php/obsolete-api-documentation-examples",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.706Z",
+      "section": "[Obsolete] PHP",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-php.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-php",
+      "lastUpdated": "2025-10-16",
+      "downloadedAt": "2025-11-02T03:15:24.706Z",
+      "section": "[Obsolete] PHP",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-php-coding-standards.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-php/obsolete-php-coding-standards",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.738Z",
+      "section": "[Obsolete] PHP",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-psr-4-namespaces-and-autoloading-in-drupal-8.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-php/obsolete-psr-4-namespaces-and-autoloading-in-drupal-8",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.772Z",
+      "section": "[Obsolete] PHP",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-api-documentation-and-comment-standards.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-php/obsolete-api-documentation-and-comment-standards",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.773Z",
+      "section": "[Obsolete] PHP",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-accessibility-coding-standards.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-accessibility-coding-standards",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.796Z",
+      "section": "[Obsolete] Accessibility Coding Standards",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-css.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-css",
+      "lastUpdated": "2025-10-16",
+      "downloadedAt": "2025-11-02T03:15:24.832Z",
+      "section": "[Obsolete] CSS",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-css-coding-standards.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-css-coding-standards",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.832Z",
+      "section": "[Obsolete] CSS",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-csscomb-settings-for-drupal-css-formatting-and-sort-tool.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-csscomb-settings-for-drupal-css-formatting-and-sort-tool",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.876Z",
+      "section": "[Obsolete] CSS",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-css-file-organization.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-css-file-organization",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.876Z",
+      "section": "[Obsolete] CSS",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-css-formatting-guidelines.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-css-formatting-guidelines",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.881Z",
+      "section": "[Obsolete] CSS",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-css-architecture-for-drupal-9.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-css-architecture-for-drupal-9",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.881Z",
+      "section": "[Obsolete] CSS",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-javascript-coding-standards.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards/obsolete-javascript-coding-standards",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.904Z",
+      "section": "[Obsolete] JavaScript coding standards",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-javascript-best-practices.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards/obsolete-javascript-best-practices",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.903Z",
+      "section": "[Obsolete] JavaScript coding standards",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-what-to-look-for-when-reviewing-css.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-css/obsolete-what-to-look-for-when-reviewing-css",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.905Z",
+      "section": "[Obsolete] CSS",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-setting-up-the-linter-fixer-tool.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards/obsolete-setting-up-the-linter-fixer-tool",
+      "lastUpdated": "2025-10-16",
+      "downloadedAt": "2025-11-02T03:15:24.913Z",
+      "section": "[Obsolete] JavaScript coding standards",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-javascript-api-documentation-and-comment-standards.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards/obsolete-javascript-api-documentation-and-comment-standards",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.930Z",
+      "section": "[Obsolete] JavaScript coding standards",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-sql.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-sql",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.938Z",
+      "section": "[Obsolete] SQL",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-jquery-coding-standards.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-javascript-coding-standards/obsolete-jquery-coding-standards",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.954Z",
+      "section": "[Obsolete] JavaScript coding standards",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-sql-coding-conventions.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-sql/obsolete-sql-coding-conventions",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:24.968Z",
+      "section": "[Obsolete] SQL",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
+    },
+    "obsolete-spelling.html": {
+      "url": "https://www.drupal.org/docs/develop/standards/obsolete-spelling",
+      "lastUpdated": "2025-10-28",
+      "downloadedAt": "2025-11-02T03:15:25.015Z",
+      "section": "[Obsolete] Spelling",
+      "error": "ACCESS_DENIED: Access denied - skipping page",
+      "accessDenied": true,
+      "contentHash": null
     }
   },
   "totalPages": 34,
-  "updatedPages": 0,
-  "skippedPages": 34,
-  "accessDeniedPages": 0
+  "updatedPages": 34,
+  "skippedPages": 0,
+  "accessDeniedPages": 34
 }
