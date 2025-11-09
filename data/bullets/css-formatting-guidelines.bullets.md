@@ -1,80 +1,49 @@
-
-## CSS formatting guidelines
-
-## CSS formatting guidelines
-
 ## Whitespace
-
-## Indentation
-- Use 2 spaces for each level of indentation, the same standard as Drupal’s PHP and JavaScript code.
-- Declarations (property/value pairs) should be indented one level relative to their selector.
+- Use 2 spaces for each level of indentation.
+- Declarations should be indented one level relative to their selector.
 - Rulesets within a media query should be indented one level relative to the media statement.
 - Comments should maintain the indentation of their declaration or ruleset.
 
 ## Blank lines
-- In general, separate each ruleset by a blank line when using PostCSS.
-- If a ruleset has a preceding Doxygen-style or single-line-style comment that describes it, place a blank line before the comment.
-- If two rulesets have no interleaving blank line, they must be logically related. If they are not logically related to each other, add a blank line and a comment describing the second ruleset.
+- Separate each ruleset by a blank line when using PostCSS.
+- If a ruleset has a preceding comment that describes it, place a blank line before the comment.
+- If two rulesets have no interleaving blank line, they must be logically related. If not, add a blank line and a comment describing the second ruleset.
 
 ## Line endings
-- There MUST NOT be any whitespace (spaces or tabs) at the end of lines.
+- Do not include any whitespace (spaces or tabs) at the end of lines.
 - All text files should end with a single blank line.
-- Files should be formatted with Unix line endings (a newline character, denoted as `\n` or `LF`), which is also the default in Mac OS X.
-- Tip: configure your editor to “show invisibles”. This will allow you to eliminate end-of-line whitespace, eliminate unintended blank-line whitespace, and avoid polluting commits.
-- Drupal 8 and above includes an [EditorConfig](http://editorconfig.org/) file in [its root directory](https://git.drupalcode.org/project/drupal/-/tree/11.x?ref_type=heads) to help maintain these whitespace conventions.
+- Format files with Unix line endings (a newline character, denoted as `\n` or `LF`).
 
 ## Comments
-- Well commented code is extremely important. Take time to describe components, how they work, their limitations, and the way they are constructed. Don't leave others guessing as to the purpose of uncommon or non-obvious code.
-- To stay consistent with the rest of Drupal's code base, we borrow some of the CSS comment styles from the [Doxygen and comment formatting conventions](https://www.drupal.org/docs/develop/standards/php/api-documentation-and-comment-standards) for PHP files.
-
-## File comments
-- Each file should start with a comment describing what the file does. Note that a blank line should follow a file comment. And keep line-lengths to 80 columns, when possible. For more information, see the [PHP file comment standards](https://www.drupal.org/docs/develop/standards/php/api-documentation-and-comment-standards).
-
-## Single line comments describing a ruleset
+- Each file should start with a comment describing what the file does. Follow this with a blank line.
+- Keep line-lengths to 80 columns, when possible.
 - Short comments describing a ruleset can be kept to one line.
-
-## Multi-line comments describing a ruleset
-- When describing a ruleset or set of rulesets, any comment that requires 2 or more lines (wrapped to 80 characters) must follow the Doxygen comment style (also called a “docblock”).
-
-## Multi-line comments inside a ruleset
-- Within a ruleset, multi-line comments are preceded with a `/*` and terminated by a `*/`. Text is intended to maintain the text’s left alignment.
-
-## Single-line comments
-- When describing a property or ruleset, any comment that can be written inside the 80 character line length limit can use a simple CSS comment style.
-- Example of all comment styles:
+- Multi-line comments that describe a ruleset or set of rulesets must follow the Doxygen comment style.
+- Multi-line comments within a ruleset are preceded with a `/*` and terminated by a `*/`. Text should maintain left alignment.
+- Single-line comments can use a simple CSS comment style if they can be written inside the 80 character line length limit.
 
 ## Properties where browsers do not have or support CSS logical properties
-- Certain properties do not have a “logical properties” equivalent (such as `transform`). For these direction specific rules, add a `/* LTR */` comment on the same line preceded by a single space. Follow with an additional ruleset (or nested ruleset if using PostCSS) containing the inverse property/values.
+- For direction specific rules, add a `/* LTR */` comment on the same line preceded by a single space.
 
 ## Rulesets
 - Use one selector per line when a ruleset has a group of selectors separated by commas.
-- When possible, consider using functional pseudo-classes like  `:is()`, `:not()or` `:where()` that allow combining of selectors.
+- Consider using functional pseudo-classes like `:is()`, `:not()or` `:where()` that allow combining of selectors.
 - Include one declaration per line in a declaration block.
 
 ## Properties
 - In a declaration, the property name should be immediately followed by a colon, then a single space, and then the property’s value.
 - Include a semicolon at the end of all declarations.
-- For property values that require quotes, use double quotes instead of single quotes, e.g. font-family: "Arial Black", Arial, sans-serif; and content: " ";.
+- For property values that require quotes, use double quotes instead of single quotes.
 - Default to rem units, unless it creates an undesired effect.
-- Note that if you are using PostCSS, this is automatic via the PostCSS PxToRem plugin.
-- Quote attribute values in selectors, e.g. input\[type="checkbox"\].
-- Where allowed, avoid specifying units for zero-values, e.g. use `margin: 0;` instead of `margin: 0px;`.
+- Quote attribute values in selectors.
+- Avoid specifying units for zero-values.
 - Include a space after each comma in comma-separated property or function values.
-- Do not use spaces around the parentheses in a function, e.g. color: rgba(0, 0, 0, 0.8);
-- Use lower case function names, correct: color: rgba(0, 0, 0, 0.8);
+- Do not use spaces around the parentheses in a function.
+- Use lower case function names.
 
 ## Declaration order
-- The declarations in a ruleset should be ordered so that the purpose of the declaration block is most obvious. Clarity should be the guiding principle.
-- 1.  Positioning properties include: `position`, `float`, `clear`, `inset`, `top`, `right`, `bottom`, `left`, `direction`, and `z-index` plus logical properties like `block-start`, `block-end`, `inline-start` and `inline-end`.
-- 2.  Box model properties include:
-- 1.  display
-- 2.  sizing (like block-size or inline-size as logical properties, and width and height and the (max|min) variation or each of them)
-- 3.  Margins and the logical property equivalents, plus their various longhand forms (margin-block, margin-top, margin-inline-end…)
-- 4.  Paddings and the logical property equivalents,  plus their various longhand forms (padding-block, padding-top, padding-inline-end…)
-- 5.  Borders and the logical property equivalents,  plus their various longhand forms.
-- 6.  box-sizing
-- 3.  Other declarations.
-- Within each of the above groups, properties can be grouped alphabetically or grouped with like properties next to each other, e.g. putting font and text properties next to each other. Drupal’s coding standards are purposefully vague here because there is no consensus on this issue (as of 2013), but we respect each other’s abilities and preferences.
-- If not automatically added by autoprefixer (which is part of the PostCSS build process), vendor prefixed properties should be directly before their non-prefixed version. This allows the official version of the property to override any inconsistencies in the vendor-prefixed versions once those browsers implement the official property. If browser bugs or cross-browser issues necessitate any deviation from this ordering, it should be clearly documented.
-- Again, the order of properties is meant to reinforce the purpose of the ruleset. As such, it is much more important to add comments to the ruleset than to worry about property ordering.
-- The text of this guideline was originally based on the [*Principles of writing consistent, idiomatic CSS*](https://github.com/necolas/idiomatic-css) by Nicolas Gallagher.
+- Order the declarations in a ruleset so that the purpose of the declaration block is most obvious.
+- Positioning properties should come first, followed by box model properties, and then other declarations.
+- Within each group, properties can be grouped alphabetically or grouped with like properties next to each other.
+- Vendor prefixed properties should be directly before their non-prefixed version.
+- Add comments to the ruleset to reinforce its purpose.
