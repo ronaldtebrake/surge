@@ -1,8 +1,11 @@
 {
-  "convertedAt": "2025-09-26T13:15:24.590Z",
-  "totalFiles": 33,
-  "successful": 33,
+  "convertedAt": "2025-11-23T03:27:17.617Z",
+  "totalFiles": 54,
+  "accessibleFiles": 21,
+  "accessDeniedFiles": 33,
+  "successful": 21,
   "failed": 0,
+  "skipped": 33,
   "results": [
     {
       "htmlFile": "accessibility-coding-standards.html",
@@ -18,21 +21,6 @@
       "htmlFile": "api-documentation-examples.html",
       "markdownFile": "api-documentation-examples.md",
       "title": "API Documentation Examples"
-    },
-    {
-      "htmlFile": "avoid-select-from.html",
-      "markdownFile": "avoid-select-from.md",
-      "title": "Avoid \"SELECT * FROM ...\""
-    },
-    {
-      "htmlFile": "composer-package-naming-conventions.html",
-      "markdownFile": "composer-package-naming-conventions.md",
-      "title": "Composer package naming conventions"
-    },
-    {
-      "htmlFile": "configuration-file-coding-standards.html",
-      "markdownFile": "configuration-file-coding-standards.md",
-      "title": "YAML Configuration files"
     },
     {
       "htmlFile": "css-architecture-for-drupal-9.html",
@@ -65,11 +53,6 @@
       "title": "CSScomb settings for Drupal (CSS formatting and sort tool)"
     },
     {
-      "htmlFile": "drupal-markup-style-guide.html",
-      "markdownFile": "drupal-markup-style-guide.md",
-      "title": "Drupal Markup Style Guide"
-    },
-    {
       "htmlFile": "javascript-api-documentation-and-comment-standards.html",
       "markdownFile": "javascript-api-documentation-and-comment-standards.md",
       "title": "JavaScript API documentation and comment standards"
@@ -90,34 +73,9 @@
       "title": "jQuery coding standards"
     },
     {
-      "htmlFile": "list-of-sql-reserved-words.html",
-      "markdownFile": "list-of-sql-reserved-words.md",
-      "title": "List of SQL reserved words"
-    },
-    {
-      "htmlFile": "markdown-coding-standards.html",
-      "markdownFile": "markdown-coding-standards.md",
-      "title": "Markdown"
-    },
-    {
-      "htmlFile": "namespaces.html",
-      "markdownFile": "namespaces.md",
-      "title": "Namespaces"
-    },
-    {
-      "htmlFile": "naming-standards-for-services-and-extending-symfony.html",
-      "markdownFile": "naming-standards-for-services-and-extending-symfony.md",
-      "title": "Naming standards for services and extending Symfony"
-    },
-    {
       "htmlFile": "php-coding-standards.html",
       "markdownFile": "php-coding-standards.md",
       "title": "PHP coding standards"
-    },
-    {
-      "htmlFile": "php-exceptions.html",
-      "markdownFile": "php-exceptions.md",
-      "title": "PHP Exceptions"
     },
     {
       "htmlFile": "php.html",
@@ -150,24 +108,207 @@
       "title": "SQL"
     },
     {
-      "htmlFile": "temporary-placeholders-and-delimiters.html",
-      "markdownFile": "temporary-placeholders-and-delimiters.md",
-      "title": "Temporary placeholders and delimiters"
-    },
-    {
-      "htmlFile": "twig-coding-standards.html",
-      "markdownFile": "twig-coding-standards.md",
-      "title": "Twig coding standards"
-    },
-    {
       "htmlFile": "what-to-look-for-when-reviewing-css.html",
       "markdownFile": "what-to-look-for-when-reviewing-css.md",
       "title": "What to look for when reviewing CSS"
     },
     {
+      "htmlFile": "avoid-select-from.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "composer-package-naming-conventions.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "configuration-file-coding-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "drupal-markup-style-guide.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "list-of-sql-reserved-words.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "markdown-coding-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "namespaces.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "naming-standards-for-services-and-extending-symfony.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-accessibility-coding-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-api-documentation-and-comment-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-api-documentation-examples.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-css-architecture-for-drupal-9.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-css-coding-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-css-file-organization.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-css-formatting-guidelines.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-css.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-csscomb-settings-for-drupal-css-formatting-and-sort-tool.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-javascript-api-documentation-and-comment-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-javascript-best-practices.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-javascript-coding-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-jquery-coding-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-php-coding-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-php.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-psr-4-namespaces-and-autoloading-in-drupal-8.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-setting-up-the-linter-fixer-tool.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-spelling.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-sql-coding-conventions.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-sql.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "obsolete-what-to-look-for-when-reviewing-css.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "php-exceptions.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "temporary-placeholders-and-delimiters.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
+      "htmlFile": "twig-coding-standards.html",
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
+    },
+    {
       "htmlFile": "write-e-all-compliant-code.html",
-      "markdownFile": "write-e-all-compliant-code.md",
-      "title": "Write E_ALL compliant code"
+      "markdownFile": null,
+      "skipped": true,
+      "reason": "Access denied during download"
     }
   ]
 }

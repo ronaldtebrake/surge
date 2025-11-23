@@ -1,32 +1,143 @@
 {
-  "convertedAt": "2025-10-12T12:16:04.850Z",
-  "totalFiles": 33,
-  "filesUpdated": 1,
-  "filesSkipped": 32,
-  "successful": 33,
-  "failed": 0,
+  "convertedAt": "2025-11-23T03:28:19.495Z",
+  "totalFiles": 21,
+  "filesUpdated": 21,
+  "filesSkipped": 0,
+  "successful": 12,
+  "failed": 21,
   "skipped": 0,
   "results": [
+    {
+      "markdownFile": "accessibility-coding-standards.md",
+      "bulletsFile": "accessibility-coding-standards.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "api-documentation-and-comment-standards.md",
+      "bulletsFile": "api-documentation-and-comment-standards.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "api-documentation-examples.md",
+      "bulletsFile": "api-documentation-examples.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "css-architecture-for-drupal-9.md",
+      "bulletsFile": "css-architecture-for-drupal-9.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "css-coding-standards.md",
+      "bulletsFile": "css-coding-standards.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "css-file-organization.md",
+      "bulletsFile": "css-file-organization.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "css-formatting-guidelines.md",
+      "bulletsFile": "css-formatting-guidelines.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "css.md",
+      "bulletsFile": "css.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "csscomb-settings-for-drupal-css-formatting-and-sort-tool.md",
+      "bulletsFile": "csscomb-settings-for-drupal-css-formatting-and-sort-tool.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "javascript-api-documentation-and-comment-standards.md",
+      "bulletsFile": "javascript-api-documentation-and-comment-standards.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "javascript-best-practices.md",
+      "bulletsFile": "javascript-best-practices.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "javascript-coding-standards.md",
+      "bulletsFile": "javascript-coding-standards.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "jquery-coding-standards.md",
+      "bulletsFile": "jquery-coding-standards.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "php-coding-standards.md",
+      "bulletsFile": "php-coding-standards.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "php.md",
+      "bulletsFile": "php.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "psr-4-namespaces-and-autoloading-in-drupal-8.md",
+      "bulletsFile": "psr-4-namespaces-and-autoloading-in-drupal-8.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "setting-up-the-linter-fixer-tool.md",
+      "bulletsFile": "setting-up-the-linter-fixer-tool.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "spelling.md",
+      "bulletsFile": "spelling.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "sql-coding-conventions.md",
+      "bulletsFile": "sql-coding-conventions.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "sql.md",
+      "bulletsFile": "sql.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
+    {
+      "markdownFile": "what-to-look-for-when-reviewing-css.md",
+      "bulletsFile": "what-to-look-for-when-reviewing-css.bullets.md",
+      "success": false,
+      "error": "OpenAI API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.. This is a critical error that prevents AI generation. Please check your API key, billing, and rate limits."
+    },
     {
       "markdownFile": "write-e-all-compliant-code.md",
       "bulletsFile": "write-e-all-compliant-code.bullets.md",
       "success": true,
       "lastProcessedAt": "2025-10-12T12:16:03.848Z"
-    },
-    {
-      "markdownFile": "accessibility-coding-standards.md",
-      "bulletsFile": "accessibility-coding-standards.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "api-documentation-and-comment-standards.md",
-      "bulletsFile": "api-documentation-and-comment-standards.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "api-documentation-examples.md",
-      "bulletsFile": "api-documentation-examples.bullets.md",
-      "success": true
     },
     {
       "markdownFile": "avoid-select-from.md",
@@ -44,58 +155,8 @@
       "success": true
     },
     {
-      "markdownFile": "css-architecture-for-drupal-9.md",
-      "bulletsFile": "css-architecture-for-drupal-9.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "css-coding-standards.md",
-      "bulletsFile": "css-coding-standards.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "css-file-organization.md",
-      "bulletsFile": "css-file-organization.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "css-formatting-guidelines.md",
-      "bulletsFile": "css-formatting-guidelines.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "css.md",
-      "bulletsFile": "css.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "csscomb-settings-for-drupal-css-formatting-and-sort-tool.md",
-      "bulletsFile": "csscomb-settings-for-drupal-css-formatting-and-sort-tool.bullets.md",
-      "success": true
-    },
-    {
       "markdownFile": "drupal-markup-style-guide.md",
       "bulletsFile": "drupal-markup-style-guide.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "javascript-api-documentation-and-comment-standards.md",
-      "bulletsFile": "javascript-api-documentation-and-comment-standards.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "javascript-best-practices.md",
-      "bulletsFile": "javascript-best-practices.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "javascript-coding-standards.md",
-      "bulletsFile": "javascript-coding-standards.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "jquery-coding-standards.md",
-      "bulletsFile": "jquery-coding-standards.bullets.md",
       "success": true
     },
     {
@@ -119,43 +180,8 @@
       "success": true
     },
     {
-      "markdownFile": "php-coding-standards.md",
-      "bulletsFile": "php-coding-standards.bullets.md",
-      "success": true
-    },
-    {
       "markdownFile": "php-exceptions.md",
       "bulletsFile": "php-exceptions.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "php.md",
-      "bulletsFile": "php.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "psr-4-namespaces-and-autoloading-in-drupal-8.md",
-      "bulletsFile": "psr-4-namespaces-and-autoloading-in-drupal-8.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "setting-up-the-linter-fixer-tool.md",
-      "bulletsFile": "setting-up-the-linter-fixer-tool.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "spelling.md",
-      "bulletsFile": "spelling.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "sql-coding-conventions.md",
-      "bulletsFile": "sql-coding-conventions.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "sql.md",
-      "bulletsFile": "sql.bullets.md",
       "success": true
     },
     {
@@ -166,11 +192,6 @@
     {
       "markdownFile": "twig-coding-standards.md",
       "bulletsFile": "twig-coding-standards.bullets.md",
-      "success": true
-    },
-    {
-      "markdownFile": "what-to-look-for-when-reviewing-css.md",
-      "bulletsFile": "what-to-look-for-when-reviewing-css.bullets.md",
       "success": true
     }
   ]
