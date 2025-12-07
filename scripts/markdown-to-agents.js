@@ -100,6 +100,18 @@ class MarkdownToAgentsGenerator {
   }
 
   /**
+   * Escape Liquid syntax to prevent Jekyll from processing it
+   */
+  escapeLiquidSyntax(content) {
+    // Escape {% and %} sequences that aren't already raw/endraw tags
+    return content
+      .replace(/\{%(?!\s*(raw|endraw))/g, '{% raw %}{%')
+      .replace(/\{%\s*raw\s*%\}{%(\s*raw\s*%)/g, '{%$1') // Prevent double raw tags
+      .replace(/(?<!endraw\s*)\%}/g, '%}{% endraw %}')
+      .replace(/({%\s*endraw\s*%})\s*\1/g, '$1'); // Remove duplicate endraw tags
+  }
+
+  /**
    * Build AI prompt for processing markdown
    */
   buildPrompt(content, title, section) {
@@ -185,6 +197,14 @@ Keep the output focused, actionable, and optimized for AI coding agents.`;
 
     } catch (error) {
       console.error(`   ❌ AI processing failed for ${filePath}:`, error.message);
+      
+      // Check for context length errors specifically
+      const errorMessage = error.message?.toLowerCase() || '';
+      if (errorMessage.includes('context length') || errorMessage.includes('maximum context length')) {
+        console.error(`   ⚠️ Context length exceeded for ${filePath}. Consider using a model with larger context window or implementing chunking.`);
+        // Context length errors are critical - fail even in local dev
+        throw new Error(`Context length exceeded for ${filePath}: ${error.message}`);
+      }
       
       // Check for critical API errors
       if (this.isCriticalApiError(error)) {
@@ -406,7 +426,15 @@ Auto-generated from: [git.drupalcode.org/project/coding_standards](https://git.d
       for (const [section, files] of Object.entries(sections).sort()) {
         agentsContent.push(`\n# ${section}\n`);
         for (const file of files.sort((a, b) => a.title.localeCompare(b.title))) {
-          agentsContent.push(file.content);
+          // Escape any Liquid syntax in the content to prevent Jekyll from processing it
+          // Escape {% and %} (Liquid tags)
+          // Escape {{ and }} (Liquid variables)
+          let escapedContent = file.content
+            .replace(/\{%(?!\s*(raw|endraw))/g, '&#123;&#37;')
+            .replace(/(?<!endraw\s*)\%}/g, '&#37;&#125;')
+            .replace(/\{\{/g, '&#123;&#123;')
+            .replace(/\}\}/g, '&#125;&#125;');
+          agentsContent.push(escapedContent);
           agentsContent.push('\n');
         }
       }

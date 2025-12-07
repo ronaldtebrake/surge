@@ -1,3 +1,4 @@
+{% raw %}
 ## Accessibility Coding Standards
 
 ## Accessibility Coding Standards
@@ -2386,7 +2387,7 @@
 - One more thing to see: currently, the only single `node_modules/` directory containing all these external dependencies exists down there in `web/core/`, thus it is only relevant for Drupal Core. However, we also want to lint the JavaScript code of contrib and custom modules and themes as well, living in different locations of the codebase. To make the content of `node_modules/` available from other places as well, create a symlink from the topmost project root pointing to its content. This line chains together three commands: jumping up to the project root, creating the symlink, then returning to `web/core/` where we started from.
 
 ## Running checks & fixes
-- Having everything prepared, now we are ready to run the linting process to check any JavaScript file existing in our project codebase. The syntax of invoking ESLint is `$ ddev yarn eslint {{../relative-path/to-the/file}}`. If you also want ESLint to modify file content where an automatically fixable coding standard violation is detected, plus reformat the style of the entire file too, simply add the "--fix" switch to the command in extra. Some examples:
+- Having everything prepared, now we are ready to run the linting process to check any JavaScript file existing in our project codebase. The syntax of invoking ESLint is `$ ddev yarn eslint &#123;&#123;../relative-path/to-the/file&#125;&#125;`. If you also want ESLint to modify file content where an automatically fixable coding standard violation is detected, plus reformat the style of the entire file too, simply add the "--fix" switch to the command in extra. Some examples:
 - Only check (but do not fix) a single file of Drupal Core:
 - `$ ddev yarn eslint modules/big_pipe/js/big_pipe.js`
 - Check a given file outside of Core (e.g. a contrib theme's):
@@ -2524,7 +2525,7 @@
 - Twig template docblocks should only include `@ingroup themeable` if the template is providing the default themeable output. For themes overriding default output the `@ingroup themeable` line should not be included.
 
 ## Variables in the DocBlock
-- Variables in a twig template docblock should be referenced by name. They will not be surrounded by the Twig print indicators {{ and }} and will not be preceded by the PHP variable indicator $. There should be no separate "Other variables" section.
+- Variables in a twig template docblock should be referenced by name. They will not be surrounded by the Twig print indicators &#123;&#123; and &#125;&#125; and will not be preceded by the PHP variable indicator $. There should be no separate "Other variables" section.
 - A good rule of thumb for converting docs at the top of templates is as follows
 - Start from what we had in Drupal 7.
 - If you see a section of variables titled "Other variables", delete the title and the extra line above.
@@ -2555,9 +2556,9 @@
 - Expressions can also be used for setting variables directly in template files.
 
 ## HTML attributes
-- HTML attributes in Drupal 8 are drillable. This means that you can print all of them at once by printing `{{ attributes }}` or you can print each attribute individually, like so:
-- If you choose to print out individual attributes within a HTML tag, you should still include the complete `{{ attributes }}` at the end, so that attributes added by modules are still also printed.
-- *In Drupal core**, we will print only the class attribute specially, all the others will be printed as part of `{{ attributes }}`. The reason for this is that it needs to be very easy for front end developers to be able to add a class, anywhere. By printing the `class=""` attribute directly in the template file, people familiar with HTML and CSS will see and recognize the correct way to add a class without needing to read documentation, or understand that Drupal has a preprocess layer.
+- HTML attributes in Drupal 8 are drillable. This means that you can print all of them at once by printing `&#123;&#123; attributes &#125;&#125;` or you can print each attribute individually, like so:
+- If you choose to print out individual attributes within a HTML tag, you should still include the complete `&#123;&#123; attributes &#125;&#125;` at the end, so that attributes added by modules are still also printed.
+- *In Drupal core**, we will print only the class attribute specially, all the others will be printed as part of `&#123;&#123; attributes &#125;&#125;`. The reason for this is that it needs to be very easy for front end developers to be able to add a class, anywhere. By printing the `class=""` attribute directly in the template file, people familiar with HTML and CSS will see and recognize the correct way to add a class without needing to read documentation, or understand that Drupal has a preprocess layer.
 - More advanced theme developers may choose to add their classes in preprocess and remove these separately printed classes from templates. This will prevent the empty `class=""` attribute from being printed when an element has no classes.
 
 ## Whitespace Control
@@ -2578,10 +2579,10 @@
 - We may revisit this decision about use of whitespace controllers later, after converting everything to twig and examining our resulting Twig code, and the markup that is produced. For now, our main goal is not to confuse people who are new to Twig, and that may mean using Twig's built-in tools less frequently.
 - DOs and DON'Ts for using spaces and whitespace controllers and spaceless filters in Twig templates:
 - If you can remove the whitespace legibly, do so.
-- Remove the space before attributes `<div{{ attributes }}>`
-- Never remove spaces or add a whitespace controllers around classes `class="no {{ attributes.class }} no"`
+- Remove the space before attributes `<div&#123;&#123; attributes &#125;&#125;>`
+- Never remove spaces or add a whitespace controllers around classes `class="no &#123;&#123; attributes.class &#125;&#125; no"`
 - If you can't remove the whitespace legibly, consider using the spaceless filter. Examples:
-- Apply the spaceless filter around commands (`{% if foo %} ...`)
+- Apply the spaceless filter around commands (`&#123;&#37; if foo &#37;&#125; ...`)
 - Apply the spaceless filter around comments `{# this is a comment #}`
 - *Caveat regarding newlines at the end of files**
 - Git requires that twig files need a newline at the end of the file. This can break tests or may be not wanted in your template output.
@@ -2647,3 +2648,4 @@
 - 3.  Check Whitespace is being used correctly, this includes indentations and line breaks - see [here](https://www.drupal.org/node/1887862#whitespace) for guidelines.
 - 4.  Check the formatting of rulesets, properties and media queries are correct - see [here](https://www.drupal.org/node/1887862#format) for guidelines.
 - 5.  As mentioned above, check existing RTL styles are formatted correctly - see [here](https://www.drupal.org/node/1887862#rtl) for guidelines.
+{% endraw %}

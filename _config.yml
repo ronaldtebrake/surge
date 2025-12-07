@@ -48,6 +48,10 @@ defaults:
       type: "docs"
     values:
       layout: "default"
+  - scope:
+      path: "docs/Agents.md"
+    values:
+      liquid: false
 
 # Plugins (GitHub Pages compatible)
 plugins:
