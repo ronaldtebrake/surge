@@ -453,6 +453,15 @@ Auto-generated from: [git.drupalcode.org/project/coding_standards](https://git.d
       // Save cache
       await this.saveCache();
 
+      // Update index.html with the new Agents.md content
+      try {
+        const { updateIndex } = require('./update-index.js');
+        await updateIndex();
+      } catch (error) {
+        console.warn('⚠️ Could not update index.html:', error.message);
+        // Don't fail the pipeline if index update fails
+      }
+
       console.log('\n✅ Generation complete!');
       
       return {

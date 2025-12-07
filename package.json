@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "discover": "node scripts/repo-file-discoverer.js",
     "agents": "node scripts/markdown-to-agents.js",
+    "update-index": "node scripts/update-index.js",
     "full-pipeline": "npm run discover && npm run agents"
   },
   "keywords": [

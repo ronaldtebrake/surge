@@ -48,7 +48,7 @@ jobs:
     - name: Check for changes
       id: changes
       run: |
-        if git diff --quiet data/repo-manifest.json data/agents-cache.json docs/Agents.md 2>/dev/null; then
+        if git diff --quiet data/repo-manifest.json data/agents-cache.json docs/Agents.md index.html 2>/dev/null; then
           echo "changes=false" >> $GITHUB_OUTPUT
         else
           echo "changes=true" >> $GITHUB_OUTPUT
@@ -101,3 +101,4 @@ jobs:
           data/repo-manifest.json
           data/agents-cache.json
           docs/Agents.md
+          index.html
