@@ -1,0 +1,286 @@
+{
+  "discoveredAt": "2025-12-07T10:29:04.315Z",
+  "repoPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards",
+  "totalFiles": 31,
+  "files": {
+    "accessibility/accessibility.md": {
+      "path": "accessibility/accessibility.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/accessibility/accessibility.md",
+      "title": "Accessibility",
+      "section": "Accessibility",
+      "lastModified": "2025-05-30T22:13:26+12:00",
+      "contentHash": "869f4aacf80896f81751839dbde51a896e89ac3440d06260c5c30473ee258f80",
+      "size": 47
+    },
+    "composer/package-name.md": {
+      "path": "composer/package-name.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/composer/package-name.md",
+      "title": "Composer package name convention",
+      "section": "Composer",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "7b5e371f00f831cd10bd98eff12fec685a01358a0fc7b43452297bded119d1e4",
+      "size": 4729
+    },
+    "css/architecture.md": {
+      "path": "css/architecture.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/css/architecture.md",
+      "title": "CSS architecture (for Drupal 9)",
+      "section": "Css",
+      "lastModified": "2025-06-25T17:18:48+12:00",
+      "contentHash": "10dae042bbf782365539915ae719c519b15979538676c39c87accf692173447b",
+      "size": 18847
+    },
+    "css/coding.md": {
+      "path": "css/coding.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/css/coding.md",
+      "title": "Coding",
+      "section": "Css",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "0fdb49b77f1bc9265cabf84413e2a05238fb9ef7518692ba40c8f57fbae3d705",
+      "size": 1140
+    },
+    "css/csscomb.md": {
+      "path": "css/csscomb.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/css/csscomb.md",
+      "title": "CSScomb settings for Drupal (CSS formatting and sort tool)",
+      "section": "Css",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "b94d746c138b1579bb791b06ecf0d8027208130eee8d3be10b6900a10f622b6f",
+      "size": 19301
+    },
+    "css/file-organization.md": {
+      "path": "css/file-organization.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/css/file-organization.md",
+      "title": "CSS file organization",
+      "section": "Css",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "23ff1a3e2ad17ffb4813133b8a9e6c8f19df64f2a7aabf28792979851ce0bd9b",
+      "size": 8382
+    },
+    "css/format.md": {
+      "path": "css/format.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/css/format.md",
+      "title": "Format",
+      "section": "Css",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "27808130ec8caf57ff883f28fb75392e207dd4de81768a8bd2320563cc18a9df",
+      "size": 9045
+    },
+    "css/review.md": {
+      "path": "css/review.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/css/review.md",
+      "title": "What to look for when reviewing CSS",
+      "section": "Css",
+      "lastModified": "2025-06-25T17:18:48+12:00",
+      "contentHash": "f4468983b38e5407dd23644d1ae287b374c4cf574d6db88b1435dc2d47f636ef",
+      "size": 3572
+    },
+    "index.md": {
+      "path": "index.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/index.md",
+      "title": "Coding Standards",
+      "section": "General",
+      "lastModified": "2025-06-03T10:52:28+12:00",
+      "contentHash": "ac9e04eb0d2d374a75e370746a5f35f7e7cf88eb9190ce3452d6594a2003b5d5",
+      "size": 777
+    },
+    "javascript/best-practice.md": {
+      "path": "javascript/best-practice.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/javascript/best-practice.md",
+      "title": "Best Practice",
+      "section": "Javascript",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "7e9fe2fb4e7b405d0e7db01b71f1007e8948a34eb563eb3c7da20e73b8608345",
+      "size": 3743
+    },
+    "javascript/coding.md": {
+      "path": "javascript/coding.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/javascript/coding.md",
+      "title": "Coding",
+      "section": "Javascript",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "1ee96b4f1a038e7d206831125e7a2f0da8a92366f470bce5abf47acca36b2a43",
+      "size": 9795
+    },
+    "javascript/documentation.md": {
+      "path": "javascript/documentation.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/javascript/documentation.md",
+      "title": "Documentation",
+      "section": "Javascript",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "b33c348b9e07d258a6ab4396b3d2e39f6b5c5590a1be60ef55b8bedd3da65fa6",
+      "size": 5521
+    },
+    "javascript/eslint.md": {
+      "path": "javascript/eslint.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/javascript/eslint.md",
+      "title": "Before running these commands, install node.js, npm, and npx",
+      "section": "Javascript",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "5f347206e52293109041f57cc4d9b54fa0c45d26dd81f20f74954d2113f14e28",
+      "size": 2474
+    },
+    "javascript/jquery.md": {
+      "path": "javascript/jquery.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/javascript/jquery.md",
+      "title": "Jquery",
+      "section": "Javascript",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "136aa6996461696a6979844730d0e2360075e546aa0043c910eb28dc25753554",
+      "size": 5586
+    },
+    "markup/style.md": {
+      "path": "markup/style.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/markup/style.md",
+      "title": "Drupal Markup Style Guide",
+      "section": "Markup",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "0d7e5e4cecddd1f70498148835b5f30376c77dac2f8d9f7fb4e5e7a4e6024d2a",
+      "size": 239
+    },
+    "php/coding.md": {
+      "path": "php/coding.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/php/coding.md",
+      "title": "Coding",
+      "section": "Php",
+      "lastModified": "2025-11-13T15:22:49+13:00",
+      "contentHash": "320a244b9c595c7959fd3f594c54693dd24097ded0755af788bbddc2a3a121da",
+      "size": 28075
+    },
+    "php/documentation-examples.md": {
+      "path": "php/documentation-examples.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/php/documentation-examples.md",
+      "title": "Documentation Examples",
+      "section": "Php",
+      "lastModified": "2025-06-25T17:18:48+12:00",
+      "contentHash": "9c40f999e96c62fe835fb42d846d3ab9840e8417979f010f4463474de6951dc3",
+      "size": 13019
+    },
+    "php/documentation.md": {
+      "path": "php/documentation.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/php/documentation.md",
+      "title": "Documentation",
+      "section": "Php",
+      "lastModified": "2025-06-25T17:18:48+12:00",
+      "contentHash": "368bf2bebf08d7a6cf8a996091b3ceabbcdb8fe1ab93670608e8423a919b2401",
+      "size": 43182
+    },
+    "php/e_all.md": {
+      "path": "php/e_all.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/php/e_all.md",
+      "title": "E_all",
+      "section": "Php",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "18b579a58ec317f37621377a95f7147531562f7b8acdde764ebc44a7999c57e8",
+      "size": 2320
+    },
+    "php/exceptions.md": {
+      "path": "php/exceptions.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/php/exceptions.md",
+      "title": "Exceptions",
+      "section": "Php",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "7beefc4a6eb69a21ca9dae9e97ec3fc071dae701abac1e8dd5b59db22e418c24",
+      "size": 3036
+    },
+    "php/index.md": {
+      "path": "php/index.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/php/index.md",
+      "title": "Index",
+      "section": "Php",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "b71a450aec9ae03faff70a82874d9826d69b6672eb870f99f444dd5503d63b1e",
+      "size": 306
+    },
+    "php/namespaces.md": {
+      "path": "php/namespaces.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/php/namespaces.md",
+      "title": "Namespaces",
+      "section": "Php",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "0783bcd1204cbb66110d5758cc8b603b8d5f98367c71d3dbc792f5cf5a513d6f",
+      "size": 5371
+    },
+    "php/naming-services.md": {
+      "path": "php/naming-services.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/php/naming-services.md",
+      "title": "Naming Services",
+      "section": "Php",
+      "lastModified": "2025-06-25T17:18:48+12:00",
+      "contentHash": "b57462c3449eed5df8961cb35c6e524c56dce4c675c1b43e22566cd35112cdda",
+      "size": 966
+    },
+    "php/placeholders-delimiters.md": {
+      "path": "php/placeholders-delimiters.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/php/placeholders-delimiters.md",
+      "title": "Placeholders Delimiters",
+      "section": "Php",
+      "lastModified": "2025-05-30T22:13:26+12:00",
+      "contentHash": "bf1b94ad4ee26d2a87835a7f2bf19d29d936e904bbadc234b68a10848dbfd462",
+      "size": 1313
+    },
+    "php/psr4.md": {
+      "path": "php/psr4.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/php/psr4.md",
+      "title": "Psr4",
+      "section": "Php",
+      "lastModified": "2025-06-25T17:18:48+12:00",
+      "contentHash": "deb9b9e6112aecf5481f0584303c9e51a7a8e920767e35a800be13aac934e7be",
+      "size": 4854
+    },
+    "spelling/spelling.md": {
+      "path": "spelling/spelling.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/spelling/spelling.md",
+      "title": "Spelling",
+      "section": "Spelling",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "03ca027c3620626b06f347a0b58f2e7f2f50a8d8c2cd5b90e2a6a590432d0708",
+      "size": 1261
+    },
+    "sql/conventions.md": {
+      "path": "sql/conventions.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/sql/conventions.md",
+      "title": "SQL coding conventions",
+      "section": "Sql",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "e596e6cf5abd254e10ef5f63ac28ad927b511bf54619b078852649e4f9c614a9",
+      "size": 5838
+    },
+    "sql/keywords.md": {
+      "path": "sql/keywords.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/sql/keywords.md",
+      "title": "List of SQL reserved words",
+      "section": "Sql",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "56be505e9e2ba29c0f72a69e59dde4ff89cd93f139be9c89b9f5e5ccf2f2f1fe",
+      "size": 13418
+    },
+    "sql/select-from.md": {
+      "path": "sql/select-from.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/sql/select-from.md",
+      "title": "Avoid \"SELECT * FROM ...\"",
+      "section": "Sql",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "5b599b9f479705edfd13f35f4226b79a100449dade34295c7c48b8cf7a24dca9",
+      "size": 1086
+    },
+    "twig/coding.md": {
+      "path": "twig/coding.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/twig/coding.md",
+      "title": "Twig coding standards",
+      "section": "Twig",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "5a2d683641b46f6f845ea345372705dc0d74292e806d5ee54b26457e7392270d",
+      "size": 10720
+    },
+    "yaml/configuration-files.md": {
+      "path": "yaml/configuration-files.md",
+      "fullPath": "/Users/ronaldtebrake/Sites/surge-codingstandards/data/coding_standards/docs/yaml/configuration-files.md",
+      "title": "YAML Configuration files",
+      "section": "Yaml",
+      "lastModified": "2025-06-17T21:19:17+12:00",
+      "contentHash": "65a94b43b64e1e2fad41ffbcb1bacc341c883d97563e2f2171946ee69d54f8fd",
+      "size": 3640
+    }
+  }
+}

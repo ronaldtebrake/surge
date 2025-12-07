@@ -1,17 +1,13 @@
 {
   "name": "surge-codingstandards",
-  "version": "1.0.0",
-  "description": "Automated Drupal coding standards sitemap generation with AI-powered Agents.md creation",
+  "version": "2.0.0",
+  "description": "Drupal coding standards documentation with AI-powered Agents.md generation from GitLab repository",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sitemap": "node scripts/sitemap-scraper.js",
-    "download": "node scripts/smart-content-downloader.js",
-    "convert": "node scripts/html-to-markdown.js",
-    "bullets": "node scripts/markdown-to-bullets.js",
-    "page-agents": "node scripts/page-agents-generator.js",
-    "merge-agents": "node scripts/quickref-merger.js",
-    "full-pipeline": "npm run sitemap && npm run download && npm run convert && npm run bullets && npm run page-agents && npm run merge-agents"
+    "discover": "node scripts/repo-file-discoverer.js",
+    "agents": "node scripts/markdown-to-agents.js",
+    "full-pipeline": "npm run discover && npm run agents"
   },
   "keywords": [
     "drupal",
@@ -23,18 +19,14 @@
   "author": "ronaldtebrake",
   "license": "MIT",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
     "fs-extra": "^11.1.1",
-    "moment": "^2.29.4",
-    "openai": "^4.20.1",
-    "playwright": "^1.40.0",
-    "turndown": "^7.1.3"
+    "openai": "^4.20.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.0",
     "@types/node": "^24.5.2"
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

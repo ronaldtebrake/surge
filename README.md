@@ -1,13 +1,14 @@
 # Surge Coding Standards
 
-Automated Drupal coding standards documentation with AI-powered Agents.md generation.
+Automated Drupal coding standards documentation with AI-powered Agents.md generation from GitLab repository.
 
 > Part of the [Drupal Surge](https://www.drupal.org/project/surge) ecosystem - giving AI tools a sense of Drupal.
 
 ## Features
 
-- **Smart Downloads**: Only downloads changed content using content hashing and timestamps
-- **AI Processing**: Converts documentation to structured bullet points and Agents.md
+- **Direct Repository Access**: Uses [Drupal Coding Standards](https://git.drupalcode.org/project/coding_standards) GitLab repository as git submodule
+- **Smart Caching**: Only processes changed files using content hash comparison
+- **AI Processing**: Converts markdown documentation directly to Agents.md
 - **Automated Pipeline**: Weekly GitHub Actions workflow with PR-based updates
 - **GitHub Pages**: Deployed documentation site
 
@@ -18,11 +19,16 @@ Automated Drupal coding standards documentation with AI-powered Agents.md genera
    npm install
    ```
 
-2. **Configure GitHub secrets**:
+2. **Initialize submodule** (if not already done):
+   ```bash
+   git submodule update --init --recursive
+   ```
+
+3. **Configure GitHub secrets**:
    - `PAT_GITHUB_TOKEN`: PAT token for repository access
    - `OPENAI_API_KEY`: OpenAI API key for AI processing
 
-3. **Run locally**:
+4. **Run locally**:
    ```bash
    npm run full-pipeline
    ```
@@ -31,42 +37,36 @@ Automated Drupal coding standards documentation with AI-powered Agents.md genera
 
 ```mermaid
 graph TD
-    A[Weekly Pipeline<br/>Sundays 2 AM UTC] --> B[Generate Sitemap]
-    B --> C[Download Content]
-    C --> D[Convert to Markdown]
-    D --> E[Generate Bullet Points]
-    E --> F[Create Quick Reference]
-    F --> G[Merge to Agents.md]
-    G --> H[Create PR]
+    A[Weekly Pipeline<br/>Sundays 2 AM UTC] --> B[Update Submodule]
+    B --> C[Discover Markdown Files]
+    C --> D[Generate Agents.md]
+    D --> E[Create PR]
     
-    I[Manual Trigger] --> B
+    F[Manual Trigger] --> B
     
     style A fill:#e1f5fe
-    style H fill:#c8e6c9
-    style I fill:#f1f8e9
+    style E fill:#c8e6c9
+    style F fill:#f1f8e9
 ```
 
 **Pipeline Steps:**
-1. **Sitemap Generation** - Downloads Drupal docs and extracts timestamps
-2. **Smart Download** - Only downloads changed content using content hashing
-3. **HTML to Markdown** - Converts to clean markdown
-4. **AI Bullet Points** - Generates structured content for AI tools
-5. **Quick Reference** - Creates page-specific AI prompts
-6. **Agents.md** - Merges everything into comprehensive documentation
-7. **PR Creation** - Single PR with all changes for review
+1. **Update Submodule** - Pulls latest changes from coding_standards repository
+2. **Discover Files** - Scans repository for markdown files and builds manifest
+3. **Generate Agents.md** - Processes markdown files with AI (only changed files)
+4. **Create PR** - Single PR with all changes for review
 
 ## Project Structure
 
 ```
-├── .github/workflows/     # GitHub Actions
-├── data/                  # Generated content
-│   ├── sitemap.json      # Documentation links with timestamps
-│   ├── downloads/        # Downloaded HTML files
-│   ├── markdown/         # Converted markdown
-│   ├── bullets/          # AI bullet points
-│   └── pages/            # Quick Reference pages
-├── scripts/              # Automation scripts
-├── docs/Agents.md        # Final documentation
+├── .github/workflows/        # GitHub Actions
+├── data/                     # Generated content
+│   ├── coding_standards/    # Git submodule (Drupal coding standards repo)
+│   ├── repo-manifest.json   # File manifest with hashes and metadata
+│   └── agents-cache.json    # Cache of AI-processed content
+├── scripts/                  # Automation scripts
+│   ├── repo-file-discoverer.js  # Discovers markdown files
+│   └── markdown-to-agents.js   # Generates Agents.md
+├── docs/Agents.md           # Final documentation
 └── package.json
 ```
 
@@ -75,14 +75,21 @@ graph TD
 - **Weekly**: Runs automatically every Sunday at 2 AM UTC
 - **Manual**: Trigger via GitHub Actions UI
 - **PR-Based**: All changes go through PR review
-- **Smart Updates**: Only processes changed content using content hashing
+- **Smart Caching**: Only processes changed files using content hash comparison
 
-## Content Hashing
+## Content Hashing & Caching
 
-The system uses SHA-256 content hashing to detect actual content changes, eliminating unnecessary downloads. Pages are only updated when their content actually changes, not just because time has passed. This ensures efficient updates and reduces bandwidth usage.
+The system uses SHA-256 content hashing to detect actual content changes. Only files with changed content hashes are processed with AI, while unchanged files are loaded from cache. This ensures:
+- **Efficient updates**: Minimal AI API calls
+- **Cost effective**: Only process what changed
+- **Fast execution**: Reuse cached results
+
+## Source Repository
+
+This project uses the official [Drupal Coding Standards](https://git.drupalcode.org/project/coding_standards) repository as a git submodule. The repository contains markdown documentation files that are processed to generate the Agents.md file.
 
 ## Links
 
 - [Generated Documentation](./docs/Agents.md)
 - [Drupal Surge Project](https://www.drupal.org/project/surge)
-- [Drupal Official Docs](https://www.drupal.org/docs/develop/standards)
+- [Drupal Coding Standards Repository](https://git.drupalcode.org/project/coding_standards)

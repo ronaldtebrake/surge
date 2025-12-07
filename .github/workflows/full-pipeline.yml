@@ -20,6 +20,12 @@ jobs:
       with:
         token: ${{ secrets.PAT_GITHUB_TOKEN }}
         fetch-depth: 0
+        submodules: recursive
+    
+    - name: Update coding_standards submodule
+      run: |
+        git submodule update --remote --merge data/coding_standards
+        echo "Submodule updated to latest commit"
     
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -30,45 +36,19 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
-    - name: Install Playwright browsers
-      run: npx playwright install --with-deps
+    - name: Discover markdown files
+      run: npm run discover
     
-    - name: Generate sitemap
-      run: npm run sitemap
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
-    
-    - name: Download content
-      run: npm run download
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
-    
-    - name: Convert HTML to markdown
-      run: npm run convert
-    
-    - name: Generate bullet points
-      run: npm run bullets
+    - name: Generate Agents.md
+      run: npm run agents
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
-        CI: true  # Ensure CI environment is detected
-    
-    - name: Generate Quick Reference pages
-      run: npm run page-agents
-      env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
-        CI: true  # Ensure CI environment is detected
-    
-    - name: Merge into Agents.md
-      run: npm run merge-agents
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
+        CI: true
     
     - name: Check for changes
       id: changes
       run: |
-        if git diff --quiet data/ docs/Agents.md; then
+        if git diff --quiet data/repo-manifest.json data/agents-cache.json docs/Agents.md 2>/dev/null; then
           echo "changes=false" >> $GITHUB_OUTPUT
         else
           echo "changes=true" >> $GITHUB_OUTPUT
@@ -93,22 +73,20 @@ jobs:
         token: ${{ steps.generate_token.outputs.token }}
         title: "Weekly documentation pipeline update - ${{ steps.timestamp.outputs.timestamp }}"
         body: |
-          This PR contains a comprehensive documentation pipeline update with all changes from sitemap generation to final Agents.md creation.
+          This PR contains a documentation pipeline update from the [Drupal Coding Standards](https://git.drupalcode.org/project/coding_standards) repository.
           
           ## Changes
-          - Updated sitemap with latest timestamps from Drupal.org
-          - Downloaded and processed changed content
-          - Generated AI bullet points and Quick Reference pages
-          - Updated comprehensive Agents.md documentation
+          - Updated coding_standards submodule to latest commit
+          - Discovered markdown files from repository
+          - Generated AI-processed Agents.md documentation
           
           ## Files Updated
-          - `data/sitemap.json` - Updated sitemap with latest timestamps
-          - `data/downloads/` - Downloaded HTML files (timestamp-based updates)
-          - `data/markdown/` - Converted markdown files
-          - `data/bullets/` - AI-generated bullet points
-          - `data/pages/` - Quick Reference pages
-          - `data/prompts/` - AI prompts
-          - `docs/Agents.md` - Final comprehensive documentation
+          - `data/repo-manifest.json` - File manifest from coding_standards repo
+          - `data/agents-cache.json` - Cache of AI-processed content
+          - `docs/Agents.md` - Final comprehensive documentation for AI agents
+          
+          ## Source
+          [git.drupalcode.org/project/coding_standards](https://git.drupalcode.org/project/coding_standards)
           
           ## Next Steps
           - Review the changes
@@ -119,7 +97,7 @@ jobs:
         commit-message: "docs: weekly pipeline update ${{ steps.timestamp.outputs.timestamp }}"
         committer: "GitHub Actions <noreply@github.com>"
         author: "GitHub Actions <noreply@github.com>"
-        # Reduce API calls by using existing PR if possible
         add-paths: |
-          data/
+          data/repo-manifest.json
+          data/agents-cache.json
           docs/Agents.md
