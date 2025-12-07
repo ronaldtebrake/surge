@@ -115,7 +115,7 @@ class MarkdownToAgentsGenerator {
    * Build AI prompt for processing markdown
    */
   buildPrompt(content, title, section) {
-    return `Convert the following Drupal coding standards documentation into a clean, focused section for an AI Agents coding reference guide.
+    return `Extract the most essential coding standard rules from the following Drupal documentation. Output only concise coding reference standards - no indexes, no approach, no summarization.
 
 ## Source Documentation
 Title: ${title}
@@ -125,29 +125,14 @@ Content:
 ${content}
 
 ## Requirements:
-- Extract only the essential coding standards and rules
-- Use clear, actionable language that AI coding agents can implement
-- Group related rules under appropriate subheadings
-- Keep it concise - focus on rules, not lengthy explanations
-- Use consistent bullet point formatting
-- Focus on what AI coding agents should do/avoid
-- Preserve important code examples that illustrate rules
-- Remove navigation elements, links to other pages, and metadata
-
-## Output Format:
-Generate a clean section starting with a ## heading for the topic, followed by organized rules and guidelines:
-
-## ${title}
-
-### [Subsection 1]
-- [Essential rule 1]
-- [Essential rule 2]
-
-### [Subsection 2]
-- [Essential rule 3]
-- [Essential rule 4]
-
-Keep the output focused, actionable, and optimized for AI coding agents.`;
+- Extract only critical rules that meaningfully improve code generation performance or correctness
+- Validate that each rule is both critical and non-obvious (skip rules that current models are likely already trained on)
+- Prioritize minimal token usage - avoid redundant or obvious rules
+- Use clear, actionable language
+- Preserve important code examples that illustrate critical rules only
+- Remove navigation elements, links, metadata, and explanatory text
+- Output format: Start with ## ${title}, then organized rules with ### subsections and bullet points
+- Do not add any additional output beyond the coding standards themselves`;
   }
 
   /**
@@ -180,7 +165,7 @@ Keep the output focused, actionable, and optimized for AI coding agents.`;
         messages: [
           {
             role: 'system',
-            content: 'You are an expert Drupal developer specializing in creating concise coding reference guides for AI coding agents. Focus on extracting the most important rules and standards. Use bullet points to minimize token usage. Preserve important code examples that illustrate rules.'
+            content: 'You are an expert Drupal developer focused on creating concise coding standard rules for AI coding agents. Your goal is to extract the most essential rules and standards from the provided documentation, ensuring that only critical guidance is included. Prioritize minimal token usage in outputs and avoid redundant or obvious rules that current models are likely already trained on. Include a rule only if it meaningfully improves code generation performance or correctness, as unnecessary additions increase processing costs. After extraction, validate that each included rule is both critical and non-obvious. Do not create any additional output, no indexes, no approach, no summarization, we just want the concise coding reference standards.'
           },
           {
             role: 'user',
@@ -309,27 +294,6 @@ Keep the output focused, actionable, and optimized for AI coding agents.`;
   generateProjectOverview() {
     return `# Drupal Coding Standards - AI Agent Reference
 
-## Overview
-
-This document provides comprehensive Drupal coding standards optimized for AI coding agents. It consolidates essential rules and guidelines from the official [Drupal Coding Standards](https://git.drupalcode.org/project/coding_standards) repository.
-
-## Purpose
-
-This reference serves:
-- **AI Coding Agents** (Cursor, Claude, GitHub Copilot, etc.)
-- **Development Tools** with AI integration
-- **Automated Code Review** systems
-- **Code Generation** tools
-
-## How to Use
-
-Each section contains coding standards for a specific technology or aspect of Drupal development. AI agents should reference the relevant section when working with that particular area.
-
-## Source
-
-Auto-generated from: [git.drupalcode.org/project/coding_standards](https://git.drupalcode.org/project/coding_standards)
-
----
 `;
   }
 
@@ -417,9 +381,7 @@ Auto-generated from: [git.drupalcode.org/project/coding_standards](https://git.d
       // Generate Agents.md - wrap in raw tags to prevent Jekyll Liquid processing
       const agentsContent = [
         '{% raw %}',
-        this.generateProjectOverview(),
-        this.generateTableOfContents(sections),
-        '---\n'
+        this.generateProjectOverview()
       ];
 
       // Add content by section
