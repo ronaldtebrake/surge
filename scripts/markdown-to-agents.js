@@ -164,7 +164,7 @@ Keep the output focused, actionable, and optimized for AI coding agents.`;
 
     try {
       const response = await this.openai.chat.completions.create({
-        model: 'gpt-4',
+        model: 'gpt-4o-mini', // supports 128k token context, more cost-effective
         messages: [
           {
             role: 'system',
@@ -211,7 +211,8 @@ Keep the output focused, actionable, and optimized for AI coding agents.`;
       'billing_hard_limit_reached',
       'invalid_api_key',
       'authentication_error',
-      'rate_limit_exceeded'
+      'rate_limit_exceeded',
+      'context_length_exceeded'
     ];
     
     if (error.code && criticalErrors.includes(error.code)) {
@@ -224,7 +225,9 @@ Keep the output focused, actionable, and optimized for AI coding agents.`;
       'billing',
       'rate limit',
       'invalid api key',
-      'authentication'
+      'authentication',
+      'context length exceeded',
+      'maximum context length'
     ];
     
     return criticalPatterns.some(pattern => errorMessage.includes(pattern));
