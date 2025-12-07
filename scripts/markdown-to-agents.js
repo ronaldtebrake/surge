@@ -391,8 +391,9 @@ Auto-generated from: [git.drupalcode.org/project/coding_standards](https://git.d
         }
       }
 
-      // Generate Agents.md
+      // Generate Agents.md - wrap in raw tags to prevent Jekyll Liquid processing
       const agentsContent = [
+        '{% raw %}',
         this.generateProjectOverview(),
         this.generateTableOfContents(sections),
         '---\n'
@@ -406,6 +407,9 @@ Auto-generated from: [git.drupalcode.org/project/coding_standards](https://git.d
           agentsContent.push('\n');
         }
       }
+
+      // Close raw tag to prevent Jekyll Liquid processing
+      agentsContent.push('{% endraw %}');
 
       const finalContent = agentsContent.join('\n');
 
