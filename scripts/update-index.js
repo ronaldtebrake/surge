@@ -7,19 +7,8 @@ const AGENTS_FILE = path.join(__dirname, '..', 'docs', 'Agents.md');
 const INDEX_FILE = path.join(__dirname, '..', 'index.html');
 
 /**
- * Escape JavaScript string content for embedding in template literal
- */
-function escapeForJavaScript(str) {
-  return str
-    .replace(/\\/g, '\\\\')
-    .replace(/`/g, '\\`')
-    .replace(/\${/g, '\\${')
-    .replace(/\r\n/g, '\n')
-    .replace(/\r/g, '\n');
-}
-
-/**
- * Update index.html to embed Agents.md content in the agentsMarkdownContent variable
+ * Update index.html to embed Agents.md content in a static script tag
+ * Using type="text/markdown" means no JavaScript escaping is needed - it's just raw text
  */
 async function updateIndex() {
   console.log('🔄 Updating index.html with Agents.md content...');
@@ -32,7 +21,7 @@ async function updateIndex() {
 
     const agentsContent = await fs.readFile(AGENTS_FILE, 'utf8');
     
-    // Remove raw tags for JavaScript (they're only needed for Jekyll)
+    // Remove raw tags (they're only needed for Jekyll, not for HTML)
     const cleanedContent = agentsContent
       .replace(/^{% raw %}\n?/m, '')
       .replace(/\n?{% endraw %}$/m, '');
@@ -40,31 +29,30 @@ async function updateIndex() {
     // Read current index.html
     const indexContent = await fs.readFile(INDEX_FILE, 'utf8');
 
-    // Find the agentsMarkdownContent variable
-    const agentsVarStart = indexContent.indexOf('const agentsMarkdownContent = `');
-    if (agentsVarStart === -1) {
-      throw new Error('Could not find agentsMarkdownContent variable in index.html');
+    // Find the script tag with type="text/markdown"
+    const scriptStart = indexContent.indexOf('<script type="text/markdown" id="agents-md-content">');
+    if (scriptStart === -1) {
+      throw new Error('Could not find agents-md-content script tag in index.html');
     }
 
-    // Find the end of the template literal (the closing backtick and semicolon)
-    const agentsVarEnd = indexContent.indexOf('`;', agentsVarStart);
-    if (agentsVarEnd === -1) {
-      throw new Error('Could not find end of agentsMarkdownContent variable in index.html');
+    // Find the closing script tag
+    const scriptEnd = indexContent.indexOf('</script>', scriptStart);
+    if (scriptEnd === -1) {
+      throw new Error('Could not find closing script tag for agents-md-content in index.html');
     }
 
-    // Escape the content for JavaScript
-    const escapedContent = escapeForJavaScript(cleanedContent);
-
-    // Replace the variable content
-    const beforeVar = indexContent.substring(0, agentsVarStart + 'const agentsMarkdownContent = `'.length);
-    const afterVar = indexContent.substring(agentsVarEnd);
+    // Replace the content between the script tags
+    // No escaping needed - it's just raw text in a non-JavaScript script tag
+    const beforeScript = indexContent.substring(0, scriptStart + '<script type="text/markdown" id="agents-md-content">\n'.length);
+    const afterScript = indexContent.substring(scriptEnd);
     
-    const newIndexContent = beforeVar + escapedContent + afterVar;
+    const newIndexContent = beforeScript + cleanedContent + '\n' + afterScript;
 
     // Write updated index.html
     await fs.writeFile(INDEX_FILE, newIndexContent);
     console.log(`✅ Updated index.html with Agents.md content`);
     console.log(`   - Agents.md content embedded: ${(cleanedContent.length / 1024).toFixed(1)} KB`);
+    console.log(`   - No JavaScript escaping needed - content is in a text/markdown script tag`);
 
   } catch (error) {
     console.error('❌ Error updating index.html:', error);
@@ -78,3 +66,4 @@ if (require.main === module) {
 }
 
 module.exports = { updateIndex };
+

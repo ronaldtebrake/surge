@@ -129,7 +129,7 @@ ${content}
 - Validate that each rule is both critical and non-obvious (skip rules that current models are likely already trained on)
 - Prioritize minimal token usage - avoid redundant or obvious rules
 - Use clear, actionable language
-- Preserve important code examples that illustrate critical rules only
+- Remove examples and highlights, we only want the rules, not the code examples
 - Remove navigation elements, links, metadata, and explanatory text
 - Output format: Start with ## ${title}, then organized rules with ### subsections and bullet points
 - Do not add any additional output beyond the coding standards themselves`;
