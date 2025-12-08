@@ -125,12 +125,14 @@ Content:
 ${content}
 
 ## Requirements:
+- If the content only contains links to external resources without meaningful coding standards or guidelines, output 'SKIP' and do not generate any content
 - Extract only critical rules that meaningfully improve code generation performance or correctness
 - Validate that each rule is both critical and non-obvious (skip rules that current models are likely already trained on)
 - Prioritize minimal token usage - avoid redundant or obvious rules
 - Use clear, actionable language
 - Remove examples and highlights, we only want the rules, not the code examples
 - Remove navigation elements, links, metadata, and explanatory text
+- Ignore links when extracting rules - only extract actual coding standards and guidelines
 - Output format: Start with ## ${title}, then organized rules with ### subsections and bullet points
 - Do not add any additional output beyond the coding standards themselves`;
   }
@@ -165,7 +167,7 @@ ${content}
         messages: [
           {
             role: 'system',
-            content: 'You are an expert Drupal developer focused on creating concise coding standard rules for AI coding agents. Your goal is to extract the most essential rules and standards from the provided documentation, ensuring that only critical guidance is included. Prioritize minimal token usage in outputs and avoid redundant or obvious rules that current models are likely already trained on. Include a rule only if it meaningfully improves code generation performance or correctness, as unnecessary additions increase processing costs. After extraction, validate that each included rule is both critical and non-obvious. Do not create any additional output, no indexes, no approach, no summarization, we just want the concise coding reference standards.'
+            content: 'You are an expert Drupal developer focused on creating concise coding standard rules for AI coding agents. Your goal is to extract the most essential rules and standards from the provided documentation, ensuring that only critical guidance is included. If a file only contains links to external resources without actual coding standards or guidelines, respond with "SKIP" and do not generate content. Prioritize minimal token usage in outputs and avoid redundant or obvious rules that current models are likely already trained on. Include a rule only if it meaningfully improves code generation performance or correctness, as unnecessary additions increase processing costs. After extraction, validate that each included rule is both critical and non-obvious. Do not create any additional output, no indexes, no approach, no summarization, we just want the concise coding reference standards.'
           },
           {
             role: 'user',
@@ -176,7 +178,14 @@ ${content}
         temperature: 0.2
       });
 
-      const result = response.choices[0].message.content;
+      const result = response.choices[0].message.content.trim();
+      
+      // Check if AI returned SKIP (case-insensitive)
+      if (result.toUpperCase().startsWith('SKIP')) {
+        console.log(`   ⏭ Skipping ${filePath} (link-only content, no meaningful standards)`);
+        return null;
+      }
+      
       console.log(`   ✅ Processed with AI (${result.length} chars)`);
       return result;
 
