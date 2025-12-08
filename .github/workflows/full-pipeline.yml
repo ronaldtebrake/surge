@@ -43,7 +43,7 @@ jobs:
       run: npm ci
     
     - name: Reset repo-manifest and cache
-      if: inputs.reset_repo_manifest == 'true'
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.reset_repo_manifest }}
       run: |
         echo "Resetting repo-manifest and cache to force full regeneration..."
         rm -f data/repo-manifest.json data/agents-cache.json
