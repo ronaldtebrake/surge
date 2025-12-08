@@ -6,6 +6,12 @@ name: Full Documentation Pipeline
 
 on:
   workflow_dispatch: # Allow manual triggering
+    inputs:
+      reset_repo_manifest:
+        description: 'Reset repo-manifest and cache to force full regeneration'
+        required: false
+        type: boolean
+        default: false
   schedule:
     # Run weekly on Sundays at 2 AM UTC
     - cron: '0 2 * * 0'
@@ -35,6 +41,13 @@ jobs:
     
     - name: Install dependencies
       run: npm ci
+    
+    - name: Reset repo-manifest and cache
+      if: inputs.reset_repo_manifest == 'true'
+      run: |
+        echo "Resetting repo-manifest and cache to force full regeneration..."
+        rm -f data/repo-manifest.json data/agents-cache.json
+        echo "Reset complete - all files will be reprocessed"
     
     - name: Discover markdown files
       run: npm run discover
