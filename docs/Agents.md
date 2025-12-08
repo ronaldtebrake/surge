@@ -8,31 +8,13 @@
 ## Composer package name convention
 
 ### Drupal Projects
-- Use package name format: `drupal/PROJECT`
-  - `PROJECT` corresponds to the project part of the URL.
-- Examples:
-  - `drupal/drupal` for Drupal core
-  - `drupal/ctools` for ctools
-  - `drupal/views` for Views in Drupal 7
-  - `drupal/core` for core
-  - `drupal/datetime` for Datetime module
+- Use package name format: `drupal/PROJECT`.
 
-### Modules, Themes, and Profiles
-- Use package name format: `drupal/SUBPROJECT`
-  - `SUBPROJECT` is the machine name of the module, theme, or profile.
-- Ensure no naming conflicts with existing projects.
-- Examples:
-  - `drupal/devel_generate` for Devel module
-  - `drupal/views` for Views module in core
+### Modules, Themes and Profiles
+- Use package name format: `drupal/SUBPROJECT`.
 
 ### Components
-- Use package name format: `drupal/PARENT-COMPONENT`
-  - `PARENT` is the parent package name, `COMPONENT` is the component name.
-- Avoid conflicts by using a dash (`-`).
-- Examples:
-  - `drupal/core-datetime` for Datetime component
-  - `drupal/core-diff` for Diff component
-  - `drupal/panels-renderer` for contrib components
+- Use package name format: `drupal/PARENT-COMPONENT`.
 
 
 
@@ -41,436 +23,157 @@
 ## Coding
 
 ### CSS Formatting
-- Use consistent indentation (2 spaces).
-- Place each property on a new line.
-- Use lowercase for property names and values.
-
-**Example:**
-```css
-.selector {
-  property: value;
-  another-property: another-value;
-}
-```
+- Use consistent indentation and spacing for readability.
+- Limit line length to 80 characters.
 
 ### CSS Architecture
-- Aim for clarity and maintainability in your CSS.
-- Avoid overly complex selectors; prefer simple, readable ones.
-- Group related styles together in a logical order.
+- Organize CSS files by component or module.
+- Avoid deep nesting of selectors to maintain clarity.
 
 ### Grouping Rulesets
-- Organize CSS files by functionality (e.g., layout, components).
-- Use a consistent naming convention for files (e.g., `component-name.css`).
-- Keep file sizes manageable; split large files into smaller, modular ones.
+- Group related styles together in a logical order.
+- Use comments to separate sections within CSS files for clarity.
 
 
 ## CSS architecture (for Drupal 9)
 
-### Goals
-- **Predictable**: Ensure CSS is consistent and understandable.
-- **Reusable**: Create abstract CSS rules for quick component building.
-- **Maintainable**: Allow easy modification and extension without breaking existing styles.
-- **Scalable**: Manage CSS effectively for both individual developers and large teams.
+### Predictability
+- Ensure CSS is consistent and understandable; avoid side-effects from changes.
 
-### Component Structure
-- Components are discrete UI elements made of HTML, CSS, and sometimes JavaScript.
+### Reusability
+- Create abstract and decoupled CSS rules to facilitate quick component building.
 
-### Common CSS Pitfalls
-- **Context-based Modifications**: Avoid modifying components based on context (e.g., `.sidebar .component {}`).
-- **HTML Structure Dependence**: Do not rely on HTML structure in selectors (e.g., avoid `nav > ul > li > a`).
-- **Generic Class Names**: Avoid overly generic names (e.g., `.widget .title {}`).
-- **Overloaded Rules**: Do not combine multiple styles in one rule.
-- **Undoing Styles**: Avoid creating rules that undo other styles (e.g., `.component-no-padding`).
+### Maintainability
+- Design CSS for easy modification and extension without breaking existing styles.
 
-### Best Practices
-- **Avoid HTML Structure Reliance**:
-  - Use classes for styling, not IDs.
-  - Keep selectors short; prefer single classes.
-  - Example:
-    ```css
-    .slat + .slat {
-      border-top: 1px solid #cccccc;
-    }
-    ```
+### Scalability
+- Structure CSS to be manageable for both individual developers and large teams.
 
-- **Define Elements with Classes**:
-  - Use component prefixes for elements:
-    ```css
-    .component {}
-    .component__header {}
-    ```
+### Avoid reliance on HTML structure
+- Use classes for styling; avoid id selectors and overly complex selectors.
 
-- **Use Modifier Classes**:
-  - Create variants with suffixes:
-    ```css
-    .button {}
-    .button--primary {}
-    ```
-  - Example HTML:
-    ```html
-    <button class="button button--primary">Save</button>
-    ```
+### Use specific class names
+- Prefix component elements with the component name followed by two underscores.
 
-- **Separate Concerns**:
-  - Do not set layout properties in components.
-  - Use `js-` prefix for JavaScript hooks (e.g., `.js-slider`).
+### Extend components with modifier classes
+- Use suffixes with two dashes for component variants; keep modifier classes minimal.
 
-### SMACSS Categories
-1. **Base**: Styles for HTML elements only; no class selectors.
-2. **Layout**: Arrangement of elements (e.g., grid systems).
-3. **Component**: Reusable UI elements; primary focus of Drupal CSS.
-4. **State**: Styles for transient changes (e.g., `.is-active`).
-5. **Theme**: Visual styles that do not affect functionality.
+### Separate concerns
+- Do not mix positioning/layout with component styles; use dedicated classes for JavaScript.
 
-### Naming Conventions
-- Use full words, not abbreviations (e.g., `class="button"`).
-- Use dashes between words (e.g., `class="button-group"`).
-- Example class structure:
-  ```css
-  .component-name
-  .component-name--variant
-  .component-name__sub-object
-  ```
+### Name components using design semantics
+- Class names should reflect design intent rather than content semantics.
 
-### Specificity and `!important`
-- Avoid using IDs in CSS; they increase specificity.
-- Use `!important` sparingly, primarily for themes or critical states.
+### Formatting class names
+- Use full words, dashes between words, and avoid abbreviations in class names.
 
-### Example Component
-- **HTML**:
-  ```html
-  <div class="progress">
-    <label class="label">Installing Node Module</label>
-    <div class="progress__track">
-      <div class="progress__bar js-progress-percent" style="width: 63%"></div>
-    </div>
-    <div class="progress__description">
-      <div class="layout-pull">Installed 15 of 24 modules</div>
-      <strong class="layout-push">63%</strong>
-    </div>
-    <button class="progress__cancel" href="#" title="cancel">cancel</button>
-  </div>
-  ```
-
-- **CSS**:
-  ```css
-  .progress {}
-  .progress__track {}
-  .progress__bar {}
-  .progress__description {}
-  .progress__cancel {}
-  ```
-
-This concise guide provides essential rules for CSS architecture in Drupal 9, focusing on best practices and actionable guidelines for AI coding agents.
+### Avoid `!important`
+- Use sparingly and only for states that must override all others; avoid for general rules.
 
 
 ## CSS file organization
 
 ### File Structure
-- Group CSS rules into logical files to enforce separation of concerns.
-- Follow SMACSS-style categorization:
-  - **Base**: HTML element styling, typography, resets, utility classes.
-  - **Layout**: Overall page layout.
-  - **Component**: Styles for individual components (e.g., navigation, footer).
-  - **State**: Include component states within their respective stylesheets (rarely used).
-  - **Theme**: Styles affecting overall theme aesthetics (use CSS custom properties).
-
-### CSS files for Drupal modules
-- Place all styles in a `css/` sub-directory:
-  - `module_name.module.css`: Minimal styles for module functionality.
-  - `module_name.theme.css`: Aesthetic styles for module functionality.
-  - `module_name.admin.css`: Minimal styles for admin screens.
-  - `module_name.admin.theme.css`: Aesthetic styles for admin screens.
-- **Note**: No base styles in modules; use Normalize.css and drupal.base.css.
+- Group CSS rulesets into logical files for separation of concerns.
+- Follow SMACSS-style categorization: Base, Layout, Component, State, Theme.
+- Place all module styles in a `css/` sub-directory.
+- Use `module_name.module.css` for minimal functional styles.
+- Use `module_name.theme.css` for aesthetic styles.
+- Use `module_name.admin.css` for admin screen styles.
+- Use `module_name.admin.theme.css` for admin aesthetic styles.
+- Do not include base styles in modules; use Normalize.css instead.
 
 ### CSS files for Drupal themes
 - Separate Base, Layout, and Component styles into distinct files.
-- For complex themes, consider individual files for each component.
+- For complex themes, place each component in its own file.
 - Include state rules with the corresponding component.
 - Theme rules may be separated or included with components.
 
-Example structure:
-```yaml
-css:
- base: base.css
- layout: layout.css
- component: components.css
-```
-
 ### Aggregating CSS
-- In Drupal 8+, themes can override styles without affecting original styles.
-- Two aggregate types:
-  1. **Every page**: Includes base, layout, component, state, and theme styles.
-  2. **Conditionally-loaded**: Includes layout, component, state, and theme styles.
-- **Note**: No conditionally-loaded base styles.
-
-### Weighting CSS
-- Use weights to determine style order:
-```php
-const CSS_BASE = -200;    // Base styles
-const CSS_LAYOUT = -100;  // Layout styles
-const CSS_COMPONENT = 0;  // Component styles
-const CSS_STATE = 100;    // State styles
-const CSS_THEME = 200;    // Theme styles
-```
-
-### SMACSS and Sass/Compass
-- Combine SMACSS with Sass/Compass for better CSS management.
-- Use Sass Globbing for multiple .scss files to generate a single CSS file.
+- In Drupal 8+, themes can override stylesheets without affecting original styles.
+- Maintain two aggregates: "Every page" and "conditionally-loaded".
+- Never include conditionally-loaded base styles.
+- Order styles within an aggregate by the weight option of `drupal_add_css()`.
 
 
 ## CSScomb settings for Drupal (CSS formatting and sort tool)
 
-### General Configuration
-- Use CSScomb for formatting and sorting CSS properties in `.css`, `.scss`, `.sass`, or `.less` files.
-- Place configuration in `.csscomb.json` in the local home folder or project root.
-
 ### Exclusions
-- Exclude the following directories from processing:
-  - `core/**`
-  - `modules/**`
-  - `profiles/**`
-  - `sites/**`
-  - `themes/**`
-  - `tests/**`
-  - `config/**`
-  - `includes/**`
-  - `tmp/**`
-  - `vendor/**`
-  - `node_modules/**`
-  - `bower_components/**`
-  - `lib/**`
-  - `src/**`
-  - `img/**`
-  - `images/**`
-  - `icons/**`
-  - `js/**`
-  - `javascript/**`
-  - `scripts/**`
-  - `jquery/**`
-  - `.git/**`
+- Exclude directories: core, modules, profiles, sites, themes, tests, config, includes, tmp, vendor, node_modules, bower_components, lib, src, img, images, icons, js, javascript, scripts, jquery, .git.
 
 ### Formatting Rules
-- Always use semicolons: `"always-semicolon": true`
-- Remove empty rulesets: `"remove-empty-rulesets": true`
-- Use lowercase for colors: `"color-case": "lower"`
-- Use shorthand for colors: `"color-shorthand": true`
-- Use double quotes for strings: `"quotes": "double"`
-- Maintain a newline after opening braces: `"space-after-opening-brace": "\n"`
-- Maintain a newline before closing braces: `"space-before-closing-brace": "\n"`
-- Use 2 spaces for indentation: `"block-indent": 2`
-- Strip unnecessary spaces: `"strip-spaces": true`
+- Always use a semicolon at the end of CSS declarations.
+- Remove empty rulesets.
+- Use lowercase for color names and element names.
+- Ensure a newline at the end of files.
+- Use double quotes for strings.
+- Maintain a space after colons in declarations.
+- Maintain a space after combinators.
+- Maintain a space after opening braces.
+- Maintain a space before closing braces.
+- Maintain a newline between declarations.
+- Indent blocks with 2 spaces.
+- Strip unnecessary spaces.
+- Use unitless zero values where applicable.
 
 ### Sort Order
-- Define sort order for CSS properties:
-```yaml
-"sort-order": [
-  [
-    "$charset",
-    "$import",
-    "$namespace",
-    "$extend",
-    "$variable",
-    "$include",
-    "position",
-    "z-index",
-    "top",
-    "right",
-    "bottom",
-    "left",
-    ...
-    "font-size",
-    "font-weight",
-    "font-style",
-    ...
-    "opacity",
-    "filter",
-    "color",
-    "border",
-    ...
-  ]
-]
-```
-
-### Usage with Gulp
-- Install Gulp CLI globally:
-```bash
-npm install --global gulp-cli
-```
-- Create `gulpfile.js` with the following task:
-```javascript
-gulp.task('style', function() {
-  return gulp.src(mySrcStyles)
-    .pipe(csscombx())
-    .pipe(gulp.dest('./my-dest-styles'));
-});
-```
-- Watch for changes:
-```javascript
-gulp.task('watch-my-styles', function() {
-  var watcher = gulp.watch(mySrcStyles, ['style']);
-  watcher.on('change', function(event) {
-    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  });
-});
-```
-
-### Alternatives
-- Use `csscombx`, a Drupal-specific fork of CSScomb, with default settings matching Drupal standards. Install globally:
-```bash
-npm install csscombx --global
-```
-- Perform a dry run:
-```bash
-csscombx -vl ./
-```
-- For actual changes, specify files:
-```bash
-csscombx -v ./my-styles public/styles.css
-```
+- Sort CSS properties according to the specified order, prioritizing variables first in SASS/LESS.
 
 
 ## Format
 
-### Whitespace
+### Css
 
-#### Indentation
+#### Whitespace
 - Use 2 spaces for indentation.
-- Indent declarations one level relative to their selector.
-- Indent rulesets within media queries one level relative to the media statement.
-- Maintain comment indentation with declarations or rulesets.
+- Declarations should be indented one level relative to their selector.
+- Rulesets within a media query should be indented one level relative to the media statement.
+- Comments should maintain the indentation of their declaration or ruleset.
+- Separate each ruleset by a blank line when using PostCSS.
+- If two rulesets are not logically related, add a blank line and a comment describing the second ruleset.
+- There MUST NOT be any whitespace at the end of lines.
+- All text files should end with a single blank line.
+- Use Unix line endings (LF).
 
-```css
-.tabs__tab {
-  display: none;
-  margin: 0;
-  margin-block-end: calc(-1 * var(--tabs-border-width));
+#### Comments
+- Each file should start with a comment describing its purpose, followed by a blank line.
+- Short comments describing a ruleset can be kept to one line.
+- Multi-line comments must follow the Doxygen comment style if they require 2 or more lines.
+- Multi-line comments within a ruleset must be preceded with `/*` and terminated by `*/`.
+- Comments describing properties or rulesets can use simple CSS comment style if within 80 characters.
 
-  &.is-active {
-    display: flex;
-  }
-}
-```
+#### Properties
+- Property name must be followed by a colon, a single space, and the value.
+- Include a semicolon at the end of all declarations.
+- Use double quotes for property values that require quotes.
+- Default to rem units unless it creates an undesired effect.
+- Quote attribute values in selectors.
+- Avoid specifying units for zero-values.
+- Include a space after each comma in comma-separated values.
+- Do not use spaces around parentheses in functions.
+- Use lower case function names.
 
-#### Blank Lines
-- Separate each ruleset with a blank line.
-- Place a blank line before comments describing a ruleset.
-- Add a blank line and a comment if two rulesets are not logically related.
-
-```css
-.tabs {
-  --tabs-height: var(--sp3);
-  /* Comment about tabs */
-}
-
-.tabs__tab {
-  display: none;
-}
-```
-
-#### Line Endings
-- No whitespace at the end of lines.
-- End files with a single blank line.
-- Use Unix line endings (`\n`).
-
-### Comments
-
-#### File Comments
-- Start each file with a comment describing its purpose.
-- Follow with a blank line.
-
-#### Single-Line Comments
-- Keep short comments to one line.
-
-#### Multi-Line Comments
-- Use Doxygen style for comments longer than one line.
-
-```css
-/*
- * @file
- * Example CSS file.
- */
-```
-
-#### Inside Rulesets
-- Use `/* comment */` for multi-line comments.
-- Use simple CSS comments for single-line comments.
-
-### Properties
-
-- Property name followed by a colon, a space, and the value.
-- End all declarations with a semicolon.
-- Use double quotes for quoted values.
-- Default to `rem` units; avoid units for zero-values.
-- Include a space after commas in lists.
-- No spaces around parentheses in functions.
-
-### Declaration Order
-- Order declarations for clarity:
-  1. Positioning properties (e.g., `position`, `z-index`).
-  2. Box model properties (e.g., `display`, `margin`).
-  3. Other properties.
-
-- Vendor-prefixed properties should precede their non-prefixed versions.
-
-### Rulesets
-- One selector per line for grouped selectors.
-- Use functional pseudo-classes when possible.
-- One declaration per line.
-
-```css
-.my-component,
-.my-other-component {
-  background-color: #cccccc;
-}
-
-:is(.my-component, .my-other-component) {
-  background-color: #cccccc;
-}
-```
-
-### Logical Properties
-- For properties without logical equivalents, add a comment indicating direction.
-
-```css
-.my-component {
-  transform: translateX(20px); /* LTR */
-}
-
-[dir="rtl"] .my-component {
-  transform: translateX(-20px);
-}
-```
+#### Declaration order
+- Order declarations by purpose: positioning properties, box model properties, then other declarations.
+- Vendor-prefixed properties should be directly before their non-prefixed version if not automatically added.
 
 
 ## What to look for when reviewing CSS
 
-### Architecture Guidelines
-- **Check for unused code**: Ensure CSS is relevant to current markup.
-  - Example: Remove unused classes or IDs.
-  
-- **Identify redundant code**: Look for CSS that overrides previous styles unnecessarily.
-  - Example: Remove default padding overrides if they are already set.
+### Architecture guidelines
+- Ensure all CSS code is still in use and applies correctly.
+- Identify and remove redundant CSS that overrides identical values.
+- Verify that component names accurately describe their design semantics.
+- Abstract custom CSS into reusable component classes where applicable.
+- Use short and simple selectors, favoring component and sub-component classes.
+- Organize CSS so that each component resides in its own file, consolidating related styles.
 
-- **Verify component naming**: Ensure component names accurately describe their design semantics.
-
-- **Abstract reusable code**: Move custom CSS into common classes for reusability across modules.
-  - Example: Create generic layout and color classes.
-
-- **Use correct selectors**: Favor short, simple selectors; utilize component and sub-component classes.
-
-- **Organize CSS files**: Each component should have its own file; avoid spreading styles across multiple files.
-
-### Formatting Guidelines
-- **File comments**: Add a file comment at the top of each stylesheet.
-  
-- **Comment formatting**: Ensure all comments are correctly formatted.
-
-- **Whitespace usage**: Maintain proper indentation and line breaks.
-
-- **Ruleset formatting**: Check that rulesets, properties, and media queries are formatted correctly.
-
-- **RTL styles**: Confirm existing RTL styles are formatted properly.
+### Formatting guidelines
+- Add a file comment to the top of the stylesheet.
+- Ensure all comments are formatted correctly.
+- Use whitespace correctly, including indentations and line breaks.
+- Format rulesets, properties, and media queries correctly.
+- Verify that existing RTL styles are formatted correctly.
 
 
 
@@ -478,516 +181,169 @@ csscombx -v ./my-styles public/styles.css
 
 ## Coding Standards
 
-### General Guidelines
+### General
 - Follow current Drupal coding standards for all new code.
-- Update existing code when feasible, especially in contributed modules.
+- Update existing code to current standards when feasible.
 - Use US English spelling for comments and names.
 - Apply coding standard fixes by rule, not by individual files.
-
-### Code Structure
-- Maintain consistent indentation (2 spaces).
-- Use camelCase for variable names and function names.
-- Use PascalCase for class names.
-- Use underscores for file names (e.g., `my_module.module`).
-
-### Comments
-- Write clear, concise comments to explain complex logic.
-- Use full sentences and proper punctuation in comments.
-- Document all public functions with PHPDoc comments.
-
-### Code Formatting
-- Limit lines to 80 characters.
-- Use spaces around operators and after commas.
-- Place opening braces on the same line as the declaration.
-
-### Example Code
-```php
-function myFunction($myVariable) {
-    // This is a comment explaining the function.
-    if ($myVariable) {
-        return true;
-    }
-    return false;
-}
-```
 
 
 
 # Javascript
 
 ## Before running these commands, install node.js, npm, and npx
-
-### ESLint Setup
-- Use ESLint for JavaScript consistency and error detection.
-- Install ESLint and Drupal configuration:
-  ```bash
-  npm install eslint eslint-config-drupal --save-dev
-  ```
-
-### Configuration Files
-- Use provided configuration files:
-  - `.eslintrc.json`
-  - `.eslintignore`
-- These files are automatically detected in the Drupal folder.
-
-### Contrib Modules
-- Contrib modules must conform to ESLint standards.
-- If using third-party libraries, create a custom `.eslintrc.json`:
-  ```json
-  {
-    "extends": [
-      "drupal"
-    ],
-    "globals": {
-      "ga": true
-    }
-  }
-  ```
-
-### Checking Custom JavaScript
-- Run ESLint on custom modules and themes:
-  ```bash
-  npx eslint modules/custom/
-  npx eslint themes/custom/
-  ```
+### JavaScript Standards
+- Use ESLint to ensure JavaScript code consistency and error-free syntax.
+- Always use the latest stable ESLint version.
+- Contrib modules must conform to ESLint requirements.
+- Customize `.eslintrc.json` for specific modules needing unique global variables.
 
 
 ## Best Practice
 
 ### JavaScript Code Placement
-- JavaScript code MUST NOT be embedded in HTML.
-  
+- JavaScript code SHOULD NOT be embedded in HTML.
+
 ### Use Literal Expressions
-- Use `[]` instead of `new Array()`.
-- Use `{}` instead of `new Object()`.
-- Prefer literal expressions over `new Number`, `new String`, `new Boolean` unless object instances are necessary.
+- Code SHOULD use literal expressions instead of the `new` operator.
 
-```javascript
-var literalNum = 0;
-var objectNum = new Number(0);
-if (literalNum) { } // false
-if (objectNum) { }  // true
-if (objectNum.valueOf()) { } // false
-```
-
-### Avoid "with" Statement
+### "with" Statement
 - The `with` statement MUST NOT be used.
-- Use explicit property access instead:
 
-```javascript
-foo.bar.foobar.abc = true;
-foo.bar.foobar.xyz = true;
-```
+### Avoiding Unreachable Code
+- A `return`, `break`, `continue`, or `throw` statement SHOULD be followed by a `}` or `case` or `default`.
 
-- Alternatively, use references:
-
-```javascript
-var o = foo.bar.foobar;
-o.abc = true;
-o.xyz = true;
-```
-
-### Unreachable Code
-- A `return`, `break`, `continue`, or `throw` MUST be followed by a `}` or `case` or `default`.
-
-### Avoid `eval()`
-- `eval()` MUST NOT be used.
-- Avoid using the `Function` constructor and passing strings to `setTimeout()` or `setInterval()`.
+### `eval()` is Evil
+- `eval()` SHOULD NOT be used.
 
 ### Preventing XSS
-- All user-provided output MUST be escaped using `Drupal.checkPlain()`.
+- All output to the browser from a user SHOULD be escaped through `Drupal.checkPlain()`.
 
 ### Modifying the DOM
-- Use jQuery for creating new HTML elements instead of `document.createElement()`:
+- When adding new HTML elements to the DOM, you SHOULD NOT use `document.createElement()`.
 
-```javascript
-this.popup = $('<div id="autocomplete"></div>')[0];
-```
-
-- Avoid this:
-
-```javascript
-this.popup = document.createElement('div');
-this.popup.id = 'autocomplete';
-```
-
-### Theming and Translation
-- JavaScript producing HTML MUST provide default theme functions in the `Drupal.theme.prototype` namespace.
-- Wrap all strings in JavaScript files with `Drupal.t()`.
-- Use `Drupal.formatPlural()` for pluralization, matching the parameter order of server-side counterparts.
+### String Translation
+- All strings in JavaScript files SHOULD be wrapped in `Drupal.t()`.
 
 
 ## Coding
 
-### JavaScript Standards
-- Use ESLint with 'eslint-config-airbnb' for coding standards.
-
-### Indentation
-- Indent code with **two (2) spaces**.
-- Do **not** use tab characters.
-- Do **not** end lines with trailing whitespace.
+### Indenting
+- All code MUST indent using two (2) space characters.
+- All code MUST NOT indent using tab characters.
+- All code MUST NOT end with trailing whitespace.
 
 ### Semicolons
-- Always use semicolons after statements (except `for`, `function`, `if`, `switch`, `try`, `while`).
-- Return values must start on the same line as `return`.
-- **Exceptions**:
-  - Anonymous functions assigned to a variable must end with a semicolon.
-    ```javascript
-    Drupal.behaviors.tableSelect = function (context) {};
-    ```
-  - `do/while` structures must end with a semicolon.
-    ```javascript
-    do {} while (condition);
-    ```
+- All statements (except `for, function, if, switch, try, while`) MUST be followed by a semi-colon (`;`).
+- Return values MUST start on the same line as the `return` keyword.
 
-### File Closure
-- Wrap all JavaScript code in an IIFE (Immediately Invoked Function Expression).
-    ```javascript
-    (() => {
-      // All the JavaScript for this file.
-    })();
-    ```
+### File-closure
+- All JavaScript code MUST be declared inside a closure wrapping the whole file.
 
-### Naming Conventions
-- Use **lowerCamelCase** for variables and functions (except constants and constructors).
-- Prefix jQuery objects with a dollar sign (`$`).
-    ```javascript
-    let $form = $('#search-block-form');
-    ```
+### CamelCasing
+- Multi-word variables and functions SHOULD be lowerCamelCased.
+- Variables containing a jQuery object MUST start with a dollar sign (`$`).
 
-### Variable Declarations
-- Declare all variables with `let` or `const` before use.
-- Declare variables only once and at the beginning of a function.
-- Each variable assignment should be on a separate line.
-    ```javascript
-    let anArray = [];
-    let eventCallback = function () {};
-    ```
-
-### Global Variables
-- Do **not** define global variables in Drupal JavaScript.
-
-### Constants
-- Use **UPPER_UNDERSCORED** for constants.
-- PHP variables added to JavaScript should be **lowerCamelCased**.
-
-### Arrays
-- Format arrays with one space between elements and the assignment operator.
-    ```javascript
-    let someArray = ['hello', 'world'];
-    ```
-- Break long arrays into separate lines, indented one level.
-- Use trailing commas in multi-line arrays.
-    ```javascript
-    let fruits = [
-      'apples',
-      'banana',
-      'pineapple',
-    ];
-    ```
+### Variables and Arrays
+- All variables MUST be declared with let or const before they are used and SHOULD be declared only once.
+- Each variable assignment SHOULD be declared on a separate line.
+- Drupal JavaScript MUST NOT define global variables.
+- Pre-defined constants SHOULD be all-uppercase and words separated by underscores.
+- Arrays SHOULD be formatted with one space separating each element and the assignment operator.
+- Use trailing comma after the last element in multi-line arrays.
 
 ### Typeof
-- Do **not** wrap values in parentheses during type comparisons.
-    ```javascript
-    if (typeof myVariable === 'string') {}
-    ```
+- In type comparisons, the value tested MUST NOT be wrapped in parenthesis.
 
 ### Functions
-- Function names should start with the module/theme name.
-    ```javascript
-    Drupal.behaviors.tableDrag = function (context) {};
-    ```
-- Use one space after the `function` keyword and no space between the function name and the opening parenthesis.
-- Optional arguments should be at the end of the function signature.
-- Functions should return meaningful values.
-
-### Function Calls
-- Call functions without spaces between the name and the opening parenthesis.
-- Use one space between commas and parameters.
-    ```javascript
-    let foobar = foo(bar, baz, quux);
-    ```
+- Function names SHOULD begin with the name of the module or theme declaring the function.
+- The `function` keyword MUST be followed by one space.
+- Named functions MUST NOT have a space between the function name and the following left parenthesis.
+- Optional arguments SHOULD be defined at the end of the function signature.
+- Functions SHOULD be called with no spaces between the function name, the opening parenthesis, and the first parameter.
 
 ### Constructors
-- Constructor names must start with an uppercase letter.
-- Call constructors with the `new` operator.
-    ```javascript
-    function CollapsibleDetails(node) {}
-    let collapsibleDetail = new CollapsibleDetails(element);
-    ```
+- Constructor functions MUST be given names with an initial uppercase character.
+- A function with an initial uppercase name MUST NOT be called without a `new` operator.
 
 ### Comments
-- Follow JSDoc standards for inline documentation.
-- Use capitalized sentences with punctuation for non-JSDoc comments.
-    ```javascript
-    // Unselect all other checkboxes.
-    doSomething();
-    ```
+- Inline documentation for source files MUST follow the JavaScript API documentation and comment standards.
+- Non-JSDoc comments SHOULD use capitalized sentences with punctuation.
 
 ### String Concatenation
-- Separate expressions with one space before and after the `+` operator.
-    ```javascript
-    let string = 'Foo' + bar;
-    ```
+- Expressions SHOULD be separated with one space before and after the `+` operator.
+- The concatenating assignment operator (`+=`) SHOULD be separated with one space on each side.
 
 ### Control Structures
-- Use one space between control keywords and opening parentheses.
-- Always use curly braces for control structures.
-    ```javascript
-    if (condition) {
-      action();
-    }
-    ```
+- Control statements MUST have one space between the control keyword and opening parenthesis.
+- Control structures MUST always use curly braces.
 
 ### Comparisons
-- Use strict equality (`===` or `!==`) for comparisons.
+- Strict equality MUST be used in comparisons (`===` or `!==`).
 
 ### Comma Operator
-- Avoid using the comma operator except in `for` statements.
+- You SHOULD NOT use the comma operator, with the exception of the control part in `for` statements.
 
 
 ## Documentation
 
-### JavaScript Documentation Headers
-- Document all JavaScript items (methods, functions, variables) with headers.
-- Use JSDoc3 format for documentation.
-- Only behaviors are documented specifically.
-
-### Tags and Notation
-- Use `{}` brackets for data types in `@param` and `@return`: 
-  - Example: `@param {string} paramName`
-- Supported data types: `number`, `string`, `bool`, `null`, `undefined`, `object`, `function`, `Array`, or specific constructor names.
-- Use `@fires` for events triggered by functions.
-- For custom events, add an `@event` block before the triggering line.
-- Use `@prop {type} name` for object properties not used as namespaces or classes.
-- Use `@name`, `@constructor`, and `@namespace` as needed to clarify item types.
+### JavaScript Documentation
+- All JavaScript items must have documentation headers to be recognized by the parser.
+- Use `{}` brackets for data types in `@param` and `@return`: `@param {Type} paramName`.
+- Use `@fires` to document events triggered by functions; include `@event` for custom events.
+- Use `@prop {type} name` for properties of non-namespace objects.
+- Use `@name` for naming discrepancies, `@constructor` for class constructors, and `@namespace` for namespaces.
+- Avoid using `@function` as JSDoc infers functions automatically.
 
 ### Tag Order
 - Declare tags in this order:
   - `@global`
-  - `@typedef`, `@var`, `@name`, `@namespace`, `@constructor`, `@callback`, `@event`, `@function`
-  - `@augments`, `@lends`
-  - `@type`, `@prop`
-  - `@param`, `@return`
-  - `@throws`, `@fires`, `@listens`
-  - `@ingroup`, `@deprecated`, `@see`, `@todo`, `@ignore`
-
-### Code Examples
-
-#### Documenting a JavaScript File
-```javascript
-/**
- * @file
- * Provides some feature
- *
- * The extra line between the end of the @file docblock
- * and the file-closure is important.
- */
-
-(function ($) {
-  "use strict";
-})();
-```
-
-#### Documenting Behaviors
-```javascript
-/**
- * Attaches the table drag behavior to tables.
- *
- * @type {Drupal~behavior}
- *
- * @prop {Drupal~behaviorAttach} attach
- *   Specific description of this attach function goes here.
- * @prop {Drupal~behaviorDetach} detach
- *   Specific description of this detach function goes here.
- */
-Drupal.behaviors.tableDrag = {
-  attach: function (context, settings) {
-    // ...
-  },
-  detach: function (context, settings, trigger) {
-    // …
-  }
-};
-```
-
-#### Documenting Usual Constructs
-```javascript
-/**
- * Holds JavaScript settings and other information for Drupal.
- *
- * @namespace
- */
-var Drupal = {
-   // ...
-  /**
-   * Holds behaviors for Drupal.
-   *
-   * @namespace
-   */
-  'behaviors': {},
-  // ...
-};
-
-/**
- * Returns the value of foo for the current widget.
- *
- * @return
- *   The value of foo in the current widget.
- */
-Drupal.getCurrentFoo = function () {
-  // ...
-};
-
-/**
- * Constructs a table drag object.
- *
- * @constructor
- *
- * @param {HTMLTableElement} table
- *   DOM object for the table to be made draggable.
- * @param {object} tableSettings
- *   Settings for the table.
- */
-Drupal.tableDrag = function (table, tableSettings) {
-  // ...
-}
-
-/**
- * Hides the columns containing weight and parent form elements.
- *
- * @fires event:columnschange
- *
- * @see Drupal.tableDrag.showColumns
- */
-Drupal.tableDrag.prototype.hideColumns = function() {
-  // ...
-
-  /**
-   * Indicates that columns have changed in a table.
-   *
-   * @param {string} type
-   *   Type of change: 'show' or 'hide'.
-   *
-   * @event columnschange
-   */
-  $('table.tableDrag-processed').trigger('columnschange', 'hide');
-  // ...
-};
-
-/**
- * Shows the columns containing weight and parent form elements.
- *
- * @fires columnschange
- *
- * @see Drupal.tableDrag.hideColumns
- */
-Drupal.tableDrag.prototype.showColumns = function() {
-  // This event is documented in Drupal.tableDrag.hideColumns
-  $('table.tabledrag-processed').trigger('columnschange', 'hide');
-};
-```
+  - `@typedef`
+  - `@var`
+  - `@name`
+  - `@namespace`
+  - `@constructor`
+  - `@callback`
+  - `@event`
+  - `@function`
+  - `@augments`
+  - `@lends`
+  - `@type`
+  - `@prop`
+  - `@param`
+  - `@return`
+  - `@throws`
+  - `@fires`
+  - `@listens`
+  - `@ingroup`
+  - `@deprecated`
+  - `@see`
+  - `@todo`
+  - `@ignore`
 
 
 ## Jquery
 
 ### Variable Naming
-- Prefix variables that point to jQuery objects with a dollar sign `$`.
-  - **Incorrect:** `var foo = $('.foo');`
-  - **Correct:** `var $foo = $('.foo');`
+- Prefix variables that point to jQuery objects with a dollar sign ($).
 
-### Chaining
-- Use `.find()` for better performance when chaining selectors.
-  - **Incorrect:**
-    ```php
-    this.$el
-        .find('.contextual-links')
-        .prop('hidden', !isOpen);
-    ```
-  - **Correct:**
-    ```php
-    this.$el.find('.contextual-links')
-        .prop('hidden', !isOpen);
-    ```
+### Event Handling
+- Use event.preventDefault() and event.stopPropagation() explicitly instead of returning false.
 
-### Event Delegation
-- Use `event.preventDefault()` and `event.stopPropagation()` explicitly instead of `return false;`.
-  - **Incorrect:**
-    ```php
-    $('.item').click(function(event) {
-      return false;
-    });
-    ```
-  - **Correct (Drupal 7):**
-    ```php
-    $menus.delegate('.item', 'click', function(event) {
-      event.preventDefault();
-      event.stopPropagation();
-    });
-    ```
-  - **Correct (Drupal 8):**
-    ```php
-    $menus.on('click', '.item', function(event) {
-      event.preventDefault();
-      event.stopPropagation();
-    });
-    ```
+### Function Structure
+- Separate functions into individual callable units.
 
-### Function Separation
-- Separate functions into individual callable functions.
-  - **Incorrect:**
-    ```php
-    $('.btn').click(function() { ... });
-    ```
-  - **Correct:**
-    ```php
-    function clickFunction() { ... };
-    $('div').click(function() { clickFunction(); });
-    ```
-
-### Context in Selectors
-- Provide context for selectors to improve performance.
-  - **Incorrect:**
-    ```php
-    var $element = $('.element');
-    ```
-  - **Correct:**
-    ```php
-    var $sidebar = $('#sidebar');
-    var $element = $sidebar.find('.element');
-    ```
+### Selector Context
+- Always provide a context for selectors to improve performance.
 
 ### ID vs Class Selection
-- Use `#id` for unique elements; use `.class` with context for multiple elements.
+- Use #id for unique elements and .class for multiple elements, preferably within a context.
 
 ### jQuery.attr() Usage
-- Use `.prop()` for boolean properties in jQuery 1.9+; avoid using `.attr()` for boolean values.
-  - **Incorrect:**
-    ```php
-    $element.attr('disabled', '');
-    if ($element.attr('checked') === true) { ... }
-    ```
-  - **Correct:**
-    ```php
-    $element.attr('disabled', false);
-    $element.attr('disabled', true);
-    if ($element.attr('checked')) { ... }
-    ```
+- Use booleans to set properties instead of empty strings.
 
-### jQuery.each() Performance
-- Prefer native JavaScript loops over `jQuery.each()` for iterating simple arrays.
-  - **Incorrect:**
-    ```php
-    var array = [ ... ];
-    $.each(array, function(i, item) { ... });
-    ```
-  - **Correct:**
-    ```php
-    var array = [ ... ];
-    for (var i = 0, len = array.length; i < len; i++) {
-      var element = array[i];
-    }
-    ```
+### jQuery.each() Usage
+- Prefer native JavaScript loops over jQuery.each() for iterating simple arrays or objects.
 
 
 
@@ -995,27 +351,21 @@ Drupal.tableDrag.prototype.showColumns = function() {
 
 ## Drupal Markup Style Guide
 
-### HTML/Markup Creation
-- Use semantic HTML elements (e.g., `<header>`, `<footer>`, `<article>`, `<section>`).
-- Ensure all elements are properly nested and closed.
+### HTML/Markup
+- Use semantic HTML elements to enhance accessibility and SEO.
+- Ensure all HTML elements are properly nested and closed.
 - Use lowercase for all HTML tags and attributes.
 - Use double quotes for attribute values.
 
-### Base Templates for Themers
-- Use Twig for templating; avoid PHP in templates.
-- Keep templates clean and minimal; separate logic from presentation.
-- Use `&#123;&#123; content &#125;&#125;` for rendering fields in templates.
+### Base Templates
+- Use Twig for templating to separate logic from presentation.
+- Avoid inline styles; use CSS classes for styling.
+- Keep templates DRY (Don't Repeat Yourself) by using includes and blocks.
 
-### CSS Class Naming
-- Use BEM (Block Element Modifier) methodology for class names.
-  - Example: `.block__element--modifier`
-- Avoid using IDs for styling; prefer classes.
-- Use hyphens to separate words in class names (e.g., `.main-header`).
-
-### Accessibility Considerations
-- Use `alt` attributes for all `<img>` tags.
-- Ensure sufficient color contrast for text and backgrounds.
-- Use ARIA roles and properties where necessary to enhance accessibility.
+### CSS Classes
+- Use BEM (Block Element Modifier) methodology for naming CSS classes.
+- Prefix custom classes with a unique identifier to avoid conflicts.
+- Avoid using IDs for styling; prefer classes for reusability.
 
 
 
@@ -1024,850 +374,330 @@ Drupal.tableDrag.prototype.showColumns = function() {
 ## Coding
 
 ### Arrays
-- Use short array syntax:  
-  ```php
-  $some_array = ['hello', 'world', 'foo' => 'bar'];
-  ```
-- For multi-line arrays, each element on a new line, indented:  
-  ```php
-  $form['title'] = [
-    '#type' => 'textfield',
-    '#title' => t('Title'),
-  ];
-  ```
-- Always include a comma after the last element in multi-line arrays.
+- Use short array syntax. 
+- Break multi-line arrays into separate lines, indented one level, with a comma after the last element.
 
 ### Casting
-- Add a space between the type and variable in casts:  
-  ```php
-  (int) $myNumber;
-  ```
+- Place a space between the type and the variable in a cast.
 
 ### Chaining
-- Use fluent interface for method chaining:  
-  ```php
-  $title = db_query("SELECT title FROM {node} WHERE nid = :nid", [':nid' => 42])->fetchField();
-  ```
-- Indent chained methods by 2 spaces if spanning multiple lines.
+- Methods should return `$this` for chainability where applicable.
+- Indent chained method calls with 2 spaces if spanning multiple lines.
 
 ### Class Constructor Calls
-- Always include parentheses for constructors:  
-  ```php
-  $foo = new MyClassName();
-  ```
+- Always include parentheses when calling class constructors, even with no arguments.
 
 ### Control Structures
-- Use one space between control keyword and parenthesis:  
-  ```php
-  if (condition) {
-    action;
-  }
-  ```
-- Always use curly braces, even if optional.
-- For `switch` statements:  
-  ```php
-  switch (condition) {
-    case 1:
-      action1;
-      break;
-    default:
-      default_action;
-  }
-  ```
+- Use one space between the control keyword and the opening parenthesis.
+- Always use curly braces for control structures.
+- Use `elseif` instead of `else if`.
+
+### Declaring Classes
+- One class or interface per file, named after the class.
 
 ### Function Calls
-- No spaces between function name and opening parenthesis:  
-  ```php
-  $var = foo($bar, $baz);
-  ```
+- No spaces between the function name and the opening parenthesis; spaces between parameters.
 
 ### Function Declarations
-- Use trailing commas for multi-line arguments:  
-  ```php
-  function funStuff_system(
-    string $foo,
-    string $bar,
-    int $baz,
-  ) {
-    // body
-  }
-  ```
+- Split argument lists across multiple lines, with one argument per line and a trailing comma on the last argument.
 
 ### Indenting and Whitespace
 - Use 2 spaces for indentation, no tabs.
-- No trailing whitespace at line ends.
-- Files should end with a newline.
+- No trailing whitespace at the end of lines.
+- All text files should end with a single newline.
+
+### Instantiation
+- Use factory functions for creating classes instead of direct instantiation.
+
+### Line Length and Wrapping
+- Keep lines of code under 80 characters, except for specific cases.
 
 ### Naming Conventions
-- Functions: lowercase with underscores, prefixed by module name.
-- Variables: lowercase, either snake_case or lowerCamelCase.
-- Constants: all-uppercase with underscores, prefixed by module name.
-- Classes/Interfaces: UpperCamelCase, no underscores unless necessary.
+- Functions and variables: use lowercase with underscores; prefix functions with the module name.
+- Constants: use uppercase with underscores; module-defined constants should be prefixed by the module name.
+- Classes and interfaces: use UpperCamelCase; methods and properties use lowerCamelCase.
 
 ### Operators
-- Space before and after binary operators:  
-  ```php
-  $foo = $bar + $baz;
-  ```
-- Use `!=` for weak-typed inequality, avoid `<>`.
-- Use short ternary and null coalescing operators for readability:  
-  ```php
-  $result = $condition ?: 'default';
-  $result = $values['entry'] ?? 'default';
-  ```
+- All binary operators should have spaces before and after.
+- Use `!=` for weak-typed inequality; avoid `<>`.
+- Use the short ternary operator `?:` and the null coalescing operator `??` for readability.
 
 ### Parameter and Return Type Hinting
-- Use type hints for all new functions and methods:  
-  ```php
-  public function myMethod(MyInterface $myClass, string $id): array {
-    // Method code here.
-  }
-  ```
+- Use type hints for all new functions and methods.
 
 ### PHP Code Tags
-- Use `<?php ?>` for PHP code, omit `?>` at file end.
+- Use `<?php ?>` for PHP code delimiters; omit `?>` at the end of files.
 
 ### Quotes
-- Prefer single quotes unless interpolation or escaping is needed.
+- Use single quotes by default, except for variable interpolation and translated strings.
 
 ### Semicolons
-- Always use semicolons at the end of lines, including one-line blocks.
+- Require semicolons at the end of all lines, including one-line blocks.
+
+### Strict Type Declaration
+- Place the `declare(strict_types=1);` statement on a new line after the opening PHP tag.
 
 ### String Concatenations
-- Use spaces around concatenation operator:  
-  ```php
-  $string = 'Foo' . $bar;
-  ```
+- Use a space between the dot and concatenated parts; use double quotes for simple variable concatenation.
+
+### Use of Interfaces
+- Encourage separate interface definitions for flexibility and documentation.
 
 ### Visibility
-- Declare visibility for all methods and properties.
-- Do not prefix method names with underscores.
+- Declare visibility for all methods and properties; do not prefix method names with an underscore.
 
-### Drupal 7 Class/Interface Autoloading
-- Use `.inc` files and `files[]` in `.info` for class/interface extensions.
-
-### Helper Modules
-- Utilize contributed modules for coding standards compliance checks.
+### abstract, final, and static
+- Place `abstract` and `final` before visibility; place `static` after visibility.
 
 
 ## Documentation
 
-### General Documentation Standards
-- Use docblocks (`/** ... */`) for all documentation.
-- Start each line in a docblock with `*`.
-- Ensure the first line is a summary, under 80 characters, starting with a capital letter and ending with a period.
-- Use proper grammar and punctuation; write in English (US spelling).
-- Document the current version of the code, not past or future changes.
-- Use a blank line to separate paragraphs in docblocks.
+### General considerations for API module parsing
+- Use docblocks starting with `/**` for documentation.
+- Only docblocks are parsed; inline comments (`//` or `/*`) are ignored.
+- Docblocks must precede the item being documented without blank lines.
 
-### Tag Usage
-- Use `@param` for each function parameter, followed by the type, variable name, and description.
-- Use `@return` for return values, following the same format as `@param`.
-- Use `@throws` to document exceptions thrown by a function.
-- Use `@todo` for notes on future improvements or changes.
-- Use `@see` for references to related functions or documentation.
+### General documentation
+- All documentation must use proper grammar and punctuation.
+- Summaries must be under 80 characters, start with a capital letter, and end with a period.
+- Document the current version of code, not past or future changes.
 
-### Classes and Methods
+### Classes and namespaces
 - Document all classes and methods, including private methods.
-- Use `{@inheritdoc}` for methods that inherit documentation from a parent class.
-- Start class and method summaries with a third-person verb (e.g., "Represents a...").
-- Use fully-qualified namespaces for classes in documentation.
+- Use fully-qualified namespaces for classes and interfaces in documentation.
 
-### Data Types
-- Use PHPDoc type syntax for `@var`, `@param`, and `@return` tags.
-- Prefix types with a fully-qualified namespace.
-- Spell types as follows: `array`, `bool`, `int`, `null`, `object`.
+### Data types in documentation
+- Use PHPDoc Type syntax for data types.
+- Prefix types with fully-qualified namespaces.
 
 ### Functions
-- Document each function with a summary, parameters, and return values.
-- Use an imperative verb for hook definitions (e.g., "Respond to...").
-- For callbacks, indicate the function it is passed to after the summary.
+- Document each parameter with `@param` and return values with `@return`.
+- Summaries must start with a third person singular present tense verb.
 
-### Inline Comments
-- Use inline comments (`//`) to clarify complex code.
+### In-line code comments
 - Place comments on a separate line before the code they reference.
-- Use `@var` to document variable types inline.
+- Use `@todo` for inline comments to indicate tasks.
 
-### Lists in Documentation
-- Use hyphens (`-`) to create lists in docblocks.
-- Indent nested lists consistently.
-- End the line before a list with a colon.
+### Lists in documentation
+- Use hyphens for list items, with proper indentation for nesting.
+- Each list item must be on its own line without blank lines between items.
 
-### Template Files
-- Start template files with a docblock summarizing the file's purpose and available variables.
-- Include `@see` references to preprocess functions.
+### Order of documentation sections
+- Follow the order: summary, additional explanation, `@var`, `@param`, `@return`, `@throws`, `@ingroup`, `@deprecated`, `@see`, `@todo`, `@Plugin`.
 
-### Order of Documentation Sections
-- Follow this order in docblocks:
-  - Summary
-  - Additional explanation
-  - `@var`
-  - `@param`
-  - `@return`
-  - `@throws`
-  - `@ingroup`
-  - `@deprecated`
-  - `@see`
-  - `@todo`
+### PHPUnit and Simpletest tests
+- Follow Class standards with specific tags like `@group`, `@covers`, and `@coversDefaultClass`.
 
-### PHPUnit and Simpletest
-- Follow class documentation standards but include `@group`, `@covers`, and `@coversDefaultClass` tags as needed.
+### @deprecated
+- Use to indicate deprecated functionality with version strings for deprecation and removal.
 
-### Example Syntax
-```php
-/**
- * Sample summary line.
- *
- * Next paragraph. Etc.
- *
- * @param string $paramName Description.
- * @return string Description.
- */
-function exampleFunction($paramName) {
-    // Code here.
-}
-```
+### @file
+- Include a `@file` docblock for PHP files, summarizing the file's purpose.
+
+### {@inheritdoc}
+- Use to inherit documentation from a parent class or interface.
+
+### @link
+- Use for HTML links in docblock text.
+
+### @param
+- Document parameters with `@param`, including data type and description.
+
+### @return
+- Document return values with `@return`, including data type and description.
+
+### @see
+- Use `@see` for references to related items, with each reference on its own line.
+
+### @throws
+- Document exceptions thrown by functions with `@throws`, including class names and optional descriptions.
+
+### @todo
+- Use `@todo` for tasks in documentation, referencing corresponding issues when applicable.
+
+### @var
+- Use `@var` to document class property data types, following with a space and data type specification.
 
 
 ## Documentation Examples
 
-### File Documentation
-- Use `@file` to describe the purpose of the file.
-  
-  **Example:**
-  ```php
-  /**
-   * @file
-   * Attaches custom data fields to Drupal entities.
-   */
-  ```
+### Php
 
-### Module File (*.module)
-- Document the file's purpose using `@file`.
-
-  **Example:**
-  ```php
-  /**
-   * @file
-   * Install, update and uninstall functions for the System module.
-   */
-  ```
-
-### Install File (*.install)
-- Use `@file` to indicate installation-related functions.
-
-  **Example:**
-  ```php
-  /**
-   * @file
-   * Install, update and uninstall functions for the System module.
-   */
-  ```
-
-### Include File (*.inc)
-- Document the integration purpose with `@file`.
-
-  **Example:**
-  ```php
-  /**
-   * @file
-   * Media module integration for the Media module.
-   */
-  ```
-
-### PHP Theme Template File (*.tpl.php)
-- Use `@file` and list available variables.
-- Include `@see` for related preprocess functions.
-
-  **Example:**
-  ```php
-  /**
-   * @file
-   * Displays a block.
-   *
-   * Available variables:
-   * - $block->subject: Block title.
-   *
-   * @see template_preprocess_block()
-   */
-  ```
-
-### Class Documentation
-- Use `namespace` for classes.
-- Document class purpose and properties.
-
-  **Example:**
-  ```php
-  namespace Drupal\commerce\Element;
-
-  /**
-   * Provides a form input element for selecting one or multiple entities.
-   */
-  class EntitySelect extends FormElement {
-  ```
-
-### Function Documentation
-- Use `@param` for parameters and `@return` for return values.
-  
-  **Example:**
-  ```php
-  /**
-   * Returns data from the persistent cache.
-   *
-   * @param int $cid
-   *   The cache ID of the data to retrieve.
-   * @return mixed
-   *   The value from the cache, or FALSE on failure.
-   */
-  function cache_get($cid, $bin = 'cache') {
-  ```
-
-### Callback Function Documentation
-- Specify the function's role as a callback.
-  
-  **Example:**
-  ```php
-  /**
-   * Sorts structured arrays by weight.
-   *
-   * Callback for uasort() within foo_bar().
-   */
-  function element_sort($a, $b) {
-  ```
-
-### Hook Definition Functions
-- Document hooks with `@param` and `@return`.
-
-  **Example:**
-  ```php
-  /**
-   * Define the Field API schema for a field structure.
-   *
-   * @param $field
-   *   A field structure.
-   * @return
-   *   An associative array with schema definitions.
-   */
-  function hook_field_schema($field) {
-  ```
-
-### Themeable Function Documentation
-- Use `@ingroup themeable` for themeable functions.
-
-  **Example:**
-  ```php
-  /**
-   * Returns HTML for a form.
-   *
-   * @param array $variables
-   *   An associative array containing element properties.
-   *
-   * @ingroup themeable
-   */
-  function theme_form($variables) {
-  ```
-
-### Class Member Function Documentation
-- Document overridden methods clearly.
-
-  **Example:**
-  ```php
-  /**
-   * Overrides prepareTimezone().
-   */
-  protected function prepareTimezone($timezone) {
-  ```
-
-### Constant Documentation
-- Use clear descriptions for constants.
-
-  **Example:**
-  ```php
-  /**
-   * The block or element is the same for every user and page that it is visible.
-   */
-  const DRUPAL_CACHE_GLOBAL = 0x0008;
-  ```
-
-### Miscellaneous Documentation
-- Use bullet lists for clarity in documentation.
-- Use `@see` for references to related functions or hooks.
-
-  **Example:**
-  ```php
-  /**
-   * Respond to a custom menu creation.
-   *
-   * @see hook_menu_update()
-   * @see hook_menu_delete()
-   */
-  function hook_menu_insert($menu) {
-  ```
+- **File Documentation**: Use `@file` to describe the purpose of the file.
+- **Function Documentation**: Use `@param` for parameters and `@return` for return values.
+- **Callback Functions**: Document the context of usage in the callback description.
+- **Hook Definitions**: Specify that the hook must be defined in the appropriate file for detection.
+- **Themeable Functions**: Use `@ingroup themeable` to indicate themeable functions.
+- **Class Documentation**: Include the namespace and a brief description of the class's purpose.
+- **Interface Documentation**: Clearly state the purpose of the interface and its methods.
+- **Member Functions**: Document overrides and implementations of interface methods.
+- **Constants**: Use clear descriptions for constants, indicating their purpose.
+- **Global Variables**: Document global variables in separate API files.
+- **Lists**: Use bullet lists for clarity in documentation.
+- **Code Samples**: Use `@code` for code snippets and `@endcode` to close them.
+- **Links**: Use `@link` for references to related documentation.
+- **See Also**: Use `@see` for references to related hooks or functions.
+- **Grouping**: Use `@ingroup` to categorize functions or hooks appropriately.
 
 
 ## E_all
 
 ### Error Reporting
-- For Drupal 6.x, change error reporting in `includes/common.inc`:
-  ```php
-  if ($errno & (E_ALL | E_STRICT)) {
-  ```
-- For Drupal 7.x, set in `.htaccess` to view all errors:
-  ```apache
-  php_value error_reporting -1
-  ```
+- Set `php_value error_reporting -1` in `.htaccess` for development sites.
 
-### Variable Checking
-- Use `isset()` or `!empty()` to check variables:
-  - Use `isset($var)` when `''` or `0` are valid values.
-  - Use `!empty($var)` to ensure the variable is not empty.
-  
-- Example of potential E_NOTICE error:
-  ```php
-  function _form_builder($form, $parents = array(), $multiple = FALSE) {
-    if ($form['#input']) {
-      // some code (...)
-    }
-  }
-  ```
-  
-- Corrected version:
-  ```php
-  function _form_builder($form, $parents = array(), $multiple = FALSE) {
-    if (!empty($form['#input'])) {
-      // some code (...)
-    }
-  }
-  ```
-
-### Null Checking
-- `isset()` returns `TRUE` for `0`, `FALSE` for `NULL`.
-- Use `is_null()` when checking values returned by SQL queries.
+### Variable Checks
+- Use `isset()` for checking if a variable is defined.
+- Use `!empty()` when checking if a variable has a non-empty value.
+- Prefer `is_null()` when testing for `NULL` values from SQL queries.
 
 
 ## Exceptions
 
 ### Basic Exception Naming Conventions
-- Exceptions must follow object-oriented coding standards.
-- All Exceptions must end with "Exception".
-- Include an appropriate, untranslated message in Exceptions.
-- Message should hint at values causing the exception:
-  - Use string concatenation or `sprintf()`.
-  - Surround values with single quotes.
-  - **DO NOT** translate the message.
-  - **DO NOT** use `SafeMarkup::format()`.
-- Name Exception classes based on subsystem and error type: `[Subsystem][ErrorType]Exception`.
+- Exceptions must end with "Exception".
+- Include an appropriate message; do not translate messages.
+- Message should hint at values causing the exception; use string concatenation or `sprintf()`, and surround values with single quotes.
+- Exception classes should be named as `[Subsystem][ErrorType]Exception`.
 
 ### Exception Subclasses
-- Prefer subclassed Exceptions over a single generic Exception class for better error handling.
+- Prefer subclassed Exceptions over a single generic Exception class for different error messages.
 
-#### Example:
-```php
-class WidgetNotFoundException extends Exception {}
-
-function use_widget($widget_name) {
-  $widget = find_widget($widget_name);
-  if (!$widget) {
-    throw new WidgetNotFoundException("Widget '$widget_name' not found.");
-  }
-}
-```
-
-### Try-catch Blocks
-- Follow a line-breaking pattern similar to if-else statements; each catch starts on a new line.
-
-#### Example:
-```php
-try {
-  $widget = 'thingies';
-  $result = use_widget($widget);
-}
-catch (WidgetNotFoundException $e) {
-  // Handle absence of widget.
-}
-catch (Exception $e) {
-  \Drupal::logger('widget')->error($e->getMessage());
-}
-```
+### Try-catch blocks
+- Each catch statement should begin on a new line.
 
 ### Inheritance
-- All Exceptions must inherit from the Exception class.
-- Name new exception classes based on subsystem and error message.
-- Group related exceptions under a common base exception for multiple catch blocks.
-
-#### Example:
-```php
-class FelineException extends Exception {}
-
-class FelineHairBallException extends FelineException {}
-
-class FelineKittenTooCuteException extends FelineException {}
-
-try {
-  $normal = new Kitten();
-  $normal->playWith($string);
-}
-catch (FelineHairBallException $e) {
-  // Handle hairball error.
-}
-catch (FelineKittenTooCuteException $e) {
-  // Handle cuteness error.
-}
-catch (FelineException $e) {
-  // Handle generic feline error.
-}
-```
+- All exceptions must inherit from the Exception class. If multiple exceptions exist in a subsystem, they should extend a common base exception.
 
 
-## PHP Coding Standards
+## Index
 
-### General Standards
-- Use **PHP_CodeSniffer** for enforcing coding standards.
-- Follow rules from the **Drupal coder project** and **Slevomat**.
-
-### Code Structure
-- **Indentation**: Use 2 spaces for indentation, no tabs.
-- **Line Length**: Limit lines to 80 characters.
-- **File Encoding**: Use UTF-8 without BOM.
-
-### Naming Conventions
-- **Classes**: Use `CamelCase` for class names (e.g., `MyClass`).
-- **Methods**: Use `camelCase` for method names (e.g., `myMethod()`).
-- **Variables**: Use `$camelCase` for variable names (e.g., `$myVariable`).
-
-### Control Structures
-- **Braces**: Always use braces for control structures, even for single statements.
-  ```php
-  if ($condition) {
-      // Code here
-  }
-  ```
-- **Spaces**: Use a space after control structure keywords.
-  ```php
-  if ($condition) {
-      // Code here
-  }
-  ```
-
-### Comments
-- **DocBlocks**: Use PHPDoc for documenting classes and methods.
-  ```php
-  /**
-   * Description of the method.
-   *
-   * @param int $param Description of parameter.
-   * @return void
-   */
-  public function myMethod($param) {
-      // Code here
-  }
-  ```
-- **Inline Comments**: Use inline comments sparingly and only when necessary.
-
-### Arrays
-- **Syntax**: Use short array syntax `[]` instead of `array()`.
-  ```php
-  $array = ['value1', 'value2'];
-  ```
-
-### Whitespace
-- **Blank Lines**: Use one blank line to separate methods and logical sections.
-- **Trailing Whitespace**: Remove any trailing whitespace at the end of lines.
-
-### Function Declarations
-- **Spacing**: No space before the opening parenthesis.
-  ```php
-  function myFunction($param) {
-      // Code here
-  }
-  ```
-
-### Error Handling
-- **Exceptions**: Use exceptions for error handling instead of error codes.
-  ```php
-  if (!$result) {
-      throw new \Exception('Error message');
-  }
-  ```
-
-### Security
-- **Input Validation**: Always validate and sanitize user input.
-- **Output Encoding**: Encode output to prevent XSS vulnerabilities.
-
-### Testing
-- **Unit Tests**: Write unit tests for all public methods.
-- **Test Naming**: Use `test` prefix for test methods (e.g., `testMyFunction()`).
-
-### Version Control
-- **Commit Messages**: Use clear and concise commit messages.
-- **Branch Naming**: Use descriptive names for branches (e.g., `feature/my-feature`).
+### PHP Standards
+- Use `<?php` for opening PHP tags.
+- Use `===` and `!==` for comparisons to avoid type juggling.
+- Declare strict types by adding `declare(strict_types=1);` at the top of files when applicable.
+- Use camelCase for variable and function names.
+- Use PascalCase for class names.
+- Use snake_case for file names.
+- Limit lines to 80 characters.
+- Use spaces, not tabs, for indentation (4 spaces).
+- Place opening braces on the same line as the declaration.
+- Use a single blank line to separate logical sections of code.
+- Use `array()` instead of `[]` for array declarations in legacy code.
+- Avoid using short array syntax `[]` in legacy code.
+- Use `NULL` instead of `null` for consistency.
+- Use `true` and `false` in lowercase.
+- Use single quotes for strings unless interpolation is needed.
+- Use `isset()` to check for variable existence before use.
+- Avoid using `die()` and `exit()`; use exceptions instead.
+- Use `@` to suppress errors sparingly; handle errors properly instead.
+- Use `return` statements consistently in functions.
 
 
 ## Namespaces
 
-### Class Usage
-- Use `use` statements for classes/interfaces with a backslash `\` in their fully-qualified name.
-  ```php
-  use Drupal\simpletest\WebTestBase;
-  ```
-- Fully qualify classes/interfaces without a backslash when used in a namespaced file.
-  ```php
-  new \Exception();
-  ```
-- In global namespace files, use `use` for all non-global classes.
-- Do not include a leading `\` in `use` statements.
-- Specify class names in strings with full names including namespace, escaping `\` in double-quoted strings.
-  ```php
-  "Drupal\\Context\\ContextInterface"
-  ```
-  Use single quotes without escaping.
-  ```php
-  'Drupal\Context\ContextInterface'
-  ```
-- Prefer single-quoted strings generally.
-- Use one class per `use` statement; do not combine multiple classes.
-- Order of `use` statements is flexible; prioritize readability.
-- Use full class names in API documentation; short names only after `use`.
+### "use"-ing classes
+* Classes with a backslash in their fully-qualified name must not use their fully-qualified name; use a `use` statement instead.
+* Classes without a backslash must be fully qualified when used in a namespaced file; do not `use` global classes.
+* In files without a namespace, classes in any namespace must be specified with a `use` statement.
+* When importing a class with `use`, do not include a leading backslash.
+* Specify a single class per `use` statement; do not combine multiple classes.
+* API documentation should use full class names; if a class is used multiple times, it must be `use`d first.
 
-### Class Aliasing
-- Alias classes only to avoid name collisions.
-  ```php
-  use Foo\Bar\Baz as BarBaz;
-  use Stuff\Thing\Baz as ThingBaz;
-  ```
+### Class aliasing
+* Alias classes only to avoid name collisions; prefix colliding classes with the next higher portion of the namespace.
 
-### Module Namespacing
-- Create classes in a custom namespace: `Drupal\module_name\...`
-- Follow PSR-4 for class autodiscovery; omit `/src/` from namespace.
-  - Class `Drupal\example_module\Foo` in `example_module/src/Foo.php`
-  - Class `Drupal\example_module\Foo\Bar` in `example_module/src/Foo/Bar.php`
+### Order of import
+* There are no specific rules for ordering `use` statements; prioritize code readability.
+
+### Modules
+* Modules creating classes must place their code inside a custom namespace following the convention: `Drupal\module_name\...`.
 
 
 ## Naming Services
 
-### Manipulating the Request Object
-- Prepend attributes added to the Request object with an underscore (`_`), unless they originate from the path.
-  - Example: 
-    ```php
-    \Drupal::request()->attributes->set('_context_value', $myValue);
-    ```
-- Omit the underscore for values coming from the path (e.g., `/node/{node}`).
-
-### Reserved Attributes
-- Do not overwrite the following core and Symfony prefixed attributes:
-  - Drupal core:
-    - `_system_path`
-    - `_title`
-    - `_account` (being removed)
-  - Symfony:
-    - `_route`
-    - `_route_object`
-    - `_controller`
-    - `_content`
+### Php
+- Prepend "_" to attributes added to the Request object by any module or service, except for values from the path.  
+- Do not overwrite prefixed attributes added by Drupal core or Symfony.
 
 
 ## Placeholders Delimiters
 
-### Temporary Placeholders
-- Use alphanumeric strings as placeholders.
-- Prefix placeholders with the module name followed by a hyphen `-` or underscore `_`.
-- Enclose placeholders within square brackets `[`…`]`.
+### Temporary Place-holders
+- Use appropriate alpha-numeric strings for place-holders, prefixed by the module name and a hyphen or underscore, surrounded by `[`…`]`.
+- Avoid using obscure characters as place-holders to ensure compatibility with browsers and feed-readers. 
 
-### Delimiter Format
-- For closing delimiters, include a `/` after the initial `[` if needed.
-- Optionally, suffix the module name in the closing delimiter.
-
-### Regex Matching
-- Use the following PCRE to match placeholders:
-  - `'@\[modulename-tag\](.+?)\[/modulename-tag\]@'`
-  - Or, if suffixed: `'@\[modulename-tag\](.+?)\[/tag-modulename\]@'`
+### Finding Placeholders
+- Use PCRE patterns that match the defined structure of your place-holders for accurate string processing.
 
 
 ## Psr4
 
 ### Namespace and Directory Structure
-- Each module has a namespace corresponding to its module name:  
-  `Drupal\vegetable\`
-  
-- The module's namespace maps to the `./src/` folder:  
-  `Drupal\vegetable\` → `modules/vegetable/src/`
-
-- Class names map directly to the directory structure in `./src/`:  
-  `Drupal\vegetable\Entity\Tomato` → `modules/vegetable/src/Entity/Tomato.php`
-
-- PHPUnit tests follow the same structure in `./tests/src/`.
-
-### Class and File Naming
+- Each module must have a namespace that matches its module name.
+- The module's namespace maps to the `./src/` folder in the module directory.
+- Class names must directly correspond to the directory and file structure in the `./src/` folder.
 - Each PHP class, interface, or trait must reside in a separate PHP file.
 
-- Example of class mapping:  
-  `Drupal\Component\Diff\Engine\DiffEngine` is defined in `core/lib/Drupal/Component/Diff/Engine/DiffEngine.php`.
+### Naming Conventions
+- Use lowercase characters and underscores for the unique machine name of the module.
+- The namespace for module classes follows the format `Drupal\$modulename\`.
 
-### Namespace Resolution
-- All namespaces for Drupal components start with `Drupal\`.
-
-- Base namespaces and their directories:
-  - `Drupal\Component\` → `core/lib/Drupal/Component/`
-  - `Drupal\Core\` → `core/lib/Drupal/Core/`
-  - `Drupal\Tests\` → `core/tests/Drupal/Tests/`
-  - `Drupal\$modulename\` → `modules/$modulename/src/`
-  - `Drupal\$modulename\Tests\` → `modules/$modulename/src/Tests/`
-  - `Drupal\Tests\$modulename\` → `modules/$modulename/tests/src/`
-
-- The `$modulename` must consist of lowercase characters and underscores.
-
-### File Path Construction
-- Convert namespace separators (`\`) to directory separators (`/`) and append `.php` for file paths.
-
-- Example of file path construction:  
-  `Drupal\node\` → `Entity\Node` → `core/modules/node/src/Entity/Node.php`
+### Testing
+- Use PHPUnit for testing in the `modules/$modulename/tests/src/` directory.
+- SimpleTest is deprecated; avoid using it for new tests.
 
 
 
 # Spelling
 
 ## Spelling
-
-### General Guidelines
+### General
 - Use US English spelling for all source code, comments, and names.
-- Code is checked for spelling using CSpell.
 
 ### CSpell Usage
-- Use all lower case for CSpell directives.
-  - Example: `// cspell:ignore`
-
-### Ignore Words
-- Use `cspell:ignore` to list words to ignore, separated by a single space, in alphabetical order.
-- Use multiple lines if necessary.
-  ```php
-  <?php
-  // cspell:ignore first-word second-word
-  ```
-
-### Disable CSpell for Lines
-- Disable CSpell for non-English or nonsensical strings using `cspell:disable-next-line`.
-  ```php
-  <?php
-  // cspell:disable-next-line
-  $token = 'PxOHfS_QL-T01NjBgu7Z7I04tIwMp6La5vM-mVxezbU';
-  ```
-
-### Disable CSpell for Multiple Lines
-- Use `cspell:disable` before the lines and `cspell:enable` after.
-  ```php
-  <?php
-  // cspell:disable
-  $lorem1 = 'Lorem ipsum dolor sit amet in libero.';
-  $lorem2 = 'Ut fermentum est vitae metus orci.';
-  // cspell:enable
-  ```
+- Use all lower case for `cspell` in inline documentation settings.
+- Use `cspell:ignore` directive for ignoring words, listed alphabetically with a single space between them.
+- Disable CSpell for non-English or nonsense strings using `cspell:disable-next-line`.
+- For multiple lines, disable CSpell before the lines and enable it after.
 
 
 
 # Sql
 
 ## Avoid "SELECT * FROM ..."
-
-### Security and Performance
-- Avoid using `SELECT * FROM {node}` to prevent bypassing Drupal's Node Access system.
-- Use `SELECT nid, ...` to explicitly list fields when querying nodes.
-
-### General Guidelines
-- Do not use `SELECT *` in general queries; it is less self-documenting and slightly slower.
-- Use `SELECT *` only in rare cases:
-  - When fields are dynamic and unknown at development time.
-  - When the list of fields is prohibitively long.
+### Rules
+- Avoid using `SELECT * FROM {node}` to prevent security issues with Node Access.
+- Always explicitly list fields to be retrieved in queries.
+- Use `SELECT *` only if fields are dynamic and unknown at development time or if the list of fields is prohibitively long.
 
 
-## List of SQL Reserved Words
-
-### General Guidelines
+## List of SQL reserved words
+### Reserved Words
 - Avoid using SQL reserved words as identifiers (e.g., table names, column names).
-- If necessary, enclose reserved words in quotes or brackets to prevent syntax errors.
-
-### Common Reserved Words
-- **Keywords to Avoid**: 
-  - `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `WHERE`, `JOIN`, `CREATE`, `DROP`, `ALTER`, `TABLE`, `VIEW`, `INDEX`, `USER`, `GROUP`, `ORDER`, `LIMIT`, `DISTINCT`, `NULL`, `TRUE`, `FALSE`, `AND`, `OR`, `NOT`, `IN`, `LIKE`, `BETWEEN`, `EXISTS`, `HAVING`, `CASE`, `WHEN`, `THEN`, `ELSE`, `END`, `AS`, `FROM`, `TO`, `WITH`, `SET`, `VALUES`, `RETURN`, `EXECUTE`, `TRANSACTION`, `COMMIT`, `ROLLBACK`.
-
-### Specific SQL Dialects
-- Be aware that different SQL dialects (e.g., MySQL, PostgreSQL, Oracle) may have unique reserved words.
-- Check the documentation for the specific SQL dialect being used for a comprehensive list of reserved words.
-
-### Examples
-- **Incorrect Usage**:
-  ```sql
-  SELECT * FROM user; -- 'user' is a reserved word
-  ```
-
-- **Correct Usage**:
-  ```sql
-  SELECT * FROM `user`; -- Using backticks to avoid conflict
-  ```
-
-### Best Practices
-- Regularly consult updated lists of reserved words for the SQL dialect in use.
-- Use descriptive, non-reserved names for database objects to enhance clarity and maintainability.
+- Use backticks or double quotes around identifiers if they must match reserved words.
+- Regularly check for updates to reserved words in the SQL dialect being used.
 
 
 ## SQL coding conventions
 
 ### Reserved Words
-- Quote all identifiers in SQL queries:
-  - Table names: `{table_name}`
-  - Other identifiers: `[column_name]`
-- Avoid using reserved words for column/table names to ensure compatibility across databases.
+- Quote all identifiers in SQL queries. Use `{}` for table names and `[]` for other identifiers.
+- Avoid using reserved words for column and table names.
 
-### Capitalization and User-Supplied Data
+### Capitalization and user-supplied data
 - Use UPPERCASE for SQL reserved words.
 - Use lowercase for column and constraint names.
-- Enclose table names with `{}`.
-- Pass user-supplied data as separate parameters to `db_query()`, `db_query_range()`, etc., using placeholders:
-  - `%d` - integers
-  - `%f` - floats
-  - `%s` - strings (enclosed in single quotes)
-  - `%b` - binary data (no quotes)
-  - `%` - replaced with `%`
-- String literals or `%s` placeholders must be enclosed in single quotes: `'`.
+- Move variable arguments out of the query body and use placeholders for proper escaping to prevent SQL injection.
+- Enclose string literals and `%s` placeholders in single quotes.
 
-**Example:**
-```php
-db_query("INSERT INTO {filters} (format, module, delta, weight) VALUES (%d, 'php', 0, 0)", $format);
-```
-
-### Naming Conventions
+### Naming
 - Use singular nouns for table names.
-- Prefix table names with the module name to avoid namespace conflicts.
-- Explicitly name all constraints (primary, foreign, unique keys).
-- Index names should start with the table name they depend on (e.g., `INDEX users_sid_idx`).
+- Prefix table names with the module name.
+- Name every constraint explicitly to avoid system-generated names.
+- Index names should begin with the table name they depend on.
 
-### Database Server Configuration
-- Configure database servers for standard compliance (e.g., enable ANSI and Strict Mode in MySQL).
-
-### Indentation
-- No standard method for SQL query indentation; use consistent formatting. Examples:
-```php
-if (!(db_query(
-  "
-    INSERT INTO {my_module_media_file_type}
-    SET extension   = '%s',
-    attributes      = '%s'
-  ",
-  $file_type_entry['extension'],
-  $selected_attributes
-))) {
-  $errors = TRUE;
-}
-```
-or
-```php
-$sql = "SELECT t.*, j1.col1, j2.col2"
-. " FROM {table} AS t"
-. " LEFT JOIN {join1} AS j1 ON j1.id = t.jid"
-. " LEFT JOIN {join2} AS j2 ON j2.id = t.jid"
-. " WHERE t.col LIKE '%s'"
-. " ORDER BY %s";
-$result = db_query($sql, 'find_me', 't.weight');
-```
+### Database server configuration
+- Configure database servers for standard compliance, enabling ANSI and Strict Mode in MySQL.
 
 
 
@@ -1875,95 +705,39 @@ $result = db_query($sql, 'find_me', 't.weight');
 
 ## Twig coding standards
 
-### DocBlock
-- Wrap the entire docblock in Twig comment markers `{# and #}`.
+### The DocBlock
+- Wrap the entire docblock in Twig comment markers {# and #}.
 - Include `@ingroup themeable` only if providing default themeable output.
-  
-```php
-{#
-/**
- * @file
- * Default theme implementation for a region.
- */
-#}
-```
 
 ### Variables in the DocBlock
-- Reference variables by name without Twig print indicators `&#123;&#123; &#125;&#125;` or PHP variable indicator `$`.
-- Remove "Other variables" section if present.
-- Document useful variables not included in the Twig docs.
+- Reference variables by name without Twig print indicators or PHP variable indicators.
+- Do not include a separate "Other variables" section.
 
-### Variable Definitions
-- Do not specify variable types (array, object, string) in the docblock.
+### Variable definitions in the DocBlock
+- Omit type information for variables.
 
-### Inline Variable References
+### Variables referenced inline in the DocBlock
 - Wrap variable names in single quotes when referenced inline.
 
-```php
- * Example: 'node.body' becomes 'body'.
-```
-
 ### Expressions
-- **Checking Variables**: Use `&#123;&#37; if variable &#37;&#125;` to check if a variable is available.
+- Use `&#123;&#37; if variable &#37;&#125;` to check for variable availability without 'is defined'.
+- Use `&#123;&#37; for item in collection &#37;&#125;` for looping without array keys.
+- Use `&#123;&#37; set variable = value &#37;&#125;` for setting variables.
 
-```php
-&#123;&#37; if foo &#37;&#125;
-  <div>&#123;&#123; foo &#125;&#125;</div>
-&#123;&#37; endif &#37;&#125;
-```
-
-- **Looping**: Use `for` loops instead of `foreach`.
-
-```php
-&#123;&#37; for item in navigation &#37;&#125;
-  <li><a href="&#123;&#123; item.href &#125;&#125;">&#123;&#123; item.caption &#125;&#125;</a></li>
-&#123;&#37; endfor &#37;&#125;
-```
-
-- **Setting Variables**: Use `&#123;&#37; set variable = value &#37;&#125;`.
-
-```php
-&#123;&#37; set list = ['Alice', 'Bob'] &#37;&#125;
-```
-
-### HTML Attributes
-- Print all attributes using `&#123;&#123; attributes &#125;&#125;` or individually, but always include `&#123;&#123; attributes &#125;&#125;` at the end.
-
-```php
-<div class="&#123;&#123; attributes.class &#125;&#125;"&#123;&#123; attributes &#125;&#125;>
-  &#123;&#123; content &#125;&#125;
-</div>
-```
+### HTML attributes
+- Print all attributes using `&#123;&#123; attributes &#125;&#125;` and include it at the end of the tag.
+- Print the class attribute directly in the template for ease of use.
 
 ### Whitespace Control
-- Use the `spaceless` filter to remove whitespace between HTML and Twig tags.
-
-```php
-&#123;&#37; apply spaceless &#37;&#125;
-  <div>&#123;&#123; content &#125;&#125;</div>
-&#123;&#37; endapply &#37;&#125;
-```
-
-- Use the dash `-` for precise whitespace control sparingly.
+- Use the `spaceless` filter to remove non-text whitespace between HTML and Twig tags.
+- Use the dash character `-` sparingly for precise whitespace control.
 
 ### Filters
 - Use filters with the pipe character `|` without spaces on either side.
 
-```php
-&#123;&#123; 'Original'|t &#125;&#125;
-```
-
 ### Comments
-- Use `{# and #}` for comments.
-- Keep single-line comments on the same line.
-- Wrap multi-line comments to less than 80 characters.
-
-```php
-{# This is a comment. #}
-{#
-  This is a long comment that spans multiple lines.
-#}
-```
+- Surround all comments with Twig comment indicators {# and #}.
+- Keep comments under 80 characters per line.
 
 
 
@@ -1971,41 +745,27 @@ $result = db_query($sql, 'find_me', 't.weight');
 
 ## YAML Configuration files
 
-### Format and Filename
-- Use YAML syntax for configuration files.
-- Filename must match the unique configuration name with a **`.yml`** extension.
+### Format
+- Configuration files use YAML syntax.
+
+### Filename
+- Configuration file name must have a `.yml` extension.
 - Unique configuration name cannot exceed 250 characters.
 
-### Simple Configuration
-- Unique configuration name **must** start with the extension name (machine name of the module, theme, or profile).
-  - Example: `my_module.settings`
-- Multiple configuration files are allowed; using `settings` is common but not mandatory.
-  - Example: `my_module.features`
+### Simple configuration
+- Unique configuration name must start with the extension name.
 
-### Configuration Entities
+### Configuration entities
 - Unique configuration name format: `(extension).(config_prefix).(suffix)`.
-  - `(extension)`: machine name of the module or "core".
-  - `(config_prefix)`: defined in entity annotation (defaults to machine name).
-- Extension names cannot exceed 50 characters; config prefixes cannot exceed 32 characters.
-- Suffix limited to 150 characters.
-  - Example for image style: `image.style.(machine_name_of_style)`
-  - Example for view: `views.view.(machine_name_of_view)`
+- Extension names cannot exceed 50 characters.
+- Config entity config prefixes cannot exceed 32 characters.
+- Suffix cannot exceed 150 characters.
 
-### Entity Bundles
-- Unique configuration name format: `(extension).(entity_id).(bundle_config_prefix).(bundle_machine_name)`.
-  - Example for Book module: `node.type.book`
-- Entity and bundle IDs, config prefixes limited to 32 characters.
+### Comments
+- Use `#` for comments.
 
-### Field Instances and View Modes
-- View mode format: `entity.view_mode.(target_entity_type).(view_mode_machine_name)`
-  - Example: `entity.view_mode.node.teaser`
-- Field instance format: `field.instance.(target_entity_type).(target_bundle).(field_machine_name)`
-  - Example: `field.instance.node.article.body`
-- Ensure suffix does not exceed 150 characters.
-
-### Comments and Whitespace
-- Comments can be added using `#`, but are not typical.
-- Use two spaces for indentation; whitespace is semantically significant in YAML.
+### Whitespace
+- Use two spaces for indentation.
 
 
 {% endraw %}
