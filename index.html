@@ -320,42 +320,6 @@
         // Raw markdown content of Agents.md
         const agentsMarkdownContent = `# Drupal Coding Standards - AI Agent Reference
 
-## Overview
-
-This document provides comprehensive Drupal coding standards optimized for AI coding agents. It consolidates essential rules and guidelines from the official [Drupal Coding Standards](https://git.drupalcode.org/project/coding_standards) repository.
-
-## Purpose
-
-This reference serves:
-- **AI Coding Agents** (Cursor, Claude, GitHub Copilot, etc.)
-- **Development Tools** with AI integration
-- **Automated Code Review** systems
-- **Code Generation** tools
-
-## How to Use
-
-Each section contains coding standards for a specific technology or aspect of Drupal development. AI agents should reference the relevant section when working with that particular area.
-
-## Source
-
-Auto-generated from: [git.drupalcode.org/project/coding_standards](https://git.drupalcode.org/project/coding_standards)
-
----
-
-## Table of Contents
-
-- [Composer](#composer)
-- [Css](#css)
-- [General](#general)
-- [Javascript](#javascript)
-- [Markup](#markup)
-- [Php](#php)
-- [Spelling](#spelling)
-- [Sql](#sql)
-- [Twig](#twig)
-- [Yaml](#yaml)
-
----
 
 
 # Composer
@@ -2157,6 +2121,212 @@ catch (FelineException $e) {
 - **Correct Usage**:
   \`\`\`sql
   SELECT * FROM \`user\`; -- Using backticks to avoid conflict
+  \`\`\`
+
+### Best Practices
+- Regularly consult updated lists of reserved words for the SQL dialect in use.
+- Use descriptive, non-reserved names for database objects to enhance clarity and maintainability.
+
+
+## SQL coding conventions
+
+### Reserved Words
+- Quote all identifiers in SQL queries:
+  - Table names: \`{table_name}\`
+  - Other identifiers: \`[column_name]\`
+- Avoid using reserved words for column/table names to ensure compatibility across databases.
+
+### Capitalization and User-Supplied Data
+- Use UPPERCASE for SQL reserved words.
+- Use lowercase for column and constraint names.
+- Enclose table names with \`{}\`.
+- Pass user-supplied data as separate parameters to \`db_query()\`, \`db_query_range()\`, etc., using placeholders:
+  - \`%d\` - integers
+  - \`%f\` - floats
+  - \`%s\` - strings (enclosed in single quotes)
+  - \`%b\` - binary data (no quotes)
+  - \`%\` - replaced with \`%\`
+- String literals or \`%s\` placeholders must be enclosed in single quotes: \`'\`.
+
+**Example:**
+\`\`\`php
+db_query("INSERT INTO {filters} (format, module, delta, weight) VALUES (%d, 'php', 0, 0)", $format);
+\`\`\`
+
+### Naming Conventions
+- Use singular nouns for table names.
+- Prefix table names with the module name to avoid namespace conflicts.
+- Explicitly name all constraints (primary, foreign, unique keys).
+- Index names should start with the table name they depend on (e.g., \`INDEX users_sid_idx\`).
+
+### Database Server Configuration
+- Configure database servers for standard compliance (e.g., enable ANSI and Strict Mode in MySQL).
+
+### Indentation
+- No standard method for SQL query indentation; use consistent formatting. Examples:
+\`\`\`php
+if (!(db_query(
+  "
+    INSERT INTO {my_module_media_file_type}
+    SET extension   = '%s',
+    attributes      = '%s'
+  ",
+  $file_type_entry['extension'],
+  $selected_attributes
+))) {
+  $errors = TRUE;
+}
+\`\`\`
+or
+\`\`\`php
+$sql = "SELECT t.*, j1.col1, j2.col2"
+. " FROM {table} AS t"
+. " LEFT JOIN {join1} AS j1 ON j1.id = t.jid"
+. " LEFT JOIN {join2} AS j2 ON j2.id = t.jid"
+. " WHERE t.col LIKE '%s'"
+. " ORDER BY %s";
+$result = db_query($sql, 'find_me', 't.weight');
+\`\`\`
+
+
+
+# Twig
+
+## Twig coding standards
+
+### DocBlock
+- Wrap the entire docblock in Twig comment markers \`{# and #}\`.
+- Include \`@ingroup themeable\` only if providing default themeable output.
+  
+\`\`\`php
+{#
+/**
+ * @file
+ * Default theme implementation for a region.
+ */
+#}
+\`\`\`
+
+### Variables in the DocBlock
+- Reference variables by name without Twig print indicators \`&#123;&#123; &#125;&#125;\` or PHP variable indicator \`$\`.
+- Remove "Other variables" section if present.
+- Document useful variables not included in the Twig docs.
+
+### Variable Definitions
+- Do not specify variable types (array, object, string) in the docblock.
+
+### Inline Variable References
+- Wrap variable names in single quotes when referenced inline.
+
+\`\`\`php
+ * Example: 'node.body' becomes 'body'.
+\`\`\`
+
+### Expressions
+- **Checking Variables**: Use \`&#123;&#37; if variable &#37;&#125;\` to check if a variable is available.
+
+\`\`\`php
+&#123;&#37; if foo &#37;&#125;
+  <div>&#123;&#123; foo &#125;&#125;</div>
+&#123;&#37; endif &#37;&#125;
+\`\`\`
+
+- **Looping**: Use \`for\` loops instead of \`foreach\`.
+
+\`\`\`php
+&#123;&#37; for item in navigation &#37;&#125;
+  <li><a href="&#123;&#123; item.href &#125;&#125;">&#123;&#123; item.caption &#125;&#125;</a></li>
+&#123;&#37; endfor &#37;&#125;
+\`\`\`
+
+- **Setting Variables**: Use \`&#123;&#37; set variable = value &#37;&#125;\`.
+
+\`\`\`php
+&#123;&#37; set list = ['Alice', 'Bob'] &#37;&#125;
+\`\`\`
+
+### HTML Attributes
+- Print all attributes using \`&#123;&#123; attributes &#125;&#125;\` or individually, but always include \`&#123;&#123; attributes &#125;&#125;\` at the end.
+
+\`\`\`php
+<div class="&#123;&#123; attributes.class &#125;&#125;"&#123;&#123; attributes &#125;&#125;>
+  &#123;&#123; content &#125;&#125;
+</div>
+\`\`\`
+
+### Whitespace Control
+- Use the \`spaceless\` filter to remove whitespace between HTML and Twig tags.
+
+\`\`\`php
+&#123;&#37; apply spaceless &#37;&#125;
+  <div>&#123;&#123; content &#125;&#125;</div>
+&#123;&#37; endapply &#37;&#125;
+\`\`\`
+
+- Use the dash \`-\` for precise whitespace control sparingly.
+
+### Filters
+- Use filters with the pipe character \`|\` without spaces on either side.
+
+\`\`\`php
+&#123;&#123; 'Original'|t &#125;&#125;
+\`\`\`
+
+### Comments
+- Use \`{# and #}\` for comments.
+- Keep single-line comments on the same line.
+- Wrap multi-line comments to less than 80 characters.
+
+\`\`\`php
+{# This is a comment. #}
+{#
+  This is a long comment that spans multiple lines.
+#}
+\`\`\`
+
+
+
+# Yaml
+
+## YAML Configuration files
+
+### Format and Filename
+- Use YAML syntax for configuration files.
+- Filename must match the unique configuration name with a **\`.yml\`** extension.
+- Unique configuration name cannot exceed 250 characters.
+
+### Simple Configuration
+- Unique configuration name **must** start with the extension name (machine name of the module, theme, or profile).
+  - Example: \`my_module.settings\`
+- Multiple configuration files are allowed; using \`settings\` is common but not mandatory.
+  - Example: \`my_module.features\`
+
+### Configuration Entities
+- Unique configuration name format: \`(extension).(config_prefix).(suffix)\`.
+  - \`(extension)\`: machine name of the module or "core".
+  - \`(config_prefix)\`: defined in entity annotation (defaults to machine name).
+- Extension names cannot exceed 50 characters; config prefixes cannot exceed 32 characters.
+- Suffix limited to 150 characters.
+  - Example for image style: \`image.style.(machine_name_of_style)\`
+  - Example for view: \`views.view.(machine_name_of_view)\`
+
+### Entity Bundles
+- Unique configuration name format: \`(extension).(entity_id).(bundle_config_prefix).(bundle_machine_name)\`.
+  - Example for Book module: \`node.type.book\`
+- Entity and bundle IDs, config prefixes limited to 32 characters.
+
+### Field Instances and View Modes
+- View mode format: \`entity.view_mode.(target_entity_type).(view_mode_machine_name)\`
+  - Example: \`entity.view_mode.node.teaser\`
+- Field instance format: \`field.instance.(target_entity_type).(target_bundle).(field_machine_name)\`
+  - Example: \`field.instance.node.article.body\`
+- Ensure suffix does not exceed 150 characters.
+
+### Comments and Whitespace
+- Comments can be added using \`#\`, but are not typical.
+- Use two spaces for indentation; whitespace is semantically significant in YAML.
+
+`; -- Using backticks to avoid conflict
   \`\`\`
 
 ### Best Practices

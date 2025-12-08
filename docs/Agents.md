@@ -1,42 +1,6 @@
 {% raw %}
 # Drupal Coding Standards - AI Agent Reference
 
-## Overview
-
-This document provides comprehensive Drupal coding standards optimized for AI coding agents. It consolidates essential rules and guidelines from the official [Drupal Coding Standards](https://git.drupalcode.org/project/coding_standards) repository.
-
-## Purpose
-
-This reference serves:
-- **AI Coding Agents** (Cursor, Claude, GitHub Copilot, etc.)
-- **Development Tools** with AI integration
-- **Automated Code Review** systems
-- **Code Generation** tools
-
-## How to Use
-
-Each section contains coding standards for a specific technology or aspect of Drupal development. AI agents should reference the relevant section when working with that particular area.
-
-## Source
-
-Auto-generated from: [git.drupalcode.org/project/coding_standards](https://git.drupalcode.org/project/coding_standards)
-
----
-
-## Table of Contents
-
-- [Composer](#composer)
-- [Css](#css)
-- [General](#general)
-- [Javascript](#javascript)
-- [Markup](#markup)
-- [Php](#php)
-- [Spelling](#spelling)
-- [Sql](#sql)
-- [Twig](#twig)
-- [Yaml](#yaml)
-
----
 
 
 # Composer
